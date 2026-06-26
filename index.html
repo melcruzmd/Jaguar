@@ -78,6 +78,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .bmi-number{font-size:2rem;font-weight:800;color:var(--primary)}
 .bmi-category{font-size:1rem;font-weight:700;color:var(--text);margin-top:2px}
 .bmi-note{font-size:0.8rem;color:var(--muted);margin-top:8px;line-height:1.5}
+.unit-seg{display:flex;gap:0;margin-bottom:12px;border-radius:8px;overflow:hidden;border:1.5px solid var(--border);background:#f9fafb}
+.unit-seg button{flex:1;padding:9px 4px;font-size:0.82rem;font-weight:600;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:background 0.15s,color 0.15s;min-height:40px;border-right:1px solid var(--border)}
+.unit-seg button:last-child{border-right:none}
+.unit-seg button.active{background:var(--primary);color:white}
+.bmi-ft-row{display:flex;gap:8px;margin-bottom:12px}
+.bmi-ft-row input{flex:1;margin-bottom:0!important}
+.bmi-ft-row .ft-sublabel{font-size:0.75rem;color:var(--muted);text-align:center;display:block;margin-top:3px}
+.bmi-range-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.8rem;text-align:left}
+.bmi-range-table th{background:var(--primary);color:white;padding:6px 8px;font-size:0.78rem}
+.bmi-range-table td{padding:6px 8px;border-bottom:1px solid var(--border);color:#374151}
+.bmi-range-table tr.bmi-hl td{background:#e0fdf4;font-weight:700;color:var(--primary)}
+.bmi-rec{font-size:0.87rem;color:#1a3a2a;background:#f0fdf4;border-left:3px solid var(--primary);padding:10px 12px;border-radius:0 8px 8px 0;margin-top:10px;text-align:left;line-height:1.55}
+.bmi-outside{font-size:0.88rem;font-weight:700;margin:8px 0 2px;text-align:center}
 .facility-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px}
 .facility-name{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:3px}
 .facility-type{font-size:0.75rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px}
@@ -154,8 +167,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="home-card" onclick="navigate('vaccines')">
         <div class="card-icon">💉</div><div class="card-label" id="lbl-vaccines">Vaccines</div>
       </div>
-      <div class="home-card wide" onclick="navigate('nearby')">
+      <div class="home-card" onclick="navigate('nearby')">
         <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby">Nearby Care</div>
+      </div>
+      <div class="home-card" onclick="navigate('mental')">
+        <div class="card-icon">🧠</div><div class="card-label" id="lbl-mental">Mental Health</div>
       </div>
     </div>
   </div>
@@ -250,6 +266,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
+<!-- MENTAL HEALTH -->
+<div class="page" id="page-mental">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <span class="section-icon">🧠</span>
+      <h2 class="section-title" id="title-mental">Mental Health</h2>
+    </div>
+    <div id="mental-content"></div>
+  </div>
+</div>
+
 <!-- MORE -->
 <div class="page" id="page-more">
   <div class="content-wrap">
@@ -269,6 +297,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
       <div class="more-card" onclick="navigate('nearby')">
         <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby2">Nearby Care</div>
+      </div>
+      <div class="more-card" onclick="navigate('mental')">
+        <div class="card-icon">🧠</div><div class="card-label" id="lbl-mental2">Mental Health</div>
       </div>
     </div>
     <div class="disclaimer mt-10" id="more-disclaimer">This app gives health guidance only. It does not diagnose or replace a doctor, nurse, BHW, or health center.</div>
@@ -313,12 +344,24 @@ const T = {
     callNow:'⚠ Emergency? Call QC 122',
     noResults:'No results found. Try a different keyword.',
     verify:'⚠ VERIFY NUMBER BEFORE USE',
-    bmiBtn:'Calculate BMI', bmiAge:'Age (years)', bmiH:'Height (cm)', bmiW:'Weight (kg)',
-    bmiDisclaimer:'BMI is a screening guide only. It does not diagnose your health status. For children and teenagers, please ask the health center, doctor, or nutritionist for proper interpretation.',
-    bmiResultNote:'This is a screening estimate only. Consult a health professional for proper assessment.',
-    bmiUnder:'Underweight', bmiNormal:'Normal weight', bmiOver:'Overweight', bmiObese:'Obesity',
-    bmiTeen:'For those under 18: adult BMI categories do not apply. Please ask a health center, doctor, or nutritionist for a proper weight assessment.',
+    bmiBtn:'Calculate BMI', bmiAge:'Age (years)', bmiH:'Height', bmiW:'Weight',
+    bmiUnitCm:'cm', bmiUnitIn:'inches', bmiUnitFt:'ft + in', bmiUnitKg:'kg', bmiUnitLbs:'lbs',
+    bmiFtLabel:'ft', bmiInLabel:'in (extra)',
+    bmiDisclaimer:'Asia-Pacific BMI cutoffs are used — these are lower than standard WHO values and more appropriate for Filipino adults. BMI is a screening guide only and does not diagnose your health status. For those under 18, consult a health center, doctor, or nutritionist.',
+    bmiResultNote:'Asia-Pacific cutoffs applied. Screening estimate only — consult a health professional for proper assessment.',
+    bmiUnder:'Underweight', bmiNormal:'Normal weight', bmiOver:'Overweight', bmiObese1:'Obese Class I', bmiObese2:'Obese Class II (Morbidly Obese)',
+    bmiRanges:'Asia-Pacific BMI Ranges', bmiCatCol:'Category', bmiRangeCol:'BMI Range',
+    bmiTeen:'For those under 18: adult BMI categories do not apply. Please consult a health center, doctor, or nutritionist for a proper weight-for-age assessment.',
     bmiInvalid:'Please enter valid age, height, and weight.',
+    bmiAboveNorm:'above the healthy weight range',
+    bmiBelowNorm:'below the healthy weight range',
+    bmiToLose:'To reach a healthy weight, you may need to lose approximately',
+    bmiToGain:'To reach a healthy weight, you may need to gain approximately',
+    bmiRecUnder:'Eat more protein-rich and calorie-dense foods — eggs, fish, chicken, legumes (monggo, patani), dairy. Aim for regular, balanced meals. Consider seeing a nutritionist or doctor.',
+    bmiRecNormal:'Great! Maintain your healthy lifestyle. Keep eating balanced meals with plenty of vegetables and lean protein, and stay physically active.',
+    bmiRecOver:'Try reducing refined carbohydrates and sweet drinks. Eat more vegetables and lean protein, and limit processed foods. Walking at least 30 minutes most days helps. Consult a doctor or nutritionist for a personalized plan.',
+    bmiRecObese1:'Lifestyle changes are important now. Reduce processed, high-calorie, and sugary foods. Increase physical activity gradually. See a doctor and nutritionist for a personalized weight management plan.',
+    bmiRecObese2:'Please see a doctor as soon as possible. Significant weight management support is needed. Do not attempt crash dieting without medical supervision.',
     signsSym:'Signs / Symptoms', dangerSigns:'⚠ Danger signs — seek urgent care:',
     whatToDo:'What to do', catEm:'Emergency', catHC:'Health Centers', catHosp:'Hospitals',
     abtcTitle:'Animal Bite Treatment Center (ABTC)',
@@ -328,7 +371,14 @@ const T = {
     plateNote:'Based on DOH/NNC Pinggang Pinoy guidelines.',
     mealsTitle:'Budget-Friendly Meals',
     tipsTitle:'Simple Food Reminders',
-    bmiTitle:'BMI Calculator (Adults Only)',
+    bmiTitle:'BMI Calculator (Adults)',
+    lblMentalHealth:'Mental Health', titleMentalHealth:'Mental Health',
+    mhIntro:'Mental health is part of total health. Feeling overwhelmed, deeply sad, or unable to cope for weeks is not weakness — it is a sign you may need support. There is no shame in asking for help.',
+    mhCrisisTitle:'Signs That Need Help Right Now',
+    mhCrisisAction:'Call or text the NCMH Crisis Hotline — it is free and available 24 hours, 7 days a week.',
+    mhResourcesTitle:'Where to Get Help',
+    mhVerify:'⚠ VERIFY NUMBER BEFORE USE',
+    mhResourceNote:'If you or someone you know is in immediate danger, call QC 122 or go to the nearest ER.',
   },
   fil: {
     subtitle:'Gabay pangkalusugan para sa Sitio Jaguar',
@@ -346,12 +396,24 @@ const T = {
     callNow:'⚠ Emergency? Tumawag sa QC 122',
     noResults:'Walang nahanap. Subukan ang ibang salita.',
     verify:'⚠ I-VERIFY ANG NUMERO BAGO GAMITIN',
-    bmiBtn:'Kalkulahin ang BMI', bmiAge:'Edad (taon)', bmiH:'Taas (cm)', bmiW:'Timbang (kg)',
-    bmiDisclaimer:'Ang BMI ay gabay lamang. Hindi ito diagnosis ng iyong kalusugan. Para sa mga bata at kabataan, itanong sa health center, doktor, o nutrisyonista ang tamang pagsasalin.',
-    bmiResultNote:'Gabay lamang ang resultang ito. Kumonsulta sa health professional para sa tamang assessment.',
-    bmiUnder:'Kulang ang timbang', bmiNormal:'Normal ang timbang', bmiOver:'Sobra ang timbang', bmiObese:'Obesity',
-    bmiTeen:'Para sa edad 17 pababa: hindi angkop ang adult BMI categories. Makipag-usap sa health center, doktor, o nutrisyonista para sa tamang pagtatasa.',
+    bmiBtn:'Kalkulahin ang BMI', bmiAge:'Edad (taon)', bmiH:'Taas', bmiW:'Timbang',
+    bmiUnitCm:'cm', bmiUnitIn:'pulgada', bmiUnitFt:'ft + in', bmiUnitKg:'kg', bmiUnitLbs:'lbs',
+    bmiFtLabel:'ft', bmiInLabel:'in (dagdag)',
+    bmiDisclaimer:'Ginagamit ang Asia-Pacific na pamantayan ng BMI — mas mababa ito kaysa sa karaniwang WHO at mas angkop para sa mga Pilipinong adulto. Gabay lamang ang BMI at hindi ito diagnosis. Para sa edad 17 pababa, kumonsulta sa health center, doktor, o nutrisyonista.',
+    bmiResultNote:'Ginamit ang Asia-Pacific na pamantayan. Gabay lamang ito — kumonsulta sa health professional para sa wastong pagsusuri.',
+    bmiUnder:'Kulang ang timbang', bmiNormal:'Normal ang timbang', bmiOver:'Sobra ang timbang', bmiObese1:'Obese Class I', bmiObese2:'Obese Class II (Matinding Obesity)',
+    bmiRanges:'Asia-Pacific na Pamantayan ng BMI', bmiCatCol:'Kategorya', bmiRangeCol:'Saklaw ng BMI',
+    bmiTeen:'Para sa edad 17 pababa: hindi angkop ang adult BMI categories. Kumonsulta sa health center, doktor, o nutrisyonista para sa wastong pagtatasa.',
     bmiInvalid:'Mangyaring maglagay ng tamang edad, taas, at timbang.',
+    bmiAboveNorm:'na sobra sa malusog na timbang',
+    bmiBelowNorm:'na kulang sa malusog na timbang',
+    bmiToLose:'Para maabot ang malusog na timbang, maaaring kailangang mabawasan ng',
+    bmiToGain:'Para maabot ang malusog na timbang, maaaring kailangang madagdagan ng',
+    bmiRecUnder:'Kumain ng mas maraming protina at masustansyang pagkain — itlog, isda, manok, munggo, gatas. Subukang kumain nang regular at balanse. Kumonsulta sa nutrisyonista o doktor.',
+    bmiRecNormal:'Napakahusay! Ipagpatuloy ang malusog na pamumuhay. Kumain ng balanseng pagkain na may maraming gulay at lean na protina, at manatiling aktibo.',
+    bmiRecOver:'Subukang bawasan ang kanin, matamis, at inuming may asukal. Kumain ng mas maraming gulay at lean na protina. Ang paglalakad nang 30 minuto sa araw ay nakakatulong. Kumonsulta sa doktor o nutrisyonista.',
+    bmiRecObese1:'Mahalaga na ang pagbabago sa pamumuhay. Iwasan ang processed at mataas-kaloyang pagkain. Mag-ehersisyo nang dahan-dahan. Kumonsulta sa doktor at nutrisyonista para sa personalisadong plano.',
+    bmiRecObese2:'Pumunta sa doktor agad. Kailangan ng malaking tulong sa pamamahala ng timbang. Huwag mag-crash diet nang walang gabay ng doktor.',
     signsSym:'Mga Senyales / Sintomas', dangerSigns:'⚠ Delikadong senyales — magpatingin agad:',
     whatToDo:'Dapat gawin', catEm:'Emergency', catHC:'Mga Health Center', catHosp:'Mga Ospital',
     abtcTitle:'Animal Bite Treatment Center (ABTC)',
@@ -361,7 +423,14 @@ const T = {
     plateNote:'Batay sa mga alituntunin ng DOH/NNC Pinggang Pinoy.',
     mealsTitle:'Mga Abot-Kayang Pagkain',
     tipsTitle:'Simpleng Paalala sa Pagkain',
-    bmiTitle:'BMI Calculator (Para sa Matatanda Lamang)',
+    bmiTitle:'BMI Calculator (Para sa Matatanda)',
+    lblMentalHealth:'Mental Health', titleMentalHealth:'Mental Health',
+    mhIntro:'Ang mental health ay bahagi ng kabuuang kalusugan. Ang matagal na pakiramdam na malungkot, nag-aalala, o hindi makayanan ang buhay ay hindi kahinaan — tanda ito na maaaring kailangan mo ng tulong. Walang kahihiyang humingi ng tulong.',
+    mhCrisisTitle:'Mga Senyales na Kailangan ng Tulong AGAD',
+    mhCrisisAction:'Tumawag o mag-text sa NCMH Crisis Hotline — libre ito at available 24 oras, 7 araw sa isang linggo.',
+    mhResourcesTitle:'Saan Humingi ng Tulong',
+    mhVerify:'⚠ I-VERIFY ANG NUMERO BAGO GAMITIN',
+    mhResourceNote:'Kung ikaw o ang isang mahal mo ay nasa agarang panganib, tumawag sa QC 122 o pumunta sa pinakamalapit na ER.',
   }
 };
 
@@ -644,8 +713,53 @@ const NEARBY = {
   }
 };
 
+const MENTAL = {
+  en:{
+    sections:[
+      {id:'mh-warn',icon:'🔍',title:'Warning Signs to Watch For',
+       body:`<ul class="checklist"><li>Feeling sad, empty, or hopeless for two or more weeks in a row</li><li>Loss of interest in activities that used to bring you joy</li><li>Sleeping much more or much less than usual</li><li>Eating much more or much less than usual</li><li>Persistent tiredness without a physical cause</li><li>Difficulty concentrating, remembering, or making decisions</li><li>Feeling worthless, excessively guilty, or blaming yourself for things outside your control</li><li>Withdrawing from family, friends, or community activities</li><li>Increased use of alcohol or substances to cope with feelings</li><li>Constant worry, fear, or feeling on edge most days</li></ul>`},
+      {id:'mh-help',icon:'🤝',title:'How to Help Someone You Are Worried About',
+       body:`<ul class="checklist"><li>Listen without judgment — you do not need to fix everything, just be present</li><li>Ask directly: "Are you thinking of hurting yourself?" Asking does not increase the risk — it opens the door</li><li>Stay with them if you are worried about their immediate safety</li><li>Help them reach care — accompany them to the health center or call the crisis line together</li><li>Avoid saying "Just be strong" or "Others have it worse" — these can feel dismissive</li><li>Take care of yourself too — supporting someone in crisis is emotionally draining</li></ul>`},
+      {id:'mh-care',icon:'🌱',title:'Daily Self-Care That Helps',
+       body:`<ul class="checklist"><li>Talk to someone you trust about how you feel — a family member, friend, or BHW</li><li>Try to sleep and wake at the same time each day</li><li>Eat regular meals, even simple ones</li><li>Stay physically active — even a short walk helps your mood</li><li>Limit alcohol — it worsens anxiety and depression over time</li><li>Take breaks from social media or news when it adds to your stress</li><li>Participate in community, spiritual, or group activities that give you a sense of belonging</li></ul>`},
+    ],
+    crisis:{
+      items:['Thoughts of harming yourself or ending your life','Hearing or seeing things others cannot (hallucinations)','Believing things that cause intense fear or confusion (delusions)','Becoming very confused, disoriented, or unable to recognize familiar people','Behaving in ways that put yourself or others in danger']
+    },
+    resources:[
+      {name:'NCMH Crisis Hotline',num:'1553',label:'1553',note:'Free, 24/7 — call or text',urgent:true},
+      {name:'Hopeline Philippines (NCMH)',num:'88044673',label:'8804-4673',note:'Daily mental health support line'},
+      {name:'Hopeline (mobile)',num:'09175584673',label:'0917-558-4673',note:'Call or text'},
+      {name:'Fairview Health Center',num:'71494641',label:'7149-4641',note:'Ask about mental health referral or social worker',verify:true},
+      {name:'Barangay Fairview — Social Services',num:'89300040',label:'8-9300-040',note:'Ask about BHERT or social welfare assistance',verify:true},
+    ]
+  },
+  fil:{
+    sections:[
+      {id:'mh-warn',icon:'🔍',title:'Mga Babala na Dapat Pansinin',
+       body:`<ul class="checklist"><li>Matagal na malungkot, walang nararamdaman, o walang pag-asa — dalawa o higit pang linggo nang sunud-sunod</li><li>Nawalan ng interes sa mga bagay na dating nagpapasaya sa iyo</li><li>Masyadong marami o masyadong kaunting tulog kaysa dati</li><li>Masyadong marami o masyadong kaunting pagkain kaysa dati</li><li>Palaging pagod kahit hindi naman nag-eehersisyo</li><li>Hirap mag-isip, matandaan, o gumawa ng desisyon</li><li>Pakiramdam na walang kwenta, sobrang pagkakasala, o sinisisi ang sarili sa mga bagay na wala kang kontrol</li><li>Umaalis na sa pamilya, mga kaibigan, o mga aktibidad sa komunidad</li><li>Tumataas na pag-inom ng alak o paggamit ng droga para makayanan ang pakiramdam</li><li>Palaging nag-aalala, takot, o kinakabahan halos araw-araw</li></ul>`},
+      {id:'mh-help',icon:'🤝',title:'Paano Tulungan ang Isang Nag-aalala',
+       body:`<ul class="checklist"><li>Makinig nang walang paghuhusga — hindi mo kailangang ayusin ang lahat, nasa tabi ka lang</li><li>Magtanong nang direkta: "Nag-iisip ka ba na saktan ang iyong sarili?" Ang pagtatanong ay hindi nagdadagdag ng panganib — nagbubukas ito ng pinto ng tulong</li><li>Manatili sa kanyang tabi kung nag-aalala ka sa kaligtasan niya</li><li>Tulungan siyang humingi ng tulong — samahan sa health center o tumawag sa crisis line nang magkasama</li><li>Iwasang sabihing "Malakas ka naman" o "May mas malala pa" — maaaring mas mapahirap pa ito</li><li>Alagaan din ang sarili mo — nakaka-drain ang suportahan ang isang nangangailangan</li></ul>`},
+      {id:'mh-care',icon:'🌱',title:'Pang-araw-araw na Self-Care',
+       body:`<ul class="checklist"><li>Makipag-usap sa isang mapagkakatiwalaang tao — kamag-anak, kaibigan, o BHW</li><li>Subukang matulog at gumising sa parehong oras araw-araw</li><li>Kumain nang regular, kahit simple lang</li><li>Manatiling aktibo — kahit maikling paglalakad ay nakakatulong sa mood</li><li>Bawasan ang alak — nagpapalala ito ng kalungkutan at pagkabalisa sa paglipas ng panahon</li><li>Magpahinga sa social media o balita kapag nagdudulot ito ng dagdag na stress</li><li>Sumali sa mga aktibidad sa komunidad, espirituwal, o panggrupo na nagbibigay ng pakiramdam ng pagmamalasakit</li></ul>`},
+    ],
+    crisis:{
+      items:['Iniisip ang pasakitan o patayin ang sarili','Nakakakita o nakakaririnig ng mga bagay na hindi nakikita o naririnig ng iba (hallucinations)','Naniniwala sa mga bagay na nagdudulot ng matinding takot o kalituhan (delusions)','Biglang nalilito, hindi nakakakilala sa mga pamilyar na tao, o hindi alam kung nasaan','Kumikilos nang mapanganib sa sarili o sa iba']
+    },
+    resources:[
+      {name:'NCMH Crisis Hotline',num:'1553',label:'1553',note:'Libre, 24/7 — tawag o text',urgent:true},
+      {name:'Hopeline Philippines (NCMH)',num:'88044673',label:'8804-4673',note:'Pang-araw-araw na linya ng tulong'},
+      {name:'Hopeline (mobile)',num:'09175584673',label:'0917-558-4673',note:'Tawag o text'},
+      {name:'Fairview Health Center',num:'71494641',label:'7149-4641',note:'Magtanong tungkol sa mental health referral o social worker',verify:true},
+      {name:'Barangay Fairview — Serbisyo Panlipunan',num:'89300040',label:'8-9300-040',note:'Magtanong tungkol sa BHERT o social welfare',verify:true},
+    ]
+  }
+};
+
 // ── State ─────────────────────────────────────────────────────────────────────
 let lang = localStorage.getItem('jhl-lang') || 'en';
+let bmiHUnit = 'cm';   // 'cm' | 'in' | 'ft'
+let bmiWUnit = 'kg';   // 'kg' | 'lbs'
 
 // ── Navigation ────────────────────────────────────────────────────────────────
 function navigate(page){
@@ -696,10 +810,12 @@ function applyStaticStrings(){
   document.getElementById('lbl-nutrition').innerHTML=t.lblNutrition;
   document.getElementById('lbl-vaccines').innerHTML=t.lblVaccines;
   document.getElementById('lbl-nearby').innerHTML=t.lblNearby;
+  document.getElementById('lbl-mental').innerHTML=t.lblMentalHealth;
   document.getElementById('lbl-chronic2').innerHTML=t.lblChronic;
   document.getElementById('lbl-nutrition2').innerHTML=t.lblNutrition;
   document.getElementById('lbl-vaccines2').innerHTML=t.lblVaccines;
   document.getElementById('lbl-nearby2').innerHTML=t.lblNearby;
+  document.getElementById('lbl-mental2').innerHTML=t.lblMentalHealth;
   document.getElementById('title-rf').innerHTML=t.titleRF;
   document.getElementById('title-bite').innerHTML=t.titleBite;
   document.getElementById('title-dengue').innerHTML=t.titleDengue;
@@ -707,6 +823,7 @@ function applyStaticStrings(){
   document.getElementById('title-nutrition').innerHTML=t.titleNutrition;
   document.getElementById('title-vaccines').innerHTML=t.titleVaccines;
   document.getElementById('title-nearby').innerHTML=t.titleNearby;
+  document.getElementById('title-mental').innerHTML=t.titleMentalHealth;
   document.getElementById('title-more').innerHTML=t.titleMore;
   document.getElementById('nav-lbl-home').textContent=t.navHome;
   document.getElementById('nav-lbl-rf').textContent=t.navRF;
@@ -730,15 +847,16 @@ const SEARCH_IDX = [
   {sec:'chronic',kw:['blood pressure','diabetes','asthma','hypertension','sugar','medicine','BP','diyabetis','hika','gamot']},
   {sec:'nutrition',kw:['food','nutrition','pinggang pinoy','BMI','vegetable','rice','protein','pagkain','nutrisyon','gulay','kanin']},
   {sec:'vaccines',kw:['vaccine','vaccination','BCG','MMR','flu','rabies','tetanus','baby','pregnant','bakuna','sanggol','buntis']},
-  {sec:'nearby',kw:['hospital','health center','clinic','emergency','phone','contact','122','ospital','klinika']}
+  {sec:'nearby',kw:['hospital','health center','clinic','emergency','phone','contact','122','ospital','klinika']},
+  {sec:'mental',kw:['mental health','depression','anxiety','stress','suicide','crisis','sad','counseling','1553','hopeline','nalungkot','nag-aalala','depresyon','pagpapakamatay','krisis','takot','pagkabalisa','self-harm','hopelessness','mental','pag-aalala']}
 ];
 const SEC_NAMES = {
-  en:{'red-flags':'Red Flags',bite:'Dog/Cat Bite',dengue:'Dengue & Floods',chronic:'BP/Diabetes/Asthma',nutrition:'Food & BMI',vaccines:'Vaccines',nearby:'Nearby Care'},
-  fil:{'red-flags':'Mga Babala',bite:'Kagat ng Hayop',dengue:'Dengue at Baha',chronic:'BP/Diyabetis/Hika',nutrition:'Pagkain at BMI',vaccines:'Bakuna',nearby:'Malapit na Tulong'}
+  en:{'red-flags':'Red Flags',bite:'Dog/Cat Bite',dengue:'Dengue & Floods',chronic:'BP/Diabetes/Asthma',nutrition:'Food & BMI',vaccines:'Vaccines',nearby:'Nearby Care',mental:'Mental Health'},
+  fil:{'red-flags':'Mga Babala',bite:'Kagat ng Hayop',dengue:'Dengue at Baha',chronic:'BP/Diyabetis/Hika',nutrition:'Pagkain at BMI',vaccines:'Bakuna',nearby:'Malapit na Tulong',mental:'Mental Health'}
 };
 const SEC_DESC = {
-  en:{'red-flags':'Symptom red flags and when to seek care','bite':'Dog/cat bite first aid and rabies guidance','dengue':'Dengue symptoms, flood safety, and sanitation','chronic':'BP, diabetes, and asthma guidance','nutrition':'Pinggang Pinoy plate guide and BMI calculator','vaccines':'Vaccination guide by life stage','nearby':'Emergency contacts, health centers, and hospitals'},
-  fil:{'red-flags':'Mga babala ng sintomas at kung kailan magpatingin','bite':'First aid sa kagat ng hayop at gabay sa rabies','dengue':'Sintomas ng dengue, kaligtasan sa baha','chronic':'Gabay sa BP, diyabetis, at hika','nutrition':'Pinggang Pinoy at BMI calculator','vaccines':'Gabay sa bakuna ayon sa edad','nearby':'Emergency contacts, health centers, at ospital'}
+  en:{'red-flags':'Symptom red flags and when to seek care','bite':'Dog/cat bite first aid and rabies guidance','dengue':'Dengue symptoms, flood safety, and sanitation','chronic':'BP, diabetes, and asthma guidance','nutrition':'Pinggang Pinoy plate guide and BMI calculator','vaccines':'Vaccination guide by life stage','nearby':'Emergency contacts, health centers, and hospitals','mental':'Warning signs, crisis help, and mental health resources'},
+  fil:{'red-flags':'Mga babala ng sintomas at kung kailan magpatingin','bite':'First aid sa kagat ng hayop at gabay sa rabies','dengue':'Sintomas ng dengue, kaligtasan sa baha','chronic':'Gabay sa BP, diyabetis, at hika','nutrition':'Pinggang Pinoy at BMI calculator','vaccines':'Gabay sa bakuna ayon sa edad','nearby':'Emergency contacts, health centers, at ospital','mental':'Mga babala, crisis na tulong, at mga mapagkukunan ng mental health'}
 };
 
 function handleSearch(val){
@@ -770,6 +888,7 @@ function renderAll(){
   renderNutrition();
   renderVaccines();
   renderNearby();
+  renderMentalHealth();
 }
 
 function renderRedFlags(){
@@ -849,35 +968,102 @@ function renderNutrition(){
   const plate=PLATE[lang];
   const meals=MEALS[lang];
   const tips=TIPS[lang];
+  const hCm=bmiHUnit==='cm', hIn=bmiHUnit==='in', hFt=bmiHUnit==='ft';
+  const wKgA=bmiWUnit==='kg';
   document.getElementById('nutrition-content').innerHTML=
     `<div class="info-card"><div class="info-card-title">🍽️ ${t.plateTitle}</div><p style="font-size:0.8rem;color:var(--muted);margin-bottom:10px">${t.plateNote}</p>`+
     plate.map(p=>`<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:9px"><span style="font-size:1.4rem;flex-shrink:0">${p.icon}</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--primary)">${p.label}</div><div style="font-size:0.86rem;color:#374151">${p.desc}</div></div></div>`).join('')+
     `</div><div class="info-card"><div class="info-card-title">🛒 ${t.mealsTitle}</div><ul class="checklist">${meals.map(m=>`<li>${m}</li>`).join('')}</ul></div>`+
     `<div class="info-card"><div class="info-card-title">💡 ${t.tipsTitle}</div><ul class="checklist">${tips.map(tp=>`<li>${tp}</li>`).join('')}</ul></div>`+
-    `<div class="bmi-form"><div style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:12px">⚖️ ${t.bmiTitle}</div><div class="disclaimer" style="margin-bottom:14px;font-size:0.8rem">${t.bmiDisclaimer}</div>`+
+    `<div class="bmi-form"><div style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:12px">⚖️ ${t.bmiTitle}</div>`+
+    `<div class="disclaimer" style="margin-bottom:14px;font-size:0.8rem">${t.bmiDisclaimer}</div>`+
     `<label>${t.bmiAge}</label><input type="number" id="bmi-age" min="1" max="120" placeholder="e.g. 30">`+
-    `<label>${t.bmiH}</label><input type="number" id="bmi-h" min="50" max="250" placeholder="e.g. 160">`+
-    `<label>${t.bmiW}</label><input type="number" id="bmi-w" min="10" max="300" placeholder="e.g. 65">`+
+    `<label>${t.bmiH}</label>`+
+    `<div class="unit-seg"><button onclick="setBmiHUnit('cm')" id="hbtn-cm" class="${hCm?'active':''}">${t.bmiUnitCm}</button><button onclick="setBmiHUnit('in')" id="hbtn-in" class="${hIn?'active':''}">${t.bmiUnitIn}</button><button onclick="setBmiHUnit('ft')" id="hbtn-ft" class="${hFt?'active':''}">${t.bmiUnitFt}</button></div>`+
+    `<div id="bmi-h-cm"${hCm?'':' style="display:none"'}><input type="number" id="bmi-h-cm-val" min="50" max="250" placeholder="e.g. 160"></div>`+
+    `<div id="bmi-h-in"${hIn?'':' style="display:none"'}><input type="number" id="bmi-h-in-val" min="20" max="100" placeholder="e.g. 63"></div>`+
+    `<div id="bmi-h-ft"${hFt?'':' style="display:none"'}><div class="bmi-ft-row"><div style="flex:1"><input type="number" id="bmi-h-ft-ft" min="1" max="8" placeholder="e.g. 5"><span class="ft-sublabel">${t.bmiFtLabel}</span></div><div style="flex:1"><input type="number" id="bmi-h-ft-in" min="0" max="11" placeholder="0–11"><span class="ft-sublabel">${t.bmiInLabel}</span></div></div><div style="height:4px"></div></div>`+
+    `<label>${t.bmiW}</label>`+
+    `<div class="unit-seg"><button onclick="setBmiWUnit('kg')" id="wbtn-kg" class="${wKgA?'active':''}">${t.bmiUnitKg}</button><button onclick="setBmiWUnit('lbs')" id="wbtn-lbs" class="${wKgA?'':'active'}">${t.bmiUnitLbs}</button></div>`+
+    `<input type="number" id="bmi-w-val" min="5" max="1500" placeholder="e.g. 65">`+
     `<button class="bmi-calc-btn" onclick="calcBMI()">${t.bmiBtn}</button><div class="bmi-result" id="bmi-result"></div></div>`;
+}
+
+function setBmiHUnit(u){
+  bmiHUnit=u;
+  ['cm','in','ft'].forEach(x=>{
+    document.getElementById('bmi-h-'+x).style.display=(x===u?'':'none');
+    const b=document.getElementById('hbtn-'+x);
+    if(b) b.classList.toggle('active',x===u);
+  });
+}
+
+function setBmiWUnit(u){
+  bmiWUnit=u;
+  ['kg','lbs'].forEach(x=>{
+    const b=document.getElementById('wbtn-'+x);
+    if(b) b.classList.toggle('active',x===u);
+  });
 }
 
 function calcBMI(){
   const t=T[lang];
-  const age=parseFloat(document.getElementById('bmi-age').value);
-  const h=parseFloat(document.getElementById('bmi-h').value);
-  const w=parseFloat(document.getElementById('bmi-w').value);
   const res=document.getElementById('bmi-result');
   res.style.display='block';
-  if(!age||!h||!w||h<50||w<5){res.innerHTML=`<p style="color:var(--danger);font-weight:600">${t.bmiInvalid}</p>`;return;}
+  res.style.background='';
+  res.style.borderColor='';
+  const age=parseFloat(document.getElementById('bmi-age').value);
+  let hCm=0;
+  if(bmiHUnit==='cm'){
+    hCm=parseFloat(document.getElementById('bmi-h-cm-val').value)||0;
+  } else if(bmiHUnit==='in'){
+    hCm=(parseFloat(document.getElementById('bmi-h-in-val').value)||0)*2.54;
+  } else {
+    const ft=parseFloat(document.getElementById('bmi-h-ft-ft').value)||0;
+    const ex=parseFloat(document.getElementById('bmi-h-ft-in').value)||0;
+    hCm=(ft*12+ex)*2.54;
+  }
+  const wRaw=parseFloat(document.getElementById('bmi-w-val').value)||0;
+  const wKg=bmiWUnit==='kg'?wRaw:wRaw*0.453592;
+  if(!age||hCm<50||wKg<5){res.innerHTML=`<p style="color:var(--danger);font-weight:600">${t.bmiInvalid}</p>`;return;}
   if(age<18){res.style.background='#fffbeb';res.style.borderColor='#fde68a';res.innerHTML=`<div style="font-size:0.92rem;color:#92400e;font-weight:600">${t.bmiTeen}</div>`;return;}
-  const bmi=w/((h/100)*(h/100));
-  let cat,col;
-  if(bmi<18.5){cat=t.bmiUnder;col='#2563eb';}
-  else if(bmi<25){cat=t.bmiNormal;col='#0f766e';}
-  else if(bmi<30){cat=t.bmiOver;col='#d97706';}
-  else{cat=t.bmiObese;col='#dc2626';}
-  res.style.background='';res.style.borderColor='';
-  res.innerHTML=`<div class="bmi-number" style="color:${col}">${bmi.toFixed(1)}</div><div class="bmi-category" style="color:${col}">${cat}</div><div class="bmi-note">${t.bmiResultNote}</div>`;
+  const hM=hCm/100;
+  const bmi=wKg/(hM*hM);
+  // Asia-Pacific cutoffs (WHO WPRO 2000)
+  const CATS=[
+    {label:t.bmiUnder,  min:0,    max:18.5, col:'#2563eb', rec:t.bmiRecUnder},
+    {label:t.bmiNormal, min:18.5, max:23.0, col:'#0f766e', rec:t.bmiRecNormal},
+    {label:t.bmiOver,   min:23.0, max:25.0, col:'#d97706', rec:t.bmiRecOver},
+    {label:t.bmiObese1, min:25.0, max:30.0, col:'#ea580c', rec:t.bmiRecObese1},
+    {label:t.bmiObese2, min:30.0, max:999,  col:'#dc2626', rec:t.bmiRecObese2},
+  ];
+  const RANGES=['< 18.5','18.5 – 22.9','23.0 – 24.9','25.0 – 29.9','≥ 30.0'];
+  let ci=CATS.findIndex(c=>bmi>=c.min&&bmi<c.max);
+  if(ci<0)ci=4;
+  const cat=CATS[ci];
+  const rangeRows=CATS.map((c,i)=>
+    `<tr${i===ci?' class="bmi-hl"':''}><td>${c.label}</td><td>${RANGES[i]}</td></tr>`
+  ).join('');
+  // Distance from top of normal (22.9) or bottom (18.5)
+  const normLowKg=18.5*hM*hM;
+  const normHighKg=22.9*hM*hM;
+  let outsideHtml='';
+  if(ci!==1){
+    const diffKg=ci===0?(normLowKg-wKg):(wKg-normHighKg);
+    const diffLbs=diffKg*2.20462;
+    const dir=ci===0?t.bmiBelowNorm:t.bmiAboveNorm;
+    const verb=ci===0?t.bmiToGain:t.bmiToLose;
+    outsideHtml=
+      `<div class="bmi-outside" style="color:${cat.col}">${diffKg.toFixed(1)} kg (${diffLbs.toFixed(1)} lbs) ${dir}</div>`+
+      `<div style="font-size:0.81rem;color:var(--muted);margin-bottom:2px;text-align:center">${verb} ${diffKg.toFixed(1)} kg / ${diffLbs.toFixed(1)} lbs</div>`;
+  }
+  res.innerHTML=
+    `<div class="bmi-number" style="color:${cat.col}">${bmi.toFixed(1)}</div>`+
+    `<div class="bmi-category" style="color:${cat.col}">${cat.label}</div>`+
+    `<table class="bmi-range-table"><thead><tr><th>${t.bmiCatCol}</th><th>${t.bmiRangeCol}</th></tr></thead><tbody>${rangeRows}</tbody></table>`+
+    outsideHtml+
+    `<div class="bmi-rec">&#128161; ${cat.rec}</div>`+
+    `<div class="bmi-note">${t.bmiResultNote}</div>`;
 }
 
 function renderVaccines(){
@@ -918,6 +1104,41 @@ function renderNearby(){
   });
   html+=`<div class="info-card mt-10"><div class="info-card-title">🐾 ${t.abtcTitle}</div><p style="font-size:0.87rem;color:#374151;line-height:1.55">${d.abtcNote}</p></div>`;
   document.getElementById('nearby-content').innerHTML=html;
+}
+
+function renderMentalHealth(){
+  const t=T[lang];
+  const d=MENTAL[lang];
+  const crisisItems=d.crisis.items.map(i=>`<li style="color:#7f1d1d;font-size:0.88rem;padding:6px 0;border-bottom:1px solid #fecaca;display:flex;align-items:flex-start;gap:8px;line-height:1.45"><span style="color:var(--danger);font-weight:700;flex-shrink:0">!</span>${i}</li>`).join('');
+  const crisisHtml=
+    `<div style="background:#fef2f2;border:2px solid var(--danger);border-radius:12px;padding:14px 15px;margin-bottom:12px">
+      <div style="font-size:0.95rem;font-weight:700;color:var(--danger);margin-bottom:10px">🚨 ${t.mhCrisisTitle}</div>
+      <ul style="list-style:none;padding:0;margin:0 0 12px">${crisisItems}</ul>
+      <div style="font-size:0.86rem;color:var(--danger);font-weight:600;margin-bottom:10px">${t.mhCrisisAction}</div>
+      <a href="tel:1553" class="go-now-btn" style="background:var(--danger)">📞 1553 — NCMH Crisis Hotline (Free 24/7)</a>
+    </div>`;
+  const sectionsHtml=d.sections.map(s=>
+    `<div class="symptom-card" id="${s.id}">
+      <div class="symptom-card-header" onclick="toggleCard('${s.id}')">
+        <div class="symptom-card-title">${s.icon} ${s.title}</div>
+        <span class="chevron">⌄</span>
+      </div>
+      <div class="symptom-card-body">${s.body}</div>
+    </div>`
+  ).join('');
+  const resourcesHtml=`<div style="font-size:0.9rem;font-weight:700;color:var(--text);margin:14px 0 8px">📞 ${t.mhResourcesTitle}</div>`+
+  d.resources.map(r=>
+    `<div class="facility-card" ${r.urgent?'style="border-color:var(--danger)"':''}>
+      <div class="facility-name">${r.name}</div>
+      <div style="font-size:0.8rem;color:var(--muted);margin-bottom:6px">${r.note}</div>
+      <a href="tel:${r.num}" class="facility-phone" ${r.urgent?'style="background:#fef2f2;color:var(--danger);border-color:#fca5a5"':''}>📞 ${r.label}</a>
+      ${r.verify?`<span class="verify-label">${t.mhVerify}</span>`:''}
+    </div>`
+  ).join('')+
+  `<div class="disclaimer" style="margin-top:10px">${t.mhResourceNote}</div>`;
+  document.getElementById('mental-content').innerHTML=
+    `<div class="disclaimer" style="margin-bottom:12px">${t.mhIntro}</div>`+
+    crisisHtml+sectionsHtml+resourcesHtml;
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
