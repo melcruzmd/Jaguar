@@ -2,17 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Jaguar HealthLink</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>BIDA Health App</title>
+
+<!-- PWA / "installed app" metadata. See handoff doc, section "Editing the App Icon", before changing the icon SVG below. -->
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIkJJREEgSGVhbHRoIEFwcCIsICJzaG9ydF9uYW1lIjogIkJJREEgSGVhbHRoIiwgImRlc2NyaXB0aW9uIjogIkJldHRlciBJbmZvcm1lZCBmb3IgRGlzZWFzZSBBd2FyZW5lc3Mg4oCUIE11bnRpbmx1cGEgQ2l0eSIsICJzdGFydF91cmwiOiAiLiIsICJpZCI6ICIuIiwgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmNWY3ZmIiLCAidGhlbWVfY29sb3IiOiAiIzFkNGVkOCIsICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdC1wcmltYXJ5IiwgImljb25zIjogW3sic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmclMjB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnJTIwdmlld0JveD0nMCUyMDAlMjAxMDAlMjAxMDAnJTNFJTNDcmVjdCUyMHdpZHRoPScxMDAnJTIwaGVpZ2h0PScxMDAnJTIwcng9JzIyJyUyMGZpbGw9JyUyMzFkNGVkOCcvJTNFJTNDcmVjdCUyMHg9JzQyJyUyMHk9JzIyJyUyMHdpZHRoPScxNiclMjBoZWlnaHQ9JzU2JyUyMHJ4PSc0JyUyMGZpbGw9J3doaXRlJy8lM0UlM0NyZWN0JTIweD0nMjInJTIweT0nNDInJTIwd2lkdGg9JzU2JyUyMGhlaWdodD0nMTYnJTIwcng9JzQnJTIwZmlsbD0nd2hpdGUnLyUzRSUzQy9zdmclM0UiLCAic2l6ZXMiOiAiYW55IiwgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIsICJwdXJwb3NlIjogImFueSJ9LCB7InNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsJTNDc3ZnJTIweG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyUyMHZpZXdCb3g9JzAlMjAwJTIwMTAwJTIwMTAwJyUzRSUzQ3JlY3QlMjB3aWR0aD0nMTAwJyUyMGhlaWdodD0nMTAwJyUyMHJ4PScyMiclMjBmaWxsPSclMjMxZDRlZDgnLyUzRSUzQ3JlY3QlMjB4PSc0MiclMjB5PScyMiclMjB3aWR0aD0nMTYnJTIwaGVpZ2h0PSc1NiclMjByeD0nNCclMjBmaWxsPSd3aGl0ZScvJTNFJTNDcmVjdCUyMHg9JzIyJyUyMHk9JzQyJyUyMHdpZHRoPSc1NiclMjBoZWlnaHQ9JzE2JyUyMHJ4PSc0JyUyMGZpbGw9J3doaXRlJy8lM0UlM0Mvc3ZnJTNFIiwgInNpemVzIjogImFueSIsICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLCAicHVycG9zZSI6ICJtYXNrYWJsZSJ9XX0=">
+<meta name="theme-color" content="#1d4ed8">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BIDA Health">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%231d4ed8'/%3E%3Crect%20x='42'%20y='22'%20width='16'%20height='56'%20rx='4'%20fill='white'/%3E%3Crect%20x='22'%20y='42'%20width='56'%20height='16'%20rx='4'%20fill='white'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%231d4ed8'/%3E%3Crect%20x='42'%20y='22'%20width='16'%20height='56'%20rx='4'%20fill='white'/%3E%3Crect%20x='22'%20y='42'%20width='56'%20height='16'%20rx='4'%20fill='white'/%3E%3C/svg%3E">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f6fbfa;color:#111827;line-height:1.5;min-height:100vh;padding-bottom:72px}
-:root{--primary:#0f766e;--primary-dark:#0b6b62;--accent:#2563eb;--danger:#dc2626;--danger-bg:#fef2f2;--warning:#d97706;--card:#ffffff;--bg:#f6fbfa;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--teal-light:#f0fdfa}
-.emergency-banner{position:sticky;top:0;z-index:100;background:var(--danger);color:white;text-align:center;padding:10px 16px;font-size:0.92rem;font-weight:600;line-height:1.4}
+html{font-size:16px;overscroll-behavior-y:none}
+html,body{height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f7fb;color:#111827;line-height:1.5;min-height:100vh;padding-bottom:calc(72px + env(safe-area-inset-bottom));overscroll-behavior:none;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+:root{--primary:#1d4ed8;--primary-dark:#1e3a8a;--accent:#dc2626;--danger:#dc2626;--danger-bg:#fef2f2;--warning:#d97706;--card:#ffffff;--bg:#f5f7fb;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--blue-light:#eff6ff}
+.emergency-banner{position:sticky;top:0;z-index:100;background:var(--danger);color:white;text-align:center;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;font-size:0.92rem;font-weight:600;line-height:1.4}
 .emergency-banner a{color:white;text-decoration:underline}
-.app-header{background:var(--primary);color:white;padding:14px 16px 12px;display:flex;justify-content:space-between;align-items:center}
-.app-header .brand h1{font-size:1.2rem;font-weight:700;letter-spacing:-0.3px}
+.app-header{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);color:white;padding:14px 16px 12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(30,58,138,0.25);user-select:none}
+.app-header .brand h1{font-size:1.25rem;font-weight:700;letter-spacing:-0.4px}
 .app-header .brand p{font-size:0.78rem;opacity:0.88;margin-top:1px}
 .lang-toggle{display:flex;gap:4px;background:rgba(255,255,255,0.18);border-radius:8px;padding:3px}
 .lang-btn{background:transparent;border:none;color:white;font-size:0.8rem;font-weight:600;padding:5px 10px;border-radius:6px;cursor:pointer;min-height:34px;transition:background 0.15s}
@@ -23,23 +34,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .search-bar input::placeholder{color:var(--muted)}
 .search-clear{background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:4px;display:none}
 .page{display:none}
-.page.active{display:block}
+.page.active{display:block;animation:bidaFadeIn 0.18s ease}
+@keyframes bidaFadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 .content-wrap{padding:14px 14px 8px}
-.disclaimer{background:var(--teal-light);border:1px solid #99f6e4;border-radius:10px;padding:11px 14px;font-size:0.83rem;color:#134e4a;margin-bottom:14px;line-height:1.5}
+.disclaimer{background:var(--blue-light);border:1px solid #bfdbfe;border-radius:10px;padding:11px 14px;font-size:0.83rem;color:#1e3a8a;margin-bottom:14px;line-height:1.5}
 .home-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.home-card{background:var(--card);border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;border:1.5px solid var(--border);transition:transform 0.12s;min-height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;-webkit-tap-highlight-color:transparent}
-.home-card:active{transform:scale(0.97)}
+.home-card{background:var(--card);border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;border:1.5px solid var(--border);transition:transform 0.12s,box-shadow 0.12s;box-shadow:0 1px 4px rgba(17,24,39,0.06);min-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;-webkit-tap-highlight-color:transparent}
+.home-card:active{transform:scale(0.97);box-shadow:0 1px 2px rgba(17,24,39,0.05)}
 .home-card.danger-card{border-color:#fca5a5;background:#fff5f5}
-.home-card.danger-card .card-icon{color:var(--danger)}
-.home-card.bite-card{border-color:#fcd34d;background:#fffdf0}
+.home-card.danger-card .card-icon{background:#fee2e2;color:var(--danger)}
+.home-card.med-home-card{border-color:#fde68a;background:#fffdf5}
+.home-card.med-home-card .card-icon{background:#fef3c7}
 .home-card.wide{grid-column:1/-1}
-.card-icon{font-size:1.7rem;line-height:1}
+.card-icon{font-size:1.55rem;line-height:1;width:46px;height:46px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center}
 .card-label{font-size:0.82rem;font-weight:600;color:var(--text);line-height:1.3}
 .section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--border)}
 .back-btn{background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--primary);padding:4px 8px 4px 0;min-height:44px;display:flex;align-items:center;line-height:1}
 .section-title{font-size:1.1rem;font-weight:700;color:var(--text);flex:1}
 .section-icon{font-size:1.3rem}
-.symptom-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);margin-bottom:10px;overflow:hidden}
+.symptom-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);margin-bottom:10px;overflow:hidden;box-shadow:0 1px 3px rgba(17,24,39,0.05)}
 .symptom-card-header{display:flex;justify-content:space-between;align-items:center;padding:14px 15px;cursor:pointer;min-height:52px;-webkit-tap-highlight-color:transparent}
 .symptom-card-header:active{background:#f9fafb}
 .symptom-card-title{font-size:0.95rem;font-weight:600;color:var(--text);flex:1;padding-right:8px}
@@ -50,18 +63,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .card-section-label{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);margin:12px 0 6px}
 .danger-strip{background:var(--danger-bg);border:1px solid #fca5a5;border-radius:8px;padding:10px 12px;margin-top:10px}
 .danger-strip .strip-label{font-size:0.8rem;font-weight:700;color:var(--danger);margin-bottom:5px}
-.danger-strip ul,.action-strip ul,.info-card ul,.vaccine-list{padding-left:17px;margin:4px 0 0}
+.danger-strip ul,.action-strip ul,.info-card ul{padding-left:17px;margin:4px 0 0}
 .danger-strip li{font-size:0.88rem;line-height:1.5;margin-bottom:3px;color:#7f1d1d}
-.action-strip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 12px;margin-top:10px}
-.action-strip .strip-label{font-size:0.8rem;font-weight:700;color:var(--accent);margin-bottom:5px}
+.action-strip{background:var(--blue-light);border:1px solid #bfdbfe;border-radius:8px;padding:10px 12px;margin-top:10px}
+.action-strip .strip-label{font-size:0.8rem;font-weight:700;color:var(--primary);margin-bottom:5px}
 .action-strip li{color:#1e3a8a}
-.go-now-btn{display:block;width:100%;background:var(--danger);color:white;border:none;border-radius:10px;padding:13px 16px;font-size:0.95rem;font-weight:700;text-align:center;margin-top:12px;cursor:pointer;min-height:48px;-webkit-tap-highlight-color:transparent;text-decoration:none}
-.step-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.go-now-btn{display:block;width:100%;background:var(--danger);color:white;border:none;border-radius:10px;padding:13px 16px;font-size:0.95rem;font-weight:700;text-align:center;margin-top:12px;cursor:pointer;min-height:48px;-webkit-tap-highlight-color:transparent;text-decoration:none;box-shadow:0 2px 8px rgba(220,38,38,0.28)}
+.step-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 1px 3px rgba(17,24,39,0.05)}
 .step-num{background:var(--primary);color:white;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;flex-shrink:0;margin-top:1px}
 .step-content{flex:1}
 .step-title{font-size:0.92rem;font-weight:700;color:var(--text);margin-bottom:4px}
 .step-desc{font-size:0.86rem;color:#374151;line-height:1.5}
-.info-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px}
+.info-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px;box-shadow:0 1px 3px rgba(17,24,39,0.05)}
 .info-card-title{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:8px}
 .info-card p{font-size:0.87rem;color:#374151;line-height:1.55;margin-bottom:6px}
 .info-card li{font-size:0.87rem;color:#374151;line-height:1.5;margin-bottom:3px}
@@ -69,12 +82,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .checklist li{font-size:0.88rem;color:#374151;padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:8px;line-height:1.45}
 .checklist li:last-child{border-bottom:none}
 .checklist li::before{content:"✓";color:var(--primary);font-weight:700;font-size:0.9rem;flex-shrink:0;margin-top:1px}
-.bmi-form{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:16px;margin-bottom:10px}
+.bmi-form{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:16px;margin-bottom:10px;box-shadow:0 1px 3px rgba(17,24,39,0.05)}
 .bmi-form label{display:block;font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:5px}
 .bmi-form input[type=number]{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:11px 12px;font-size:1rem;color:var(--text);background:#f9fafb;margin-bottom:12px;outline:none;-webkit-appearance:none}
 .bmi-form input[type=number]:focus{border-color:var(--primary);background:white}
-.bmi-calc-btn{width:100%;background:var(--primary);color:white;border:none;border-radius:10px;padding:13px;font-size:1rem;font-weight:700;cursor:pointer;min-height:48px}
-.bmi-result{display:none;background:var(--teal-light);border:1.5px solid #99f6e4;border-radius:10px;padding:14px 16px;margin-top:10px;text-align:center}
+.bmi-calc-btn{width:100%;background:var(--primary);color:white;border:none;border-radius:10px;padding:13px;font-size:1rem;font-weight:700;cursor:pointer;min-height:48px;box-shadow:0 2px 8px rgba(29,78,216,0.28)}
+.bmi-result{display:none;background:var(--blue-light);border:1.5px solid #bfdbfe;border-radius:10px;padding:14px 16px;margin-top:10px;text-align:center}
 .bmi-number{font-size:2rem;font-weight:800;color:var(--primary)}
 .bmi-category{font-size:1rem;font-weight:700;color:var(--text);margin-top:2px}
 .bmi-note{font-size:0.8rem;color:var(--muted);margin-top:8px;line-height:1.5}
@@ -88,23 +101,67 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .bmi-range-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.8rem;text-align:left}
 .bmi-range-table th{background:var(--primary);color:white;padding:6px 8px;font-size:0.78rem}
 .bmi-range-table td{padding:6px 8px;border-bottom:1px solid var(--border);color:#374151}
-.bmi-range-table tr.bmi-hl td{background:#e0fdf4;font-weight:700;color:var(--primary)}
-.bmi-rec{font-size:0.87rem;color:#1a3a2a;background:#f0fdf4;border-left:3px solid var(--primary);padding:10px 12px;border-radius:0 8px 8px 0;margin-top:10px;text-align:left;line-height:1.55}
+.bmi-range-table tr.bmi-hl td{background:var(--blue-light);font-weight:700;color:var(--primary)}
+.bmi-rec{font-size:0.87rem;color:#1e3a8a;background:var(--blue-light);border-left:3px solid var(--primary);padding:10px 12px;border-radius:0 8px 8px 0;margin-top:10px;text-align:left;line-height:1.55}
 .bmi-outside{font-size:0.88rem;font-weight:700;margin:8px 0 2px;text-align:center}
-.facility-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px}
+.facility-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px;box-shadow:0 1px 3px rgba(17,24,39,0.05)}
 .facility-name{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:3px}
 .facility-type{font-size:0.75rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px}
 .facility-type.emerg{color:var(--danger)}
 .facility-address{font-size:0.84rem;color:var(--muted);margin-bottom:8px;line-height:1.4}
-.facility-phone{display:inline-flex;align-items:center;gap:6px;background:var(--teal-light);color:var(--primary-dark);border:1px solid #99f6e4;border-radius:8px;padding:8px 12px;font-size:0.88rem;font-weight:600;text-decoration:none;min-height:40px;margin-top:2px}
+.facility-phone{display:inline-flex;align-items:center;gap:6px;background:var(--blue-light);color:var(--primary-dark);border:1px solid #bfdbfe;border-radius:8px;padding:8px 12px;font-size:0.88rem;font-weight:600;text-decoration:none;min-height:40px;margin-top:2px}
 .verify-label{font-size:0.72rem;color:var(--warning);font-weight:600;margin-top:5px;display:block}
-.vaccine-group{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px}
-.vaccine-group-title{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:8px}
-.vaccine-list li{font-size:0.87rem;color:#374151;line-height:1.5;margin-bottom:2px}
-.vaccine-note{font-size:0.8rem;color:var(--primary-dark);background:var(--teal-light);border-radius:7px;padding:7px 10px;margin-top:8px;line-height:1.45}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:90;background:white;border-top:1.5px solid var(--border);display:flex;height:64px}
-.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:0.63rem;font-weight:600;padding:6px 2px;min-height:44px;-webkit-tap-highlight-color:transparent;transition:color 0.15s}
+.med-group-title{font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:var(--primary);margin:16px 0 8px}
+.med-group-title:first-child{margin-top:0}
+.med-item-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:8px;box-shadow:0 1px 3px rgba(17,24,39,0.05)}
+.med-name{font-size:0.98rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.med-row{font-size:0.86rem;color:#374151;line-height:1.5;margin-bottom:3px}
+.med-row b{color:var(--text)}
+.med-dose-reminder{font-size:0.78rem;color:var(--warning);font-weight:600;margin-top:6px;line-height:1.4}
+.med-safety-banner{background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:0.86rem;color:#78350f;line-height:1.55}
+.med-safety-banner b{display:block;margin-bottom:4px;color:#92400e}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:90;background:white;border-top:1.5px solid var(--border);display:flex;height:calc(64px + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 10px rgba(17,24,39,0.05)}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:0.63rem;font-weight:600;padding:6px 2px;min-height:44px;-webkit-tap-highlight-color:transparent;transition:color 0.15s;position:relative;user-select:none}
 .nav-btn.active{color:var(--primary)}
+.nav-btn.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:26px;height:3px;background:var(--primary);border-radius:0 0 3px 3px}
+
+/* ── Trackers & Logs (My Medicines, BP Log, Sugar Log) ─────────────────── */
+.tracker-section{background:var(--card);border-radius:14px;border:1.5px solid var(--border);padding:16px;margin-bottom:16px;box-shadow:0 1px 4px rgba(17,24,39,0.06)}
+.tracker-header{margin-bottom:10px}
+.tracker-title{font-size:1rem;font-weight:700;color:var(--text)}
+.tracker-sub{font-size:0.78rem;color:var(--muted);margin-top:2px;line-height:1.45}
+.tracker-reminder{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:9px 11px;font-size:0.82rem;color:#92400e;margin:10px 0;line-height:1.4}
+.tracker-row{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.tracker-row:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.tracker-row-name{font-size:0.88rem;font-weight:600;color:var(--text);margin-bottom:7px;display:flex;justify-content:space-between;align-items:center}
+.tracker-remove{background:none;border:none;color:var(--muted);font-size:0.85rem;cursor:pointer;padding:2px 6px;min-height:28px}
+.tracker-days{display:flex;gap:4px;justify-content:space-between}
+.day-cell{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:#f9fafb;border:1.5px solid var(--border);border-radius:8px;padding:7px 2px;font-size:0.62rem;font-weight:700;color:var(--muted);cursor:pointer;min-height:46px;-webkit-tap-highlight-color:transparent}
+.day-cell.taken{background:var(--blue-light);border-color:var(--primary);color:var(--primary)}
+.day-dot{font-size:0.85rem}
+.tracker-add-row{display:flex;gap:8px;margin-top:12px}
+.tracker-add-row select{flex:1;border:1.5px solid var(--border);border-radius:8px;padding:10px;font-size:0.85rem;background:#f9fafb;min-width:0}
+.tracker-add-btn{background:var(--primary);color:white;border:none;border-radius:8px;padding:10px 14px;font-size:0.82rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.tracker-empty-note{font-size:0.82rem;color:var(--muted);padding:6px 0}
+.tracker-print-btn{width:100%;background:var(--blue-light);color:var(--primary-dark);border:1.5px solid #bfdbfe;border-radius:10px;padding:11px;font-size:0.86rem;font-weight:700;cursor:pointer;margin-top:12px;-webkit-tap-highlight-color:transparent}
+.log-input-row{display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.log-input-row input[type=number]{flex:1;border:1.5px solid var(--border);border-radius:8px;padding:10px;font-size:0.92rem;background:#f9fafb;min-width:70px;margin-bottom:0}
+.log-input-row select{border:1.5px solid var(--border);border-radius:8px;padding:10px;font-size:0.82rem;background:#f9fafb}
+.log-input-row button{background:var(--primary);color:white;border:none;border-radius:8px;padding:10px 14px;font-size:0.82rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.log-slash{font-weight:800;color:var(--muted);font-size:1.1rem}
+.log-entry{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:0.86rem}
+.log-entry:last-child{border-bottom:none}
+.log-entry .log-date{color:var(--muted);flex:1}
+.log-entry .log-value{color:var(--text);font-weight:700}
+.log-entry .log-type-tag{font-size:0.7rem;color:var(--primary);background:var(--blue-light);border-radius:6px;padding:2px 7px;font-weight:600}
+.log-delete{background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.85rem;padding:4px 6px;min-height:28px}
+@media print{
+  .app-header,.search-wrap,.bottom-nav,.emergency-banner,.back-btn,.no-print{display:none!important}
+  body{padding-bottom:0}
+  .page{display:none!important;animation:none!important}
+  .page.active{display:block!important}
+  .tracker-print-btn{display:none!important}
+}
 .nav-icon{font-size:1.2rem;line-height:1}
 .more-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .more-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:16px 12px;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;min-height:90px;-webkit-tap-highlight-color:transparent}
@@ -116,19 +173,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .mt-10{margin-top:10px}
 .mb-14{margin-bottom:14px}
 .text-danger{color:var(--danger)}
+.emerg-big-btn{display:flex;align-items:center;gap:12px;width:100%;background:var(--danger);color:white;border:none;border-radius:14px;padding:18px 16px;margin-bottom:12px;cursor:pointer;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.emerg-big-num{font-size:1.7rem;font-weight:800;line-height:1}
+.emerg-big-label{font-size:0.8rem;opacity:0.92;margin-top:2px}
 @media(max-width:360px){.card-label{font-size:0.76rem}.nav-btn{font-size:0.6rem}}
 </style>
 </head>
 <body>
 
 <div class="emergency-banner" id="emergency-banner">
-  Emergency? Call <a href="tel:122">QC 122</a> or go to nearest ER.
+  Emergency? Call <a href="tel:137175">137-175</a> or go to the nearest health center.
 </div>
 
 <header class="app-header">
   <div class="brand">
-    <h1>Jaguar HealthLink</h1>
-    <p id="hdr-subtitle">Health guide for Sitio Jaguar</p>
+    <h1>BIDA Health App</h1>
+    <p id="hdr-subtitle">Better Informed for Disease Awareness — Muntinlupa City</p>
   </div>
   <div class="lang-toggle">
     <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
@@ -147,31 +207,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <!-- HOME -->
 <div class="page active" id="page-home">
   <div class="content-wrap">
-    <div class="disclaimer" id="home-disclaimer">This app gives health guidance only. It does not diagnose or replace a doctor, nurse, BHW, or health center.</div>
+    <div class="disclaimer" id="home-disclaimer">This app gives health guidance only. It does not diagnose or replace a doctor, nurse, or health center.</div>
     <div class="home-grid">
       <div class="home-card danger-card" onclick="navigate('red-flags')">
         <div class="card-icon">🚨</div><div class="card-label" id="lbl-rf">Red Flags</div>
       </div>
-      <div class="home-card bite-card" onclick="navigate('bite')">
-        <div class="card-icon">🐕</div><div class="card-label" id="lbl-bite">Dog / Cat Bite</div>
+      <div class="home-card" onclick="navigate('hypertension')">
+        <div class="card-icon">🩺</div><div class="card-label" id="lbl-htn">Hypertension</div>
       </div>
-      <div class="home-card" onclick="navigate('dengue')">
-        <div class="card-icon">🦟</div><div class="card-label" id="lbl-dengue">Dengue &amp; Floods</div>
+      <div class="home-card" onclick="navigate('diabetes')">
+        <div class="card-icon">🩸</div><div class="card-label" id="lbl-dm">Diabetes</div>
       </div>
-      <div class="home-card" onclick="navigate('chronic')">
-        <div class="card-icon">💊</div><div class="card-label" id="lbl-chronic">BP / Diabetes / Asthma</div>
+      <div class="home-card" onclick="navigate('dyslipidemia')">
+        <div class="card-icon">❤️</div><div class="card-label" id="lbl-dys">Cholesterol</div>
       </div>
       <div class="home-card" onclick="navigate('nutrition')">
         <div class="card-icon">🥗</div><div class="card-label" id="lbl-nutrition">Food &amp; BMI</div>
       </div>
-      <div class="home-card" onclick="navigate('vaccines')">
-        <div class="card-icon">💉</div><div class="card-label" id="lbl-vaccines">Vaccines</div>
+      <div class="home-card med-home-card" onclick="navigate('medications')">
+        <div class="card-icon">💊</div><div class="card-label" id="lbl-meds">Medicines</div>
       </div>
       <div class="home-card" onclick="navigate('nearby')">
         <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby">Nearby Care</div>
       </div>
-      <div class="home-card" onclick="navigate('mental')">
-        <div class="card-icon">🧠</div><div class="card-label" id="lbl-mental">Mental Health</div>
+      <div class="home-card danger-card" onclick="navigate('emergency')">
+        <div class="card-icon">☎️</div><div class="card-label" id="lbl-emerg">Emergency Numbers</div>
       </div>
     </div>
   </div>
@@ -194,39 +254,39 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
-<!-- BITE -->
-<div class="page" id="page-bite">
+<!-- HYPERTENSION -->
+<div class="page" id="page-hypertension">
   <div class="content-wrap">
     <div class="section-header">
       <button class="back-btn" onclick="goHome()">&#8249;</button>
-      <span class="section-icon">🐕</span>
-      <h2 class="section-title" id="title-bite">Dog / Cat Bite</h2>
+      <span class="section-icon">🩺</span>
+      <h2 class="section-title" id="title-htn">Hypertension</h2>
     </div>
-    <div id="bite-content"></div>
+    <div id="hypertension-content"></div>
   </div>
 </div>
 
-<!-- DENGUE -->
-<div class="page" id="page-dengue">
+<!-- DIABETES -->
+<div class="page" id="page-diabetes">
   <div class="content-wrap">
     <div class="section-header">
       <button class="back-btn" onclick="goHome()">&#8249;</button>
-      <span class="section-icon">🦟</span>
-      <h2 class="section-title" id="title-dengue">Dengue &amp; Floods</h2>
+      <span class="section-icon">🩸</span>
+      <h2 class="section-title" id="title-dm">Diabetes</h2>
     </div>
-    <div id="dengue-content"></div>
+    <div id="diabetes-content"></div>
   </div>
 </div>
 
-<!-- CHRONIC -->
-<div class="page" id="page-chronic">
+<!-- DYSLIPIDEMIA -->
+<div class="page" id="page-dyslipidemia">
   <div class="content-wrap">
     <div class="section-header">
       <button class="back-btn" onclick="goHome()">&#8249;</button>
-      <span class="section-icon">💊</span>
-      <h2 class="section-title" id="title-chronic">BP / Diabetes / Asthma</h2>
+      <span class="section-icon">❤️</span>
+      <h2 class="section-title" id="title-dys">Cholesterol (Dyslipidemia)</h2>
     </div>
-    <div id="chronic-content"></div>
+    <div id="dyslipidemia-content"></div>
   </div>
 </div>
 
@@ -242,15 +302,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
-<!-- VACCINES -->
-<div class="page" id="page-vaccines">
+<!-- MEDICATIONS -->
+<div class="page" id="page-medications">
   <div class="content-wrap">
     <div class="section-header">
       <button class="back-btn" onclick="goHome()">&#8249;</button>
-      <span class="section-icon">💉</span>
-      <h2 class="section-title" id="title-vaccines">Vaccines</h2>
+      <span class="section-icon">💊</span>
+      <h2 class="section-title" id="title-meds">Medicines at the Health Center</h2>
     </div>
-    <div id="vaccines-content"></div>
+    <div id="medications-content"></div>
   </div>
 </div>
 
@@ -266,15 +326,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
-<!-- MENTAL HEALTH -->
-<div class="page" id="page-mental">
+<!-- EMERGENCY -->
+<div class="page" id="page-emergency">
   <div class="content-wrap">
     <div class="section-header">
       <button class="back-btn" onclick="goHome()">&#8249;</button>
-      <span class="section-icon">🧠</span>
-      <h2 class="section-title" id="title-mental">Mental Health</h2>
+      <span class="section-icon">☎️</span>
+      <h2 class="section-title" id="title-emerg">Emergency Numbers</h2>
     </div>
-    <div id="mental-content"></div>
+    <div id="emergency-content"></div>
   </div>
 </div>
 
@@ -286,23 +346,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <h2 class="section-title" id="title-more">More</h2>
     </div>
     <div class="more-grid">
-      <div class="more-card" onclick="navigate('chronic')">
-        <div class="card-icon">💊</div><div class="card-label" id="lbl-chronic2">BP / Diabetes / Asthma</div>
+      <div class="more-card" onclick="navigate('dyslipidemia')">
+        <div class="card-icon">❤️</div><div class="card-label" id="lbl-dys2">Cholesterol</div>
       </div>
       <div class="more-card" onclick="navigate('nutrition')">
         <div class="card-icon">🥗</div><div class="card-label" id="lbl-nutrition2">Food &amp; BMI</div>
       </div>
-      <div class="more-card" onclick="navigate('vaccines')">
-        <div class="card-icon">💉</div><div class="card-label" id="lbl-vaccines2">Vaccines</div>
+      <div class="more-card" onclick="navigate('medications')">
+        <div class="card-icon">💊</div><div class="card-label" id="lbl-meds2">Medicines</div>
       </div>
       <div class="more-card" onclick="navigate('nearby')">
         <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby2">Nearby Care</div>
       </div>
-      <div class="more-card" onclick="navigate('mental')">
-        <div class="card-icon">🧠</div><div class="card-label" id="lbl-mental2">Mental Health</div>
+      <div class="more-card" onclick="navigate('emergency')">
+        <div class="card-icon">☎️</div><div class="card-label" id="lbl-emerg2">Emergency Numbers</div>
       </div>
     </div>
-    <div class="disclaimer mt-10" id="more-disclaimer">This app gives health guidance only. It does not diagnose or replace a doctor, nurse, BHW, or health center.</div>
+    <div class="disclaimer mt-10" id="more-disclaimer">This app gives health guidance only. It does not diagnose or replace a doctor, nurse, or health center.</div>
   </div>
 </div>
 
@@ -314,11 +374,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <button class="nav-btn" id="nav-red-flags" onclick="navigate('red-flags')">
     <span class="nav-icon">🚨</span><span id="nav-lbl-rf">Red Flags</span>
   </button>
-  <button class="nav-btn" id="nav-bite" onclick="navigate('bite')">
-    <span class="nav-icon">🐕</span><span id="nav-lbl-bite">Bites</span>
+  <button class="nav-btn" id="nav-hypertension" onclick="navigate('hypertension')">
+    <span class="nav-icon">🩺</span><span id="nav-lbl-htn">Hypertension</span>
   </button>
-  <button class="nav-btn" id="nav-dengue" onclick="navigate('dengue')">
-    <span class="nav-icon">🦟</span><span id="nav-lbl-dengue">Dengue</span>
+  <button class="nav-btn" id="nav-diabetes" onclick="navigate('diabetes')">
+    <span class="nav-icon">🩸</span><span id="nav-lbl-dm">Diabetes</span>
   </button>
   <button class="nav-btn" id="nav-more" onclick="navigate('more')">
     <span class="nav-icon">☰</span><span id="nav-lbl-more">More</span>
@@ -326,24 +386,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </nav>
 
 <script>
+// ══════════════════════════════════════════════════════════════════════════════
+// BIDA HEALTH APP — Better Informed for Disease Awareness
+// Muntinlupa City Health Office | NCD Phase 1 Pilot
+// Bilingual (English/Filipino) | Offline-first | Zero data collection
+// ══════════════════════════════════════════════════════════════════════════════
+
 // ── i18n ──────────────────────────────────────────────────────────────────────
 const T = {
   en: {
-    subtitle:'Health guide for Sitio Jaguar',
-    banner:'Emergency? Call <a href="tel:122">QC 122</a> or go to nearest ER.',
+    subtitle:'Better Informed for Disease Awareness — Muntinlupa City',
+    banner:'Emergency? Call <a href="tel:137175">137-175</a> or go to the nearest health center.',
     search:'Search symptom or topic…',
-    disclaimer:'This app gives health guidance only. It does not diagnose or replace a doctor, nurse, BHW, or health center.',
-    navHome:'Home', navRF:'Red Flags', navBite:'Bites', navDengue:'Dengue', navMore:'More',
-    lblRF:'Red Flags', lblBite:'Dog / Cat Bite', lblDengue:'Dengue &amp; Floods',
-    lblChronic:'BP / Diabetes / Asthma', lblNutrition:'Food &amp; BMI',
-    lblVaccines:'Vaccines', lblNearby:'Nearby Care',
-    titleRF:'Red Flags', titleBite:'Dog / Cat Bite', titleDengue:'Dengue &amp; Floods',
-    titleChronic:'BP / Diabetes / Asthma', titleNutrition:'Food &amp; BMI',
-    titleVaccines:'Vaccines', titleNearby:'Nearby Care', titleMore:'More',
-    goNow:'⚠ Go to ER / Emergency now',
-    callNow:'⚠ Emergency? Call QC 122',
+    disclaimer:'This app gives health guidance only. It does not diagnose or replace a doctor, nurse, or health center.',
+    navHome:'Home', navRF:'Red Flags', navHTN:'Hypertension', navDM:'Diabetes', navMore:'More',
+    lblRF:'Red Flags', lblHTN:'Hypertension', lblDM:'Diabetes', lblDys:'Cholesterol',
+    lblNutrition:'Food &amp; BMI', lblMeds:'Medicines', lblNearby:'Nearby Care', lblEmerg:'Emergency Numbers',
+    titleRF:'Red Flags', titleHTN:'Hypertension', titleDM:'Diabetes', titleDys:'Cholesterol (Dyslipidemia)',
+    titleNutrition:'Food &amp; BMI', titleMeds:'Medicines at the Health Center', titleNearby:'Nearby Care',
+    titleEmerg:'Emergency Numbers', titleMore:'More',
+    goNow:'⚠ Seek care now', callNow:'⚠ Emergency? Call 137-175',
     noResults:'No results found. Try a different keyword.',
-    verify:'⚠ VERIFY NUMBER BEFORE USE',
+    verify:'⚠ VERIFY BEFORE USE',
     bmiBtn:'Calculate BMI', bmiAge:'Age (years)', bmiH:'Height', bmiW:'Weight',
     bmiUnitCm:'cm', bmiUnitIn:'inches', bmiUnitFt:'ft + in', bmiUnitKg:'kg', bmiUnitLbs:'lbs',
     bmiFtLabel:'ft', bmiInLabel:'in (extra)',
@@ -353,101 +417,176 @@ const T = {
     bmiRanges:'Asia-Pacific BMI Ranges', bmiCatCol:'Category', bmiRangeCol:'BMI Range',
     bmiTeen:'For those under 18: adult BMI categories do not apply. Please consult a health center, doctor, or nutritionist for a proper weight-for-age assessment.',
     bmiInvalid:'Please enter valid age, height, and weight.',
-    bmiAboveNorm:'above the healthy weight range',
-    bmiBelowNorm:'below the healthy weight range',
+    bmiAboveNorm:'above the healthy weight range', bmiBelowNorm:'below the healthy weight range',
     bmiToLose:'To reach a healthy weight, you may need to lose approximately',
     bmiToGain:'To reach a healthy weight, you may need to gain approximately',
-    bmiRecUnder:'Eat more protein-rich and calorie-dense foods — eggs, fish, chicken, legumes (monggo, patani), dairy. Aim for regular, balanced meals. Consider seeing a nutritionist or doctor.',
+    bmiRecUnder:'Eat more protein-rich and calorie-dense foods, such as eggs, fish, chicken, legumes (monggo, patani), and dairy. Aim for regular, balanced meals. Consider seeing a nutritionist or doctor.',
     bmiRecNormal:'Great! Maintain your healthy lifestyle. Keep eating balanced meals with plenty of vegetables and lean protein, and stay physically active.',
-    bmiRecOver:'Try reducing refined carbohydrates and sweet drinks. Eat more vegetables and lean protein, and limit processed foods. Walking at least 30 minutes most days helps. Consult a doctor or nutritionist for a personalized plan.',
-    bmiRecObese1:'Lifestyle changes are important now. Reduce processed, high-calorie, and sugary foods. Increase physical activity gradually. See a doctor and nutritionist for a personalized weight management plan.',
+    bmiRecOver:'Try reducing refined carbohydrates and sweet drinks. Eat more vegetables and lean protein, and limit processed and salty foods. Walking at least 30 minutes most days helps. Consult a doctor or nutritionist for a personalized plan.',
+    bmiRecObese1:'Lifestyle changes are important now. Reduce processed, high-calorie, salty, and sugary foods. Increase physical activity gradually. See a doctor and nutritionist for a personalized weight management plan.',
     bmiRecObese2:'Please see a doctor as soon as possible. Significant weight management support is needed. Do not attempt crash dieting without medical supervision.',
     signsSym:'Signs / Symptoms', dangerSigns:'⚠ Danger signs — seek urgent care:',
     whatToDo:'What to do', catEm:'Emergency', catHC:'Health Centers', catHosp:'Hospitals',
-    abtcTitle:'Animal Bite Treatment Center (ABTC)',
-    nearbyVerify:'All contact numbers must be verified before use. Numbers listed are from the project proposal (2026) and may have changed.',
-    vacNote:'Vaccination schedules must be verified with Fairview Health Center or your doctor before acting on them. This is for awareness only.',
+    nearbyVerify:'Contact numbers below were verified against official Muntinlupa City Government sources. Numbers can still change — please confirm before an urgent visit.',
     plateTitle:'Pinggang Pinoy — Balanced Plate Guide',
-    plateNote:'Based on DOH/NNC Pinggang Pinoy guidelines.',
-    mealsTitle:'Budget-Friendly Meals',
+    plateNote:'Based on DOH/NNC Pinggang Pinoy guidelines, adjusted for blood pressure, blood sugar, and cholesterol management.',
+    mealsTitle:'Budget-Friendly, Heart-Healthy Meals',
     tipsTitle:'Simple Food Reminders',
     bmiTitle:'BMI Calculator (Adults)',
-    lblMentalHealth:'Mental Health', titleMentalHealth:'Mental Health',
-    mhIntro:'Mental health is part of total health. Feeling overwhelmed, deeply sad, or unable to cope for weeks is not weakness — it is a sign you may need support. There is no shame in asking for help.',
-    mhCrisisTitle:'Signs That Need Help Right Now',
-    mhCrisisAction:'Call or text the NCMH Crisis Hotline — it is free and available 24 hours, 7 days a week.',
-    mhResourcesTitle:'Where to Get Help',
-    mhVerify:'⚠ VERIFY NUMBER BEFORE USE',
-    mhResourceNote:'If you or someone you know is in immediate danger, call QC 122 or go to the nearest ER.',
+    medSafetyTitle:'Please Read Before Using This List',
+    medSafetyBody:'This list is for general information only. It does not replace your doctor\'s prescription. Your doctor or health worker decides your exact medicine and dose based on your own health condition. Never start, stop, or change any medicine on your own. If you notice side effects or have questions, go to your health center right away.',
+    medWhatFor:'What it\'s for', medHowTaken:'How it\'s usually taken', medUsualDose:'Usual Adult Dose',
+    medReminder:'Every patient is different. Always take the exact dose your doctor or health worker prescribed for you, not just what is written here.',
+    medListNote:'This list reflects medicines commonly available through the Muntinlupa City Health Office as of this app\'s development. Availability may change — please confirm at your health center.',
+    // Hypertension
+    htnIntro:'Understanding hypertension helps you manage it, not just take medicine for it. Here is what it is, why it matters, and what you can do.',
+    htnWhatTitle:'What Is Hypertension?', htnWhatBody:'Blood pressure is the force of blood pushing against your artery walls. It is written as two numbers, for example 120/80: the top number (systolic) is the pressure when your heart beats, and the bottom number (diastolic) is the pressure when your heart rests between beats. Hypertension means your blood pressure stays higher than normal over time.',
+    htnWhyTitle:'Why It Matters', htnWhyBody:'High blood pressure usually has no symptoms, which is why it is called a "silent" condition. Over months or years, uncontrolled hypertension slowly damages your blood vessels, heart, kidneys, and eyes. This raises your risk of stroke, heart attack, heart failure, and kidney disease, often without warning until a complication happens.',
+    htnRiskTitle:'Who Is at Higher Risk', htnRiskBody:'Your risk of hypertension is higher if you have a family history of high blood pressure, are older, eat a high-salt diet, are overweight, are not physically active, drink alcohol regularly, smoke, or experience ongoing stress. Many of these factors can be improved with lifestyle changes, even if family history cannot be changed.',
+    htnNumbersTitle:'Know Your Numbers', htnNumbersBody:'Have your blood pressure checked regularly at the health center. If you monitor at home, sit quietly for 5 minutes before measuring, keep your arm supported at heart level, avoid caffeine, exercise, or smoking for 30 minutes before checking, and take two readings a few minutes apart. Regular monitoring is the only way to know if your hypertension is controlled, since it usually causes no symptoms.',
+    htnMedTitle:'Taking Your Medicine', htnMedBody:'If prescribed medicine for high blood pressure, take it exactly as instructed, even if you feel fine. These medicines work best when taken consistently, often for life. Never stop or change your dose without talking to your doctor or health worker first, even if your blood pressure reading looks normal — a normal reading often means the medicine is working.',
+    htnDietTitle:'Eating for Healthy Blood Pressure', htnDietBody:'Reduce salty foods such as processed meats, instant noodles, canned goods, and extra patis or toyo. Choose fresh fruits and vegetables, especially those rich in potassium like banana and leafy greens, which help balance sodium in the body. Read food labels when available and choose lower-sodium options. Cooking at home with fresh ingredients gives you more control over salt than eating out or buying processed food.',
+    htnActivityTitle:'Staying Active', htnActivityBody:'Regular physical activity helps lower and control blood pressure. Aim for at least 30 minutes of moderate activity, such as brisk walking, most days of the week. If you are not used to exercise, start slowly and build up gradually. Simple activities like walking to the market, taking the stairs, or light household chores also count. Ask your doctor before starting a new exercise routine if you have other health conditions.',
+    htnStressTitle:'Managing Stress', htnStressBody:'Ongoing stress can raise blood pressure and make it harder to manage. Simple habits that may help include getting enough sleep, talking to family or friends about what is bothering you, taking short breaks during a busy day, and practicing slow, deep breathing when feeling overwhelmed. If stress feels difficult to manage on your own, it is okay to ask your health worker for support.',
+    htnUrgentTitle:'When to Seek Urgent Care', htnUrgentBody:'Severe headache, chest pain, difficulty breathing, sudden confusion, vision changes, or weakness on one side, together with high blood pressure, are signs of a hypertensive emergency. See the Red Flags section and seek care immediately.',
+    // Diabetes
+    dmIntro:'Understanding diabetes helps you manage it day to day, not just when you visit the doctor. Here is what it is, why it matters, and what you can do.',
+    dmWhatTitle:'What Is Diabetes?', dmWhatBody:'Diabetes means your blood sugar (glucose) stays higher than normal because your body does not make enough insulin or cannot use it well. Insulin is a hormone that helps move sugar from your blood into your cells for energy. Most adults with diabetes have Type 2, which is often linked to lifestyle and can be managed well with medicine, diet, and activity.',
+    dmWhyTitle:'Why It Matters', dmWhyBody:'Uncontrolled diabetes over time can damage blood vessels and nerves throughout the body. This raises the risk of heart disease, stroke, kidney disease, vision loss, and nerve damage, especially in the feet. Good blood sugar control significantly lowers these risks, which is why consistent management matters even when you feel fine.',
+    dmRiskTitle:'Who Is at Higher Risk', dmRiskBody:'Your risk of Type 2 diabetes is higher if you have a family history of diabetes, are overweight, are not physically active, are older, or have high blood pressure or high cholesterol. Having hypertension, diabetes, and high cholesterol together is common, and each condition can make the others harder to manage, so treating them together matters.',
+    dmNumbersTitle:'Know Your Numbers', dmNumbersBody:'Follow up on blood sugar testing at the health center or with your doctor as advised. If you test at home, ask your doctor or health worker what target range is right for you, since this can vary by person. Keep a record of your readings, including whether you tested fasting (before eating) or random (after eating), to help your doctor see your pattern over time.',
+    dmMedTitle:'Taking Your Medicine', dmMedBody:'Take your diabetes medicine exactly as prescribed and at the same times each day where possible. Never stop or change your dose on your own, even if your blood sugar reading looks good, since that may simply mean the medicine is working.',
+    dmFootTitle:'Foot Care', dmFootBody:'Check your feet every day for cuts, blisters, redness, or sores, since diabetes can reduce feeling in the feet, making injuries easy to miss. Wash and dry your feet daily, especially between the toes, and moisturize dry skin (but not between the toes). Do not walk barefoot, even at home. Trim toenails straight across. See a health worker right away for any wound that is not healing, since foot injuries can worsen quickly in diabetes.',
+    dmDietTitle:'Eating for Blood Sugar Control', dmDietBody:'Eat regular, balanced meals rather than skipping meals, which can cause blood sugar swings. Be mindful of carbohydrate portions (rice, bread, root crops) and pair them with protein and vegetables to slow sugar absorption. Reduce sugary foods, drinks, and desserts. Choose whole fruit over fruit juice. Eating at consistent times each day also helps keep blood sugar more stable.',
+    dmActivityTitle:'Staying Active', dmActivityBody:'Physical activity helps your body use insulin better and can lower blood sugar. Aim for regular activity most days, such as walking. If you take medicine that can cause low blood sugar, carry a small sugary snack in case you feel shaky, dizzy, or confused during exercise. Check your feet after activity, especially if wearing new shoes.',
+    dmUrgentTitle:'When to Seek Urgent Care', dmUrgentBody:'Vomiting with inability to keep fluids down, severe weakness or confusion, drowsiness, very dry mouth, or sudden shaking with cold sweat are emergency signs. See the Red Flags section and seek care immediately.',
+    // Dyslipidemia (Cholesterol)
+    dysIntro:'Understanding cholesterol helps explain why lifestyle changes and medicine both matter, even without symptoms.',
+    dysWhatTitle:'What Is Cholesterol?', dysWhatBody:'Cholesterol is a fat-like substance your body needs in small amounts, but too much of certain types can be harmful. LDL ("bad" cholesterol) can build up in your blood vessels, while HDL ("good" cholesterol) helps remove it. Triglycerides are another type of blood fat that, when high, also raise health risks. Dyslipidemia means these levels are not at a healthy balance.',
+    dysWhyTitle:'Why It Matters', dysWhyBody:'High cholesterol contributes to the buildup of fatty deposits in blood vessels over time, a process called atherosclerosis. This narrows and stiffens the arteries, increasing risk of heart attack and stroke, especially when combined with hypertension or diabetes. Managing all three conditions together, if you have more than one, gives the best protection for your heart and blood vessels.',
+    dysRiskTitle:'Who Is at Higher Risk', dysRiskBody:'Your risk of dyslipidemia is higher if you have a diet high in fried and fatty foods, are overweight, are not physically active, smoke, drink alcohol regularly, or have a family history of high cholesterol or early heart disease. Having diabetes or hypertension also raises your risk of dyslipidemia.',
+    dysNumbersTitle:'Know Your Numbers', dysNumbersBody:'Ask your health center about lipid (cholesterol) testing, especially if you have hypertension, diabetes, or a family history of heart disease. This is usually a simple blood test that your doctor can help interpret.',
+    dysMedTitle:'Taking Your Medicine', dysMedBody:'If prescribed a cholesterol medicine, take it exactly as instructed, usually at the same time each day. Never stop or change your dose without talking to your doctor or health worker first.',
+    dysDietTitle:'Eating for Healthy Cholesterol', dysDietBody:'Reduce fried, fatty, and processed foods, including lechon, crispy pata, and processed meats. Choose fish, skinless chicken, and plant-based protein (beans, monggo, tokwa) more often than red meat. Use less oil in cooking and choose healthier oils when possible. Eat more vegetables, fruits, and high-fiber foods like oats and legumes, which can help lower cholesterol.',
+    dysActivityTitle:'Staying Active', dysActivityBody:'Regular physical activity can help raise your "good" HDL cholesterol and lower triglycerides. Aim for at least 30 minutes of activity, such as brisk walking, most days of the week. Combined with a healthier diet, staying active is one of the most effective ways to improve your cholesterol levels without medicine, or to help medicine work better.',
+    emergMainLabel:'Main Emergency Hotline (24/7)',
+    emergOtherTitle:'Other Ways to Reach Emergency Response',
+    emergAppNote:'Muntinlupa City also offers the iRESPOND Muntinlupa mobile app for reporting emergencies (disaster, police, fire, ambulance). Available on Google Play and the App Store.',
+    medTrackerTitle:'My Medicine Tracker', medTrackerSub:'Track your own medicine intake here. This stays only on this phone — nothing is sent anywhere, and no one else can see it.',
+    medTrackerEmpty:'You haven\'t added any medicines to track yet.', medAdd:'Add', medAllAdded:'All listed medicines have been added to your tracker.',
+    medPrintBtn:'Print My Checklist', medReminderBanner:'You haven\'t marked {meds} as taken today yet.',
+    bpLogTitle:'My Blood Pressure Log', bpLogSub:'Keep track of your home blood pressure readings to discuss with your doctor. Stays only on this phone.',
+    bpSysPlaceholder:'Systolic (e.g. 130)', bpDiaPlaceholder:'Diastolic (e.g. 85)', bpLogPrintBtn:'Print My BP Log',
+    sugarLogTitle:'My Blood Sugar Log', sugarLogSub:'Keep track of your home blood sugar readings to discuss with your doctor. Stays only on this phone.',
+    sugarValPlaceholder:'Reading (mg/dL)', sugarFasting:'Fasting', sugarRandom:'Random/After meal', sugarLogPrintBtn:'Print My Sugar Log',
+    logAdd:'+ Add', logNoEntries:'No entries yet.', logInvalid:'Please enter a valid reading.',
   },
   fil: {
-    subtitle:'Gabay pangkalusugan para sa Sitio Jaguar',
-    banner:'Emergency? Tumawag sa <a href="tel:122">QC 122</a> o pumunta sa pinakamalapit na ER.',
+    subtitle:'Mas May Kaalaman Tungkol sa Sakit — Lungsod ng Muntinlupa',
+    banner:'Emergency? Tumawag sa <a href="tel:137175">137-175</a> o pumunta sa pinakamalapit na health center.',
     search:'Hanapin ang sintomas o paksa…',
-    disclaimer:'Gabay pangkalusugan lamang ito. Hindi ito kapalit ng doktor, nurse, BHW, o health center.',
-    navHome:'Home', navRF:'Babala', navBite:'Kagat', navDengue:'Dengue', navMore:'Iba Pa',
-    lblRF:'Mga Babala', lblBite:'Kagat ng Hayop', lblDengue:'Dengue at Baha',
-    lblChronic:'BP / Diyabetis / Hika', lblNutrition:'Pagkain at BMI',
-    lblVaccines:'Bakuna', lblNearby:'Malapit na Tulong',
-    titleRF:'Mga Babala', titleBite:'Kagat ng Hayop', titleDengue:'Dengue at Baha',
-    titleChronic:'BP / Diyabetis / Hika', titleNutrition:'Pagkain at BMI',
-    titleVaccines:'Bakuna', titleNearby:'Malapit na Tulong', titleMore:'Iba Pa',
-    goNow:'⚠ Pumunta agad sa ER / Emergency',
-    callNow:'⚠ Emergency? Tumawag sa QC 122',
+    disclaimer:'Gabay pangkalusugan lamang ito. Hindi ito kapalit ng doktor, nurse, o health center.',
+    navHome:'Home', navRF:'Babala', navHTN:'Altapresyon', navDM:'Diyabetis', navMore:'Iba Pa',
+    lblRF:'Mga Babala', lblHTN:'Altapresyon', lblDM:'Diyabetis', lblDys:'Kolesterol',
+    lblNutrition:'Pagkain at BMI', lblMeds:'Mga Gamot', lblNearby:'Malapit na Tulong', lblEmerg:'Emergency Numbers',
+    titleRF:'Mga Babala', titleHTN:'Altapresyon (Hypertension)', titleDM:'Diyabetis', titleDys:'Kolesterol (Dyslipidemia)',
+    titleNutrition:'Pagkain at BMI', titleMeds:'Mga Gamot sa Health Center', titleNearby:'Malapit na Tulong',
+    titleEmerg:'Mga Numero sa Emergency', titleMore:'Iba Pa',
+    goNow:'⚠ Magpatingin agad', callNow:'⚠ Emergency? Tumawag sa 137-175',
     noResults:'Walang nahanap. Subukan ang ibang salita.',
-    verify:'⚠ I-VERIFY ANG NUMERO BAGO GAMITIN',
+    verify:'⚠ I-VERIFY BAGO GAMITIN',
     bmiBtn:'Kalkulahin ang BMI', bmiAge:'Edad (taon)', bmiH:'Taas', bmiW:'Timbang',
     bmiUnitCm:'cm', bmiUnitIn:'pulgada', bmiUnitFt:'ft + in', bmiUnitKg:'kg', bmiUnitLbs:'lbs',
     bmiFtLabel:'ft', bmiInLabel:'in (dagdag)',
-    bmiDisclaimer:'Ginagamit ang Asia-Pacific na pamantayan ng BMI — mas mababa ito kaysa sa karaniwang WHO at mas angkop para sa mga Pilipinong adulto. Gabay lamang ang BMI at hindi ito diagnosis. Para sa edad 17 pababa, kumonsulta sa health center, doktor, o nutrisyonista.',
-    bmiResultNote:'Ginamit ang Asia-Pacific na pamantayan. Gabay lamang ito — kumonsulta sa health professional para sa wastong pagsusuri.',
+    bmiDisclaimer:'Ginagamit ang Asia-Pacific na pamantayan ng BMI, mas mababa ito kaysa sa karaniwang WHO at mas angkop para sa mga Pilipinong adulto. Gabay lamang ang BMI at hindi ito diagnosis. Para sa edad 17 pababa, kumonsulta sa health center, doktor, o nutrisyonista.',
+    bmiResultNote:'Ginamit ang Asia-Pacific na pamantayan. Gabay lamang ito, kumonsulta sa health professional para sa wastong pagsusuri.',
     bmiUnder:'Kulang ang timbang', bmiNormal:'Normal ang timbang', bmiOver:'Sobra ang timbang', bmiObese1:'Obese Class I', bmiObese2:'Obese Class II (Matinding Obesity)',
     bmiRanges:'Asia-Pacific na Pamantayan ng BMI', bmiCatCol:'Kategorya', bmiRangeCol:'Saklaw ng BMI',
     bmiTeen:'Para sa edad 17 pababa: hindi angkop ang adult BMI categories. Kumonsulta sa health center, doktor, o nutrisyonista para sa wastong pagtatasa.',
     bmiInvalid:'Mangyaring maglagay ng tamang edad, taas, at timbang.',
-    bmiAboveNorm:'na sobra sa malusog na timbang',
-    bmiBelowNorm:'na kulang sa malusog na timbang',
+    bmiAboveNorm:'na sobra sa malusog na timbang', bmiBelowNorm:'na kulang sa malusog na timbang',
     bmiToLose:'Para maabot ang malusog na timbang, maaaring kailangang mabawasan ng',
     bmiToGain:'Para maabot ang malusog na timbang, maaaring kailangang madagdagan ng',
-    bmiRecUnder:'Kumain ng mas maraming protina at masustansyang pagkain — itlog, isda, manok, munggo, gatas. Subukang kumain nang regular at balanse. Kumonsulta sa nutrisyonista o doktor.',
+    bmiRecUnder:'Kumain ng mas maraming protina at masustansyang pagkain, tulad ng itlog, isda, manok, munggo, at gatas. Subukang kumain nang regular at balanse. Kumonsulta sa nutrisyonista o doktor.',
     bmiRecNormal:'Napakahusay! Ipagpatuloy ang malusog na pamumuhay. Kumain ng balanseng pagkain na may maraming gulay at lean na protina, at manatiling aktibo.',
-    bmiRecOver:'Subukang bawasan ang kanin, matamis, at inuming may asukal. Kumain ng mas maraming gulay at lean na protina. Ang paglalakad nang 30 minuto sa araw ay nakakatulong. Kumonsulta sa doktor o nutrisyonista.',
-    bmiRecObese1:'Mahalaga na ang pagbabago sa pamumuhay. Iwasan ang processed at mataas-kaloyang pagkain. Mag-ehersisyo nang dahan-dahan. Kumonsulta sa doktor at nutrisyonista para sa personalisadong plano.',
+    bmiRecOver:'Subukang bawasan ang kanin, matamis, at inuming may asukal. Kumain ng mas maraming gulay at lean na protina, at bawasan ang processed at maalat na pagkain. Ang paglalakad nang 30 minuto sa araw ay nakakatulong. Kumonsulta sa doktor o nutrisyonista.',
+    bmiRecObese1:'Mahalaga na ang pagbabago sa pamumuhay. Iwasan ang processed, mataas-kaloriya, maalat, at matamis na pagkain. Mag-ehersisyo nang dahan-dahan. Kumonsulta sa doktor at nutrisyonista para sa personalisadong plano.',
     bmiRecObese2:'Pumunta sa doktor agad. Kailangan ng malaking tulong sa pamamahala ng timbang. Huwag mag-crash diet nang walang gabay ng doktor.',
     signsSym:'Mga Senyales / Sintomas', dangerSigns:'⚠ Delikadong senyales — magpatingin agad:',
     whatToDo:'Dapat gawin', catEm:'Emergency', catHC:'Mga Health Center', catHosp:'Mga Ospital',
-    abtcTitle:'Animal Bite Treatment Center (ABTC)',
-    nearbyVerify:'Dapat i-verify ang lahat ng numero bago gamitin. Ang mga numerong nakalista ay mula sa project proposal (2026) at maaaring nagbago na.',
-    vacNote:'Dapat i-verify ang mga iskedyul ng bakuna sa Fairview Health Center o sa iyong doktor bago gawin. Para sa kaalaman lamang ito.',
+    nearbyVerify:'Ang mga numerong nasa ibaba ay na-verify laban sa opisyal na mapagkukunan ng Lungsod ng Muntinlupa. Maaari pa ring magbago ang mga ito, kumpirmahin bago pumunta para sa agarang pangangailangan.',
     plateTitle:'Pinggang Pinoy — Gabay sa Balanseng Pagkain',
-    plateNote:'Batay sa mga alituntunin ng DOH/NNC Pinggang Pinoy.',
-    mealsTitle:'Mga Abot-Kayang Pagkain',
+    plateNote:'Batay sa mga alituntunin ng DOH/NNC Pinggang Pinoy, inayos para sa pamamahala ng BP, blood sugar, at kolesterol.',
+    mealsTitle:'Abot-Kayang Pagkain na Mabuti sa Puso',
     tipsTitle:'Simpleng Paalala sa Pagkain',
     bmiTitle:'BMI Calculator (Para sa Matatanda)',
-    lblMentalHealth:'Mental Health', titleMentalHealth:'Mental Health',
-    mhIntro:'Ang mental health ay bahagi ng kabuuang kalusugan. Ang matagal na pakiramdam na malungkot, nag-aalala, o hindi makayanan ang buhay ay hindi kahinaan — tanda ito na maaaring kailangan mo ng tulong. Walang kahihiyang humingi ng tulong.',
-    mhCrisisTitle:'Mga Senyales na Kailangan ng Tulong AGAD',
-    mhCrisisAction:'Tumawag o mag-text sa NCMH Crisis Hotline — libre ito at available 24 oras, 7 araw sa isang linggo.',
-    mhResourcesTitle:'Saan Humingi ng Tulong',
-    mhVerify:'⚠ I-VERIFY ANG NUMERO BAGO GAMITIN',
-    mhResourceNote:'Kung ikaw o ang isang mahal mo ay nasa agarang panganib, tumawag sa QC 122 o pumunta sa pinakamalapit na ER.',
+    medSafetyTitle:'Basahin Muna Bago Gamitin ang Listahang Ito',
+    medSafetyBody:'Para sa pangkalahatang kaalaman lamang ang listahang ito. Hindi ito kapalit ng reseta ng iyong doktor. Ang iyong doktor o health worker ang magpapasya ng tamang gamot at dosage para sa iyong kalagayan. Huwag simulan, itigil, o palitan ang anumang gamot nang mag-isa. Kung may napansing side effect o may tanong, pumunta agad sa iyong health center.',
+    medWhatFor:'Para saan', medHowTaken:'Karaniwang pag-inom', medUsualDose:'Karaniwang Dosage (Matanda)',
+    medReminder:'Iba-iba ang pangangailangan ng bawat pasyente. Laging inumin ang eksaktong dosage na inireseta sa iyo ng iyong doktor o health worker, hindi lang basta ang nakasulat dito.',
+    medListNote:'Makikita sa listahang ito ang mga gamot na karaniwang available sa Muntinlupa City Health Office noong ginawa ang app na ito. Maaaring magbago ang availability, kumpirmahin sa iyong health center.',
+    // Hypertension
+    htnIntro:'Ang pag-unawa sa hypertension ay tumutulong sa iyo na pamahalaan ito, hindi lang basta uminom ng gamot dito. Narito kung ano ito, bakit mahalaga, at ano ang magagawa mo.',
+    htnWhatTitle:'Ano ang Hypertension?', htnWhatBody:'Ang presyon ng dugo ay ang lakas ng dugo na dumadaloy laban sa dingding ng iyong mga ugat. Isinusulat ito bilang dalawang numero, halimbawa 120/80: ang taas na numero (systolic) ay ang presyon kapag tumitibok ang puso, at ang mababang numero (diastolic) ay ang presyon kapag nagpapahinga ang puso sa pagitan ng tibok. Ang hypertension ay nangangahulugang mas mataas sa normal ang iyong presyon ng dugo sa mahabang panahon.',
+    htnWhyTitle:'Bakit Mahalaga Ito', htnWhyBody:'Karaniwang walang sintomas ang altapresyon, kaya ito tinatawag na "tahimik" na kondisyon. Sa loob ng mga buwan o taon, unti-unting nasisira ng hindi kontroladong hypertension ang iyong mga ugat, puso, bato, at mata. Pinapataas nito ang panganib ng stroke, heart attack, heart failure, at sakit sa bato, kadalasan nang walang babala hanggang magkaroon ng komplikasyon.',
+    htnRiskTitle:'Sino ang Mas Nanganganib', htnRiskBody:'Mas mataas ang panganib mong magkaroon ng hypertension kung may family history ka ng altapresyon, matanda na, kumakain ng maalat, sobra sa timbang, hindi aktibo, regular na umiinom ng alak, naninigarilyo, o palaging stressed. Marami sa mga salik na ito ay maaaring mapabuti sa pamamagitan ng pagbabago sa pamumuhay, kahit hindi mababago ang family history.',
+    htnNumbersTitle:'Alamin ang Iyong BP', htnNumbersBody:'Ipasuri ang iyong presyon ng dugo nang regular sa health center. Kung magsusukat ka sa bahay, umupo nang tahimik ng 5 minuto bago magsukat, itaas ang braso sa antas ng puso, iwasan ang caffeine, ehersisyo, o paninigarilyo 30 minuto bago magsukat, at kumuha ng dalawang reading na may pagitan ng ilang minuto. Ang regular na pagsusuri ang tanging paraan para malaman kung kontrolado ang iyong hypertension, dahil karaniwang walang sintomas ito.',
+    htnMedTitle:'Pag-inom ng Gamot', htnMedBody:'Kung may nireseta sa iyong gamot para sa altapresyon, inumin ito nang eksakto sa payo, kahit pakiramdam mo ay maayos ka. Pinakamabisa ang mga gamot na ito kapag regular na iniinom, kadalasan habambuhay. Huwag itigil o baguhin ang dosage nang hindi muna kumukonsulta sa doktor o health worker, kahit normal na ang mababasa mong BP — kadalasan ang normal na reading ay senyales na gumagana ang gamot.',
+    htnDietTitle:'Pagkain Para sa Malusog na Presyon ng Dugo', htnDietBody:'Bawasan ang maalat na pagkain tulad ng processed na karne, instant noodles, de-lata, at dagdag na patis o toyo. Piliin ang sariwang prutas at gulay, lalo na ang mayaman sa potassium tulad ng saging at madahong gulay, na tumutulong balansehin ang sodium sa katawan. Basahin ang food label kung available at piliin ang mas mababa sa sodium. Ang pagluluto sa bahay gamit ang sariwang sangkap ay nagbibigay sa iyo ng mas maraming kontrol sa asin kumpara sa pagkain sa labas o processed na pagkain.',
+    htnActivityTitle:'Pananatiling Aktibo', htnActivityBody:'Ang regular na pisikal na aktibidad ay tumutulong pababain at kontrolin ang presyon ng dugo. Layunin ang hindi bababa sa 30 minuto ng katamtamang aktibidad, tulad ng mabilis na paglalakad, halos araw-araw. Kung hindi ka sanay mag-ehersisyo, magsimula nang dahan-dahan at unti-unting dagdagan. Ang simpleng aktibidad tulad ng paglalakad papuntang palengke, pag-akyat ng hagdan, o magaang gawaing bahay ay may bisa rin. Magtanong sa iyong doktor bago magsimula ng bagong ehersisyo kung may iba ka pang kondisyon sa kalusugan.',
+    htnStressTitle:'Pamamahala sa Stress', htnStressBody:'Ang patuloy na stress ay maaaring magpataas ng presyon ng dugo at mahirapan itong pamahalaan. Ang simpleng ugali na makakatulong ay ang sapat na tulog, pakikipag-usap sa pamilya o kaibigan tungkol sa nakakaabala sa iyo, pagkuha ng maikling break sa abalang araw, at mahinahong paghinga kapag nararamdamang overwhelmed. Kung mahirap pamahalaan ang stress nang mag-isa, okay lang humingi ng suporta sa iyong health worker.',
+    htnUrgentTitle:'Kailan Dapat Magpatingin Agad', htnUrgentBody:'Ang matinding sakit ng ulo, pananakit ng dibdib, hirap huminga, biglang pagkalito, pagbabago ng paningin, o panghihina sa isang panig, kasabay ng mataas na BP, ay senyales ng hypertensive emergency. Tingnan ang seksyong Mga Babala at magpatingin agad.',
+    // Diabetes
+    dmIntro:'Ang pag-unawa sa diyabetis ay tumutulong sa iyo na pamahalaan ito araw-araw, hindi lang kapag bumibisita sa doktor. Narito kung ano ito, bakit mahalaga, at ano ang magagawa mo.',
+    dmWhatTitle:'Ano ang Diyabetis?', dmWhatBody:'Ang diyabetis ay nangangahulugang mas mataas sa normal ang iyong blood sugar (glucose) dahil hindi sapat ang ginagawang insulin ng katawan o hindi ito magamit nang maayos. Ang insulin ay hormone na tumutulong ilipat ang asukal mula sa dugo papunta sa mga selula para sa enerhiya. Karamihan sa mga matanda na may diyabetis ay may Type 2, na kadalasang konektado sa pamumuhay at maaaring mapamahalaan nang maayos sa gamot, pagkain, at aktibidad.',
+    dmWhyTitle:'Bakit Mahalaga Ito', dmWhyBody:'Ang hindi kontroladong diyabetis sa paglipas ng panahon ay maaaring makasira sa mga ugat at nerbiyos sa buong katawan. Pinapataas nito ang panganib ng sakit sa puso, stroke, sakit sa bato, pagkawala ng paningin, at pinsala sa nerbiyos, lalo na sa paa. Ang mahusay na kontrol ng blood sugar ay malaking nakakabawas ng mga panganib na ito, kaya mahalaga ang patuloy na pamamahala kahit pakiramdam mo ay maayos ka.',
+    dmRiskTitle:'Sino ang Mas Nanganganib', dmRiskBody:'Mas mataas ang panganib mong magkaroon ng Type 2 diabetes kung may family history ka ng diyabetis, sobra sa timbang, hindi aktibo, matanda na, o may hypertension o mataas na kolesterol. Karaniwan ang pagsasabay ng hypertension, diyabetis, at mataas na kolesterol, at ang bawat kondisyon ay maaaring magpahirap sa pamamahala ng iba, kaya mahalagang gamutin ang mga ito nang sabay.',
+    dmNumbersTitle:'Alamin ang Iyong Blood Sugar', dmNumbersBody:'Sundan ang follow-up na blood sugar test sa health center o sa iyong doktor ayon sa payo. Kung nagsusuri ka sa bahay, itanong sa iyong doktor o health worker kung anong target range ang tama para sa iyo, dahil maaaring iba-iba ito depende sa tao. Itala ang iyong mga reading, kasama kung fasting (bago kumain) o random (pagkatapos kumain), para matulungan ang doktor na makita ang iyong pattern sa paglipas ng panahon.',
+    dmMedTitle:'Pag-inom ng Gamot', dmMedBody:'Inumin ang iyong gamot sa diyabetis nang eksakto sa reseta at sa parehong oras araw-araw kung maaari. Huwag itigil o baguhin ang dosage nang mag-isa, kahit maganda ang iyong blood sugar reading, dahil maaaring ito ay dahil gumagana ang gamot.',
+    dmFootTitle:'Pag-aalaga ng Paa', dmFootBody:'Suriin ang iyong paa araw-araw para sa mga hiwa, paltos, pamumula, o sugat, dahil maaaring mabawasan ng diyabetis ang pakiramdam sa paa, kaya madaling hindi mapansin ang injury. Hugasan at patuyuin ang paa araw-araw, lalo na sa pagitan ng mga daliri, at lagyan ng lotion ang tuyong balat (pero huwag sa pagitan ng daliri). Huwag maglakad nang walang sapin, kahit sa bahay. Gupitin ang kuko ng paa nang tuwid. Magpatingin agad sa health worker kung may sugat na hindi gumagaling, dahil mabilis lumala ang sugat sa paa kapag may diyabetis.',
+    dmDietTitle:'Pagkain Para sa Kontrol ng Blood Sugar', dmDietBody:'Kumain nang regular at balanse sa halip na laktawan ang mga kainan, na maaaring magdulot ng biglaang pagbabago ng blood sugar. Bantayan ang bahagi ng carbohydrate (kanin, tinapay, kamote) at isabay ito sa protina at gulay para mabagalan ang pagsipsip ng asukal. Bawasan ang matamis na pagkain, inumin, at dessert. Piliin ang buong prutas kaysa juice. Ang pagkain sa magkasingsabay na oras araw-araw ay tumutulong din panatilihing stable ang blood sugar.',
+    dmActivityTitle:'Pananatiling Aktibo', dmActivityBody:'Ang pisikal na aktibidad ay tumutulong sa katawan na mas mabuting gamitin ang insulin at maaaring pababain ang blood sugar. Layunin ang regular na aktibidad halos araw-araw, tulad ng paglalakad. Kung umiinom ka ng gamot na maaaring magdulot ng mababang blood sugar, magdala ng maliit na matamis na meryenda kung sakaling manginig, mahilo, o malito habang nag-eehersisyo. Suriin ang paa pagkatapos ng aktibidad, lalo na kung sumusuot ng bagong sapatos.',
+    dmUrgentTitle:'Kailan Dapat Magpatingin Agad', dmUrgentBody:'Ang pagsusuka at hindi makatago ng likido, matinding panghihina o pagkalito, antok, napakatuyong bibig, o biglang panginginig na may malamig na pawis ay senyales ng emergency. Tingnan ang seksyong Mga Babala at magpatingin agad.',
+    // Dyslipidemia (Kolesterol)
+    dysIntro:'Ang pag-unawa sa kolesterol ay tumutulong ipaliwanag kung bakit mahalaga ang parehong pagbabago sa pamumuhay at gamot, kahit walang sintomas.',
+    dysWhatTitle:'Ano ang Kolesterol?', dysWhatBody:'Ang kolesterol ay parang-tabang substance na kailangan ng katawan sa maliit na dami, ngunit maaaring makasama ang labis na dami ng ilang uri nito. Ang LDL ("masamang" kolesterol) ay maaaring mag-ipon sa iyong mga ugat, habang ang HDL ("mabuting" kolesterol) ay tumutulong alisin ito. Ang triglycerides ay isa pang uri ng taba sa dugo na, kapag mataas, ay nagpapataas din ng panganib sa kalusugan. Ang dyslipidemia ay nangangahulugang hindi malusog ang balanse ng mga ito.',
+    dysWhyTitle:'Bakit Mahalaga Ito', dysWhyBody:'Ang mataas na kolesterol ay nag-aambag sa pag-ipon ng mataba na deposito sa mga ugat sa paglipas ng panahon, isang proseso na tinatawag na atherosclerosis. Pinapaliit at pinapatigas nito ang mga arterya, na nagpapataas ng panganib ng heart attack at stroke, lalo na kung kasabay ng hypertension o diyabetis. Ang sabay na pamamahala sa tatlong kondisyon, kung mayroon ka ng higit sa isa, ang nagbibigay ng pinakamahusay na proteksyon para sa iyong puso at mga ugat.',
+    dysRiskTitle:'Sino ang Mas Nanganganib', dysRiskBody:'Mas mataas ang panganib mong magkaroon ng dyslipidemia kung ang iyong pagkain ay mataas sa pritong at mamantikang pagkain, sobra sa timbang, hindi aktibo, naninigarilyo, regular na umiinom ng alak, o may family history ng mataas na kolesterol o maagang sakit sa puso. Ang pagkakaroon ng diyabetis o hypertension ay nagpapataas din ng panganib ng dyslipidemia.',
+    dysNumbersTitle:'Alamin ang Iyong Numero', dysNumbersBody:'Magtanong sa iyong health center tungkol sa lipid (kolesterol) test, lalo na kung may hypertension, diyabetis, o family history ng sakit sa puso. Karaniwan itong simpleng blood test na matutulungan kang maintindihan ng iyong doktor.',
+    dysMedTitle:'Pag-inom ng Gamot', dysMedBody:'Kung may nireseta na gamot para sa kolesterol, inumin ito nang eksakto sa payo, karaniwang sa parehong oras araw-araw. Huwag itigil o baguhin ang dosage nang hindi muna kumukonsulta sa doktor o health worker.',
+    dysDietTitle:'Pagkain Para sa Malusog na Kolesterol', dysDietBody:'Bawasan ang pritong, mamantika, at processed na pagkain, kasama ang lechon, crispy pata, at processed na karne. Piliin ang isda, manok na walang balat, at plant-based na protina (beans, munggo, tokwa) nang mas madalas kaysa pulang karne. Gumamit ng kaunting mantika sa pagluluto at piliin ang mas malusog na mantika kung maaari. Kumain ng mas maraming gulay, prutas, at mataas sa fiber na pagkain tulad ng oats at legumes, na maaaring makatulong pababain ang kolesterol.',
+    dysActivityTitle:'Pananatiling Aktibo', dysActivityBody:'Ang regular na pisikal na aktibidad ay maaaring makatulong itaas ang "mabuting" HDL kolesterol at pababain ang triglycerides. Layunin ang hindi bababa sa 30 minuto ng aktibidad, tulad ng mabilis na paglalakad, halos araw-araw. Kasabay ng mas malusog na pagkain, ang pananatiling aktibo ay isa sa pinaka-epektibong paraan para mapabuti ang antas ng kolesterol nang walang gamot, o para makatulong na mas gumana ang gamot.',
+    emergMainLabel:'Pangunahing Emergency Hotline (24/7)',
+    emergOtherTitle:'Iba Pang Paraan Para Maabot ang Emergency Response',
+    emergAppNote:'May iRESPOND Muntinlupa mobile app din ang Lungsod ng Muntinlupa para sa pag-uulat ng emergency (disaster, pulis, sunog, ambulansya). Available sa Google Play at App Store.',
+    medTrackerTitle:'Aking Medicine Tracker', medTrackerSub:'Subaybayan dito ang iyong pag-inom ng gamot. Dito lang ito sa telepono mo mananatili, walang ipinapadala kahit saan, at walang ibang makakakita nito.',
+    medTrackerEmpty:'Wala ka pang naidadagdag na gamot para subaybayan.', medAdd:'Idagdag', medAllAdded:'Naidagdag na ang lahat ng nakalistang gamot sa iyong tracker.',
+    medPrintBtn:'I-print ang Aking Checklist', medReminderBanner:'Hindi mo pa nama-mark na inumin ngayon ang {meds}.',
+    bpLogTitle:'Aking BP Log', bpLogSub:'Isulat dito ang iyong presyon ng dugo sa bahay para maidiskuti sa iyong doktor. Dito lang ito sa telepono mo mananatili.',
+    bpSysPlaceholder:'Systolic (hal. 130)', bpDiaPlaceholder:'Diastolic (hal. 85)', bpLogPrintBtn:'I-print ang Aking BP Log',
+    sugarLogTitle:'Aking Blood Sugar Log', sugarLogSub:'Isulat dito ang iyong blood sugar sa bahay para maidiskuti sa iyong doktor. Dito lang ito sa telepono mo mananatili.',
+    sugarValPlaceholder:'Reading (mg/dL)', sugarFasting:'Fasting', sugarRandom:'Random/Pagkatapos kumain', sugarLogPrintBtn:'I-print ang Aking Sugar Log',
+    logAdd:'+ Idagdag', logNoEntries:'Wala pang entry.', logInvalid:'Maglagay po ng tamang reading.',
   }
 };
 
 // ── Content Data ──────────────────────────────────────────────────────────────
+// NCD-relevant Red Flags only (Phase 1 scope): stroke, chest pain, hypertensive
+// emergency, diabetic emergency. Clinical content — edit directly in code and
+// have a licensed clinician review any change before deploying.
 const RF = [
   {
     en:{title:'Stroke Signs', signs:['Sudden drooping of one side of the face','Sudden weakness or numbness of one arm or leg (one side of body)','Sudden trouble speaking or understanding speech','Sudden vision trouble in one or both eyes','Sudden severe headache with no known cause','Sudden dizziness or loss of balance'],
-      action:'Call QC 122 or go to ER immediately. Do not wait. Do not give food or water.'},
+      action:'Call 137-175 or go to the nearest health center or hospital immediately. Do not wait. Do not give food or water.'},
     fil:{title:'Senyales ng Stroke', signs:['Biglang pagtabingi ng isang bahagi ng mukha','Biglang panghihina o pamamanhid ng braso o binti sa isang panig ng katawan','Biglang hirap magsalita o umintindi','Biglang paglabo ng paningin sa isa o dalawang mata','Biglang matinding sakit ng ulo nang walang malinaw na dahilan','Biglang pagkahilo o pagkawala ng balanse'],
-      action:'Tumawag sa QC 122 o pumunta agad sa ER. Huwag maghintay. Huwag magpakain o magpainom.'},
+      action:'Tumawag sa 137-175 o pumunta agad sa pinakamalapit na health center o ospital. Huwag maghintay. Huwag magpakain o magpainom.'},
     emergency:true
   },
   {
-    en:{title:'Chest Pain / Possible Heart Emergency', signs:['Chest pain, heaviness, pressure, or tightness','Pain spreading to arm, jaw, neck, back, or stomach','Shortness of breath','Cold sweat, nausea, or vomiting','Fainting or severe weakness'],
-      action:'Emergency care now. Call QC 122 or go to ER. Do not drive yourself.'},
-    fil:{title:'Pananakit ng Dibdib / Posibleng Heart Emergency', signs:['Pananakit, bigat, presyon, o paninikip ng dibdib','Sakit na kumakalat sa braso, panga, leeg, likod, o sikmura','Hirap huminga','Malamig na pawis, pagduduwal, o pagsusuka','Himatay o matinding panghihina'],
-      action:'Emergency agad. Tumawag sa QC 122 o pumunta sa ER. Huwag magmaneho nang mag-isa.'},
+    en:{title:'Chest Pain / Possible Heart Attack', signs:['Chest pain, heaviness, pressure, or tightness','Pain spreading to arm, jaw, neck, back, or stomach','Shortness of breath','Cold sweat, nausea, or vomiting','Fainting or severe weakness'],
+      action:'Emergency care now. Call 137-175 or go to the nearest health center or hospital. Do not drive yourself.'},
+    fil:{title:'Pananakit ng Dibdib / Posibleng Heart Attack', signs:['Pananakit, bigat, presyon, o paninikip ng dibdib','Sakit na kumakalat sa braso, panga, leeg, likod, o sikmura','Hirap huminga','Malamig na pawis, pagduduwal, o pagsusuka','Himatay o matinding panghihina'],
+      action:'Emergency agad. Tumawag sa 137-175 o pumunta sa pinakamalapit na health center o ospital. Huwag magmaneho nang mag-isa.'},
     emergency:true
   },
   {
@@ -458,308 +597,351 @@ const RF = [
     emergency:true
   },
   {
-    en:{title:'Diabetes Warning Signs', signs:['Always thirsty','Frequent urination','Blurred vision','Unexplained weight loss','Slow-healing wounds','Numbness or tingling in feet'],
-      danger:['Vomiting and unable to keep fluids down','Severe weakness or confusion','Drowsiness / altered consciousness','Sunken eyes or very dry mouth (dehydration)'],
-      action:'Consult health center or doctor. Go to emergency if danger signs appear.'},
-    fil:{title:'Mga Babala ng Diyabetis', signs:['Laging nauuhaw','Madalas umihi','Malabong paningin','Hindi maipaliwanag na pagbaba ng timbang','Sugat na matagal gumaling','Pamamanhid o tusok-tusok sa paa'],
-      danger:['Pagsusuka at hindi makatago ng likido','Matinding panghihina o pagkalito','Antok / pagbabago ng kamalayan','Lubog ang mata o napakatuyong bibig (dehydration)'],
-      action:'Magpatingin sa health center o doktor. Pumunta sa emergency kung may delikadong senyales.'}
-  },
-  {
-    en:{title:'Asthma / Breathing Difficulty', signs:['Wheezing (whistling sound when breathing)','Cough with shortness of breath','Chest tightness'],
-      danger:['Cannot speak in full sentences','Bluish or pale lips and fingernails','Severe breathing difficulty','Reliever medicine is not working'],
-      action:'Use prescribed reliever medicine. Seek urgent care for danger signs. Do not change medicines without a doctor.'},
-    fil:{title:'Hika / Hirap Huminga', signs:['Wheezing / huni sa paghinga','Ubo na may hingal','Paninikip ng dibdib'],
-      danger:['Hindi makapagsalita nang maayos','Namumula-asul o maputla ang labi at kuko','Matinding hirap huminga','Hindi gumagana ang gamot'],
-      action:'Gamitin ang reseta na gamot. Magpatingin agad kung may delikadong senyales. Huwag palitan ang gamot nang walang doktor.'},
-    isDanger:true
-  },
-  {
-    en:{title:'Dengue / High Fever Warning Signs', signs:['High fever (39°C+) with severe headache','Pain behind the eyes','Severe muscle and joint pains','Nausea or vomiting','Skin rash'],
-      danger:['Severe abdominal pain','Persistent vomiting','Bleeding from nose or gums, or blood in vomit/stool','Extreme weakness or restlessness','Cold, clammy skin'],
-      action:'See a doctor. Do NOT take aspirin or ibuprofen/mefenamic acid unless doctor advises. Go to ER for warning signs.'},
-    fil:{title:'Dengue / Babala ng Mataas na Lagnat', signs:['Mataas na lagnat (39°C+) na may matinding sakit ng ulo','Sakit sa likod ng mata','Matinding pananakit ng kalamnan at kasukasuan','Pagduduwal o pagsusuka','Pantal sa balat'],
-      danger:['Matinding sakit ng tiyan','Tuloy-tuloy na pagsusuka','Pagdurugo ng ilong o gilagid, o dugo sa suka/dumi','Matinding panghihina o hindi mapakali','Malamig at pawisang balat'],
-      action:'Magpatingin. HUWAG uminom ng aspirin o ibuprofen/mefenamic acid maliban kung pinahintulutan ng doktor. Pumunta sa ER kung may babala.'},
-    isDanger:true
-  },
-  {
-    en:{title:'Diarrhea / Dehydration', signs:['Loose or watery stools','Vomiting','Fever'],
-      danger:['Sunken eyes','Very weak or unable to stand','No urination for many hours','Blood in stool','Persistent vomiting','Child unable to drink or keep fluids down'],
-      action:'Give ORS (oral rehydration solution) if available. Seek care for danger signs immediately.'},
-    fil:{title:'Pagtatae / Dehydration', signs:['Malambot o malabnaw na dumi','Pagsusuka','Lagnat'],
-      danger:['Lubog ang mata','Matinding panghihina o hindi makatayo','Hindi umiihi sa mahabang oras','May dugo sa dumi','Tuloy-tuloy na pagsusuka','Batang hindi makainom o agad nasusuka'],
-      action:'Bigyan ng ORS (oral rehydration solution) kung mayroon. Magpatingin agad kung may delikadong senyales.'},
-    isDanger:true
-  },
-  {
-    en:{title:'Flood Exposure / Leptospirosis Risk', signs:['Waded in floodwater, especially with open wounds'],
-      danger:['Fever and chills appearing 2–30 days after flood exposure','Severe calf muscle pain','Red eyes','Decreased urine output','Yellowing of skin or eyes (jaundice)'],
-      action:'Wash exposed skin with soap and clean water. Avoid floodwater when possible. Cover wounds. Seek care immediately if symptoms appear.'},
-    fil:{title:'Nakatapak sa Baha / Panganib ng Leptospirosis', signs:['Nakatapak o naligo sa baha, lalo na kung may sugat'],
-      danger:['Lagnat at panginginig na lumabas 2–30 araw pagkatapos ng baha','Matinding sakit ng binti (calf)','Pamumula ng mga mata','Kaunting ihi','Paninilaw ng balat o mga mata (jaundice)'],
-      action:'Hugasan ang nalantad na balat gamit ang sabon at malinis na tubig. Iwasan ang baha kung posible. Takpan ang mga sugat. Magpatingin agad kung may sintomas.'},
-    isDanger:true
+    en:{title:'Diabetes Emergency', signs:['Always thirsty','Frequent urination','Blurred vision','Unexplained weight loss','Slow-healing wounds','Numbness or tingling in feet'],
+      danger:['Vomiting and unable to keep fluids down','Severe weakness or confusion','Drowsiness or altered consciousness','Sunken eyes or very dry mouth (dehydration)','Shaking, cold sweat, or sudden confusion (possible very low blood sugar)'],
+      action:'Consult health center or doctor. Go to the nearest health center or hospital immediately if danger signs appear.'},
+    fil:{title:'Diabetes Emergency', signs:['Laging nauuhaw','Madalas umihi','Malabong paningin','Hindi maipaliwanag na pagbaba ng timbang','Sugat na matagal gumaling','Pamamanhid o tusok-tusok sa paa'],
+      danger:['Pagsusuka at hindi makatago ng likido','Matinding panghihina o pagkalito','Antok o pagbabago ng kamalayan','Lubog ang mata o napakatuyong bibig (dehydration)','Panginginig, malamig na pawis, o biglang pagkalito (posibleng sobrang baba ng blood sugar)'],
+      action:'Magpatingin sa health center o doktor. Pumunta agad sa pinakamalapit na health center o ospital kung may delikadong senyales.'}
   }
 ];
 
-const BITE = {
-  en:{
-    intro:'Act immediately. Do NOT wait to observe the animal before seeking care.',
-    steps:[
-      {t:'Wash the wound right away',d:'Use running water and soap. Wash for at least 15 minutes. This is the most important step.'},
-      {t:'Apply antiseptic if available',d:'Povidone iodine or any available antiseptic. Do not seal the wound with tape before seeing a doctor.'},
-      {t:'Go to Animal Bite Treatment Center, health center, or ER',d:'Even if the wound looks small. Do not delay.'},
-      {t:'Do NOT wait to observe the animal first',d:'Go immediately regardless of the animal\'s condition.'},
-      {t:'Ask about anti-rabies vaccine and tetanus',d:'Tell the health provider about the bite. Ask if post-exposure rabies vaccine and tetanus vaccine are needed.'},
-      {t:'Complete the full vaccine schedule',d:'Do not stop after one dose unless a qualified health professional tells you to.'}
-    ],
-    dLabel:'Go to ER or ABTC urgently if:',
-    dangers:['Deep or large wound','Bite on face, head, neck, hands, fingers, or genitals','Multiple bites','Bleeding that does not stop','The person is a child, pregnant, elderly, or has low immunity','Animal is unknown or possibly unvaccinated'],
-    abtcNote:'For the nearest Animal Bite Treatment Center, see the Nearby Care section or ask at Fairview Health Center / FEU-NRMF Medical Center.'
-  },
-  fil:{
-    intro:'Kumilos agad. HUWAG hintayin muna kung ano ang mangyayari sa hayop bago magpatingin.',
-    steps:[
-      {t:'Hugasan agad ang sugat',d:'Gamitin ang umaagos na tubig at sabon. Hugasan ng hindi bababa sa 15 minuto. Ito ang pinakamahalagang hakbang.'},
-      {t:'Lagyan ng antiseptic kung mayroon',d:'Povidone iodine o anumang antiseptic. Huwag ibalot ng tape ang sugat bago magpatingin sa doktor.'},
-      {t:'Pumunta sa Animal Bite Treatment Center, health center, o ER',d:'Kahit maliit mukhang ang sugat. Huwag mag-atubili.'},
-      {t:'HUWAG hintayin muna ang hayop para masundan',d:'Magpatingin agad kahit anong kondisyon ng hayop.'},
-      {t:'Itanong ang anti-rabies vaccine at tetanus',d:'Sabihin sa health provider ang tungkol sa kagat. Itanong kung kailangan ng anti-rabies at tetanus vaccine.'},
-      {t:'Kumpletuhin ang buong iskedyul ng bakuna',d:'Huwag titigil pagkatapos ng isang dosis maliban kung sinabi ng qualified health professional.'}
-    ],
-    dLabel:'Pumunta agad sa ER o ABTC kung:',
-    dangers:['Malalim o malaking sugat','Kagat sa mukha, ulo, leeg, kamay, daliri, o ari','Maraming kagat','Dugo na hindi tumitigil','Ang tao ay bata, buntis, matanda, o may mahinang immune system','Hindi kilala o posibleng hindi nabakunan ang hayop'],
-    abtcNote:'Para sa pinakamalapit na Animal Bite Treatment Center, tingnan ang Malapit na Tulong section o itanong sa Fairview Health Center / FEU-NRMF Medical Center.'
-  }
-};
-
-const DENGUE_SECTIONS = {
-  en:[
-    {title:'Dengue Symptoms',icon:'🌡️',items:['High fever (39°C or higher)','Severe headache','Pain behind the eyes','Severe muscle and joint pains','Nausea or vomiting','Skin rash (may appear 2–5 days after fever starts)']},
-    {title:'Warning Signs — Go to ER Now',icon:'🚨',danger:true,items:['Severe abdominal pain or tenderness','Persistent vomiting','Bleeding from gums, nose, or blood in vomit/stool','Rapid or difficult breathing','Extreme weakness, restlessness, or irritability','Cold or clammy skin, pale appearance']},
-    {title:'What To Do When Fever Starts',icon:'💧',items:['Rest and drink plenty of fluids (water, soup, ORS)','Take paracetamol for fever — NOT aspirin or ibuprofen/mefenamic acid','Monitor temperature and watch for warning signs','See a doctor within 24–48 hours of fever onset','Do NOT self-medicate with NSAIDs (aspirin, ibuprofen, mefenamic acid)']},
-    {title:'Search and Destroy — Mosquito Breeding Sites',icon:'🪣',checklist:true,items:['Empty all containers with standing water (pots, tires, buckets, bottles)','Cover water storage containers tightly','Clean flower vases and change water weekly','Turn over unused containers that collect water','Dispose of garbage and used containers properly','Report clogged canals or drains to barangay / community leaders']},
-    {title:'Flood Safety',icon:'🌊',checklist:true,items:['Avoid wading in floodwater when possible','Cover wounds before entering floodwater','Wash skin with soap and clean water after flood exposure','Keep children away from floodwater and drainage','Do NOT touch electrical outlets, wires, or appliances during flood','Report flooding or clogged drainage to barangay officers','Watch for leptospirosis signs 2–30 days after flood exposure']},
-    {title:'Waste and Sanitation Reminders',icon:'🗑️',checklist:true,items:['Dispose of garbage in covered bins or scheduled pickup','Do not throw waste in canals or open drainage','Clean up animal feces promptly','Wash hands with soap before eating and after using the toilet','Report stray animal or waste concerns to barangay']}
-  ],
-  fil:[
-    {title:'Sintomas ng Dengue',icon:'🌡️',items:['Mataas na lagnat (39°C pataas)','Matinding sakit ng ulo','Sakit sa likod ng mata','Matinding pananakit ng kalamnan at kasukasuan','Pagduduwal o pagsusuka','Pantal sa balat (maaaring lumabas 2–5 araw pagkatapos ng lagnat)']},
-    {title:'Mga Babala — Pumunta Agad sa ER',icon:'🚨',danger:true,items:['Matinding sakit o hapdi ng tiyan','Tuloy-tuloy na pagsusuka','Pagdurugo ng gilagid, ilong, o dugo sa suka/dumi','Mabilis o mahirap na paghinga','Matinding panghihina, hindi mapakali, o mairitahin','Malamig o pawisang balat, maputlang hitsura']},
-    {title:'Dapat Gawin Kapag Nagsimula ang Lagnat',icon:'💧',items:['Magpahinga at uminom ng maraming likido (tubig, sabaw, ORS)','Uminom ng paracetamol para sa lagnat — HUWAG aspirin o ibuprofen/mefenamic acid','Subaybayan ang temperatura at bantayan ang mga babala','Magpatingin sa doktor sa loob ng 24–48 oras mula nang magsimulang maglagnat','HUWAG mag-self-medicate ng NSAID']},
-    {title:'Search and Destroy — Tirahan ng Lamok',icon:'🪣',checklist:true,items:['Alisin ang tubig na naipon sa lahat ng lalagyan (palayok, gulong, timba, bote)','Takpan nang mahigpit ang mga lalagyan ng tubig','Linisin ang mga paso at palitan ang tubig linggu-linggo','Baligtarin ang mga lalagyang hindi ginagamit','Itapon nang maayos ang basura at ginamit na lalagyan','Iulat sa barangay ang mga baradong kanal']},
-    {title:'Kaligtasan sa Panahon ng Baha',icon:'🌊',checklist:true,items:['Iwasang lumusong sa baha kung maaari','Takpan ang mga sugat bago pumasok sa baha','Hugasan ang balat gamit ang sabon at malinis na tubig pagkatapos ng baha','Panatilihing malayo ang mga bata sa baha at kanal','HUWAG hawakan ang mga outlet, kawad, o appliance sa panahon ng baha','Iulat ang pagbaha o baradong kanal sa mga opisyal ng barangay','Bantayan ang tanda ng leptospirosis 2–30 araw pagkatapos ng baha']},
-    {title:'Paalala sa Basura at Kalinisan',icon:'🗑️',checklist:true,items:['Itapon ang basura sa nakatakpang basurahan o sa takdang koleksyon','Huwag magtapon ng basura sa kanal','Linisin agad ang dumi ng mga hayop','Maghugas ng kamay gamit ang sabon bago kumain at pagkatapos gumamit ng CR','Iulat sa barangay ang mga alalahanin tungkol sa ligaw na hayop o dumi']}
-  ]
-};
-
-const CHRONIC = {
-  en:[
-    {title:'Blood Pressure (BP)',icon:'🩺',items:[
-      {type:'p',t:'Know your BP. Have it checked at the health center, BHW, or medical caravan regularly.'},
-      {type:'p',t:'One high reading does not always mean hypertension — but very high BP with symptoms needs urgent care now.'},
-      {type:'dl',t:'Seek urgent care if high BP with any of these:'},
-      {type:'ul',items:['Severe headache','Chest pain','Shortness of breath','Sudden confusion or trouble speaking','Vision changes','Weakness or numbness on one side']},
-      {type:'warn',t:'Do not stop or change your BP medicines without talking to your doctor first.'}
-    ]},
-    {title:'Diabetes',icon:'🩸',items:[
-      {type:'p',t:'Early signs: always thirsty, frequent urination, blurred vision, tiredness, slow-healing wounds, numbness in feet.'},
-      {type:'dl',t:'Seek emergency care if:'},
-      {type:'ul',items:['Vomiting and unable to keep food or water down','Very weak, confused, or drowsy','Sunken eyes or very dry mouth (dehydration)','Wound with spreading redness, pus, or foul smell']},
-      {type:'p',t:'Foot care: Check feet daily for cuts, blisters, or sores. Do not walk barefoot.'},
-      {type:'p',t:'Follow up blood sugar testing and medicines at the health center or doctor as advised.'}
-    ]},
-    {title:'Asthma',icon:'💨',items:[
-      {type:'p',t:'Common symptoms: wheezing, cough with shortness of breath, chest tightness.'},
-      {type:'p',t:'Common triggers: smoke, dust, strong smells, cold air, respiratory infection, animal fur, weather changes.'},
-      {type:'dl',t:'Seek urgent or emergency care if:'},
-      {type:'ul',items:['Cannot speak in full sentences','Bluish or pale lips and fingernails','Severe breathing difficulty','Reliever medicine is not working','Symptoms keep getting worse']},
-      {type:'warn',t:'Use only prescribed medicines. Do not change or stop medicines without your doctor.'}
-    ]}
-  ],
-  fil:[
-    {title:'Blood Pressure (BP)',icon:'🩺',items:[
-      {type:'p',t:'Alamin ang iyong BP. Ipasuri ito sa health center, BHW, o medical caravan nang regular.'},
-      {type:'p',t:'Ang isang mataas na reading ay hindi agad nangangahulugang may hypertension — ngunit ang napakataas na BP na may sintomas ay kailangan ng agarang atensyon.'},
-      {type:'dl',t:'Magpatingin agad kung mataas ang BP at mayroon kang:'},
-      {type:'ul',items:['Matinding sakit ng ulo','Pananakit ng dibdib','Hirap huminga','Biglang pagkalito o hirap magsalita','Pagbabago ng paningin','Panghihina o pamamanhid sa isang panig']},
-      {type:'warn',t:'Huwag itigil o palitan ang iyong gamot sa BP nang hindi muna kumukonsulta sa iyong doktor.'}
-    ]},
-    {title:'Diyabetis',icon:'🩸',items:[
-      {type:'p',t:'Maagang senyales: laging nauuhaw, madalas umihi, malabong paningin, pagod, sugat na matagal gumaling, pamamanhid sa paa.'},
-      {type:'dl',t:'Humingi ng emergency na tulong kung:'},
-      {type:'ul',items:['Nagsusuka at hindi makatago ng pagkain o tubig','Napakahina, nalilito, o naaantok','Lubog ang mata o napakatuyong bibig (dehydration)','Sugat na may nana, paglaganap ng pamumula, o masamang amoy']},
-      {type:'p',t:'Pag-aalaga ng paa: Suriin ang paa araw-araw para sa mga hiwa, paltos, o sugat. Huwag maglakad nang walang sapin.'},
-      {type:'p',t:'Sundan ang rekomendasyon ng doktor o health center para sa blood sugar test at gamot.'}
-    ]},
-    {title:'Hika (Asthma)',icon:'💨',items:[
-      {type:'p',t:'Karaniwang sintomas: wheezing, ubo na may hingal, paninikip ng dibdib.'},
-      {type:'p',t:'Karaniwang trigger: usok, alikabok, matapang na amoy, malamig na hangin, impeksyon sa baga, balahibo ng hayop, pagbabago ng panahon.'},
-      {type:'dl',t:'Humingi ng agarang tulong kung:'},
-      {type:'ul',items:['Hindi makapagsalita nang maayos','Namumula-asul o maputla ang labi at kuko','Matinding hirap huminga','Hindi gumagana ang gamot','Patuloy na lumalala ang mga sintomas']},
-      {type:'warn',t:'Gamitin lamang ang mga reseta na gamot. Huwag baguhin o itigil ang gamot nang walang doktor.'}
-    ]}
-  ]
-};
+// Condition education content (Hypertension, Diabetes, Dyslipidemia) lives as
+// keyed strings in the T object below (e.g. T.en.htnWhatTitle / T.fil.htnWhatBody),
+// NOT in a separate data object. This is deliberate: it means this content is
+// automatically covered by the same Google Sheet content-sync system used for
+// UI text (see SHEET_ID setup notes further down), so whoever receives this
+// project can update health advice by editing the shared Sheet directly, with
+// no code and no developer required.
+//
+// IMPORTANT — if you extend the Sheet to cover these keys: this is clinical
+// content read directly by patients. Restrict Sheet edit access to your
+// clinical team, and have a licensed clinician review any change before it
+// goes live, the same way you would review a code change to this file.
+//
+// Below: just the structure (which sections exist, in what order, with which
+// icon) for each condition page. The actual title/body text is pulled from T.
+const HTN_SECTIONS = [
+  {key:'htnWhat', icon:'❓'}, {key:'htnWhy', icon:'⚠️'}, {key:'htnRisk', icon:'🎯'},
+  {key:'htnNumbers', icon:'📊'}, {key:'htnMed', icon:'💊'}, {key:'htnDiet', icon:'🥗'},
+  {key:'htnActivity', icon:'🚶'}, {key:'htnStress', icon:'🧘'}, {key:'htnUrgent', icon:'🚨'}
+];
+const DM_SECTIONS = [
+  {key:'dmWhat', icon:'❓'}, {key:'dmWhy', icon:'⚠️'}, {key:'dmRisk', icon:'🎯'},
+  {key:'dmNumbers', icon:'📊'}, {key:'dmMed', icon:'💊'}, {key:'dmFoot', icon:'🦶'},
+  {key:'dmDiet', icon:'🥗'}, {key:'dmActivity', icon:'🚶'}, {key:'dmUrgent', icon:'🚨'}
+];
+const DYS_SECTIONS = [
+  {key:'dysWhat', icon:'❓'}, {key:'dysWhy', icon:'❤️'}, {key:'dysRisk', icon:'🎯'},
+  {key:'dysNumbers', icon:'📊'}, {key:'dysMed', icon:'💊'}, {key:'dysDiet', icon:'🥗'},
+  {key:'dysActivity', icon:'🚶'}
+];
 
 const PLATE = {
   en:[
     {icon:'🥦',label:'Half the plate',desc:'Vegetables and fruits'},
-    {icon:'🍚',label:'One-third of the plate',desc:'Rice, corn, root crops, bread, or other carbohydrates'},
+    {icon:'🍚',label:'One-third of the plate',desc:'Rice, corn, root crops, bread, or other carbohydrates (choose whole grain where possible)'},
     {icon:'🐟',label:'Remaining portion',desc:'Fish, egg, beans, lean meat, or other protein'},
     {icon:'💧',label:'Drink',desc:'Water (not sugary drinks)'}
   ],
   fil:[
     {icon:'🥦',label:'Kalahati ng plato',desc:'Mga gulay at prutas'},
-    {icon:'🍚',label:'Isang-katlo ng plato',desc:'Kanin, mais, kamote, tinapay, o iba pang karbohidrato'},
+    {icon:'🍚',label:'Isang-katlo ng plato',desc:'Kanin, mais, kamote, tinapay, o iba pang karbohidrato (piliin ang whole grain kung maaari)'},
     {icon:'🐟',label:'Natitirang bahagi',desc:'Isda, itlog, monggo/sitaw/toyo, karne, o iba pang protina'},
     {icon:'💧',label:'Inumin',desc:'Tubig (hindi matamis na inumin)'}
   ]
 };
 const MEALS = {
-  en:['Rice + monggo + malunggay','Rice + egg + sautéed vegetables','Rice + grilled or steamed fish + vegetables','Rice + tofu or tokwa','Banana, papaya, or seasonal fruit as snack'],
-  fil:['Kanin + monggo + malunggay','Kanin + itlog + sautéed na gulay','Kanin + inihaw o pinalutong na isda + gulay','Kanin + tofu o tokwa','Saging, papaya, o panapanahong prutas bilang meryenda']
+  en:['Rice + monggo + malunggay (low salt)','Rice + boiled or grilled egg + sautéed vegetables (less oil)','Rice + grilled or steamed fish + vegetables','Rice + tofu or tokwa + vegetables','Banana, papaya, or seasonal fruit as snack instead of sweets'],
+  fil:['Kanin + monggo + malunggay (kaunting asin)','Kanin + nilagang o inihaw na itlog + sautéed na gulay (kaunting mantika)','Kanin + inihaw o pinalutong na isda + gulay','Kanin + tofu o tokwa + gulay','Saging, papaya, o panapanahong prutas bilang meryenda sa halip na matamis']
 };
 const TIPS = {
-  en:['Use less salt — try calamansi, herbs, or vinegar for flavor','Drink water instead of soft drinks or sweetened juices','Limit fried and processed foods','Eat a variety of foods when budget allows','Breastfeed infants — it is free, safe, and best for babies'],
-  fil:['Bawasan ang asin — subukan ang calamansi, herbs, o suka para sa lasa','Uminom ng tubig sa halip na softdrinks o matamis na juice','Bawasan ang pritong at processed na pagkain','Kumain ng iba\'t ibang pagkain kung magagawa','Mag-breastfeed — libre, ligtas, at pinakamabuti para sa sanggol']
+  en:['Use less salt, try calamansi, herbs, or vinegar for flavor instead','Drink water instead of soft drinks or sweetened juices','Limit fried and processed foods','Choose fresh fish or lean meat over processed meats (hotdog, longganisa, corned beef)','Eat a variety of vegetables and fruits when budget allows'],
+  fil:['Bawasan ang asin, subukan ang calamansi, herbs, o suka para sa lasa','Uminom ng tubig sa halip na softdrinks o matamis na juice','Bawasan ang pritong at processed na pagkain','Piliin ang sariwang isda o lean na karne kaysa sa processed na karne (hotdog, longganisa, corned beef)','Kumain ng iba\'t ibang gulay at prutas kung magagawa']
 };
 
-const VACCINES = {
-  en:{
-    note:'Vaccination schedules must be verified with Fairview Health Center or your doctor. This guide is for awareness only.',
-    groups:[
-      {icon:'👶',title:'Babies and Infants',
-        items:['BCG (at birth)','Hepatitis B birth dose','Pentavalent vaccine (DPT-HepB-HiB)','Oral Polio Vaccine (OPV) and/or IPV','Pneumococcal Conjugate Vaccine (PCV)','Measles-containing vaccine (MMR or MR) — per DOH schedule'],
-        note:'Follow the health center schedule. Bring your child\'s immunization card every visit.'},
-      {icon:'🎒',title:'School-Age Children',
-        items:['MR and Td vaccines (school-based immunization, Grade 1 and Grade 7)','HPV vaccine for eligible Grade 4 female learners / adolescent girls — per current DOH/LGU program'],
-        note:'Coordinate with school and health center for school-based immunization schedule.'},
-      {icon:'🤰',title:'Pregnant Women',
-        items:['Tetanus-diphtheria-containing vaccine (Td or Tdap) — as advised during prenatal care'],
-        note:'Ask your prenatal care provider or health center about timing and eligibility.'},
-      {icon:'👴',title:'Senior Citizens',
-        items:['Influenza (flu) vaccine — if available and eligible','Pneumococcal vaccine — if available and eligible'],
-        note:'Check with health center or physician for eligibility and local availability.'},
-      {icon:'🐾',title:'After Dog / Cat Bite or Scratch',
-        items:['Anti-rabies post-exposure prophylaxis (PEP) — as advised by Animal Bite Treatment Center or health professional','Tetanus vaccine — may be needed depending on wound and vaccination history'],
-        note:'Go to the nearest Animal Bite Treatment Center or ER. Do not wait. Complete the full schedule advised.'}
-    ]
-  },
-  fil:{
-    note:'Dapat i-verify ang mga iskedyul ng bakuna sa Fairview Health Center o sa iyong doktor. Para sa kaalaman lamang ito.',
-    groups:[
-      {icon:'👶',title:'Mga Sanggol at Maliliit na Bata',
-        items:['BCG (pagsilang)','Hepatitis B birth dose','Pentavalent vaccine (DPT-HepB-HiB)','Oral Polio Vaccine (OPV) at/o IPV','Pneumococcal Conjugate Vaccine (PCV)','Bakuna laban sa tigdas (MMR o MR) — ayon sa iskedyul ng DOH'],
-        note:'Sundan ang iskedyul ng health center. Dalhin ang immunization card ng bata sa bawat bisita.'},
-      {icon:'🎒',title:'Mga Batang Nasa Paaralan',
-        items:['MR at Td vaccines (school-based immunization, Grade 1 at Grade 7)','HPV vaccine para sa kwalipikadong Grade 4 na babaeng mag-aaral — ayon sa programa ng DOH/LGU'],
-        note:'Makipag-ugnayan sa paaralan at health center para sa iskedyul ng school-based immunization.'},
-      {icon:'🤰',title:'Mga Buntis',
-        items:['Tetanus-diphtheria vaccine (Td o Tdap) — ayon sa rekomendasyon ng prenatal care'],
-        note:'Itanong sa iyong prenatal care provider o health center ang tamang oras at eligibilidad.'},
-      {icon:'👴',title:'Mga Matatandang Mamamayan',
-        items:['Flu vaccine — kung available at kwalipikado','Pneumococcal vaccine — kung available at kwalipikado'],
-        note:'Kumonsulta sa health center o doktor para sa eligibilidad at availability.'},
-      {icon:'🐾',title:'Pagkatapos ng Kagat o Kalmot ng Aso / Pusa',
-        items:['Anti-rabies post-exposure prophylaxis (PEP) — ayon sa ABTC o health professional','Tetanus vaccine — maaaring kailangan depende sa sugat at kasaysayan ng bakuna'],
-        note:'Pumunta sa pinakamalapit na Animal Bite Treatment Center o ER. Huwag mag-atubili. Kumpletuhin ang buong iskedyul.'}
-    ]
-  }
-};
+// Medication Reference — reflects the Muntinlupa City Health Office EMed
+// medicine list as of app development. dose_en/dose_fil give a general usual
+// adult dose range for orientation only — NOT a prescription. Every card
+// pairs the dose with T.medReminder, reinforcing that the patient's actual
+// dose is whatever their doctor/health worker prescribed. Update via the
+// linked Google Sheet once configured (see SHEET_ID below); otherwise edit
+// MEDS directly and have a licensed clinician review the change, including
+// the dose text, before deploying.
+const MEDS = [
+  {group_en:'For High Blood Pressure and Heart Conditions', group_fil:'Para sa Altapresyon at Sakit sa Puso', items:[
+    {name:'Losartan', what_en:'Helps control high blood pressure', what_fil:'Tumutulong kontrolin ang altapresyon', dose_en:'Usually started at 50 mg once a day; some patients take 25 mg or up to 100 mg a day', dose_fil:'Karaniwang sinisimulan sa 50 mg isang beses sa isang araw; may mga pasyenteng umiinom ng 25 mg o hanggang 100 mg sa isang araw', freq_en:'Usually taken once a day', freq_fil:'Karaniwang iniinom isang beses sa isang araw'},
+    {name:'Telmisartan', what_en:'Helps control high blood pressure', what_fil:'Tumutulong kontrolin ang altapresyon', dose_en:'Usually 40 mg once a day; some patients take 20 mg or up to 80 mg a day', dose_fil:'Karaniwang 40 mg isang beses sa isang araw; may mga pasyenteng umiinom ng 20 mg o hanggang 80 mg sa isang araw', freq_en:'Usually taken once a day', freq_fil:'Karaniwang iniinom isang beses sa isang araw'},
+    {name:'Amlodipine', what_en:'Helps control high blood pressure', what_fil:'Tumutulong kontrolin ang altapresyon', dose_en:'Usually 5 mg once a day; some patients start at 2.5 mg or take up to 10 mg a day', dose_fil:'Karaniwang 5 mg isang beses sa isang araw; may nagsisimula sa 2.5 mg o umiinom ng hanggang 10 mg sa isang araw', freq_en:'Usually taken once a day', freq_fil:'Karaniwang iniinom isang beses sa isang araw'},
+    {name:'Carvedilol', what_en:'Helps control high blood pressure and certain heart conditions', what_fil:'Tumutulong kontrolin ang altapresyon at ilang kondisyon ng puso', dose_en:'Usually started at 6.25 mg twice a day; your doctor may increase this gradually', dose_fil:'Karaniwang sinisimulan sa 6.25 mg dalawang beses sa isang araw; maaaring unti-unting dagdagan ng doktor', freq_en:'Usually taken once or twice a day', freq_fil:'Karaniwang iniinom isang beses o dalawang beses sa isang araw'}
+  ]},
+  {group_en:'For Heart Care and Clot Prevention', group_fil:'Para sa Pangangalaga sa Puso at Pag-iwas sa Clot', items:[
+    {name:'Trimetazidine', what_en:'Helps with chest discomfort related to certain heart conditions', what_fil:'Tumutulong sa hapdi ng dibdib na may kaugnayan sa ilang sakit sa puso', dose_en:'Usually 20 mg two to three times a day, with meals', dose_fil:'Karaniwang 20 mg dalawa hanggang tatlong beses sa isang araw, kasabay ng pagkain', freq_en:'Usually taken two to three times a day, with meals', freq_fil:'Karaniwang iniinom dalawa hanggang tatlong beses sa isang araw, kasabay ng pagkain'},
+    {name:'Clopidogrel', what_en:'A blood thinner that helps prevent blood clots', what_fil:'Pampanipis ng dugo na tumutulong maiwasan ang pamumuo ng dugo', dose_en:'Usually 75 mg once a day', dose_fil:'Karaniwang 75 mg isang beses sa isang araw', freq_en:'Usually taken once a day', freq_fil:'Karaniwang iniinom isang beses sa isang araw'}
+  ]},
+  {group_en:'For Cholesterol Management', group_fil:'Para sa Pamamahala ng Kolesterol', items:[
+    {name:'Atorvastatin', what_en:'Helps lower cholesterol', what_fil:'Tumutulong pababain ang kolesterol', dose_en:'Usually 10 mg to 20 mg once a day, often in the evening; some patients need a higher dose', dose_fil:'Karaniwang 10 mg hanggang 20 mg isang beses sa isang araw, kadalasan sa gabi; may mga pasyenteng nangangailangan ng mas mataas na dosage', freq_en:'Usually taken once a day, often in the evening', freq_fil:'Karaniwang iniinom isang beses sa isang araw, kadalasan sa gabi'}
+  ]},
+  {group_en:'For Diabetes', group_fil:'Para sa Diyabetis', items:[
+    {name:'Metformin', what_en:'Helps control blood sugar', what_fil:'Tumutulong kontrolin ang blood sugar', dose_en:'Usually 500 mg once or twice a day with meals; your doctor may increase this gradually', dose_fil:'Karaniwang 500 mg isang beses o dalawang beses sa isang araw kasabay ng pagkain; maaaring unti-unting dagdagan ng doktor', freq_en:'Usually taken with meals, one to two times a day', freq_fil:'Karaniwang iniinom kasabay ng pagkain, isang beses o dalawang beses sa isang araw'},
+    {name:'Gliclazide', what_en:'Helps control blood sugar', what_fil:'Tumutulong kontrolin ang blood sugar', dose_en:'Usually 40 mg to 80 mg, once or twice a day before meals', dose_fil:'Karaniwang 40 mg hanggang 80 mg, isang beses o dalawang beses sa isang araw bago kumain', freq_en:'Usually taken once or twice a day, before meals', freq_fil:'Karaniwang iniinom isang beses o dalawang beses sa isang araw, bago kumain'}
+  ]},
+  {group_en:'Vitamin Supplement', group_fil:'Bitamina', items:[
+    {name:'Vitamin B Complex', what_en:'General nutritional support', what_fil:'Pangkalahatang suporta sa nutrisyon', dose_en:'Usually 1 tablet a day, or as written on the product label', dose_fil:'Karaniwang 1 tablet sa isang araw, o ayon sa nakasulat sa label ng produkto', freq_en:'Usually taken once a day', freq_fil:'Karaniwang iniinom isang beses sa isang araw'}
+  ]}
+];
 
+// Nearby Care — Muntinlupa health centers, verified against official sources
+// (City Government of Muntinlupa website, checked at time of app development).
 const NEARBY = {
   en:{
-    verifyMsg:'All contact numbers must be verified before use. Numbers listed are from the project proposal (2026) and may have changed.',
-    abtcNote:'For the nearest Animal Bite Treatment Center, ask at Fairview Health Center or FEU-NRMF Medical Center. Confirm availability before going.',
     cats:[
-      {label:'Emergency',facilities:[
-        {name:'QC Helpline 122',type:'Emergency Hotline',typeClass:'emerg',addr:'Quezon City — 24/7',phones:[{num:'122',label:'122'}],verified:true},
-        {name:'Emergency Operations Center — QC',type:'Emergency Coordination',typeClass:'emerg',addr:'Quezon City',phones:[{num:'09770312892',label:'0977-031-2892'},{num:'09478859929',label:'0947-885-9929'}],verified:false}
+      {label:'Health Centers (Pilot Sites)',facilities:[
+        {name:'Bayanan Health Center (Main)',type:'Public Health Center',addr:'16 Ilaya, Alabang, Muntinlupa City, 1770',phones:[{num:'8622-0124',label:'8622-0124'}],verified:true},
+        {name:'Bayanan Annex Health Center',type:'Public Health Center',addr:'Bayanan, Muntinlupa City',phones:[{num:'8501-1719',label:'8501-1719'},{num:'8861-3365',label:'8861-3365'}],verified:true},
+        {name:'Alabang Health Center',type:'Public Health Center',addr:'Alabang, Muntinlupa City',phones:[{num:'8422-560',label:'8422-560'},{num:'8420-468',label:'8420-468'}],verified:true}
       ]},
-      {label:'Health Centers',facilities:[
-        {name:'Fairview Health Center',type:'Public Health Center',addr:'Dahlia Avenue, Brgy. Fairview, District 5, QC',phones:[{num:'71494641',label:'7149-4641'}],verified:false,note:'Verify operating hours before visit.'},
-        {name:'Barangay Fairview Office',type:'Barangay Services',addr:'Barangay Complex, Dahlia Avenue, Brgy. Fairview',phones:[{num:'89300040',label:'8-9300-040'},{num:'09177005496',label:'0917-700-5496'}],verified:false}
+      {label:'City Health Office',facilities:[
+        {name:'Muntinlupa City Health Office',type:'City Government',addr:'Centennial Avenue, Laguerta, Brgy. Tunasan, Muntinlupa City, 1773',phones:[],verified:true,note:'For general inquiries and coordination. See Emergency Numbers for urgent concerns.'}
       ]},
       {label:'Hospitals',facilities:[
-        {name:'Healthway FEU-NRMF Medical Center',type:'Private Hospital',addr:'Regalado Avenue, West Fairview, QC',phones:[{num:'0277772273',label:'(02) 7777-2273'}],verified:false},
-        {name:'Novaliches District Hospital',type:'Government Hospital',addr:'683 Quirino Highway, Brgy. San Bartolome, Novaliches, QC',phones:[{num:'89310307',label:'8931-0307'}],verified:false},
-        {name:'Quezon City General Hospital',type:'Government Hospital',addr:'Seminary Road, Brgy. Bahay Toro, Project 8, QC',phones:[{num:'88630800',label:'8863-0800'}],verified:false},
-        {name:'Rosario Maclang Bautista General Hospital',type:'Government Hospital',addr:'IBP Road, Batasan Hills, QC',phones:[{num:'88352560',label:'8835-2560'}],verified:false},
-        {name:'The Medical City Clinic — SM City Fairview',type:'Private Clinic',addr:'Basement Level, SM City Fairview, QC',phones:[{num:'028930808',label:'(02) 8930-4808'}],verified:false}
+        {name:'Ospital ng Muntinlupa',type:'Government Hospital',addr:'Muntinlupa City',phones:[],verified:false,note:'Ask your health center for referral and current contact information.'}
       ]}
     ]
   },
   fil:{
-    verifyMsg:'Dapat i-verify ang lahat ng numero bago gamitin. Ang mga numerong nakalista ay mula sa project proposal (2026) at maaaring nagbago na.',
-    abtcNote:'Para sa pinakamalapit na Animal Bite Treatment Center, itanong sa Fairview Health Center o FEU-NRMF Medical Center. Kumpirmahin ang availability bago pumunta.',
     cats:[
-      {label:'Emergency',facilities:[
-        {name:'QC Helpline 122',type:'Emergency Hotline',typeClass:'emerg',addr:'Quezon City — 24/7',phones:[{num:'122',label:'122'}],verified:true},
-        {name:'Emergency Operations Center — QC',type:'Emergency Coordination',typeClass:'emerg',addr:'Quezon City',phones:[{num:'09770312892',label:'0977-031-2892'},{num:'09478859929',label:'0947-885-9929'}],verified:false}
+      {label:'Mga Health Center (Pilot Sites)',facilities:[
+        {name:'Bayanan Health Center (Main)',type:'Pampublikong Health Center',addr:'16 Ilaya, Alabang, Muntinlupa City, 1770',phones:[{num:'8622-0124',label:'8622-0124'}],verified:true},
+        {name:'Bayanan Annex Health Center',type:'Pampublikong Health Center',addr:'Bayanan, Muntinlupa City',phones:[{num:'8501-1719',label:'8501-1719'},{num:'8861-3365',label:'8861-3365'}],verified:true},
+        {name:'Alabang Health Center',type:'Pampublikong Health Center',addr:'Alabang, Muntinlupa City',phones:[{num:'8422-560',label:'8422-560'},{num:'8420-468',label:'8420-468'}],verified:true}
       ]},
-      {label:'Mga Health Center',facilities:[
-        {name:'Fairview Health Center',type:'Pampublikong Health Center',addr:'Dahlia Avenue, Brgy. Fairview, District 5, QC',phones:[{num:'71494641',label:'7149-4641'}],verified:false,note:'I-verify ang oras ng operasyon bago pumunta.'},
-        {name:'Barangay Fairview Office',type:'Serbisyo ng Barangay',addr:'Barangay Complex, Dahlia Avenue, Brgy. Fairview',phones:[{num:'89300040',label:'8-9300-040'},{num:'09177005496',label:'0917-700-5496'}],verified:false}
+      {label:'City Health Office',facilities:[
+        {name:'Muntinlupa City Health Office',type:'Pamahalaan ng Lungsod',addr:'Centennial Avenue, Laguerta, Brgy. Tunasan, Muntinlupa City, 1773',phones:[],verified:true,note:'Para sa pangkalahatang katanungan at koordinasyon. Tingnan ang Emergency Numbers para sa agarang pangangailangan.'}
       ]},
       {label:'Mga Ospital',facilities:[
-        {name:'Healthway FEU-NRMF Medical Center',type:'Pribadong Ospital',addr:'Regalado Avenue, West Fairview, QC',phones:[{num:'0277772273',label:'(02) 7777-2273'}],verified:false},
-        {name:'Novaliches District Hospital',type:'Government Hospital',addr:'683 Quirino Highway, Brgy. San Bartolome, Novaliches, QC',phones:[{num:'89310307',label:'8931-0307'}],verified:false},
-        {name:'Quezon City General Hospital',type:'Government Hospital',addr:'Seminary Road, Brgy. Bahay Toro, Project 8, QC',phones:[{num:'88630800',label:'8863-0800'}],verified:false},
-        {name:'Rosario Maclang Bautista General Hospital',type:'Government Hospital',addr:'IBP Road, Batasan Hills, QC',phones:[{num:'88352560',label:'8835-2560'}],verified:false},
-        {name:'The Medical City Clinic — SM City Fairview',type:'Pribadong Klinika',addr:'Basement Level, SM City Fairview, QC',phones:[{num:'028930808',label:'(02) 8930-4808'}],verified:false}
+        {name:'Ospital ng Muntinlupa',type:'Government Hospital',addr:'Muntinlupa City',phones:[],verified:false,note:'Magtanong sa iyong health center para sa referral at kasalukuyang contact information.'}
       ]}
     ]
   }
 };
 
-const MENTAL = {
-  en:{
-    sections:[
-      {id:'mh-warn',icon:'🔍',title:'Warning Signs to Watch For',
-       body:`<ul class="checklist"><li>Feeling sad, empty, or hopeless for two or more weeks in a row</li><li>Loss of interest in activities that used to bring you joy</li><li>Sleeping much more or much less than usual</li><li>Eating much more or much less than usual</li><li>Persistent tiredness without a physical cause</li><li>Difficulty concentrating, remembering, or making decisions</li><li>Feeling worthless, excessively guilty, or blaming yourself for things outside your control</li><li>Withdrawing from family, friends, or community activities</li><li>Increased use of alcohol or substances to cope with feelings</li><li>Constant worry, fear, or feeling on edge most days</li></ul>`},
-      {id:'mh-help',icon:'🤝',title:'How to Help Someone You Are Worried About',
-       body:`<ul class="checklist"><li>Listen without judgment — you do not need to fix everything, just be present</li><li>Ask directly: "Are you thinking of hurting yourself?" Asking does not increase the risk — it opens the door</li><li>Stay with them if you are worried about their immediate safety</li><li>Help them reach care — accompany them to the health center or call the crisis line together</li><li>Avoid saying "Just be strong" or "Others have it worse" — these can feel dismissive</li><li>Take care of yourself too — supporting someone in crisis is emotionally draining</li></ul>`},
-      {id:'mh-care',icon:'🌱',title:'Daily Self-Care That Helps',
-       body:`<ul class="checklist"><li>Talk to someone you trust about how you feel — a family member, friend, or BHW</li><li>Try to sleep and wake at the same time each day</li><li>Eat regular meals, even simple ones</li><li>Stay physically active — even a short walk helps your mood</li><li>Limit alcohol — it worsens anxiety and depression over time</li><li>Take breaks from social media or news when it adds to your stress</li><li>Participate in community, spiritual, or group activities that give you a sense of belonging</li></ul>`},
-    ],
-    crisis:{
-      items:['Thoughts of harming yourself or ending your life','Hearing or seeing things others cannot (hallucinations)','Believing things that cause intense fear or confusion (delusions)','Becoming very confused, disoriented, or unable to recognize familiar people','Behaving in ways that put yourself or others in danger']
-    },
-    resources:[
-      {name:'NCMH Crisis Hotline',num:'1553',label:'1553',note:'Free, 24/7 — call or text',urgent:true},
-      {name:'Hopeline Philippines (NCMH)',num:'88044673',label:'8804-4673',note:'Daily mental health support line'},
-      {name:'Hopeline (mobile)',num:'09175584673',label:'0917-558-4673',note:'Call or text'},
-      {name:'Fairview Health Center',num:'71494641',label:'7149-4641',note:'Ask about mental health referral or social worker',verify:true},
-      {name:'Barangay Fairview — Social Services',num:'89300040',label:'8-9300-040',note:'Ask about BHERT or social welfare assistance',verify:true},
-    ]
-  },
-  fil:{
-    sections:[
-      {id:'mh-warn',icon:'🔍',title:'Mga Babala na Dapat Pansinin',
-       body:`<ul class="checklist"><li>Matagal na malungkot, walang nararamdaman, o walang pag-asa — dalawa o higit pang linggo nang sunud-sunod</li><li>Nawalan ng interes sa mga bagay na dating nagpapasaya sa iyo</li><li>Masyadong marami o masyadong kaunting tulog kaysa dati</li><li>Masyadong marami o masyadong kaunting pagkain kaysa dati</li><li>Palaging pagod kahit hindi naman nag-eehersisyo</li><li>Hirap mag-isip, matandaan, o gumawa ng desisyon</li><li>Pakiramdam na walang kwenta, sobrang pagkakasala, o sinisisi ang sarili sa mga bagay na wala kang kontrol</li><li>Umaalis na sa pamilya, mga kaibigan, o mga aktibidad sa komunidad</li><li>Tumataas na pag-inom ng alak o paggamit ng droga para makayanan ang pakiramdam</li><li>Palaging nag-aalala, takot, o kinakabahan halos araw-araw</li></ul>`},
-      {id:'mh-help',icon:'🤝',title:'Paano Tulungan ang Isang Nag-aalala',
-       body:`<ul class="checklist"><li>Makinig nang walang paghuhusga — hindi mo kailangang ayusin ang lahat, nasa tabi ka lang</li><li>Magtanong nang direkta: "Nag-iisip ka ba na saktan ang iyong sarili?" Ang pagtatanong ay hindi nagdadagdag ng panganib — nagbubukas ito ng pinto ng tulong</li><li>Manatili sa kanyang tabi kung nag-aalala ka sa kaligtasan niya</li><li>Tulungan siyang humingi ng tulong — samahan sa health center o tumawag sa crisis line nang magkasama</li><li>Iwasang sabihing "Malakas ka naman" o "May mas malala pa" — maaaring mas mapahirap pa ito</li><li>Alagaan din ang sarili mo — nakaka-drain ang suportahan ang isang nangangailangan</li></ul>`},
-      {id:'mh-care',icon:'🌱',title:'Pang-araw-araw na Self-Care',
-       body:`<ul class="checklist"><li>Makipag-usap sa isang mapagkakatiwalaang tao — kamag-anak, kaibigan, o BHW</li><li>Subukang matulog at gumising sa parehong oras araw-araw</li><li>Kumain nang regular, kahit simple lang</li><li>Manatiling aktibo — kahit maikling paglalakad ay nakakatulong sa mood</li><li>Bawasan ang alak — nagpapalala ito ng kalungkutan at pagkabalisa sa paglipas ng panahon</li><li>Magpahinga sa social media o balita kapag nagdudulot ito ng dagdag na stress</li><li>Sumali sa mga aktibidad sa komunidad, espirituwal, o panggrupo na nagbibigay ng pakiramdam ng pagmamalasakit</li></ul>`},
-    ],
-    crisis:{
-      items:['Iniisip ang pasakitan o patayin ang sarili','Nakakakita o nakakaririnig ng mga bagay na hindi nakikita o naririnig ng iba (hallucinations)','Naniniwala sa mga bagay na nagdudulot ng matinding takot o kalituhan (delusions)','Biglang nalilito, hindi nakakakilala sa mga pamilyar na tao, o hindi alam kung nasaan','Kumikilos nang mapanganib sa sarili o sa iba']
-    },
-    resources:[
-      {name:'NCMH Crisis Hotline',num:'1553',label:'1553',note:'Libre, 24/7 — tawag o text',urgent:true},
-      {name:'Hopeline Philippines (NCMH)',num:'88044673',label:'8804-4673',note:'Pang-araw-araw na linya ng tulong'},
-      {name:'Hopeline (mobile)',num:'09175584673',label:'0917-558-4673',note:'Tawag o text'},
-      {name:'Fairview Health Center',num:'71494641',label:'7149-4641',note:'Magtanong tungkol sa mental health referral o social worker',verify:true},
-      {name:'Barangay Fairview — Serbisyo Panlipunan',num:'89300040',label:'8-9300-040',note:'Magtanong tungkol sa BHERT o social welfare',verify:true},
-    ]
-  }
+// Emergency Numbers — verified against official City Government of Muntinlupa
+// emergency hotlines page at time of app development.
+const EMERGENCY = {
+  en:[
+    {label:'Main Emergency Hotline', num:'137175', display:'137-175', big:true},
+    {label:'Landline', num:'8373-5165', display:'8373-5165'},
+    {label:'Emergency Hotline (Globe)', num:'09272579322', display:'0927-257-9322'},
+    {label:'Emergency Hotline (Smart)', num:'09215427123', display:'0921-542-7123'}
+  ],
+  fil:[
+    {label:'Pangunahing Emergency Hotline', num:'137175', display:'137-175', big:true},
+    {label:'Landline', num:'8373-5165', display:'8373-5165'},
+    {label:'Emergency Hotline (Globe)', num:'09272579322', display:'0927-257-9322'},
+    {label:'Emergency Hotline (Smart)', num:'09215427123', display:'0921-542-7123'}
+  ]
 };
 
 // ── State ─────────────────────────────────────────────────────────────────────
-let lang = localStorage.getItem('jhl-lang') || 'en';
+let lang = localStorage.getItem('bida-lang') || 'en';
 let bmiHUnit = 'cm';   // 'cm' | 'in' | 'ft'
 let bmiWUnit = 'kg';   // 'kg' | 'lbs'
+
+// ── Personal Tracking (Medicine Tracker, BP Log, Sugar Log) ─────────────────
+// All data below lives ONLY in this device's browser storage (localStorage).
+// Nothing here is transmitted, synced, or visible to anyone but the person
+// using this phone — not the project team, not the health center. This is a
+// deliberate design choice: the app helps a patient keep their own record
+// without turning the app into a data-collection tool.
+const MED_TRACKER_KEY = 'bida-med-tracker-v1';
+const BP_LOG_KEY = 'bida-bp-log-v1';
+const SUGAR_LOG_KEY = 'bida-sugar-log-v1';
+
+function getTrackerData(){
+  try{ const raw=localStorage.getItem(MED_TRACKER_KEY); return raw?JSON.parse(raw):{medicines:[],log:{}}; }
+  catch(e){ return {medicines:[],log:{}}; }
+}
+function saveTrackerData(data){ try{ localStorage.setItem(MED_TRACKER_KEY, JSON.stringify(data)); }catch(e){} }
+function last7Dates(){
+  const arr=[];
+  for(let i=6;i>=0;i--){ const d=new Date(); d.setDate(d.getDate()-i); arr.push(d.toISOString().slice(0,10)); }
+  return arr;
+}
+function dayLabel(dateStr){
+  const d=new Date(dateStr+'T00:00:00');
+  const days={en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], fil:['Lin','Lun','Mar','Miy','Huw','Biy','Sab']};
+  return days[lang][d.getDay()];
+}
+function addTrackedMedicine(name){
+  if(!name) return;
+  const data=getTrackerData();
+  if(!data.medicines.includes(name)) data.medicines.push(name);
+  saveTrackerData(data);
+  renderMedications();
+}
+function removeTrackedMedicine(name){
+  const data=getTrackerData();
+  data.medicines=data.medicines.filter(m=>m!==name);
+  saveTrackerData(data);
+  renderMedications();
+}
+function toggleIntake(name, dateStr){
+  const data=getTrackerData();
+  if(!data.log[name]) data.log[name]={};
+  data.log[name][dateStr]=!data.log[name][dateStr];
+  saveTrackerData(data);
+  renderMedications();
+}
+
+function getLog(key){ try{ const raw=localStorage.getItem(key); return raw?JSON.parse(raw):[]; }catch(e){ return []; } }
+function saveLog(key,arr){ try{ localStorage.setItem(key, JSON.stringify(arr)); }catch(e){} }
+
+function addBPEntry(){
+  const sysEl=document.getElementById('bp-sys-input'), diaEl=document.getElementById('bp-dia-input');
+  const sys=parseInt(sysEl.value), dia=parseInt(diaEl.value);
+  if(!sys||!dia||sys<50||sys>300||dia<30||dia>200){ alert(T[lang].logInvalid); return; }
+  const log=getLog(BP_LOG_KEY);
+  log.unshift({date:new Date().toISOString().slice(0,10), sys, dia});
+  saveLog(BP_LOG_KEY, log.slice(0,30));
+  renderHTN();
+}
+function deleteBPEntry(idx){
+  const log=getLog(BP_LOG_KEY);
+  log.splice(idx,1);
+  saveLog(BP_LOG_KEY, log);
+  renderHTN();
+}
+
+function addSugarEntry(){
+  const valEl=document.getElementById('sugar-val-input'), typeEl=document.getElementById('sugar-type-input');
+  const val=parseInt(valEl.value), type=typeEl.value;
+  if(!val||val<20||val>800){ alert(T[lang].logInvalid); return; }
+  const log=getLog(SUGAR_LOG_KEY);
+  log.unshift({date:new Date().toISOString().slice(0,10), val, type});
+  saveLog(SUGAR_LOG_KEY, log.slice(0,30));
+  renderDM();
+}
+function deleteSugarEntry(idx){
+  const log=getLog(SUGAR_LOG_KEY);
+  log.splice(idx,1);
+  saveLog(SUGAR_LOG_KEY, log);
+  renderDM();
+}
+
+// ── Anonymous usage logging ──────────────────────────────────────────────────
+// No cookies, no login, no personal data, no persistent identifier.
+const ANALYTICS_URL = '';
+
+function logVisit(module){
+  if(!ANALYTICS_URL) return;
+  try{
+    fetch(ANALYTICS_URL, {
+      method: 'POST', mode: 'no-cors',
+      body: JSON.stringify({ module: module, lang: lang, ts: Date.now() })
+    }).catch(()=>{});
+  }catch(e){ /* offline or blocked — ignore, no retry */ }
+}
+
+// ── Remote content sync (Google Sheet) ───────────────────────────────────────
+// Lets non-technical team members, including whoever this project is handed
+// off to, update content from a shared Google Sheet with no code and no login
+// page required. Leave SHEET_ID blank to run entirely on the built-in content
+// below (safe default).
+//
+// COVERAGE: The UIText tab covers every piece of text in T.en/T.fil — this
+// INCLUDES the Hypertension, Diabetes, and Cholesterol page content (keys
+// like htnWhatTitle, htnWhatBody, dmDietBody, etc. — see those keys in the T
+// object above for the full list). This is a deliberate handoff decision:
+// making this content Sheet-editable means it can be kept current without a
+// developer, but it also means the code-level "you must edit a file to change
+// this" friction is gone.
+//
+// >>> SAFETY: Restrict who has EDIT access to this Sheet to your clinical
+// >>> team. Sheet access control is now the safety mechanism for clinical
+// >>> content that used to require a code change — treat granting edit
+// >>> access the same way you would treat approving a code change, and have
+// >>> a licensed clinician review any edit to a health-advice row before it
+// >>> goes live.
+//
+// SETUP (once you have a Sheet):
+// 1. Create a Google Sheet with tabs named exactly: UIText, Medications,
+//    Facilities, Emergency (see column layouts in each fetch function below).
+//    UIText needs three columns: key, en, fil — one row per T-object key.
+// 2. File > Share > people you trust with edit access; everyone else (or
+//    "Anyone with the link") only needs Viewer, since the app only reads.
+// 3. Paste the Sheet's ID (the long string in its URL between /d/ and /edit)
+//    into SHEET_ID below.
+const SHEET_ID = '';
+const CACHE_KEY = 'bida-remote-cache-v1';
+
+async function fetchSheetTab(tabName){
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(tabName)}`;
+  const res = await fetch(url);
+  const text = await res.text();
+  const json = JSON.parse(text.substring(text.indexOf('(')+1, text.lastIndexOf(')')));
+  const cols = json.table.cols.map(c=>c.label || c.id);
+  return json.table.rows.map(r=>{
+    const obj = {};
+    r.c.forEach((cell,i)=>{ obj[cols[i]] = cell ? cell.v : ''; });
+    return obj;
+  });
+}
+
+async function syncRemoteContent(){
+  if(!SHEET_ID) return;
+  try{
+    const [uiRows, medRows, facRows, emergRows] = await Promise.all([
+      fetchSheetTab('UIText').catch(()=>null),
+      fetchSheetTab('Medications').catch(()=>null),
+      fetchSheetTab('Facilities').catch(()=>null),
+      fetchSheetTab('Emergency').catch(()=>null)
+    ]);
+    const remote = { uiRows, medRows, facRows, emergRows, ts: Date.now() };
+    localStorage.setItem(CACHE_KEY, JSON.stringify(remote));
+    applyRemoteContent(remote);
+  }catch(e){
+    // Offline or fetch failed — fall back to last cached remote content, if any.
+    const cached = localStorage.getItem(CACHE_KEY);
+    if(cached){ try{ applyRemoteContent(JSON.parse(cached)); }catch(e2){} }
+    // Otherwise the built-in hardcoded content already on the page stays as-is.
+  }
+}
+
+function applyRemoteContent(remote){
+  if(remote.uiRows){
+    remote.uiRows.forEach(row=>{
+      if(row.key && T.en[row.key]!==undefined) T.en[row.key] = row.en || T.en[row.key];
+      if(row.key && T.fil[row.key]!==undefined) T.fil[row.key] = row.fil || T.fil[row.key];
+    });
+  }
+  if(remote.medRows && remote.medRows.length){
+    const groups = {};
+    const order = [];
+    remote.medRows.forEach(row=>{
+      const gKey = row.group_en || 'Other';
+      if(!groups[gKey]){ groups[gKey] = {group_en:row.group_en, group_fil:row.group_fil, items:[]}; order.push(gKey); }
+      groups[gKey].items.push({name:row.name, what_en:row.what_en, what_fil:row.what_fil, dose_en:row.dose_en, dose_fil:row.dose_fil, freq_en:row.freq_en, freq_fil:row.freq_fil});
+    });
+    MEDS.length = 0;
+    order.forEach(k=>MEDS.push(groups[k]));
+  }
+  if(remote.facRows && remote.facRows.length){
+    // Facilities from the sheet replace the "Health Centers (Pilot Sites)" group only.
+    const items = remote.facRows.map(row=>({
+      name:row.name, type:row.type_en||row.type, addr:row.addr,
+      phones:(row.phones||'').split(',').filter(Boolean).map(p=>({num:p.trim(),label:p.trim()})),
+      verified: String(row.verified).toLowerCase()==='true'
+    }));
+    if(items.length){ NEARBY.en.cats[0].facilities = items; NEARBY.fil.cats[0].facilities = items; }
+  }
+  if(remote.emergRows && remote.emergRows.length){
+    const items = remote.emergRows.map((row,i)=>({label:row.label_en, num:row.num, display:row.display||row.num, big:i===0}));
+    if(items.length){ EMERGENCY.en = items; EMERGENCY.fil = remote.emergRows.map((row,i)=>({label:row.label_fil||row.label_en, num:row.num, display:row.display||row.num, big:i===0})); }
+  }
+  applyStaticStrings();
+  renderAll();
+}
 
 // ── Navigation ────────────────────────────────────────────────────────────────
 function navigate(page){
@@ -782,6 +964,7 @@ function navigate(page){
     else document.getElementById('nav-more').classList.add('active');
     sw.style.display='none';
   }
+  logVisit(page);
   window.scrollTo(0,0);
 }
 function goHome(){ navigate('home'); }
@@ -789,7 +972,7 @@ function goHome(){ navigate('home'); }
 // ── Language ──────────────────────────────────────────────────────────────────
 function setLang(l){
   lang=l;
-  localStorage.setItem('jhl-lang',l);
+  localStorage.setItem('bida-lang',l);
   document.getElementById('btn-en').classList.toggle('active',l==='en');
   document.getElementById('btn-fil').classList.toggle('active',l==='fil');
   applyStaticStrings();
@@ -804,59 +987,55 @@ function applyStaticStrings(){
   document.getElementById('home-disclaimer').textContent=t.disclaimer;
   document.getElementById('more-disclaimer').textContent=t.disclaimer;
   document.getElementById('lbl-rf').innerHTML=t.lblRF;
-  document.getElementById('lbl-bite').innerHTML=t.lblBite;
-  document.getElementById('lbl-dengue').innerHTML=t.lblDengue;
-  document.getElementById('lbl-chronic').innerHTML=t.lblChronic;
+  document.getElementById('lbl-htn').innerHTML=t.lblHTN;
+  document.getElementById('lbl-dm').innerHTML=t.lblDM;
+  document.getElementById('lbl-dys').innerHTML=t.lblDys;
   document.getElementById('lbl-nutrition').innerHTML=t.lblNutrition;
-  document.getElementById('lbl-vaccines').innerHTML=t.lblVaccines;
+  document.getElementById('lbl-meds').innerHTML=t.lblMeds;
   document.getElementById('lbl-nearby').innerHTML=t.lblNearby;
-  document.getElementById('lbl-mental').innerHTML=t.lblMentalHealth;
-  document.getElementById('lbl-chronic2').innerHTML=t.lblChronic;
+  document.getElementById('lbl-emerg').innerHTML=t.lblEmerg;
+  document.getElementById('lbl-dys2').innerHTML=t.lblDys;
   document.getElementById('lbl-nutrition2').innerHTML=t.lblNutrition;
-  document.getElementById('lbl-vaccines2').innerHTML=t.lblVaccines;
+  document.getElementById('lbl-meds2').innerHTML=t.lblMeds;
   document.getElementById('lbl-nearby2').innerHTML=t.lblNearby;
-  document.getElementById('lbl-mental2').innerHTML=t.lblMentalHealth;
+  document.getElementById('lbl-emerg2').innerHTML=t.lblEmerg;
   document.getElementById('title-rf').innerHTML=t.titleRF;
-  document.getElementById('title-bite').innerHTML=t.titleBite;
-  document.getElementById('title-dengue').innerHTML=t.titleDengue;
-  document.getElementById('title-chronic').innerHTML=t.titleChronic;
+  document.getElementById('title-htn').innerHTML=t.titleHTN;
+  document.getElementById('title-dm').innerHTML=t.titleDM;
+  document.getElementById('title-dys').innerHTML=t.titleDys;
   document.getElementById('title-nutrition').innerHTML=t.titleNutrition;
-  document.getElementById('title-vaccines').innerHTML=t.titleVaccines;
+  document.getElementById('title-meds').innerHTML=t.titleMeds;
   document.getElementById('title-nearby').innerHTML=t.titleNearby;
-  document.getElementById('title-mental').innerHTML=t.titleMentalHealth;
+  document.getElementById('title-emerg').innerHTML=t.titleEmerg;
   document.getElementById('title-more').innerHTML=t.titleMore;
   document.getElementById('nav-lbl-home').textContent=t.navHome;
   document.getElementById('nav-lbl-rf').textContent=t.navRF;
-  document.getElementById('nav-lbl-bite').textContent=t.navBite;
-  document.getElementById('nav-lbl-dengue').textContent=t.navDengue;
+  document.getElementById('nav-lbl-htn').textContent=t.navHTN;
+  document.getElementById('nav-lbl-dm').textContent=t.navDM;
   document.getElementById('nav-lbl-more').textContent=t.navMore;
 }
 
 // ── Search ────────────────────────────────────────────────────────────────────
 const SEARCH_IDX = [
-  {sec:'red-flags',kw:['stroke','face drooping','weakness','numbness','speech','headache','dizziness','stroke','tabingi','panghihina','pamamanhid','sakit ng ulo','pagkahilo']},
-  {sec:'red-flags',kw:['chest pain','heart','tightness','jaw','shortness of breath','sweating','sakit ng dibdib','paninikip','panga','hirap huminga','pawis']},
-  {sec:'red-flags',kw:['high blood','BP','hypertension','mataas na BP']},
-  {sec:'red-flags',kw:['diabetes','thirsty','urinate','weight loss','wound','numbness','diyabetis','nauuhaw','umihi','sugat','pamamanhid']},
-  {sec:'red-flags',kw:['asthma','wheeze','breathing','hika','wheezing','huminga']},
-  {sec:'red-flags',kw:['dengue','fever','rash','bleeding','vomit','lagnat','pantal','pagdurugo','pagsusuka']},
-  {sec:'red-flags',kw:['diarrhea','dehydration','loose stool','pagtatae','malabnaw na dumi']},
-  {sec:'red-flags',kw:['flood','leptospirosis','calf','jaundice','baha','sakit ng binti','paninilaw']},
-  {sec:'bite',kw:['dog','cat','bite','scratch','rabies','animal','wound','wash','aso','pusa','kagat','kalmot','sugat','hugasan']},
-  {sec:'dengue',kw:['dengue','mosquito','stagnant water','sanitation','garbage','lamok','nakababad','kalinisan','basura','baha','flood']},
-  {sec:'chronic',kw:['blood pressure','diabetes','asthma','hypertension','sugar','medicine','BP','diyabetis','hika','gamot']},
+  {sec:'red-flags',kw:['stroke','face drooping','weakness','numbness','speech','headache','dizziness','tabingi','panghihina','pamamanhid','sakit ng ulo','pagkahilo']},
+  {sec:'red-flags',kw:['chest pain','heart attack','tightness','jaw','shortness of breath','sweating','sakit ng dibdib','paninikip','panga','hirap huminga','pawis']},
+  {sec:'red-flags',kw:['high blood','hypertensive emergency','mataas na BP']},
+  {sec:'red-flags',kw:['diabetes emergency','hypoglycemia','shaking','confusion','pagkalito','panginginig']},
+  {sec:'hypertension',kw:['hypertension','blood pressure','BP','altapresyon','presyon ng dugo']},
+  {sec:'diabetes',kw:['diabetes','sugar','insulin','diyabetis','asukal','blood sugar']},
+  {sec:'dyslipidemia',kw:['cholesterol','dyslipidemia','lipid','kolesterol','taba']},
   {sec:'nutrition',kw:['food','nutrition','pinggang pinoy','BMI','vegetable','rice','protein','pagkain','nutrisyon','gulay','kanin']},
-  {sec:'vaccines',kw:['vaccine','vaccination','BCG','MMR','flu','rabies','tetanus','baby','pregnant','bakuna','sanggol','buntis']},
-  {sec:'nearby',kw:['hospital','health center','clinic','emergency','phone','contact','122','ospital','klinika']},
-  {sec:'mental',kw:['mental health','depression','anxiety','stress','suicide','crisis','sad','counseling','1553','hopeline','nalungkot','nag-aalala','depresyon','pagpapakamatay','krisis','takot','pagkabalisa','self-harm','hopelessness','mental','pag-aalala']}
+  {sec:'medications',kw:['medicine','medication','losartan','metformin','amlodipine','atorvastatin','gamot','dosage','dose']},
+  {sec:'nearby',kw:['health center','clinic','bayanan','alabang','ospital','klinika']},
+  {sec:'emergency',kw:['emergency','137','hotline','ambulance','irespond','ambulansya']}
 ];
 const SEC_NAMES = {
-  en:{'red-flags':'Red Flags',bite:'Dog/Cat Bite',dengue:'Dengue & Floods',chronic:'BP/Diabetes/Asthma',nutrition:'Food & BMI',vaccines:'Vaccines',nearby:'Nearby Care',mental:'Mental Health'},
-  fil:{'red-flags':'Mga Babala',bite:'Kagat ng Hayop',dengue:'Dengue at Baha',chronic:'BP/Diyabetis/Hika',nutrition:'Pagkain at BMI',vaccines:'Bakuna',nearby:'Malapit na Tulong',mental:'Mental Health'}
+  en:{'red-flags':'Red Flags',hypertension:'Hypertension',diabetes:'Diabetes',dyslipidemia:'Cholesterol',nutrition:'Food & BMI',medications:'Medicines',nearby:'Nearby Care',emergency:'Emergency Numbers'},
+  fil:{'red-flags':'Mga Babala',hypertension:'Altapresyon',diabetes:'Diyabetis',dyslipidemia:'Kolesterol',nutrition:'Pagkain at BMI',medications:'Mga Gamot',nearby:'Malapit na Tulong',emergency:'Emergency Numbers'}
 };
 const SEC_DESC = {
-  en:{'red-flags':'Symptom red flags and when to seek care','bite':'Dog/cat bite first aid and rabies guidance','dengue':'Dengue symptoms, flood safety, and sanitation','chronic':'BP, diabetes, and asthma guidance','nutrition':'Pinggang Pinoy plate guide and BMI calculator','vaccines':'Vaccination guide by life stage','nearby':'Emergency contacts, health centers, and hospitals','mental':'Warning signs, crisis help, and mental health resources'},
-  fil:{'red-flags':'Mga babala ng sintomas at kung kailan magpatingin','bite':'First aid sa kagat ng hayop at gabay sa rabies','dengue':'Sintomas ng dengue, kaligtasan sa baha','chronic':'Gabay sa BP, diyabetis, at hika','nutrition':'Pinggang Pinoy at BMI calculator','vaccines':'Gabay sa bakuna ayon sa edad','nearby':'Emergency contacts, health centers, at ospital','mental':'Mga babala, crisis na tulong, at mga mapagkukunan ng mental health'}
+  en:{'red-flags':'Symptom red flags and when to seek care','hypertension':'Managing high blood pressure','diabetes':'Managing diabetes and foot care','dyslipidemia':'Managing cholesterol','nutrition':'Pinggang Pinoy plate guide and BMI calculator','medications':'Common medicines available at the health center','nearby':'Muntinlupa health centers','emergency':'Muntinlupa emergency hotline numbers'},
+  fil:{'red-flags':'Mga babala ng sintomas at kung kailan magpatingin','hypertension':'Pamamahala ng altapresyon','diabetes':'Pamamahala ng diyabetis at pag-aalaga ng paa','dyslipidemia':'Pamamahala ng kolesterol','nutrition':'Pinggang Pinoy at BMI calculator','medications':'Karaniwang gamot na available sa health center','nearby':'Mga health center sa Muntinlupa','emergency':'Mga numero sa emergency sa Muntinlupa'}
 };
 
 function handleSearch(val){
@@ -882,13 +1061,13 @@ function toggleCard(id){document.getElementById(id).classList.toggle('open');}
 // ── Renderers ─────────────────────────────────────────────────────────────────
 function renderAll(){
   renderRedFlags();
-  renderBite();
-  renderDengue();
-  renderChronic();
+  renderHTN();
+  renderDM();
+  renderDys();
   renderNutrition();
-  renderVaccines();
+  renderMedications();
   renderNearby();
-  renderMentalHealth();
+  renderEmergency();
 }
 
 function renderRedFlags(){
@@ -898,12 +1077,12 @@ function renderRedFlags(){
     const signsHtml=`<div class="card-section-label">${t.signsSym}</div><ul class="checklist">${d.signs.map(s=>`<li>${s}</li>`).join('')}</ul>`;
     const dangerHtml=d.danger?`<div class="danger-strip"><div class="strip-label">${t.dangerSigns}</div><ul>${d.danger.map(s=>`<li>${s}</li>`).join('')}</ul></div>`:'';
     const actionHtml=c.emergency
-      ?`<a href="tel:122" class="go-now-btn">${t.goNow}</a>`
+      ?`<a href="tel:137175" class="go-now-btn">${t.goNow}</a>`
       :`<div class="action-strip"><div class="strip-label">✔ ${t.whatToDo}</div><p style="font-size:0.88rem;color:#1e3a8a;margin:0">${d.action}</p></div>`;
-    const border=c.emergency?'border-color:#fca5a5':c.isDanger?'border-color:#fde68a':'';
+    const border=c.emergency?'border-color:#fca5a5':'';
     return `<div class="symptom-card" id="rf-${i}" style="${border}">
       <div class="symptom-card-header" onclick="toggleCard('rf-${i}')">
-        <div class="symptom-card-title">${c.emergency?'🚨 ':c.isDanger?'⚠️ ':'ℹ️ '}${d.title}</div>
+        <div class="symptom-card-title">🚨 ${d.title}</div>
         <span class="chevron">⌄</span>
       </div>
       <div class="symptom-card-body">${signsHtml}${dangerHtml}${actionHtml}</div>
@@ -911,57 +1090,66 @@ function renderRedFlags(){
   }).join('');
 }
 
-function renderBite(){
-  const d=BITE[lang];
+// Renders a condition page from keyed T strings (e.g. sectionKeys entry
+// {key:'htnWhat',icon:'❓'} pulls T[lang].htnWhatTitle / htnWhatBody). This is
+// what makes the content editable through the Google Sheet: edit the
+// matching key's row in the UIText tab, no code required.
+function renderInfoSections(containerId, introKey, sectionKeys, prefixHtml){
   const t=T[lang];
-  document.getElementById('bite-content').innerHTML=
-    `<div class="info-card" style="border-color:#fcd34d;background:#fffdf0"><div class="info-card-title">⚠️ ${d.intro}</div></div>`+
-    d.steps.map((s,i)=>`<div class="step-card"><div class="step-num">${i+1}</div><div class="step-content"><div class="step-title">${s.t}</div><div class="step-desc">${s.d}</div></div></div>`).join('')+
-    `<div class="danger-strip"><div class="strip-label">🚨 ${d.dLabel}</div><ul>${d.dangers.map(x=>`<li>${x}</li>`).join('')}</ul></div>`+
-    `<a href="tel:122" class="go-now-btn">${t.callNow}</a>`+
-    `<div class="info-card mt-10"><div class="info-card-title">🏥 ${t.abtcTitle}</div><p style="font-size:0.87rem;color:#374151;line-height:1.55">${d.abtcNote}</p></div>`;
-}
-
-function renderDengue(){
-  const sections=DENGUE_SECTIONS[lang];
-  const t=T[lang];
-  document.getElementById('dengue-content').innerHTML=sections.map((s,i)=>{
-    const id='dng-'+i;
-    const itemsHtml=s.checklist
-      ?`<ul class="checklist">${s.items.map(x=>`<li>${x}</li>`).join('')}</ul>`
-      :`<ul style="padding-left:17px;margin:6px 0 0">${s.items.map(x=>`<li style="font-size:0.87rem;color:#374151;line-height:1.5;margin-bottom:4px">${x}</li>`).join('')}</ul>`;
-    const border=s.danger?'border-color:#fca5a5':'';
-    const bg=s.danger?'background:#fff5f5':'';
-    return `<div class="symptom-card" id="${id}" style="${border}${bg}">
+  let html = prefixHtml || '';
+  const intro = t[introKey];
+  html += intro ? `<div class="disclaimer mb-14 no-print">${intro}</div>` : '';
+  html += sectionKeys.map((s,i)=>{
+    const id=containerId+'-'+i;
+    const title = t[s.key+'Title'];
+    const body = t[s.key+'Body'];
+    return `<div class="symptom-card no-print" id="${id}">
       <div class="symptom-card-header" onclick="toggleCard('${id}')">
-        <div class="symptom-card-title">${s.icon} ${s.title}</div>
+        <div class="symptom-card-title">${s.icon} ${title}</div>
         <span class="chevron">⌄</span>
       </div>
-      <div class="symptom-card-body">${itemsHtml}${s.danger?`<a href="tel:122" class="go-now-btn" style="margin-top:10px">${t.goNow}</a>`:''}</div>
+      <div class="symptom-card-body"><p style="font-size:0.87rem;color:#374151;line-height:1.55;padding-top:10px">${body}</p></div>
     </div>`;
   }).join('');
+  document.getElementById(containerId+'-content').innerHTML=html;
 }
 
-function renderChronic(){
-  const sections=CHRONIC[lang];
-  document.getElementById('chronic-content').innerHTML=sections.map((s,i)=>{
-    const id='chr-'+i;
-    const body=s.items.map(item=>{
-      if(item.type==='p') return `<p style="font-size:0.87rem;color:#374151;line-height:1.55;margin-bottom:8px">${item.t}</p>`;
-      if(item.type==='ul') return `<ul style="padding-left:17px;margin:0 0 8px">${item.items.map(x=>`<li style="font-size:0.87rem;color:#374151;line-height:1.5;margin-bottom:3px">${x}</li>`).join('')}</ul>`;
-      if(item.type==='dl') return `<div class="card-section-label text-danger">⚠ ${item.t}</div>`;
-      if(item.type==='warn') return `<div class="danger-strip" style="margin-top:8px"><div class="strip-label">⚠</div><p style="font-size:0.86rem;color:#7f1d1d;margin:0">${item.t}</p></div>`;
-      return '';
-    }).join('');
-    return `<div class="symptom-card" id="${id}">
-      <div class="symptom-card-header" onclick="toggleCard('${id}')">
-        <div class="symptom-card-title">${s.icon} ${s.title}</div>
-        <span class="chevron">⌄</span>
-      </div>
-      <div class="symptom-card-body">${body}</div>
-    </div>`;
-  }).join('');
+function renderBPLogWidget(){
+  const t=T[lang];
+  const log=getLog(BP_LOG_KEY);
+  const entries=log.map((e,i)=>`<div class="log-entry"><span class="log-date">${e.date}</span><span class="log-value">${e.sys}/${e.dia}</span><button class="log-delete no-print" onclick="deleteBPEntry(${i})">✕</button></div>`).join('') || `<p class="tracker-empty-note">${t.logNoEntries}</p>`;
+  return `<div class="tracker-section">
+    <div class="tracker-header"><div class="tracker-title">📊 ${t.bpLogTitle}</div><div class="tracker-sub">${t.bpLogSub}</div></div>
+    <div class="log-input-row no-print">
+      <input type="number" id="bp-sys-input" placeholder="${t.bpSysPlaceholder}">
+      <span class="log-slash">/</span>
+      <input type="number" id="bp-dia-input" placeholder="${t.bpDiaPlaceholder}">
+      <button onclick="addBPEntry()">${t.logAdd}</button>
+    </div>
+    ${entries}
+    ${log.length?`<button class="tracker-print-btn no-print" onclick="window.print()">🖨️ ${t.bpLogPrintBtn}</button>`:''}
+  </div>`;
 }
+
+function renderSugarLogWidget(){
+  const t=T[lang];
+  const log=getLog(SUGAR_LOG_KEY);
+  const entries=log.map((e,i)=>`<div class="log-entry"><span class="log-date">${e.date}</span><span class="log-value">${e.val} mg/dL</span><span class="log-type-tag">${e.type==='fasting'?t.sugarFasting:t.sugarRandom}</span><button class="log-delete no-print" onclick="deleteSugarEntry(${i})">✕</button></div>`).join('') || `<p class="tracker-empty-note">${t.logNoEntries}</p>`;
+  return `<div class="tracker-section">
+    <div class="tracker-header"><div class="tracker-title">🩸 ${t.sugarLogTitle}</div><div class="tracker-sub">${t.sugarLogSub}</div></div>
+    <div class="log-input-row no-print">
+      <input type="number" id="sugar-val-input" placeholder="${t.sugarValPlaceholder}">
+      <select id="sugar-type-input"><option value="fasting">${t.sugarFasting}</option><option value="random">${t.sugarRandom}</option></select>
+      <button onclick="addSugarEntry()">${t.logAdd}</button>
+    </div>
+    ${entries}
+    ${log.length?`<button class="tracker-print-btn no-print" onclick="window.print()">🖨️ ${t.sugarLogPrintBtn}</button>`:''}
+  </div>`;
+}
+
+function renderHTN(){ renderInfoSections('hypertension', 'htnIntro', HTN_SECTIONS, renderBPLogWidget()); }
+function renderDM(){ renderInfoSections('diabetes', 'dmIntro', DM_SECTIONS, renderSugarLogWidget()); }
+function renderDys(){ renderInfoSections('dyslipidemia', 'dysIntro', DYS_SECTIONS); }
 
 function renderNutrition(){
   const t=T[lang];
@@ -1044,7 +1232,6 @@ function calcBMI(){
   const rangeRows=CATS.map((c,i)=>
     `<tr${i===ci?' class="bmi-hl"':''}><td>${c.label}</td><td>${RANGES[i]}</td></tr>`
   ).join('');
-  // Distance from top of normal (22.9) or bottom (18.5)
   const normLowKg=18.5*hM*hM;
   const normHighKg=22.9*hM*hM;
   let outsideHtml='';
@@ -1066,29 +1253,72 @@ function calcBMI(){
     `<div class="bmi-note">${t.bmiResultNote}</div>`;
 }
 
-function renderVaccines(){
-  const d=VACCINES[lang];
-  document.getElementById('vaccines-content').innerHTML=
-    `<div class="disclaimer mb-14">${d.note}</div>`+
-    d.groups.map((g,i)=>{
-      const id='vax-'+i;
-      return `<div class="symptom-card" id="${id}">
-        <div class="symptom-card-header" onclick="toggleCard('${id}')">
-          <div class="symptom-card-title">${g.icon} ${g.title}</div>
-          <span class="chevron">⌄</span>
-        </div>
-        <div class="symptom-card-body">
-          <ul class="vaccine-list" style="padding-left:17px;margin:8px 0">${g.items.map(v=>`<li style="font-size:0.87rem;color:#374151;line-height:1.5;margin-bottom:3px">${v}</li>`).join('')}</ul>
-          <div class="vaccine-note">📌 ${g.note}</div>
-        </div>
-      </div>`;
+function renderMedTracker(){
+  const t=T[lang];
+  const data=getTrackerData();
+  const dates=last7Dates();
+  const today=dates[dates.length-1];
+  const allMedNames=[];
+  MEDS.forEach(g=>g.items.forEach(m=>allMedNames.push(m.name)));
+  const availableToAdd=allMedNames.filter(n=>!data.medicines.includes(n));
+
+  const missedToday=data.medicines.filter(m=>!(data.log[m]&&data.log[m][today]));
+  const reminderHtml=(data.medicines.length && missedToday.length)
+    ? `<div class="tracker-reminder">🔔 ${t.medReminderBanner.replace('{meds}', missedToday.join(', '))}</div>` : '';
+
+  const rows=data.medicines.map(name=>{
+    const safeName=name.replace(/'/g,"\\'");
+    const cells=dates.map(dt=>{
+      const taken=data.log[name] && data.log[name][dt];
+      return `<button class="day-cell${taken?' taken':''}" onclick="toggleIntake('${safeName}','${dt}')" title="${dt}">${dayLabel(dt)}<span class="day-dot">${taken?'✓':'○'}</span></button>`;
     }).join('');
+    return `<div class="tracker-row">
+      <div class="tracker-row-name">${name}<button class="tracker-remove" onclick="removeTrackedMedicine('${safeName}')" aria-label="remove">✕</button></div>
+      <div class="tracker-days">${cells}</div>
+    </div>`;
+  }).join('');
+
+  const addControl=availableToAdd.length
+    ? `<div class="tracker-add-row"><select id="tracker-add-select">${availableToAdd.map(n=>`<option value="${n}">${n}</option>`).join('')}</select><button class="tracker-add-btn" onclick="addTrackedMedicine(document.getElementById('tracker-add-select').value)">${t.medAdd}</button></div>`
+    : `<p class="tracker-empty-note">${t.medAllAdded}</p>`;
+
+  return `<div class="tracker-section">
+    <div class="tracker-header"><div class="tracker-title">📋 ${t.medTrackerTitle}</div><div class="tracker-sub">${t.medTrackerSub}</div></div>
+    ${reminderHtml}
+    ${rows || `<p class="tracker-empty-note">${t.medTrackerEmpty}</p>`}
+    ${addControl}
+    ${data.medicines.length?`<button class="tracker-print-btn no-print" onclick="window.print()">🖨️ ${t.medPrintBtn}</button>`:''}
+  </div>`;
+}
+
+function renderMedications(){
+  const t=T[lang];
+  let html = renderMedTracker();
+  html += `<div class="med-safety-banner no-print"><b>⚠ ${t.medSafetyTitle}</b>${t.medSafetyBody}</div>`;
+  MEDS.forEach(group=>{
+    const groupLabel = lang==='en' ? group.group_en : group.group_fil;
+    html += `<div class="med-group-title no-print">${groupLabel}</div>`;
+    group.items.forEach(m=>{
+      const what = lang==='en' ? m.what_en : m.what_fil;
+      const dose = lang==='en' ? m.dose_en : m.dose_fil;
+      const freq = lang==='en' ? m.freq_en : m.freq_fil;
+      html += `<div class="med-item-card no-print">
+        <div class="med-name">${m.name}</div>
+        <div class="med-row"><b>${t.medWhatFor}:</b> ${what}</div>
+        ${dose ? `<div class="med-row"><b>${t.medUsualDose}:</b> ${dose}</div>` : ''}
+        <div class="med-row"><b>${t.medHowTaken}:</b> ${freq}</div>
+        <div class="med-row med-dose-reminder">⚠ ${t.medReminder}</div>
+      </div>`;
+    });
+  });
+  html += `<div class="disclaimer mt-10 no-print">${t.medListNote}</div>`;
+  document.getElementById('medications-content').innerHTML = html;
 }
 
 function renderNearby(){
   const d=NEARBY[lang];
   const t=T[lang];
-  let html=`<div class="disclaimer mb-14" style="background:#fffbeb;border-color:#fde68a;color:#92400e">⚠ ${d.verifyMsg}</div>`;
+  let html=`<div class="disclaimer mb-14">⚠ ${t.nearbyVerify}</div>`;
   d.cats.forEach(cat=>{
     html+=`<div class="card-section-label">${cat.label}</div>`;
     cat.facilities.forEach(f=>{
@@ -1096,49 +1326,36 @@ function renderNearby(){
         <div class="facility-name">${f.name}</div>
         <div class="facility-type ${f.typeClass||''}">${f.type}</div>
         <div class="facility-address">${f.addr}</div>
-        ${f.phones.map(p=>`<a href="tel:${p.num}" class="facility-phone">📞 ${p.label}</a>`).join('<br>')}
+        ${(f.phones||[]).map(p=>`<a href="tel:${p.num}" class="facility-phone">📞 ${p.label}</a>`).join('<br>')}
         ${!f.verified?`<span class="verify-label">${t.verify}</span>`:''}
         ${f.note?`<p style="font-size:0.78rem;color:var(--muted);margin-top:6px">${f.note}</p>`:''}
       </div>`;
     });
   });
-  html+=`<div class="info-card mt-10"><div class="info-card-title">🐾 ${t.abtcTitle}</div><p style="font-size:0.87rem;color:#374151;line-height:1.55">${d.abtcNote}</p></div>`;
   document.getElementById('nearby-content').innerHTML=html;
 }
 
-function renderMentalHealth(){
+function renderEmergency(){
   const t=T[lang];
-  const d=MENTAL[lang];
-  const crisisItems=d.crisis.items.map(i=>`<li style="color:#7f1d1d;font-size:0.88rem;padding:6px 0;border-bottom:1px solid #fecaca;display:flex;align-items:flex-start;gap:8px;line-height:1.45"><span style="color:var(--danger);font-weight:700;flex-shrink:0">!</span>${i}</li>`).join('');
-  const crisisHtml=
-    `<div style="background:#fef2f2;border:2px solid var(--danger);border-radius:12px;padding:14px 15px;margin-bottom:12px">
-      <div style="font-size:0.95rem;font-weight:700;color:var(--danger);margin-bottom:10px">🚨 ${t.mhCrisisTitle}</div>
-      <ul style="list-style:none;padding:0;margin:0 0 12px">${crisisItems}</ul>
-      <div style="font-size:0.86rem;color:var(--danger);font-weight:600;margin-bottom:10px">${t.mhCrisisAction}</div>
-      <a href="tel:1553" class="go-now-btn" style="background:var(--danger)">📞 1553 — NCMH Crisis Hotline (Free 24/7)</a>
+  const list=EMERGENCY[lang];
+  const big=list.find(e=>e.big);
+  const rest=list.filter(e=>!e.big);
+  let html='';
+  if(big){
+    html+=`<a href="tel:${big.num}" class="emerg-big-btn">
+      <span style="font-size:2rem">☎️</span>
+      <div><div class="emerg-big-num">${big.display}</div><div class="emerg-big-label">${t.emergMainLabel}</div></div>
+    </a>`;
+  }
+  html+=`<div class="card-section-label">${t.emergOtherTitle}</div>`;
+  rest.forEach(e=>{
+    html+=`<div class="facility-card">
+      <div class="facility-name">${e.label}</div>
+      <a href="tel:${e.num}" class="facility-phone">📞 ${e.display}</a>
     </div>`;
-  const sectionsHtml=d.sections.map(s=>
-    `<div class="symptom-card" id="${s.id}">
-      <div class="symptom-card-header" onclick="toggleCard('${s.id}')">
-        <div class="symptom-card-title">${s.icon} ${s.title}</div>
-        <span class="chevron">⌄</span>
-      </div>
-      <div class="symptom-card-body">${s.body}</div>
-    </div>`
-  ).join('');
-  const resourcesHtml=`<div style="font-size:0.9rem;font-weight:700;color:var(--text);margin:14px 0 8px">📞 ${t.mhResourcesTitle}</div>`+
-  d.resources.map(r=>
-    `<div class="facility-card" ${r.urgent?'style="border-color:var(--danger)"':''}>
-      <div class="facility-name">${r.name}</div>
-      <div style="font-size:0.8rem;color:var(--muted);margin-bottom:6px">${r.note}</div>
-      <a href="tel:${r.num}" class="facility-phone" ${r.urgent?'style="background:#fef2f2;color:var(--danger);border-color:#fca5a5"':''}>📞 ${r.label}</a>
-      ${r.verify?`<span class="verify-label">${t.mhVerify}</span>`:''}
-    </div>`
-  ).join('')+
-  `<div class="disclaimer" style="margin-top:10px">${t.mhResourceNote}</div>`;
-  document.getElementById('mental-content').innerHTML=
-    `<div class="disclaimer" style="margin-bottom:12px">${t.mhIntro}</div>`+
-    crisisHtml+sectionsHtml+resourcesHtml;
+  });
+  html+=`<div class="info-card mt-10"><div class="info-card-title">📱 iRESPOND Muntinlupa</div><p>${t.emergAppNote}</p></div>`;
+  document.getElementById('emergency-content').innerHTML=html;
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
@@ -1146,6 +1363,7 @@ applyStaticStrings();
 renderAll();
 navigate('home');
 if(lang==='fil'){setLang('fil');}
+syncRemoteContent();
 </script>
 </body>
 </html>
