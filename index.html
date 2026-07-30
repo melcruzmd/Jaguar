@@ -145,7 +145,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .day-cell.taken{background:var(--blue-light);border-color:var(--primary);color:var(--primary)}
 .day-dot{font-size:0.85rem}
 .tracker-add-row{display:flex;gap:8px;margin-top:12px}
-.tracker-add-row select{flex:1;border:1.5px solid var(--border);border-radius:8px;padding:10px;font-size:0.85rem;background:#f9fafb;min-width:0}
+.tracker-add-row select,.tracker-add-row input[type=text]{flex:1;border:1.5px solid var(--border);border-radius:8px;padding:10px;font-size:0.85rem;background:#f9fafb;min-width:0}
+.tracker-other-label{font-size:0.72rem;color:var(--muted);margin-top:12px;margin-bottom:0}
 .tracker-add-btn{background:var(--primary);color:white;border:none;border-radius:8px;padding:10px 14px;font-size:0.82rem;font-weight:700;cursor:pointer;white-space:nowrap}
 .tracker-empty-note{font-size:0.82rem;color:var(--muted);padding:6px 0}
 .tracker-print-btn{width:100%;background:var(--blue-light);color:var(--primary-dark);border:1.5px solid #bfdbfe;border-radius:10px;padding:11px;font-size:0.86rem;font-weight:700;cursor:pointer;margin-top:12px;-webkit-tap-highlight-color:transparent}
@@ -487,6 +488,7 @@ const T = {
     emergAppNote:'Muntinlupa City also offers the iRESPOND Muntinlupa mobile app for reporting emergencies (disaster, police, fire, ambulance). Available on Google Play and the App Store.',
     medTrackerTitle:'My Medicine Tracker', medTrackerSub:'Track your own medicine intake here. This stays only on this phone — nothing is sent anywhere, and no one else can see it.',
     medTrackerEmpty:'You haven\'t added any medicines to track yet.', medAdd:'Add', medAllAdded:'All listed medicines have been added to your tracker.',
+    medOtherLabel:'Taking something not on this list? Add it here:', medOtherPlaceholder:'Type the medicine name',
     medPrintBtn:'Print My Checklist', medReminderBanner:'You haven\'t marked {meds} as taken today yet.',
     thisWeek:'This week', streakLabel:'Streak', dosesUnit:'doses', dayUnit:'day', daysUnit:'days',
     timesPerDayLabel:'Times a day', doseAM:'AM', doseNoon:'Noon', dosePM:'PM',
@@ -594,6 +596,7 @@ const T = {
     emergAppNote:'May iRESPOND Muntinlupa mobile app din ang Lungsod ng Muntinlupa para sa pag-uulat ng emergency (disaster, pulis, sunog, ambulansya). Available sa Google Play at App Store.',
     medTrackerTitle:'Aking Medicine Tracker', medTrackerSub:'Subaybayan dito ang iyong pag-inom ng gamot. Dito lang ito sa telepono mo mananatili, walang ipinapadala kahit saan, at walang ibang makakakita nito.',
     medTrackerEmpty:'Wala ka pang naidadagdag na gamot para subaybayan.', medAdd:'Idagdag', medAllAdded:'Naidagdag na ang lahat ng nakalistang gamot sa iyong tracker.',
+    medOtherLabel:'May iniinom ka bang hindi nasa listahan? Idagdag dito:', medOtherPlaceholder:'I-type ang pangalan ng gamot',
     medPrintBtn:'I-print ang Aking Checklist', medReminderBanner:'Hindi mo pa nama-mark na inumin ngayon ang {meds}.',
     thisWeek:'Ngayong Linggo', streakLabel:'Streak', dosesUnit:'dosis', dayUnit:'araw', daysUnit:'araw',
     timesPerDayLabel:'Ilang beses sa isang araw', doseAM:'Umaga', doseNoon:'Tanghali', dosePM:'Gabi',
@@ -927,6 +930,16 @@ function addTrackedMedicine(name){
   if(!data.medicines.some(m=>m.name===name)) data.medicines.push({name, timesPerDay:defaultTimesPerDay(name)});
   saveTrackerData(data);
   renderMedications();
+}
+// For a medicine not in the health center's MEDS list — the name is
+// whatever the patient types, so it goes straight into the tracker the
+// same way a listed medicine would (same dose picker, same log, same
+// backup), just without a matching reference entry on the Medicines page.
+function addOtherMedicine(){
+  const input=document.getElementById('tracker-add-other-input');
+  const name=input.value.trim();
+  if(!name) return;
+  addTrackedMedicine(name);
 }
 function removeTrackedMedicine(name){
   const data=getTrackerData();
@@ -1719,9 +1732,20 @@ function renderMedTracker(){
     </div>`;
   }).join('');
 
-  const addControl=availableToAdd.length
+  // The dropdown only offers medicines from the health center's own MEDS
+  // list. The "Other" text input beneath it always stays available (even
+  // after every listed medicine has been added) so a patient can track any
+  // medicine they take that isn't on that list — its name is whatever the
+  // user types, freely editable, not limited to a fixed set.
+  const dropdownControl=availableToAdd.length
     ? `<div class="tracker-add-row"><select id="tracker-add-select">${availableToAdd.map(n=>`<option value="${n}">${n}</option>`).join('')}</select><button class="tracker-add-btn" onclick="addTrackedMedicine(document.getElementById('tracker-add-select').value)">${t.medAdd}</button></div>`
     : `<p class="tracker-empty-note">${t.medAllAdded}</p>`;
+  const otherControl=`<div class="tracker-other-label">${t.medOtherLabel}</div>
+    <div class="tracker-add-row no-print">
+      <input type="text" id="tracker-add-other-input" placeholder="${t.medOtherPlaceholder}" maxlength="60" onkeydown="if(event.key==='Enter')addOtherMedicine()">
+      <button class="tracker-add-btn" onclick="addOtherMedicine()">${t.medAdd}</button>
+    </div>`;
+  const addControl=dropdownControl+otherControl;
 
   return `<div class="tracker-section">
     <div class="tracker-header"><div class="tracker-title">📋 ${t.medTrackerTitle}</div><div class="tracker-sub">${t.medTrackerSub}</div></div>
