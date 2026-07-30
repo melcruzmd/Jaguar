@@ -233,6 +233,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="home-card danger-card" onclick="navigate('emergency')">
         <div class="card-icon">☎️</div><div class="card-label" id="lbl-emerg">Emergency Numbers</div>
       </div>
+      <div class="home-card wide" onclick="navigate('logs')">
+        <div class="card-icon">📋</div><div class="card-label" id="lbl-logs">My Logs</div>
+      </div>
     </div>
   </div>
 </div>
@@ -314,6 +317,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
+<!-- LOGS -->
+<div class="page" id="page-logs">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <span class="section-icon">📋</span>
+      <h2 class="section-title" id="title-logs">My Logs</h2>
+    </div>
+    <div id="logs-content"></div>
+  </div>
+</div>
+
 <!-- NEARBY -->
 <div class="page" id="page-nearby">
   <div class="content-wrap">
@@ -354,6 +369,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
       <div class="more-card" onclick="navigate('medications')">
         <div class="card-icon">💊</div><div class="card-label" id="lbl-meds2">Medicines</div>
+      </div>
+      <div class="more-card" onclick="navigate('logs')">
+        <div class="card-icon">📋</div><div class="card-label" id="lbl-logs2">My Logs</div>
       </div>
       <div class="more-card" onclick="navigate('nearby')">
         <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby2">Nearby Care</div>
@@ -401,10 +419,11 @@ const T = {
     disclaimer:'This app gives health guidance only. It does not diagnose or replace a doctor, nurse, or health center.',
     navHome:'Home', navRF:'Red Flags', navHTN:'Hypertension', navDM:'Diabetes', navMore:'More',
     lblRF:'Red Flags', lblHTN:'Hypertension', lblDM:'Diabetes', lblDys:'Cholesterol',
-    lblNutrition:'Food &amp; BMI', lblMeds:'Medicines', lblNearby:'Nearby Care', lblEmerg:'Emergency Numbers',
+    lblNutrition:'Food &amp; BMI', lblMeds:'Medicines', lblLogs:'My Logs', lblNearby:'Nearby Care', lblEmerg:'Emergency Numbers',
     titleRF:'Red Flags', titleHTN:'Hypertension', titleDM:'Diabetes', titleDys:'Cholesterol (Dyslipidemia)',
-    titleNutrition:'Food &amp; BMI', titleMeds:'Medicines at the Health Center', titleNearby:'Nearby Care',
+    titleNutrition:'Food &amp; BMI', titleMeds:'Medicines at the Health Center', titleLogs:'My Logs', titleNearby:'Nearby Care',
     titleEmerg:'Emergency Numbers', titleMore:'More',
+    logsDataNote:'These entries are saved only on this phone — never sent anywhere. They stay available for as long as you keep using this app on this device. They will be deleted if you clear your browser\'s site data, uninstall or reset the app, or switch to a new phone. If you want to keep a copy, use the Print button to save or print your log before that happens.',
     goNow:'⚠ Seek care now', callNow:'⚠ Emergency? Call 137-175',
     noResults:'No results found. Try a different keyword.',
     verify:'⚠ VERIFY BEFORE USE',
@@ -488,10 +507,11 @@ const T = {
     disclaimer:'Gabay pangkalusugan lamang ito. Hindi ito kapalit ng doktor, nurse, o health center.',
     navHome:'Home', navRF:'Babala', navHTN:'Altapresyon', navDM:'Diyabetis', navMore:'Iba Pa',
     lblRF:'Mga Babala', lblHTN:'Altapresyon', lblDM:'Diyabetis', lblDys:'Kolesterol',
-    lblNutrition:'Pagkain at BMI', lblMeds:'Mga Gamot', lblNearby:'Malapit na Tulong', lblEmerg:'Emergency Numbers',
+    lblNutrition:'Pagkain at BMI', lblMeds:'Mga Gamot', lblLogs:'Aking mga Log', lblNearby:'Malapit na Tulong', lblEmerg:'Emergency Numbers',
     titleRF:'Mga Babala', titleHTN:'Altapresyon (Hypertension)', titleDM:'Diyabetis', titleDys:'Kolesterol (Dyslipidemia)',
-    titleNutrition:'Pagkain at BMI', titleMeds:'Mga Gamot sa Health Center', titleNearby:'Malapit na Tulong',
+    titleNutrition:'Pagkain at BMI', titleMeds:'Mga Gamot sa Health Center', titleLogs:'Aking mga Log', titleNearby:'Malapit na Tulong',
     titleEmerg:'Mga Numero sa Emergency', titleMore:'Iba Pa',
+    logsDataNote:'Ang mga entry na ito ay naka-save lang sa telepono mong ito — hindi ito ipinapadala kahit saan. Mananatili itong available hangga\'t ginagamit mo ang app sa device na ito. Mabubura ito kapag na-clear mo ang site data ng iyong browser, in-uninstall o na-reset ang app, o lumipat ka ng bagong telepono. Kung gusto mong magkaroon ng kopya, gamitin ang Print button para i-save o i-print ang iyong log bago ito mangyari.',
     goNow:'⚠ Magpatingin agad', callNow:'⚠ Emergency? Tumawag sa 137-175',
     noResults:'Walang nahanap. Subukan ang ibang salita.',
     verify:'⚠ I-VERIFY BAGO GAMITIN',
@@ -804,13 +824,13 @@ function addBPEntry(){
   const log=getLog(BP_LOG_KEY);
   log.unshift({date:new Date().toISOString().slice(0,10), sys, dia});
   saveLog(BP_LOG_KEY, log.slice(0,30));
-  renderHTN();
+  renderLogs();
 }
 function deleteBPEntry(idx){
   const log=getLog(BP_LOG_KEY);
   log.splice(idx,1);
   saveLog(BP_LOG_KEY, log);
-  renderHTN();
+  renderLogs();
 }
 
 function addSugarEntry(){
@@ -820,13 +840,13 @@ function addSugarEntry(){
   const log=getLog(SUGAR_LOG_KEY);
   log.unshift({date:new Date().toISOString().slice(0,10), val, type});
   saveLog(SUGAR_LOG_KEY, log.slice(0,30));
-  renderDM();
+  renderLogs();
 }
 function deleteSugarEntry(idx){
   const log=getLog(SUGAR_LOG_KEY);
   log.splice(idx,1);
   saveLog(SUGAR_LOG_KEY, log);
-  renderDM();
+  renderLogs();
 }
 
 // ── Anonymous usage logging ──────────────────────────────────────────────────
@@ -992,11 +1012,13 @@ function applyStaticStrings(){
   document.getElementById('lbl-dys').innerHTML=t.lblDys;
   document.getElementById('lbl-nutrition').innerHTML=t.lblNutrition;
   document.getElementById('lbl-meds').innerHTML=t.lblMeds;
+  document.getElementById('lbl-logs').innerHTML=t.lblLogs;
   document.getElementById('lbl-nearby').innerHTML=t.lblNearby;
   document.getElementById('lbl-emerg').innerHTML=t.lblEmerg;
   document.getElementById('lbl-dys2').innerHTML=t.lblDys;
   document.getElementById('lbl-nutrition2').innerHTML=t.lblNutrition;
   document.getElementById('lbl-meds2').innerHTML=t.lblMeds;
+  document.getElementById('lbl-logs2').innerHTML=t.lblLogs;
   document.getElementById('lbl-nearby2').innerHTML=t.lblNearby;
   document.getElementById('lbl-emerg2').innerHTML=t.lblEmerg;
   document.getElementById('title-rf').innerHTML=t.titleRF;
@@ -1005,6 +1027,7 @@ function applyStaticStrings(){
   document.getElementById('title-dys').innerHTML=t.titleDys;
   document.getElementById('title-nutrition').innerHTML=t.titleNutrition;
   document.getElementById('title-meds').innerHTML=t.titleMeds;
+  document.getElementById('title-logs').innerHTML=t.titleLogs;
   document.getElementById('title-nearby').innerHTML=t.titleNearby;
   document.getElementById('title-emerg').innerHTML=t.titleEmerg;
   document.getElementById('title-more').innerHTML=t.titleMore;
@@ -1066,6 +1089,7 @@ function renderAll(){
   renderDys();
   renderNutrition();
   renderMedications();
+  renderLogs();
   renderNearby();
   renderEmergency();
 }
@@ -1147,9 +1171,21 @@ function renderSugarLogWidget(){
   </div>`;
 }
 
-function renderHTN(){ renderInfoSections('hypertension', 'htnIntro', HTN_SECTIONS, renderBPLogWidget()); }
-function renderDM(){ renderInfoSections('diabetes', 'dmIntro', DM_SECTIONS, renderSugarLogWidget()); }
+function renderHTN(){ renderInfoSections('hypertension', 'htnIntro', HTN_SECTIONS); }
+function renderDM(){ renderInfoSections('diabetes', 'dmIntro', DM_SECTIONS); }
 function renderDys(){ renderInfoSections('dyslipidemia', 'dysIntro', DYS_SECTIONS); }
+
+// BP and blood sugar logs live on their own "My Logs" page (not embedded in
+// the Hypertension/Diabetes pages) so the input fields only exist once in
+// the DOM — the widgets use fixed element IDs (bp-sys-input, etc.), so
+// rendering them twice would create duplicate IDs and break input handling.
+function renderLogs(){
+  const t=T[lang];
+  let html = `<div class="disclaimer mb-14 no-print">${t.logsDataNote}</div>`;
+  html += renderBPLogWidget();
+  html += renderSugarLogWidget();
+  document.getElementById('logs-content').innerHTML = html;
+}
 
 function renderNutrition(){
   const t=T[lang];
