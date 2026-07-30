@@ -18,7 +18,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;overscroll-behavior-y:none}
 html,body{height:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f7fb;color:#111827;line-height:1.5;min-height:100vh;padding-bottom:calc(72px + env(safe-area-inset-bottom));overscroll-behavior:none;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f7fb;color:#111827;line-height:1.5;min-height:100vh;padding-bottom:calc(104px + env(safe-area-inset-bottom));overscroll-behavior:none;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
 :root{--primary:#1d4ed8;--primary-dark:#1e3a8a;--accent:#dc2626;--danger:#dc2626;--danger-bg:#fef2f2;--warning:#d97706;--card:#ffffff;--bg:#f5f7fb;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--blue-light:#eff6ff}
 .emergency-banner{position:sticky;top:0;z-index:100;background:var(--danger);color:white;text-align:center;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;font-size:0.92rem;font-weight:600;line-height:1.4}
 .emergency-banner a{color:white;text-decoration:underline}
@@ -36,7 +36,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .page{display:none}
 .page.active{display:block;animation:bidaFadeIn 0.18s ease}
 @keyframes bidaFadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.content-wrap{padding:14px 14px 8px}
+.content-wrap{padding:14px 14px 24px}
 .disclaimer{background:var(--blue-light);border:1px solid #bfdbfe;border-radius:10px;padding:11px 14px;font-size:0.83rem;color:#1e3a8a;margin-bottom:14px;line-height:1.5}
 .home-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .home-card{background:var(--card);border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;border:1.5px solid var(--border);transition:transform 0.12s,box-shadow 0.12s;box-shadow:0 1px 4px rgba(17,24,39,0.06);min-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;-webkit-tap-highlight-color:transparent}
@@ -227,11 +227,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="home-card med-home-card" onclick="navigate('medications')">
         <div class="card-icon">💊</div><div class="card-label" id="lbl-meds">Medicines</div>
       </div>
-      <div class="home-card" onclick="navigate('nearby')">
-        <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby">Nearby Care</div>
-      </div>
-      <div class="home-card danger-card" onclick="navigate('emergency')">
-        <div class="card-icon">☎️</div><div class="card-label" id="lbl-emerg">Emergency Numbers</div>
+      <div class="home-card danger-card" onclick="navigate('nearby')">
+        <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby">Nearby Care &amp; Emergency</div>
       </div>
       <div class="home-card wide" onclick="navigate('logs')">
         <div class="card-icon">📋</div><div class="card-label" id="lbl-logs">My Logs</div>
@@ -329,27 +326,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
-<!-- NEARBY -->
+<!-- NEARBY & EMERGENCY -->
 <div class="page" id="page-nearby">
   <div class="content-wrap">
     <div class="section-header">
       <button class="back-btn" onclick="goHome()">&#8249;</button>
       <span class="section-icon">🏥</span>
-      <h2 class="section-title" id="title-nearby">Nearby Care</h2>
+      <h2 class="section-title" id="title-nearby">Nearby Care &amp; Emergency Numbers</h2>
     </div>
     <div id="nearby-content"></div>
-  </div>
-</div>
-
-<!-- EMERGENCY -->
-<div class="page" id="page-emergency">
-  <div class="content-wrap">
-    <div class="section-header">
-      <button class="back-btn" onclick="goHome()">&#8249;</button>
-      <span class="section-icon">☎️</span>
-      <h2 class="section-title" id="title-emerg">Emergency Numbers</h2>
-    </div>
-    <div id="emergency-content"></div>
   </div>
 </div>
 
@@ -374,10 +359,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div class="card-icon">📋</div><div class="card-label" id="lbl-logs2">My Logs</div>
       </div>
       <div class="more-card" onclick="navigate('nearby')">
-        <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby2">Nearby Care</div>
-      </div>
-      <div class="more-card" onclick="navigate('emergency')">
-        <div class="card-icon">☎️</div><div class="card-label" id="lbl-emerg2">Emergency Numbers</div>
+        <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby2">Nearby Care &amp; Emergency</div>
       </div>
     </div>
     <div class="disclaimer mt-10" id="more-disclaimer">This app gives health guidance only. It does not diagnose or replace a doctor, nurse, or health center.</div>
@@ -389,8 +371,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <button class="nav-btn active" id="nav-home" onclick="navigate('home')">
     <span class="nav-icon">🏠</span><span id="nav-lbl-home">Home</span>
   </button>
-  <button class="nav-btn" id="nav-red-flags" onclick="navigate('red-flags')">
-    <span class="nav-icon">🚨</span><span id="nav-lbl-rf">Red Flags</span>
+  <button class="nav-btn" id="nav-logs" onclick="navigate('logs')">
+    <span class="nav-icon">📋</span><span id="nav-lbl-logs">My Logs</span>
   </button>
   <button class="nav-btn" id="nav-hypertension" onclick="navigate('hypertension')">
     <span class="nav-icon">🩺</span><span id="nav-lbl-htn">Hypertension</span>
@@ -417,12 +399,12 @@ const T = {
     banner:'Emergency? Call <a href="tel:137175">137-175</a> or go to the nearest health center.',
     search:'Search symptom or topic…',
     disclaimer:'This app gives health guidance only. It does not diagnose or replace a doctor, nurse, or health center.',
-    navHome:'Home', navRF:'Red Flags', navHTN:'Hypertension', navDM:'Diabetes', navMore:'More',
+    navHome:'Home', navLogs:'My Logs', navHTN:'Hypertension', navDM:'Diabetes', navMore:'More',
     lblRF:'Red Flags', lblHTN:'Hypertension', lblDM:'Diabetes', lblDys:'Cholesterol',
-    lblNutrition:'Food &amp; BMI', lblMeds:'Medicines', lblLogs:'My Logs', lblNearby:'Nearby Care', lblEmerg:'Emergency Numbers',
+    lblNutrition:'Food &amp; BMI', lblMeds:'Medicines', lblLogs:'My Logs', lblNearby:'Nearby Care &amp; Emergency',
     titleRF:'Red Flags', titleHTN:'Hypertension', titleDM:'Diabetes', titleDys:'Cholesterol (Dyslipidemia)',
-    titleNutrition:'Food &amp; BMI', titleMeds:'Medicines at the Health Center', titleLogs:'My Logs', titleNearby:'Nearby Care',
-    titleEmerg:'Emergency Numbers', titleMore:'More',
+    titleNutrition:'Food &amp; BMI', titleMeds:'Medicines at the Health Center', titleLogs:'My Logs', titleNearby:'Nearby Care &amp; Emergency Numbers',
+    titleMore:'More',
     logsDataNote:'These entries are saved only on this phone — never sent anywhere. They stay available for as long as you keep using this app on this device. They will be deleted if you clear your browser\'s site data, uninstall or reset the app, or switch to a new phone. If you want to keep a copy, use the Print button to save or print your log before that happens.',
     goNow:'⚠ Seek care now', callNow:'⚠ Emergency? Call 137-175',
     noResults:'No results found. Try a different keyword.',
@@ -448,7 +430,10 @@ const T = {
     whatToDo:'What to do', catEm:'Emergency', catHC:'Health Centers', catHosp:'Hospitals',
     nearbyVerify:'Contact numbers below were verified against official Muntinlupa City Government sources. Numbers can still change — please confirm before an urgent visit.',
     plateTitle:'Pinggang Pinoy — Balanced Plate Guide',
-    plateNote:'Based on DOH/NNC Pinggang Pinoy guidelines, adjusted for blood pressure, blood sugar, and cholesterol management.',
+    plateNote:'Based on DOH/FNRI Pinggang Pinoy guidelines. Choose who the plate is for below — the recommended portions are different for adults, pregnant or breastfeeding mothers, and children.',
+    plateSelectLabel:'Choose who this is for',
+    plateAdult:'Adults', platePregnant:'Pregnant Women', plateLactating:'Breastfeeding Mothers',
+    plateYoungChild:'Young Children (2–5 years old)', plateSchoolAge:'School-age Children (6–12 years old)',
     mealsTitle:'Budget-Friendly, Heart-Healthy Meals',
     tipsTitle:'Simple Food Reminders',
     bmiTitle:'BMI Calculator (Adults)',
@@ -505,12 +490,12 @@ const T = {
     banner:'Emergency? Tumawag sa <a href="tel:137175">137-175</a> o pumunta sa pinakamalapit na health center.',
     search:'Hanapin ang sintomas o paksa…',
     disclaimer:'Gabay pangkalusugan lamang ito. Hindi ito kapalit ng doktor, nurse, o health center.',
-    navHome:'Home', navRF:'Babala', navHTN:'Altapresyon', navDM:'Diyabetis', navMore:'Iba Pa',
+    navHome:'Home', navLogs:'Aking mga Log', navHTN:'Altapresyon', navDM:'Diyabetis', navMore:'Iba Pa',
     lblRF:'Mga Babala', lblHTN:'Altapresyon', lblDM:'Diyabetis', lblDys:'Kolesterol',
-    lblNutrition:'Pagkain at BMI', lblMeds:'Mga Gamot', lblLogs:'Aking mga Log', lblNearby:'Malapit na Tulong', lblEmerg:'Emergency Numbers',
+    lblNutrition:'Pagkain at BMI', lblMeds:'Mga Gamot', lblLogs:'Aking mga Log', lblNearby:'Malapit na Tulong at Emergency',
     titleRF:'Mga Babala', titleHTN:'Altapresyon (Hypertension)', titleDM:'Diyabetis', titleDys:'Kolesterol (Dyslipidemia)',
-    titleNutrition:'Pagkain at BMI', titleMeds:'Mga Gamot sa Health Center', titleLogs:'Aking mga Log', titleNearby:'Malapit na Tulong',
-    titleEmerg:'Mga Numero sa Emergency', titleMore:'Iba Pa',
+    titleNutrition:'Pagkain at BMI', titleMeds:'Mga Gamot sa Health Center', titleLogs:'Aking mga Log', titleNearby:'Malapit na Tulong at Mga Numero sa Emergency',
+    titleMore:'Iba Pa',
     logsDataNote:'Ang mga entry na ito ay naka-save lang sa telepono mong ito — hindi ito ipinapadala kahit saan. Mananatili itong available hangga\'t ginagamit mo ang app sa device na ito. Mabubura ito kapag na-clear mo ang site data ng iyong browser, in-uninstall o na-reset ang app, o lumipat ka ng bagong telepono. Kung gusto mong magkaroon ng kopya, gamitin ang Print button para i-save o i-print ang iyong log bago ito mangyari.',
     goNow:'⚠ Magpatingin agad', callNow:'⚠ Emergency? Tumawag sa 137-175',
     noResults:'Walang nahanap. Subukan ang ibang salita.',
@@ -536,7 +521,10 @@ const T = {
     whatToDo:'Dapat gawin', catEm:'Emergency', catHC:'Mga Health Center', catHosp:'Mga Ospital',
     nearbyVerify:'Ang mga numerong nasa ibaba ay na-verify laban sa opisyal na mapagkukunan ng Lungsod ng Muntinlupa. Maaari pa ring magbago ang mga ito, kumpirmahin bago pumunta para sa agarang pangangailangan.',
     plateTitle:'Pinggang Pinoy — Gabay sa Balanseng Pagkain',
-    plateNote:'Batay sa mga alituntunin ng DOH/NNC Pinggang Pinoy, inayos para sa pamamahala ng BP, blood sugar, at kolesterol.',
+    plateNote:'Batay sa alituntunin ng DOH/FNRI Pinggang Pinoy. Piliin sa ibaba kung para kanino ang plato — iba-iba ang inirekomendang bahagi para sa matatanda, buntis o nagpapasusong ina, at mga bata.',
+    plateSelectLabel:'Piliin kung para kanino',
+    plateAdult:'Matatanda', platePregnant:'Buntis', plateLactating:'Nagpapasusong Ina',
+    plateYoungChild:'Batang Paslit (2–5 taong gulang)', plateSchoolAge:'Batang Nag-aaral (6–12 taong gulang)',
     mealsTitle:'Abot-Kayang Pagkain na Mabuti sa Puso',
     tipsTitle:'Simpleng Paalala sa Pagkain',
     bmiTitle:'BMI Calculator (Para sa Matatanda)',
@@ -657,19 +645,90 @@ const DYS_SECTIONS = [
   {key:'dysActivity', icon:'🚶'}
 ];
 
+// Pinggang Pinoy — the five DOH/FNRI life-stage plate guides. Selected via a
+// dropdown on the Food & BMI page (see plateGroup / setPlateGroup). Adults is
+// the default since it is the primary audience for this app's NCD focus; the
+// other four are included for household members (pregnant/lactating mothers,
+// young/school-age children) who may also use the family's phone.
 const PLATE = {
-  en:[
-    {icon:'🥦',label:'Half the plate',desc:'Vegetables and fruits'},
-    {icon:'🍚',label:'One-third of the plate',desc:'Rice, corn, root crops, bread, or other carbohydrates (choose whole grain where possible)'},
-    {icon:'🐟',label:'Remaining portion',desc:'Fish, egg, beans, lean meat, or other protein'},
-    {icon:'💧',label:'Drink',desc:'Water (not sugary drinks)'}
-  ],
-  fil:[
-    {icon:'🥦',label:'Kalahati ng plato',desc:'Mga gulay at prutas'},
-    {icon:'🍚',label:'Isang-katlo ng plato',desc:'Kanin, mais, kamote, tinapay, o iba pang karbohidrato (piliin ang whole grain kung maaari)'},
-    {icon:'🐟',label:'Natitirang bahagi',desc:'Isda, itlog, monggo/sitaw/toyo, karne, o iba pang protina'},
-    {icon:'💧',label:'Inumin',desc:'Tubig (hindi matamis na inumin)'}
-  ]
+  adult:{
+    en:[
+      {icon:'🥦',label:'Half the plate',desc:'Vegetables and fruits'},
+      {icon:'🍚',label:'One-fourth of the plate',desc:'Rice, corn, root crops, bread, or other carbohydrates (choose whole grain where possible)'},
+      {icon:'🐟',label:'One-fourth of the plate',desc:'Fish, egg, beans, lean meat, or other protein'},
+      {icon:'💧',label:'Drink',desc:'Water (not sugary drinks); a glass of milk daily if available'}
+    ],
+    fil:[
+      {icon:'🥦',label:'Kalahati ng plato',desc:'Mga gulay at prutas'},
+      {icon:'🍚',label:'Isang-kapat ng plato',desc:'Kanin, mais, kamote, tinapay, o iba pang karbohidrato (piliin ang whole grain kung maaari)'},
+      {icon:'🐟',label:'Isang-kapat ng plato',desc:'Isda, itlog, monggo/sitaw/toyo, karne, o iba pang protina'},
+      {icon:'💧',label:'Inumin',desc:'Tubig (hindi matamis na inumin); isang basong gatas araw-araw kung available'}
+    ]
+  },
+  pregnant:{
+    en:[
+      {icon:'🥦',label:'Half the plate',desc:'Vegetables and fruits — choose iron-rich leafy greens (malunggay, kangkong) when possible'},
+      {icon:'🍚',label:'One-fourth of the plate',desc:'Rice, corn, root crops, or bread — an extra serving may be needed compared to before pregnancy'},
+      {icon:'🐟',label:'One-fourth of the plate',desc:'Fish, egg, beans, or lean meat — an extra serving supports your baby’s growth'},
+      {icon:'🥛',label:'Extra',desc:'A glass of milk daily if available, plus iron and folic acid supplements as advised at your prenatal check-up'},
+      {icon:'💧',label:'Drink',desc:'Plenty of water; avoid alcohol and limit caffeine'}
+    ],
+    fil:[
+      {icon:'🥦',label:'Kalahati ng plato',desc:'Mga gulay at prutas — piliin ang madahong gulay na mayaman sa iron (malunggay, kangkong) kung maaari'},
+      {icon:'🍚',label:'Isang-kapat ng plato',desc:'Kanin, mais, kamote, o tinapay — maaaring kailangan ng dagdag na serving kumpara noong hindi pa buntis'},
+      {icon:'🐟',label:'Isang-kapat ng plato',desc:'Isda, itlog, monggo, o lean na karne — tumutulong ang dagdag na serving sa paglaki ng sanggol'},
+      {icon:'🥛',label:'Dagdag',desc:'Isang basong gatas araw-araw kung available, kasama ang iron at folic acid supplement ayon sa payo sa prenatal check-up'},
+      {icon:'💧',label:'Inumin',desc:'Maraming tubig; iwasan ang alak at bawasan ang caffeine'}
+    ]
+  },
+  lactating:{
+    en:[
+      {icon:'🥦',label:'Half the plate',desc:'Vegetables and fruits — malunggay is commonly recommended to help support milk supply'},
+      {icon:'🍚',label:'One-fourth of the plate',desc:'Rice, corn, root crops, or bread — extra servings support the energy needed for breastfeeding'},
+      {icon:'🐟',label:'One-fourth of the plate',desc:'Fish, egg, beans, or lean meat — extra servings support milk production'},
+      {icon:'🥛',label:'Extra',desc:'A glass of milk daily if available, and continue iron/vitamin supplements as advised'},
+      {icon:'💧',label:'Drink',desc:'Drink more water than usual — breastfeeding increases fluid needs'}
+    ],
+    fil:[
+      {icon:'🥦',label:'Kalahati ng plato',desc:'Mga gulay at prutas — karaniwang inirerekomenda ang malunggay para makatulong sa gatas'},
+      {icon:'🍚',label:'Isang-kapat ng plato',desc:'Kanin, mais, kamote, o tinapay — tumutulong ang dagdag na serving sa enerhiyang kailangan sa pagpapasuso'},
+      {icon:'🐟',label:'Isang-kapat ng plato',desc:'Isda, itlog, monggo, o lean na karne — tumutulong ang dagdag na serving sa produksyon ng gatas'},
+      {icon:'🥛',label:'Dagdag',desc:'Isang basong gatas araw-araw kung available, at ipagpatuloy ang iron/vitamin supplement ayon sa payo'},
+      {icon:'💧',label:'Inumin',desc:'Uminom ng mas maraming tubig kaysa dati — nagdaragdag ang pagpapasuso ng pangangailangan sa likido'}
+    ]
+  },
+  youngchild:{
+    en:[
+      {icon:'🥦',label:'Half the small plate',desc:'Vegetables and fruits, cut into small, easy-to-chew pieces'},
+      {icon:'🍚',label:'One-fourth of the plate',desc:'Rice, root crops, or bread, in child-sized portions'},
+      {icon:'🐟',label:'One-fourth of the plate',desc:'Fish, egg, beans, or lean meat, in child-sized portions'},
+      {icon:'🥛',label:'Milk',desc:'A glass of milk daily supports growth'},
+      {icon:'🍽️',label:'Meals',desc:'Offer 3 small meals plus 2 healthy snacks a day; avoid sweetened drinks and junk food'}
+    ],
+    fil:[
+      {icon:'🥦',label:'Kalahati ng maliit na plato',desc:'Mga gulay at prutas, gupitin nang maliliit at madaling nguyain'},
+      {icon:'🍚',label:'Isang-kapat ng plato',desc:'Kanin, kamote, o tinapay, sa sukat na angkop sa bata'},
+      {icon:'🐟',label:'Isang-kapat ng plato',desc:'Isda, itlog, monggo, o lean na karne, sa sukat na angkop sa bata'},
+      {icon:'🥛',label:'Gatas',desc:'Tumutulong sa paglaki ang isang basong gatas araw-araw'},
+      {icon:'🍽️',label:'Pagkain',desc:'Magbigay ng 3 maliit na kainan at 2 malusog na meryenda sa isang araw; iwasan ang matamis na inumin at junk food'}
+    ]
+  },
+  schoolage:{
+    en:[
+      {icon:'🥦',label:'Half the plate',desc:'Vegetables and fruits'},
+      {icon:'🍚',label:'One-fourth of the plate',desc:'Rice, corn, root crops, or bread'},
+      {icon:'🐟',label:'One-fourth of the plate',desc:'Fish, egg, beans, or lean meat'},
+      {icon:'🥛',label:'Milk',desc:'A glass of milk daily supports growth and bone health'},
+      {icon:'🏃',label:'Habits',desc:'Eat breakfast before school, stay physically active, and limit sweetened drinks and junk food'}
+    ],
+    fil:[
+      {icon:'🥦',label:'Kalahati ng plato',desc:'Mga gulay at prutas'},
+      {icon:'🍚',label:'Isang-kapat ng plato',desc:'Kanin, mais, kamote, o tinapay'},
+      {icon:'🐟',label:'Isang-kapat ng plato',desc:'Isda, itlog, monggo, o lean na karne'},
+      {icon:'🥛',label:'Gatas',desc:'Tumutulong sa paglaki at lakas ng buto ang isang basong gatas araw-araw'},
+      {icon:'🏃',label:'Ugali',desc:'Kumain ng almusal bago pumasok, manatiling aktibo, at bawasan ang matamis na inumin at junk food'}
+    ]
+  }
 };
 const MEALS = {
   en:['Rice + monggo + malunggay (low salt)','Rice + boiled or grilled egg + sautéed vegetables (less oil)','Rice + grilled or steamed fish + vegetables','Rice + tofu or tokwa + vegetables','Banana, papaya, or seasonal fruit as snack instead of sweets'],
@@ -767,6 +826,7 @@ const EMERGENCY = {
 let lang = localStorage.getItem('bida-lang') || 'en';
 let bmiHUnit = 'cm';   // 'cm' | 'in' | 'ft'
 let bmiWUnit = 'kg';   // 'kg' | 'lbs'
+let plateGroup = 'adult';   // 'adult' | 'pregnant' | 'lactating' | 'youngchild' | 'schoolage'
 
 // ── Personal Tracking (Medicine Tracker, BP Log, Sugar Log) ─────────────────
 // All data below lives ONLY in this device's browser storage (localStorage).
@@ -1014,13 +1074,11 @@ function applyStaticStrings(){
   document.getElementById('lbl-meds').innerHTML=t.lblMeds;
   document.getElementById('lbl-logs').innerHTML=t.lblLogs;
   document.getElementById('lbl-nearby').innerHTML=t.lblNearby;
-  document.getElementById('lbl-emerg').innerHTML=t.lblEmerg;
   document.getElementById('lbl-dys2').innerHTML=t.lblDys;
   document.getElementById('lbl-nutrition2').innerHTML=t.lblNutrition;
   document.getElementById('lbl-meds2').innerHTML=t.lblMeds;
   document.getElementById('lbl-logs2').innerHTML=t.lblLogs;
   document.getElementById('lbl-nearby2').innerHTML=t.lblNearby;
-  document.getElementById('lbl-emerg2').innerHTML=t.lblEmerg;
   document.getElementById('title-rf').innerHTML=t.titleRF;
   document.getElementById('title-htn').innerHTML=t.titleHTN;
   document.getElementById('title-dm').innerHTML=t.titleDM;
@@ -1029,10 +1087,9 @@ function applyStaticStrings(){
   document.getElementById('title-meds').innerHTML=t.titleMeds;
   document.getElementById('title-logs').innerHTML=t.titleLogs;
   document.getElementById('title-nearby').innerHTML=t.titleNearby;
-  document.getElementById('title-emerg').innerHTML=t.titleEmerg;
   document.getElementById('title-more').innerHTML=t.titleMore;
   document.getElementById('nav-lbl-home').textContent=t.navHome;
-  document.getElementById('nav-lbl-rf').textContent=t.navRF;
+  document.getElementById('nav-lbl-logs').textContent=t.navLogs;
   document.getElementById('nav-lbl-htn').textContent=t.navHTN;
   document.getElementById('nav-lbl-dm').textContent=t.navDM;
   document.getElementById('nav-lbl-more').textContent=t.navMore;
@@ -1049,16 +1106,15 @@ const SEARCH_IDX = [
   {sec:'dyslipidemia',kw:['cholesterol','dyslipidemia','lipid','kolesterol','taba']},
   {sec:'nutrition',kw:['food','nutrition','pinggang pinoy','BMI','vegetable','rice','protein','pagkain','nutrisyon','gulay','kanin']},
   {sec:'medications',kw:['medicine','medication','losartan','metformin','amlodipine','atorvastatin','gamot','dosage','dose']},
-  {sec:'nearby',kw:['health center','clinic','bayanan','alabang','ospital','klinika']},
-  {sec:'emergency',kw:['emergency','137','hotline','ambulance','irespond','ambulansya']}
+  {sec:'nearby',kw:['health center','clinic','bayanan','alabang','ospital','klinika','emergency','137','hotline','ambulance','irespond','ambulansya']}
 ];
 const SEC_NAMES = {
-  en:{'red-flags':'Red Flags',hypertension:'Hypertension',diabetes:'Diabetes',dyslipidemia:'Cholesterol',nutrition:'Food & BMI',medications:'Medicines',nearby:'Nearby Care',emergency:'Emergency Numbers'},
-  fil:{'red-flags':'Mga Babala',hypertension:'Altapresyon',diabetes:'Diyabetis',dyslipidemia:'Kolesterol',nutrition:'Pagkain at BMI',medications:'Mga Gamot',nearby:'Malapit na Tulong',emergency:'Emergency Numbers'}
+  en:{'red-flags':'Red Flags',hypertension:'Hypertension',diabetes:'Diabetes',dyslipidemia:'Cholesterol',nutrition:'Food & BMI',medications:'Medicines',nearby:'Nearby Care & Emergency'},
+  fil:{'red-flags':'Mga Babala',hypertension:'Altapresyon',diabetes:'Diyabetis',dyslipidemia:'Kolesterol',nutrition:'Pagkain at BMI',medications:'Mga Gamot',nearby:'Malapit na Tulong at Emergency'}
 };
 const SEC_DESC = {
-  en:{'red-flags':'Symptom red flags and when to seek care','hypertension':'Managing high blood pressure','diabetes':'Managing diabetes and foot care','dyslipidemia':'Managing cholesterol','nutrition':'Pinggang Pinoy plate guide and BMI calculator','medications':'Common medicines available at the health center','nearby':'Muntinlupa health centers','emergency':'Muntinlupa emergency hotline numbers'},
-  fil:{'red-flags':'Mga babala ng sintomas at kung kailan magpatingin','hypertension':'Pamamahala ng altapresyon','diabetes':'Pamamahala ng diyabetis at pag-aalaga ng paa','dyslipidemia':'Pamamahala ng kolesterol','nutrition':'Pinggang Pinoy at BMI calculator','medications':'Karaniwang gamot na available sa health center','nearby':'Mga health center sa Muntinlupa','emergency':'Mga numero sa emergency sa Muntinlupa'}
+  en:{'red-flags':'Symptom red flags and when to seek care','hypertension':'Managing high blood pressure','diabetes':'Managing diabetes and foot care','dyslipidemia':'Managing cholesterol','nutrition':'Pinggang Pinoy plate guide and BMI calculator','medications':'Common medicines available at the health center','nearby':'Muntinlupa health centers and emergency hotline numbers'},
+  fil:{'red-flags':'Mga babala ng sintomas at kung kailan magpatingin','hypertension':'Pamamahala ng altapresyon','diabetes':'Pamamahala ng diyabetis at pag-aalaga ng paa','dyslipidemia':'Pamamahala ng kolesterol','nutrition':'Pinggang Pinoy at BMI calculator','medications':'Karaniwang gamot na available sa health center','nearby':'Mga health center at mga numero sa emergency sa Muntinlupa'}
 };
 
 function handleSearch(val){
@@ -1091,7 +1147,6 @@ function renderAll(){
   renderMedications();
   renderLogs();
   renderNearby();
-  renderEmergency();
 }
 
 function renderRedFlags(){
@@ -1189,14 +1244,20 @@ function renderLogs(){
 
 function renderNutrition(){
   const t=T[lang];
-  const plate=PLATE[lang];
+  const plate=PLATE[plateGroup][lang];
   const meals=MEALS[lang];
   const tips=TIPS[lang];
   const hCm=bmiHUnit==='cm', hIn=bmiHUnit==='in', hFt=bmiHUnit==='ft';
   const wKgA=bmiWUnit==='kg';
+  const plateOptions=['adult','pregnant','lactating','youngchild','schoolage'];
+  const plateOptLabel={adult:t.plateAdult, pregnant:t.platePregnant, lactating:t.plateLactating, youngchild:t.plateYoungChild, schoolage:t.plateSchoolAge};
   document.getElementById('nutrition-content').innerHTML=
     `<div class="info-card"><div class="info-card-title">🍽️ ${t.plateTitle}</div><p style="font-size:0.8rem;color:var(--muted);margin-bottom:10px">${t.plateNote}</p>`+
-    plate.map(p=>`<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:9px"><span style="font-size:1.4rem;flex-shrink:0">${p.icon}</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--primary)">${p.label}</div><div style="font-size:0.86rem;color:#374151">${p.desc}</div></div></div>`).join('')+
+    `<label style="display:block;font-size:0.8rem;font-weight:600;color:var(--text);margin-bottom:5px">${t.plateSelectLabel}</label>`+
+    `<select id="plate-group-select" onchange="setPlateGroup(this.value)" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:0.9rem;color:var(--text);background:#f9fafb;margin-bottom:14px">`+
+    plateOptions.map(g=>`<option value="${g}"${g===plateGroup?' selected':''}>${plateOptLabel[g]}</option>`).join('')+
+    `</select>`+
+    `<div id="plate-list">${renderPlateList(plate)}</div>`+
     `</div><div class="info-card"><div class="info-card-title">🛒 ${t.mealsTitle}</div><ul class="checklist">${meals.map(m=>`<li>${m}</li>`).join('')}</ul></div>`+
     `<div class="info-card"><div class="info-card-title">💡 ${t.tipsTitle}</div><ul class="checklist">${tips.map(tp=>`<li>${tp}</li>`).join('')}</ul></div>`+
     `<div class="bmi-form"><div style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:12px">⚖️ ${t.bmiTitle}</div>`+
@@ -1211,6 +1272,18 @@ function renderNutrition(){
     `<div class="unit-seg"><button onclick="setBmiWUnit('kg')" id="wbtn-kg" class="${wKgA?'active':''}">${t.bmiUnitKg}</button><button onclick="setBmiWUnit('lbs')" id="wbtn-lbs" class="${wKgA?'':'active'}">${t.bmiUnitLbs}</button></div>`+
     `<input type="number" id="bmi-w-val" min="5" max="1500" placeholder="e.g. 65">`+
     `<button class="bmi-calc-btn" onclick="calcBMI()">${t.bmiBtn}</button><div class="bmi-result" id="bmi-result"></div></div>`;
+}
+
+function renderPlateList(plate){
+  return plate.map(p=>`<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:9px"><span style="font-size:1.4rem;flex-shrink:0">${p.icon}</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--primary)">${p.label}</div><div style="font-size:0.86rem;color:#374151">${p.desc}</div></div></div>`).join('');
+}
+
+// Scoped to #plate-list only (not a full renderNutrition() re-render) so
+// switching the dropdown doesn't wipe out anything already typed into the
+// BMI calculator further down the same page.
+function setPlateGroup(g){
+  plateGroup=g;
+  document.getElementById('plate-list').innerHTML = renderPlateList(PLATE[plateGroup][lang]);
 }
 
 function setBmiHUnit(u){
@@ -1351,27 +1424,11 @@ function renderMedications(){
   document.getElementById('medications-content').innerHTML = html;
 }
 
+// Emergency Numbers and Nearby Care share one page (#page-nearby) so users
+// have a single destination for "who do I call / where do I go" instead of
+// two separate cards. Emergency numbers render first since they're the more
+// time-critical of the two.
 function renderNearby(){
-  const d=NEARBY[lang];
-  const t=T[lang];
-  let html=`<div class="disclaimer mb-14">⚠ ${t.nearbyVerify}</div>`;
-  d.cats.forEach(cat=>{
-    html+=`<div class="card-section-label">${cat.label}</div>`;
-    cat.facilities.forEach(f=>{
-      html+=`<div class="facility-card">
-        <div class="facility-name">${f.name}</div>
-        <div class="facility-type ${f.typeClass||''}">${f.type}</div>
-        <div class="facility-address">${f.addr}</div>
-        ${(f.phones||[]).map(p=>`<a href="tel:${p.num}" class="facility-phone">📞 ${p.label}</a>`).join('<br>')}
-        ${!f.verified?`<span class="verify-label">${t.verify}</span>`:''}
-        ${f.note?`<p style="font-size:0.78rem;color:var(--muted);margin-top:6px">${f.note}</p>`:''}
-      </div>`;
-    });
-  });
-  document.getElementById('nearby-content').innerHTML=html;
-}
-
-function renderEmergency(){
   const t=T[lang];
   const list=EMERGENCY[lang];
   const big=list.find(e=>e.big);
@@ -1391,7 +1448,23 @@ function renderEmergency(){
     </div>`;
   });
   html+=`<div class="info-card mt-10"><div class="info-card-title">📱 iRESPOND Muntinlupa</div><p>${t.emergAppNote}</p></div>`;
-  document.getElementById('emergency-content').innerHTML=html;
+
+  const d=NEARBY[lang];
+  html+=`<div class="disclaimer mt-10 mb-14">⚠ ${t.nearbyVerify}</div>`;
+  d.cats.forEach(cat=>{
+    html+=`<div class="card-section-label">${cat.label}</div>`;
+    cat.facilities.forEach(f=>{
+      html+=`<div class="facility-card">
+        <div class="facility-name">${f.name}</div>
+        <div class="facility-type ${f.typeClass||''}">${f.type}</div>
+        <div class="facility-address">${f.addr}</div>
+        ${(f.phones||[]).map(p=>`<a href="tel:${p.num}" class="facility-phone">📞 ${p.label}</a>`).join('<br>')}
+        ${!f.verified?`<span class="verify-label">${t.verify}</span>`:''}
+        ${f.note?`<p style="font-size:0.78rem;color:var(--muted);margin-top:6px">${f.note}</p>`:''}
+      </div>`;
+    });
+  });
+  document.getElementById('nearby-content').innerHTML=html;
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
