@@ -149,6 +149,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .tracker-add-btn{background:var(--primary);color:white;border:none;border-radius:8px;padding:10px 14px;font-size:0.82rem;font-weight:700;cursor:pointer;white-space:nowrap}
 .tracker-empty-note{font-size:0.82rem;color:var(--muted);padding:6px 0}
 .tracker-print-btn{width:100%;background:var(--blue-light);color:var(--primary-dark);border:1.5px solid #bfdbfe;border-radius:10px;padding:11px;font-size:0.86rem;font-weight:700;cursor:pointer;margin-top:12px;-webkit-tap-highlight-color:transparent}
+.tracker-summary{display:flex;gap:8px;margin-bottom:14px}
+.tracker-stat{flex:1;background:var(--blue-light);border-radius:10px;padding:8px 10px}
+.tracker-stat-label{font-size:0.68rem;color:var(--primary-dark);font-weight:600}
+.tracker-stat-value{font-size:1.05rem;font-weight:700;color:var(--primary)}
+.tracker-freq-picker{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.tracker-freq-label{font-size:0.72rem;color:var(--muted)}
+.freq-btn{background:#f9fafb;border:1.5px solid var(--border);color:var(--muted);border-radius:6px;padding:3px 9px;font-size:0.72rem;font-weight:700;cursor:pointer}
+.freq-btn.active{background:var(--primary);border-color:var(--primary);color:white}
+.dose-slot-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.dose-slot-row:last-child{margin-bottom:0}
+.dose-slot-label{width:34px;flex-shrink:0;font-size:0.68rem;font-weight:700;color:var(--muted)}
 .log-input-row{display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
 .log-input-row input[type=number]{flex:1;border:1.5px solid var(--border);border-radius:8px;padding:10px;font-size:0.92rem;background:#f9fafb;min-width:70px;margin-bottom:0}
 .log-input-row select{border:1.5px solid var(--border);border-radius:8px;padding:10px;font-size:0.82rem;background:#f9fafb}
@@ -495,6 +506,8 @@ const T = {
     medTrackerTitle:'My Medicine Tracker', medTrackerSub:'Track your own medicine intake here. This stays only on this phone — nothing is sent anywhere, and no one else can see it.',
     medTrackerEmpty:'You haven\'t added any medicines to track yet.', medAdd:'Add', medAllAdded:'All listed medicines have been added to your tracker.',
     medPrintBtn:'Print My Checklist', medReminderBanner:'You haven\'t marked {meds} as taken today yet.',
+    thisWeek:'This week', streakLabel:'Streak', dosesUnit:'doses', dayUnit:'day', daysUnit:'days',
+    timesPerDayLabel:'Times a day', doseAM:'AM', doseNoon:'Noon', dosePM:'PM',
     bpLogTitle:'My Blood Pressure Log', bpLogSub:'Keep track of your home blood pressure readings to discuss with your doctor. Stays only on this phone.',
     bpSysPlaceholder:'Systolic (e.g. 130)', bpDiaPlaceholder:'Diastolic (e.g. 85)', bpLogPrintBtn:'Print My BP Log',
     flagWarn:'High', flagDanger:'Very High — Seek Care', flagLowDanger:'Low — Seek Care',
@@ -507,11 +520,11 @@ const T = {
     banner:'Emergency? Tumawag sa <a href="tel:137175">137-175</a> o pumunta sa pinakamalapit na health center.',
     search:'Hanapin ang sintomas o paksa…',
     disclaimer:'Gabay pangkalusugan lamang ito. Hindi ito kapalit ng doktor, nurse, o health center.',
-    navHome:'Home', navLogs:'Aking mga Log', navHTN:'Altapresyon', navDM:'Diyabetis', navMore:'Iba Pa',
+    navHome:'Home', navLogs:'Aking Logs', navHTN:'Altapresyon', navDM:'Diyabetis', navMore:'Iba Pa',
     lblRF:'Mga Babala', lblHTN:'Altapresyon', lblDM:'Diyabetis', lblDys:'Kolesterol',
-    lblNutrition:'Pagkain at BMI', lblMeds:'Mga Gamot', lblLogs:'Aking mga Log', lblNearby:'Malapit na Tulong at Emergency',
+    lblNutrition:'Pagkain at BMI', lblMeds:'Mga Gamot', lblLogs:'Aking Logs', lblNearby:'Malapit na Tulong at Emergency',
     titleRF:'Mga Babala', titleHTN:'Altapresyon (Hypertension)', titleDM:'Diyabetis', titleDys:'Kolesterol (Dyslipidemia)',
-    titleNutrition:'Pagkain at BMI', titleMeds:'Mga Gamot sa Health Center', titleLogs:'Aking mga Log', titleNearby:'Malapit na Tulong at Mga Numero sa Emergency',
+    titleNutrition:'Pagkain at BMI', titleMeds:'Mga Gamot sa Health Center', titleLogs:'Aking Logs', titleNearby:'Malapit na Tulong at Mga Numero sa Emergency',
     titleMore:'Iba Pa',
     logsDataNote:'Ang mga entry na ito ay naka-save lang sa telepono mong ito — hindi ito ipinapadala kahit saan. Mananatili itong available hangga\'t ginagamit mo ang app sa device na ito. Mabubura ito kapag na-clear mo ang site data ng iyong browser, in-uninstall o na-reset ang app, o lumipat ka ng bagong telepono. Kung gusto mong magkaroon ng kopya, gamitin ang Print button para i-save o i-print ang iyong log bago ito mangyari.',
     goNow:'⚠ Magpatingin agad', callNow:'⚠ Emergency? Tumawag sa 137-175',
@@ -587,6 +600,8 @@ const T = {
     medTrackerTitle:'Aking Medicine Tracker', medTrackerSub:'Subaybayan dito ang iyong pag-inom ng gamot. Dito lang ito sa telepono mo mananatili, walang ipinapadala kahit saan, at walang ibang makakakita nito.',
     medTrackerEmpty:'Wala ka pang naidadagdag na gamot para subaybayan.', medAdd:'Idagdag', medAllAdded:'Naidagdag na ang lahat ng nakalistang gamot sa iyong tracker.',
     medPrintBtn:'I-print ang Aking Checklist', medReminderBanner:'Hindi mo pa nama-mark na inumin ngayon ang {meds}.',
+    thisWeek:'Ngayong Linggo', streakLabel:'Streak', dosesUnit:'dosis', dayUnit:'araw', daysUnit:'araw',
+    timesPerDayLabel:'Ilang beses sa isang araw', doseAM:'Umaga', doseNoon:'Tanghali', dosePM:'Gabi',
     bpLogTitle:'Aking BP Log', bpLogSub:'Isulat dito ang iyong presyon ng dugo sa bahay para maidiskuti sa iyong doktor. Dito lang ito sa telepono mo mananatili.',
     bpSysPlaceholder:'Systolic (hal. 130)', bpDiaPlaceholder:'Diastolic (hal. 85)', bpLogPrintBtn:'I-print ang Aking BP Log',
     flagWarn:'Mataas', flagDanger:'Napakataas — Magpatingin Agad', flagLowDanger:'Mababa — Magpatingin Agad',
@@ -856,9 +871,23 @@ const MED_TRACKER_KEY = 'bida-med-tracker-v1';
 const BP_LOG_KEY = 'bida-bp-log-v1';
 const SUGAR_LOG_KEY = 'bida-sugar-log-v1';
 
+// Tracker schema v2: medicines are {name, timesPerDay}, and each log entry
+// is an array of booleans (one per dose slot) rather than a single boolean.
+// getTrackerData() migrates any v1 data (plain-string medicines, boolean log
+// entries) saved by earlier versions of the app on first load.
 function getTrackerData(){
-  try{ const raw=localStorage.getItem(MED_TRACKER_KEY); return raw?JSON.parse(raw):{medicines:[],log:{}}; }
-  catch(e){ return {medicines:[],log:{}}; }
+  try{
+    const raw=localStorage.getItem(MED_TRACKER_KEY);
+    const data=raw?JSON.parse(raw):{medicines:[],log:{}};
+    data.medicines=(data.medicines||[]).map(m=>typeof m==='string'?{name:m,timesPerDay:1}:m);
+    Object.keys(data.log||{}).forEach(name=>{
+      Object.keys(data.log[name]).forEach(dt=>{
+        const v=data.log[name][dt];
+        if(typeof v==='boolean') data.log[name][dt]=[v];
+      });
+    });
+    return data;
+  }catch(e){ return {medicines:[],log:{}}; }
 }
 function saveTrackerData(data){ try{ localStorage.setItem(MED_TRACKER_KEY, JSON.stringify(data)); }catch(e){} }
 function last7Dates(){
@@ -868,26 +897,50 @@ function last7Dates(){
 }
 function dayLabel(dateStr){
   const d=new Date(dateStr+'T00:00:00');
-  const days={en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], fil:['Lin','Lun','Mar','Miy','Huw','Biy','Sab']};
+  const days={en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], fil:['Sun','Mon','Tue','Wed','Thu','Fri','Sat']};
   return days[lang][d.getDay()];
+}
+// Starting guess only, read from the medicine's freq_en reference text — the
+// tracker always shows this as an editable 1x/2x/3x picker, since a
+// patient's actual prescribed frequency may differ from the general
+// reference (see T.medReminder).
+function defaultTimesPerDay(name){
+  let freq='';
+  MEDS.forEach(g=>g.items.forEach(m=>{ if(m.name===name) freq=(m.freq_en||'').toLowerCase(); }));
+  if(freq.includes('three')) return 3;
+  if(freq.includes('two') || freq.includes('twice')) return 2;
+  return 1;
+}
+function doseSlotLabel(t, n, i){
+  if(n===2) return i===0?t.doseAM:t.dosePM;
+  if(n===3) return i===0?t.doseAM:(i===1?t.doseNoon:t.dosePM);
+  return '';
 }
 function addTrackedMedicine(name){
   if(!name) return;
   const data=getTrackerData();
-  if(!data.medicines.includes(name)) data.medicines.push(name);
+  if(!data.medicines.some(m=>m.name===name)) data.medicines.push({name, timesPerDay:defaultTimesPerDay(name)});
   saveTrackerData(data);
   renderMedications();
 }
 function removeTrackedMedicine(name){
   const data=getTrackerData();
-  data.medicines=data.medicines.filter(m=>m!==name);
+  data.medicines=data.medicines.filter(m=>m.name!==name);
   saveTrackerData(data);
   renderMedications();
 }
-function toggleIntake(name, dateStr){
+function setTimesPerDay(name, n){
+  const data=getTrackerData();
+  const med=data.medicines.find(m=>m.name===name);
+  if(med) med.timesPerDay=n;
+  saveTrackerData(data);
+  renderMedications();
+}
+function toggleIntake(name, dateStr, slot){
   const data=getTrackerData();
   if(!data.log[name]) data.log[name]={};
-  data.log[name][dateStr]=!data.log[name][dateStr];
+  if(!data.log[name][dateStr]) data.log[name][dateStr]=[];
+  data.log[name][dateStr][slot]=!data.log[name][dateStr][slot];
   saveTrackerData(data);
   renderMedications();
 }
@@ -1425,21 +1478,59 @@ function renderMedTracker(){
   const today=dates[dates.length-1];
   const allMedNames=[];
   MEDS.forEach(g=>g.items.forEach(m=>allMedNames.push(m.name)));
-  const availableToAdd=allMedNames.filter(n=>!data.medicines.includes(n));
+  const trackedNames=data.medicines.map(m=>m.name);
+  const availableToAdd=allMedNames.filter(n=>!trackedNames.includes(n));
 
-  const missedToday=data.medicines.filter(m=>!(data.log[m]&&data.log[m][today]));
+  const missedToday=data.medicines.filter(m=>{
+    const todayLog=(data.log[m.name] && data.log[m.name][today]) || [];
+    for(let i=0;i<m.timesPerDay;i++){ if(!todayLog[i]) return true; }
+    return false;
+  }).map(m=>m.name);
   const reminderHtml=(data.medicines.length && missedToday.length)
     ? `<div class="tracker-reminder">🔔 ${t.medReminderBanner.replace('{meds}', missedToday.join(', '))}</div>` : '';
 
-  const rows=data.medicines.map(name=>{
+  // Weekly adherence + streak, tallied across every tracked medicine's
+  // scheduled dose slots (not just one checkbox per day).
+  let totalDoses=0, takenDoses=0;
+  const dayFullyTaken={};
+  dates.forEach(dt=>{
+    let dayScheduled=0, dayTaken=0;
+    data.medicines.forEach(m=>{
+      const dayLog=(data.log[m.name] && data.log[m.name][dt]) || [];
+      for(let i=0;i<m.timesPerDay;i++){
+        dayScheduled++; totalDoses++;
+        if(dayLog[i]){ dayTaken++; takenDoses++; }
+      }
+    });
+    dayFullyTaken[dt]=dayScheduled>0 && dayTaken===dayScheduled;
+  });
+  let streak=0;
+  for(let i=dates.length-1;i>=0;i--){ if(dayFullyTaken[dates[i]]) streak++; else break; }
+  const summaryHtml=data.medicines.length ? `<div class="tracker-summary no-print">
+    <div class="tracker-stat"><div class="tracker-stat-label">${t.thisWeek}</div><div class="tracker-stat-value">${takenDoses} / ${totalDoses} ${t.dosesUnit}</div></div>
+    <div class="tracker-stat"><div class="tracker-stat-label">${t.streakLabel}</div><div class="tracker-stat-value">${streak} ${streak===1?t.dayUnit:t.daysUnit}</div></div>
+  </div>` : '';
+
+  const rows=data.medicines.map(med=>{
+    const name=med.name, tpd=med.timesPerDay||1;
     const safeName=name.replace(/'/g,"\\'");
-    const cells=dates.map(dt=>{
-      const taken=data.log[name] && data.log[name][dt];
-      return `<button class="day-cell${taken?' taken':''}" onclick="toggleIntake('${safeName}','${dt}')" title="${dt}">${dayLabel(dt)}<span class="day-dot">${taken?'✓':'○'}</span></button>`;
-    }).join('');
+    const freqPicker=`<div class="tracker-freq-picker no-print">
+      <span class="tracker-freq-label">${t.timesPerDayLabel}:</span>
+      ${[1,2,3].map(n=>`<button class="freq-btn${tpd===n?' active':''}" onclick="setTimesPerDay('${safeName}',${n})">${n}x</button>`).join('')}
+    </div>`;
+    const slotRows=[];
+    for(let slot=0; slot<tpd; slot++){
+      const label=doseSlotLabel(t, tpd, slot);
+      const cells=dates.map(dt=>{
+        const taken=(data.log[name] && data.log[name][dt] && data.log[name][dt][slot]) || false;
+        return `<button class="day-cell${taken?' taken':''}" onclick="toggleIntake('${safeName}','${dt}',${slot})" title="${dt}">${dayLabel(dt)}<span class="day-dot">${taken?'✓':'○'}</span></button>`;
+      }).join('');
+      slotRows.push(`<div class="dose-slot-row">${label?`<span class="dose-slot-label">${label}</span>`:''}<div class="tracker-days">${cells}</div></div>`);
+    }
     return `<div class="tracker-row">
       <div class="tracker-row-name">${name}<button class="tracker-remove" onclick="removeTrackedMedicine('${safeName}')" aria-label="remove">✕</button></div>
-      <div class="tracker-days">${cells}</div>
+      ${freqPicker}
+      ${slotRows.join('')}
     </div>`;
   }).join('');
 
@@ -1449,6 +1540,7 @@ function renderMedTracker(){
 
   return `<div class="tracker-section">
     <div class="tracker-header"><div class="tracker-title">📋 ${t.medTrackerTitle}</div><div class="tracker-sub">${t.medTrackerSub}</div></div>
+    ${summaryHtml}
     ${reminderHtml}
     ${rows || `<p class="tracker-empty-note">${t.medTrackerEmpty}</p>`}
     ${addControl}
