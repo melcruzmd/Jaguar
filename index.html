@@ -175,6 +175,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .log-flag{font-size:0.68rem;font-weight:700;border-radius:6px;padding:2px 7px}
 .log-flag.log-warn{color:var(--warning);background:#fffbeb}
 .log-flag.log-danger{color:var(--danger);background:var(--danger-bg)}
+.log-viewall-btn{display:block;width:100%;background:none;border:none;color:var(--primary);font-size:0.82rem;font-weight:700;cursor:pointer;padding:8px 0;text-align:center}
 .log-delete{background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.85rem;padding:4px 6px;min-height:28px}
 @media print{
   .app-header,.search-wrap,.bottom-nav,.emergency-banner,.back-btn,.no-print{display:none!important}
@@ -184,9 +185,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   .tracker-print-btn{display:none!important}
 }
 .nav-icon{font-size:1.2rem;line-height:1}
-.more-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.more-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:16px 12px;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;min-height:90px;-webkit-tap-highlight-color:transparent}
-.more-card:active{background:#f9fafb}
 .search-result-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .search-result-card:active{background:#f9fafb}
 .result-section{font-size:0.72rem;color:var(--primary);font-weight:700;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:3px}
@@ -207,7 +205,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 
 <header class="app-header">
-  <div class="brand">
+  <div class="brand" onclick="goHome()" role="button" tabindex="0" aria-label="Go to Home" style="cursor:pointer">
     <div class="header-logo" aria-hidden="true"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 90'>
   <text x='110' y='52' font-family='Arial, sans-serif' font-size='44' font-weight='800' text-anchor='middle'><tspan fill='#1e3a8a'>B</tspan><tspan fill='#14b8a6'>i</tspan><tspan fill='#16a34a'>D</tspan><tspan fill='#2563eb'>A</tspan></text>
   <text x='110' y='76' font-family='Arial, sans-serif' font-size='16' font-weight='700' letter-spacing='4' fill='#1e3a8a' text-anchor='middle'>HEALTH</text>
@@ -248,17 +246,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="home-card" onclick="navigate('dyslipidemia')">
         <div class="card-icon">❤️</div><div class="card-label" id="lbl-dys">Cholesterol</div>
       </div>
-      <div class="home-card" onclick="navigate('nutrition')">
-        <div class="card-icon">🥗</div><div class="card-label" id="lbl-nutrition">Food &amp; BMI</div>
-      </div>
-      <div class="home-card med-home-card" onclick="navigate('medications')">
-        <div class="card-icon">💊</div><div class="card-label" id="lbl-meds">Medicines</div>
+      <div class="home-card" onclick="navigate('food')">
+        <div class="card-icon">🥗</div><div class="card-label" id="lbl-food">Food</div>
       </div>
       <div class="home-card danger-card" onclick="navigate('nearby')">
         <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby">Nearby Care &amp; Emergency</div>
-      </div>
-      <div class="home-card wide" onclick="navigate('logs')">
-        <div class="card-icon">📋</div><div class="card-label" id="lbl-logs">My Logs</div>
       </div>
     </div>
   </div>
@@ -317,15 +309,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
-<!-- NUTRITION -->
-<div class="page" id="page-nutrition">
+<!-- FOOD -->
+<div class="page" id="page-food">
   <div class="content-wrap">
     <div class="section-header">
       <button class="back-btn" onclick="goHome()">&#8249;</button>
       <span class="section-icon">🥗</span>
-      <h2 class="section-title" id="title-nutrition">Food &amp; BMI</h2>
+      <h2 class="section-title" id="title-food">Food</h2>
     </div>
-    <div id="nutrition-content"></div>
+    <div id="food-content"></div>
+  </div>
+</div>
+
+<!-- BMI & WEIGHT -->
+<div class="page" id="page-bmi">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <span class="section-icon">⚖️</span>
+      <h2 class="section-title" id="title-bmi">BMI &amp; Weight</h2>
+    </div>
+    <div id="bmi-content"></div>
   </div>
 </div>
 
@@ -365,34 +369,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
-<!-- MORE -->
-<div class="page" id="page-more">
-  <div class="content-wrap">
-    <div class="section-header">
-      <span class="section-icon" style="margin-left:4px">☰</span>
-      <h2 class="section-title" id="title-more">More</h2>
-    </div>
-    <div class="more-grid">
-      <div class="more-card" onclick="navigate('dyslipidemia')">
-        <div class="card-icon">❤️</div><div class="card-label" id="lbl-dys2">Cholesterol</div>
-      </div>
-      <div class="more-card" onclick="navigate('nutrition')">
-        <div class="card-icon">🥗</div><div class="card-label" id="lbl-nutrition2">Food &amp; BMI</div>
-      </div>
-      <div class="more-card" onclick="navigate('medications')">
-        <div class="card-icon">💊</div><div class="card-label" id="lbl-meds2">Medicines</div>
-      </div>
-      <div class="more-card" onclick="navigate('logs')">
-        <div class="card-icon">📋</div><div class="card-label" id="lbl-logs2">My Logs</div>
-      </div>
-      <div class="more-card" onclick="navigate('nearby')">
-        <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby2">Nearby Care &amp; Emergency</div>
-      </div>
-    </div>
-    <div class="disclaimer mt-10" id="more-disclaimer">This app gives health guidance only. It does not diagnose or replace a doctor, nurse, or health center.</div>
-  </div>
-</div>
-
 <!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <button class="nav-btn active" id="nav-home" onclick="navigate('home')">
@@ -401,14 +377,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <button class="nav-btn" id="nav-logs" onclick="navigate('logs')">
     <span class="nav-icon">📋</span><span id="nav-lbl-logs">My Logs</span>
   </button>
-  <button class="nav-btn" id="nav-hypertension" onclick="navigate('hypertension')">
-    <span class="nav-icon">🩺</span><span id="nav-lbl-htn">Hypertension</span>
+  <button class="nav-btn" id="nav-medications" onclick="navigate('medications')">
+    <span class="nav-icon">💊</span><span id="nav-lbl-meds">Medicines</span>
   </button>
-  <button class="nav-btn" id="nav-diabetes" onclick="navigate('diabetes')">
-    <span class="nav-icon">🩸</span><span id="nav-lbl-dm">Diabetes</span>
-  </button>
-  <button class="nav-btn" id="nav-more" onclick="navigate('more')">
-    <span class="nav-icon">☰</span><span id="nav-lbl-more">More</span>
+  <button class="nav-btn" id="nav-bmi" onclick="navigate('bmi')">
+    <span class="nav-icon">⚖️</span><span id="nav-lbl-bmi">BMI &amp; Weight</span>
   </button>
 </nav>
 
@@ -426,13 +399,22 @@ const T = {
     banner:'Emergency? Call <a href="tel:137175">137-175</a> or go to the nearest health center.',
     search:'Search symptom or topic…',
     disclaimer:'This app gives health guidance only. It does not diagnose or replace a doctor, nurse, or health center.',
-    navHome:'Home', navLogs:'My Logs', navHTN:'Hypertension', navDM:'Diabetes', navMore:'More',
+    navHome:'Home', navLogs:'My Logs',
     lblRF:'Red Flags', lblHTN:'Hypertension', lblDM:'Diabetes', lblDys:'Cholesterol',
-    lblNutrition:'Food &amp; BMI', lblMeds:'Medicines', lblLogs:'My Logs', lblNearby:'Nearby Care &amp; Emergency',
+    lblFood:'Food', lblMeds:'Medicines', lblLogs:'My Logs', lblNearby:'Nearby Care &amp; Emergency',
     titleRF:'Red Flags', titleHTN:'Hypertension', titleDM:'Diabetes', titleDys:'Cholesterol (Dyslipidemia)',
-    titleNutrition:'Food &amp; BMI', titleMeds:'Medicines at the Health Center', titleLogs:'My Logs', titleNearby:'Nearby Care &amp; Emergency Numbers',
-    titleMore:'More',
+    titleFood:'Food', titleBMI:'BMI &amp; Weight', titleMeds:'Medicines at the Health Center', titleLogs:'My Logs', titleNearby:'Nearby Care &amp; Emergency Numbers',
     logsDataNote:'These entries are saved only on this phone — never sent anywhere. They stay available for as long as you keep using this app on this device. They will be deleted if you clear your browser\'s site data, uninstall or reset the app, or switch to a new phone. If you want to keep a copy, use the Print button to save or print your log before that happens.',
+    backupTitle:'Backup & Restore', backupSub:'Save a copy of all your logs (medicines, blood pressure, blood sugar, and weight) as one file, so you don\'t lose them if you clear your browser, switch phones, or reinstall the app.',
+    backupBtn:'Download Backup', restoreBtn:'Restore from Backup File', backupNow:'Back up now',
+    restoreConfirm:'This will replace all your current logs with the ones in this backup file. This cannot be undone. Continue?',
+    restoreSuccess:'Backup restored successfully.', restoreError:'This doesn\'t look like a valid BIDA Health backup file.',
+    bpViewAll:'View all {count} readings', bpShowLess:'Show only the last 5',
+    bpBackupReminder:'You have {count} blood pressure readings saved. It\'s a good time to back up your data.',
+    sugarViewAll:'View all {count} readings', sugarShowLess:'Show only the last 5',
+    sugarBackupReminder:'You have {count} blood sugar readings saved. It\'s a good time to back up your data.',
+    weightViewAll:'View all {count} entries', weightShowLess:'Show only the last 5',
+    weightBackupReminder:'You have {count} weight entries saved. It\'s a good time to back up your data.',
     goNow:'⚠ Seek care now', callNow:'⚠ Emergency? Call 137-175',
     noResults:'No results found. Try a different keyword.',
     verify:'⚠ VERIFY BEFORE USE',
@@ -514,19 +496,32 @@ const T = {
     sugarLogTitle:'My Blood Sugar Log', sugarLogSub:'Keep track of your home blood sugar readings to discuss with your doctor. Stays only on this phone.',
     sugarValPlaceholder:'Reading (mg/dL)', sugarFasting:'Fasting', sugarRandom:'Random/After meal', sugarLogPrintBtn:'Print My Sugar Log',
     logAdd:'+ Add', logNoEntries:'No entries yet.', logInvalid:'Please enter a valid reading.',
+    weightLogTitle:'My Weight Log', weightLogSub:'Keep track of your weight over time to discuss with your doctor. Stays only on this phone.',
+    weightValPlaceholder:'Weight', weightLogPrintBtn:'Print My Weight Log', weightChartEmpty:'Add at least 2 entries to see your weight graph.',
+    safeWeightNote:'A safe pace for gaining or losing weight is about 0.5–1 kg (roughly 1–2 lbs) a week. Faster changes should only be done under a doctor\'s or nutritionist\'s supervision.',
+    weeksToGoal:'At a safe pace of 0.5–1 kg a week, this is about {weeks} weeks.',
   },
   fil: {
     subtitle:'Better Informed for Disease Awareness — Lungsod ng Muntinlupa',
     banner:'Emergency? Tumawag sa <a href="tel:137175">137-175</a> o pumunta sa pinakamalapit na health center.',
     search:'Hanapin ang sintomas o paksa…',
     disclaimer:'Gabay pangkalusugan lamang ito. Hindi ito kapalit ng doktor, nurse, o health center.',
-    navHome:'Home', navLogs:'Aking Logs', navHTN:'Altapresyon', navDM:'Diyabetis', navMore:'Iba Pa',
+    navHome:'Home', navLogs:'Aking Logs',
     lblRF:'Mga Babala', lblHTN:'Altapresyon', lblDM:'Diyabetis', lblDys:'Kolesterol',
-    lblNutrition:'Pagkain at BMI', lblMeds:'Mga Gamot', lblLogs:'Aking Logs', lblNearby:'Malapit na Tulong at Emergency',
+    lblFood:'Pagkain', lblMeds:'Mga Gamot', lblLogs:'Aking Logs', lblNearby:'Malapit na Tulong at Emergency',
     titleRF:'Mga Babala', titleHTN:'Altapresyon (Hypertension)', titleDM:'Diyabetis', titleDys:'Kolesterol (Dyslipidemia)',
-    titleNutrition:'Pagkain at BMI', titleMeds:'Mga Gamot sa Health Center', titleLogs:'Aking Logs', titleNearby:'Malapit na Tulong at Mga Numero sa Emergency',
-    titleMore:'Iba Pa',
+    titleFood:'Pagkain', titleBMI:'BMI at Timbang', titleMeds:'Mga Gamot sa Health Center', titleLogs:'Aking Logs', titleNearby:'Malapit na Tulong at Mga Numero sa Emergency',
     logsDataNote:'Ang mga entry na ito ay naka-save lang sa telepono mong ito — hindi ito ipinapadala kahit saan. Mananatili itong available hangga\'t ginagamit mo ang app sa device na ito. Mabubura ito kapag na-clear mo ang site data ng iyong browser, in-uninstall o na-reset ang app, o lumipat ka ng bagong telepono. Kung gusto mong magkaroon ng kopya, gamitin ang Print button para i-save o i-print ang iyong log bago ito mangyari.',
+    backupTitle:'Backup at Restore', backupSub:'I-save ang kopya ng lahat ng iyong logs (gamot, blood pressure, blood sugar, at timbang) bilang isang file, para hindi mawala kahit i-clear mo ang browser, lumipat ng telepono, o i-reinstall ang app.',
+    backupBtn:'I-download ang Backup', restoreBtn:'I-restore mula sa Backup File', backupNow:'Mag-backup ngayon',
+    restoreConfirm:'Papalitan nito ang lahat ng kasalukuyang logs mo ng laman ng backup file na ito. Hindi na ito maibabalik pa. Ituloy?',
+    restoreSuccess:'Matagumpay na na-restore ang backup.', restoreError:'Mukhang hindi ito valid na BIDA Health backup file.',
+    bpViewAll:'Tingnan lahat ng {count} reading', bpShowLess:'5 pinakabago lang',
+    bpBackupReminder:'May {count} na blood pressure reading ka na naka-save. Mainam nang mag-backup ng iyong data.',
+    sugarViewAll:'Tingnan lahat ng {count} reading', sugarShowLess:'5 pinakabago lang',
+    sugarBackupReminder:'May {count} na blood sugar reading ka na naka-save. Mainam nang mag-backup ng iyong data.',
+    weightViewAll:'Tingnan lahat ng {count} entry', weightShowLess:'5 pinakabago lang',
+    weightBackupReminder:'May {count} na weight entry ka na naka-save. Mainam nang mag-backup ng iyong data.',
     goNow:'⚠ Magpatingin agad', callNow:'⚠ Emergency? Tumawag sa 137-175',
     noResults:'Walang nahanap. Subukan ang ibang salita.',
     verify:'⚠ I-VERIFY BAGO GAMITIN',
@@ -608,6 +603,10 @@ const T = {
     sugarLogTitle:'Aking Blood Sugar Log', sugarLogSub:'Isulat dito ang iyong blood sugar sa bahay para maidiskuti sa iyong doktor. Dito lang ito sa telepono mo mananatili.',
     sugarValPlaceholder:'Reading (mg/dL)', sugarFasting:'Fasting', sugarRandom:'Random/Pagkatapos kumain', sugarLogPrintBtn:'I-print ang Aking Sugar Log',
     logAdd:'+ Idagdag', logNoEntries:'Wala pang entry.', logInvalid:'Maglagay po ng tamang reading.',
+    weightLogTitle:'Aking Timbang Log', weightLogSub:'Isulat dito ang iyong timbang para maidiskuti sa iyong doktor. Dito lang ito sa telepono mo mananatili.',
+    weightValPlaceholder:'Timbang', weightLogPrintBtn:'I-print ang Aking Weight Log', weightChartEmpty:'Magdagdag ng hindi bababa sa 2 entry para makita ang graph ng iyong timbang.',
+    safeWeightNote:'Ang ligtas na bilis ng pagbabago ng timbang ay humigit-kumulang 0.5–1 kg (mga 1–2 lbs) kada linggo. Ang mas mabilis na pagbabago ay dapat lang gawin sa ilalim ng gabay ng doktor o nutrisyonista.',
+    weeksToGoal:'Sa ligtas na bilis na 0.5–1 kg kada linggo, mga {weeks} linggo ito.',
   }
 };
 
@@ -860,6 +859,11 @@ let lang = localStorage.getItem('bida-lang') || 'en';
 let bmiHUnit = 'cm';   // 'cm' | 'in' | 'ft'
 let bmiWUnit = 'kg';   // 'kg' | 'lbs'
 let plateGroup = 'adult';   // 'adult' | 'pregnant' | 'lactating' | 'youngchild' | 'schoolage'
+let bpShowAll = false;      // each log defaults to showing only the last 5 entries
+let sugarShowAll = false;
+let weightShowAll = false;
+const LOG_DISPLAY_COUNT = 5;
+const LOG_BACKUP_REMINDER_EVERY = 15;   // nudge to back up every N entries saved, per log
 
 // ── Personal Tracking (Medicine Tracker, BP Log, Sugar Log) ─────────────────
 // All data below lives ONLY in this device's browser storage (localStorage).
@@ -870,6 +874,7 @@ let plateGroup = 'adult';   // 'adult' | 'pregnant' | 'lactating' | 'youngchild'
 const MED_TRACKER_KEY = 'bida-med-tracker-v1';
 const BP_LOG_KEY = 'bida-bp-log-v1';
 const SUGAR_LOG_KEY = 'bida-sugar-log-v1';
+const WEIGHT_LOG_KEY = 'bida-weight-log-v1';
 
 // Tracker schema v2: medicines are {name, timesPerDay}, and each log entry
 // is an array of booleans (one per dose slot) rather than a single boolean.
@@ -953,7 +958,8 @@ function addBPEntry(){
   const sys=parseInt(sysEl.value), dia=parseInt(diaEl.value);
   if(!sys||!dia||sys<50||sys>300||dia<30||dia>200){ alert(T[lang].logInvalid); return; }
   const log=getLog(BP_LOG_KEY);
-  log.unshift({date:new Date().toISOString().slice(0,10), sys, dia});
+  const now=new Date();
+  log.unshift({date:now.toISOString().slice(0,10), time:now.toLocaleTimeString(lang==='fil'?'fil-PH':'en-US',{hour:'numeric',minute:'2-digit'}), sys, dia});
   saveLog(BP_LOG_KEY, log.slice(0,30));
   renderLogs();
 }
@@ -969,7 +975,8 @@ function addSugarEntry(){
   const val=parseInt(valEl.value), type=typeEl.value;
   if(!val||val<20||val>800){ alert(T[lang].logInvalid); return; }
   const log=getLog(SUGAR_LOG_KEY);
-  log.unshift({date:new Date().toISOString().slice(0,10), val, type});
+  const now=new Date();
+  log.unshift({date:now.toISOString().slice(0,10), time:now.toLocaleTimeString(lang==='fil'?'fil-PH':'en-US',{hour:'numeric',minute:'2-digit'}), val, type});
   saveLog(SUGAR_LOG_KEY, log.slice(0,30));
   renderLogs();
 }
@@ -978,6 +985,92 @@ function deleteSugarEntry(idx){
   log.splice(idx,1);
   saveLog(SUGAR_LOG_KEY, log);
   renderLogs();
+}
+
+// Weight is always stored internally in kg (converting from lbs at entry
+// time if needed) so the log and chart stay consistent even if the user
+// switches their preferred display unit later.
+function addWeightEntry(){
+  const valEl=document.getElementById('weight-val-input');
+  const raw=parseFloat(valEl.value);
+  if(!raw || raw<5 || raw>1500){ alert(T[lang].logInvalid); return; }
+  const kg = bmiWUnit==='kg' ? raw : raw*0.453592;
+  const log=getLog(WEIGHT_LOG_KEY);
+  const now=new Date();
+  log.unshift({date:now.toISOString().slice(0,10), time:now.toLocaleTimeString(lang==='fil'?'fil-PH':'en-US',{hour:'numeric',minute:'2-digit'}), kg});
+  saveLog(WEIGHT_LOG_KEY, log.slice(0,60));
+  refreshWeightWidget();
+}
+function deleteWeightEntry(idx){
+  const log=getLog(WEIGHT_LOG_KEY);
+  log.splice(idx,1);
+  saveLog(WEIGHT_LOG_KEY, log);
+  refreshWeightWidget();
+}
+// Scoped to #weight-tracker-section only — not a full renderBMI() re-render —
+// so adding a weight entry or switching kg/lbs doesn't wipe out anything the
+// user is mid-typing into the separate BMI calculator form above it.
+function refreshWeightWidget(){
+  const el=document.getElementById('weight-tracker-section');
+  if(el) el.outerHTML = renderWeightLogWidget();
+}
+
+// ── Backup & Restore ─────────────────────────────────────────────────────────
+// Bundles every localStorage-only data type (medicine tracker, BP/sugar/
+// weight logs) into one downloadable JSON file, and can restore from that
+// same file. This is the actual fix for "what if I lose my data" — the
+// Print buttons on each log help with a single doctor visit, but this is
+// the only way a patient can recover everything after clearing their
+// browser, switching phones, or reinstalling the app.
+function exportBackup(){
+  const backup={
+    app:'BIDA Health App', exportedAt:new Date().toISOString(), version:1,
+    medTracker:JSON.parse(localStorage.getItem(MED_TRACKER_KEY)||'null'),
+    bpLog:JSON.parse(localStorage.getItem(BP_LOG_KEY)||'null'),
+    sugarLog:JSON.parse(localStorage.getItem(SUGAR_LOG_KEY)||'null'),
+    weightLog:JSON.parse(localStorage.getItem(WEIGHT_LOG_KEY)||'null')
+  };
+  const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download=`bida-health-backup-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+function triggerRestore(){
+  document.getElementById('restore-file-input').click();
+}
+function importBackupFile(input){
+  const file=input.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    let data;
+    try{ data=JSON.parse(e.target.result); }
+    catch(err){ alert(T[lang].restoreError); input.value=''; return; }
+    if(!data || data.app!=='BIDA Health App'){ alert(T[lang].restoreError); input.value=''; return; }
+    if(!confirm(T[lang].restoreConfirm)){ input.value=''; return; }
+    if(data.medTracker) localStorage.setItem(MED_TRACKER_KEY, JSON.stringify(data.medTracker));
+    if(data.bpLog) localStorage.setItem(BP_LOG_KEY, JSON.stringify(data.bpLog));
+    if(data.sugarLog) localStorage.setItem(SUGAR_LOG_KEY, JSON.stringify(data.sugarLog));
+    if(data.weightLog) localStorage.setItem(WEIGHT_LOG_KEY, JSON.stringify(data.weightLog));
+    input.value='';
+    alert(T[lang].restoreSuccess);
+    renderAll();
+  };
+  reader.readAsText(file);
+}
+function renderBackupSection(){
+  const t=T[lang];
+  return `<div class="tracker-section no-print">
+    <div class="tracker-header"><div class="tracker-title">💾 ${t.backupTitle}</div><div class="tracker-sub">${t.backupSub}</div></div>
+    <button class="tracker-add-btn" style="width:100%;margin-bottom:8px" onclick="exportBackup()">${t.backupBtn}</button>
+    <button class="tracker-print-btn" style="margin-top:0" onclick="triggerRestore()">${t.restoreBtn}</button>
+    <input type="file" id="restore-file-input" accept="application/json,.json" style="display:none" onchange="importBackupFile(this)">
+  </div>`;
 }
 
 // ── Anonymous usage logging ──────────────────────────────────────────────────
@@ -1112,7 +1205,6 @@ function navigate(page){
     if(pe) pe.classList.add('active');
     const ne=document.getElementById('nav-'+page);
     if(ne) ne.classList.add('active');
-    else document.getElementById('nav-more').classList.add('active');
     sw.style.display='none';
   }
   logVisit(page);
@@ -1136,34 +1228,25 @@ function applyStaticStrings(){
   document.getElementById('emergency-banner').innerHTML=t.banner;
   document.getElementById('search-input').placeholder=t.search;
   document.getElementById('home-disclaimer').textContent=t.disclaimer;
-  document.getElementById('more-disclaimer').textContent=t.disclaimer;
   document.getElementById('lbl-rf').innerHTML=t.lblRF;
   document.getElementById('lbl-htn').innerHTML=t.lblHTN;
   document.getElementById('lbl-dm').innerHTML=t.lblDM;
   document.getElementById('lbl-dys').innerHTML=t.lblDys;
-  document.getElementById('lbl-nutrition').innerHTML=t.lblNutrition;
-  document.getElementById('lbl-meds').innerHTML=t.lblMeds;
-  document.getElementById('lbl-logs').innerHTML=t.lblLogs;
+  document.getElementById('lbl-food').innerHTML=t.lblFood;
   document.getElementById('lbl-nearby').innerHTML=t.lblNearby;
-  document.getElementById('lbl-dys2').innerHTML=t.lblDys;
-  document.getElementById('lbl-nutrition2').innerHTML=t.lblNutrition;
-  document.getElementById('lbl-meds2').innerHTML=t.lblMeds;
-  document.getElementById('lbl-logs2').innerHTML=t.lblLogs;
-  document.getElementById('lbl-nearby2').innerHTML=t.lblNearby;
   document.getElementById('title-rf').innerHTML=t.titleRF;
   document.getElementById('title-htn').innerHTML=t.titleHTN;
   document.getElementById('title-dm').innerHTML=t.titleDM;
   document.getElementById('title-dys').innerHTML=t.titleDys;
-  document.getElementById('title-nutrition').innerHTML=t.titleNutrition;
+  document.getElementById('title-food').innerHTML=t.titleFood;
+  document.getElementById('title-bmi').innerHTML=t.titleBMI;
   document.getElementById('title-meds').innerHTML=t.titleMeds;
   document.getElementById('title-logs').innerHTML=t.titleLogs;
   document.getElementById('title-nearby').innerHTML=t.titleNearby;
-  document.getElementById('title-more').innerHTML=t.titleMore;
   document.getElementById('nav-lbl-home').textContent=t.navHome;
   document.getElementById('nav-lbl-logs').textContent=t.navLogs;
-  document.getElementById('nav-lbl-htn').textContent=t.navHTN;
-  document.getElementById('nav-lbl-dm').textContent=t.navDM;
-  document.getElementById('nav-lbl-more').textContent=t.navMore;
+  document.getElementById('nav-lbl-meds').textContent=t.lblMeds;
+  document.getElementById('nav-lbl-bmi').innerHTML=t.titleBMI;
 }
 
 // ── Search ────────────────────────────────────────────────────────────────────
@@ -1175,17 +1258,18 @@ const SEARCH_IDX = [
   {sec:'hypertension',kw:['hypertension','blood pressure','BP','altapresyon','presyon ng dugo']},
   {sec:'diabetes',kw:['diabetes','sugar','insulin','diyabetis','asukal','blood sugar']},
   {sec:'dyslipidemia',kw:['cholesterol','dyslipidemia','lipid','kolesterol','taba']},
-  {sec:'nutrition',kw:['food','nutrition','pinggang pinoy','BMI','vegetable','rice','protein','pagkain','nutrisyon','gulay','kanin']},
+  {sec:'food',kw:['food','nutrition','pinggang pinoy','vegetable','rice','protein','pagkain','nutrisyon','gulay','kanin']},
+  {sec:'bmi',kw:['bmi','weight','body mass','timbang','katawan']},
   {sec:'medications',kw:['medicine','medication','losartan','metformin','amlodipine','atorvastatin','gamot','dosage','dose']},
   {sec:'nearby',kw:['health center','clinic','bayanan','alabang','ospital','klinika','emergency','137','hotline','ambulance','irespond','ambulansya']}
 ];
 const SEC_NAMES = {
-  en:{'red-flags':'Red Flags',hypertension:'Hypertension',diabetes:'Diabetes',dyslipidemia:'Cholesterol',nutrition:'Food & BMI',medications:'Medicines',nearby:'Nearby Care & Emergency'},
-  fil:{'red-flags':'Mga Babala',hypertension:'Altapresyon',diabetes:'Diyabetis',dyslipidemia:'Kolesterol',nutrition:'Pagkain at BMI',medications:'Mga Gamot',nearby:'Malapit na Tulong at Emergency'}
+  en:{'red-flags':'Red Flags',hypertension:'Hypertension',diabetes:'Diabetes',dyslipidemia:'Cholesterol',food:'Food',bmi:'BMI & Weight',medications:'Medicines',nearby:'Nearby Care & Emergency'},
+  fil:{'red-flags':'Mga Babala',hypertension:'Altapresyon',diabetes:'Diyabetis',dyslipidemia:'Kolesterol',food:'Pagkain',bmi:'BMI at Timbang',medications:'Mga Gamot',nearby:'Malapit na Tulong at Emergency'}
 };
 const SEC_DESC = {
-  en:{'red-flags':'Symptom red flags and when to seek care','hypertension':'Managing high blood pressure','diabetes':'Managing diabetes and foot care','dyslipidemia':'Managing cholesterol','nutrition':'Pinggang Pinoy plate guide and BMI calculator','medications':'Common medicines available at the health center','nearby':'Muntinlupa health centers and emergency hotline numbers'},
-  fil:{'red-flags':'Mga babala ng sintomas at kung kailan magpatingin','hypertension':'Pamamahala ng altapresyon','diabetes':'Pamamahala ng diyabetis at pag-aalaga ng paa','dyslipidemia':'Pamamahala ng kolesterol','nutrition':'Pinggang Pinoy at BMI calculator','medications':'Karaniwang gamot na available sa health center','nearby':'Mga health center at mga numero sa emergency sa Muntinlupa'}
+  en:{'red-flags':'Symptom red flags and when to seek care','hypertension':'Managing high blood pressure','diabetes':'Managing diabetes and foot care','dyslipidemia':'Managing cholesterol','food':'Pinggang Pinoy plate guide','bmi':'BMI calculator and weight tracker','medications':'Common medicines available at the health center','nearby':'Muntinlupa health centers and emergency hotline numbers'},
+  fil:{'red-flags':'Mga babala ng sintomas at kung kailan magpatingin','hypertension':'Pamamahala ng altapresyon','diabetes':'Pamamahala ng diyabetis at pag-aalaga ng paa','dyslipidemia':'Pamamahala ng kolesterol','food':'Pinggang Pinoy','bmi':'BMI calculator at weight tracker','medications':'Karaniwang gamot na available sa health center','nearby':'Mga health center at mga numero sa emergency sa Muntinlupa'}
 };
 
 function handleSearch(val){
@@ -1214,7 +1298,8 @@ function renderAll(){
   renderHTN();
   renderDM();
   renderDys();
-  renderNutrition();
+  renderFood();
+  renderBMI();
   renderMedications();
   renderLogs();
   renderNearby();
@@ -1296,13 +1381,24 @@ function flagClass(flag){
   return '';
 }
 
+function toggleBPShowAll(){
+  bpShowAll=!bpShowAll;
+  renderLogs();
+}
 function renderBPLogWidget(){
   const t=T[lang];
   const log=getLog(BP_LOG_KEY);
-  const entries=log.map((e,i)=>{
+  const visible=bpShowAll?log:log.slice(0,LOG_DISPLAY_COUNT);
+  const entries=visible.map((e,vi)=>{
+    const i=log.indexOf(e);
     const flag=bpFlag(e.sys,e.dia);
-    return `<div class="log-entry"><span class="log-date">${e.date}</span><span class="log-value ${flagClass(flag)}">${e.sys}/${e.dia}</span>${flagTag(t,flag)}<button class="log-delete no-print" onclick="deleteBPEntry(${i})">✕</button></div>`;
+    const when=e.time?`${e.date} · ${e.time}`:e.date;
+    return `<div class="log-entry"><span class="log-date">${when}</span><span class="log-value ${flagClass(flag)}">${e.sys}/${e.dia}</span>${flagTag(t,flag)}<button class="log-delete no-print" onclick="deleteBPEntry(${i})">✕</button></div>`;
   }).join('') || `<p class="tracker-empty-note">${t.logNoEntries}</p>`;
+  const viewAllBtn=log.length>LOG_DISPLAY_COUNT
+    ? `<button class="log-viewall-btn no-print" onclick="toggleBPShowAll()">${bpShowAll?t.bpShowLess:t.bpViewAll.replace('{count}',log.length)}</button>` : '';
+  const backupReminder=(log.length>0 && log.length%LOG_BACKUP_REMINDER_EVERY===0)
+    ? `<div class="tracker-reminder no-print">💾 ${t.bpBackupReminder.replace('{count}',log.length)} <button class="log-viewall-btn" style="margin-top:4px" onclick="exportBackup()">${t.backupNow}</button></div>` : '';
   return `<div class="tracker-section">
     <div class="tracker-header"><div class="tracker-title">📊 ${t.bpLogTitle}</div><div class="tracker-sub">${t.bpLogSub}</div></div>
     <div class="log-input-row no-print">
@@ -1311,18 +1407,31 @@ function renderBPLogWidget(){
       <input type="number" id="bp-dia-input" placeholder="${t.bpDiaPlaceholder}">
       <button onclick="addBPEntry()">${t.logAdd}</button>
     </div>
+    ${backupReminder}
     ${entries}
+    ${viewAllBtn}
     ${log.length?`<button class="tracker-print-btn no-print" onclick="window.print()">🖨️ ${t.bpLogPrintBtn}</button>`:''}
   </div>`;
 }
 
+function toggleSugarShowAll(){
+  sugarShowAll=!sugarShowAll;
+  renderLogs();
+}
 function renderSugarLogWidget(){
   const t=T[lang];
   const log=getLog(SUGAR_LOG_KEY);
-  const entries=log.map((e,i)=>{
+  const visible=sugarShowAll?log:log.slice(0,LOG_DISPLAY_COUNT);
+  const entries=visible.map(e=>{
+    const i=log.indexOf(e);
     const flag=sugarFlag(e.val,e.type);
-    return `<div class="log-entry"><span class="log-date">${e.date}</span><span class="log-value ${flagClass(flag)}">${e.val} mg/dL</span><span class="log-type-tag">${e.type==='fasting'?t.sugarFasting:t.sugarRandom}</span>${flagTag(t,flag)}<button class="log-delete no-print" onclick="deleteSugarEntry(${i})">✕</button></div>`;
+    const when=e.time?`${e.date} · ${e.time}`:e.date;
+    return `<div class="log-entry"><span class="log-date">${when}</span><span class="log-value ${flagClass(flag)}">${e.val} mg/dL</span><span class="log-type-tag">${e.type==='fasting'?t.sugarFasting:t.sugarRandom}</span>${flagTag(t,flag)}<button class="log-delete no-print" onclick="deleteSugarEntry(${i})">✕</button></div>`;
   }).join('') || `<p class="tracker-empty-note">${t.logNoEntries}</p>`;
+  const viewAllBtn=log.length>LOG_DISPLAY_COUNT
+    ? `<button class="log-viewall-btn no-print" onclick="toggleSugarShowAll()">${sugarShowAll?t.sugarShowLess:t.sugarViewAll.replace('{count}',log.length)}</button>` : '';
+  const backupReminder=(log.length>0 && log.length%LOG_BACKUP_REMINDER_EVERY===0)
+    ? `<div class="tracker-reminder no-print">💾 ${t.sugarBackupReminder.replace('{count}',log.length)} <button class="log-viewall-btn" style="margin-top:4px" onclick="exportBackup()">${t.backupNow}</button></div>` : '';
   return `<div class="tracker-section">
     <div class="tracker-header"><div class="tracker-title">🩸 ${t.sugarLogTitle}</div><div class="tracker-sub">${t.sugarLogSub}</div></div>
     <div class="log-input-row no-print">
@@ -1330,8 +1439,75 @@ function renderSugarLogWidget(){
       <select id="sugar-type-input"><option value="fasting">${t.sugarFasting}</option><option value="random">${t.sugarRandom}</option></select>
       <button onclick="addSugarEntry()">${t.logAdd}</button>
     </div>
+    ${backupReminder}
     ${entries}
+    ${viewAllBtn}
     ${log.length?`<button class="tracker-print-btn no-print" onclick="window.print()">🖨️ ${t.sugarLogPrintBtn}</button>`:''}
+  </div>`;
+}
+
+// Simple dependency-free line chart (inline SVG) plotting up to the last 14
+// weight entries in chronological order. No charting library, to keep the
+// app a single self-contained file.
+function renderWeightChart(log){
+  const t=T[lang];
+  const chronological=log.slice().reverse();
+  const recent=chronological.slice(-14);
+  const vals=recent.map(e=>bmiWUnit==='kg'?e.kg:e.kg*2.20462);
+  const minV=Math.min(...vals), maxV=Math.max(...vals);
+  const range=Math.max(maxV-minV, 1);
+  const padTop=14, padBottom=14, padSide=10, w=300, h=110;
+  const plotH=h-padTop-padBottom;
+  const stepX=recent.length>1?(w-padSide*2)/(recent.length-1):0;
+  const points=vals.map((v,i)=>({
+    x: padSide+i*stepX,
+    y: padTop+plotH-((v-minV)/range)*plotH
+  }));
+  const polyPoints=points.map(p=>`${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+  const dots=points.map(p=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="#1d4ed8"/>`).join('');
+  const unitLabel=bmiWUnit==='kg'?t.bmiUnitKg:t.bmiUnitLbs;
+  return `<div style="margin-bottom:14px">
+    <svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block" role="img" aria-label="Weight trend chart">
+      <polyline points="${polyPoints}" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      ${dots}
+      <text x="${padSide}" y="10" font-size="9" fill="#6b7280">${maxV.toFixed(1)} ${unitLabel}</text>
+      <text x="${padSide}" y="${h-2}" font-size="9" fill="#6b7280">${minV.toFixed(1)} ${unitLabel}</text>
+    </svg>
+  </div>`;
+}
+
+function toggleWeightShowAll(){
+  weightShowAll=!weightShowAll;
+  refreshWeightWidget();
+}
+function renderWeightLogWidget(){
+  const t=T[lang];
+  const log=getLog(WEIGHT_LOG_KEY);
+  const unitLabel=bmiWUnit==='kg'?t.bmiUnitKg:t.bmiUnitLbs;
+  const visible=weightShowAll?log:log.slice(0,LOG_DISPLAY_COUNT);
+  const entries=visible.map(e=>{
+    const i=log.indexOf(e);
+    const disp=bmiWUnit==='kg'?e.kg:e.kg*2.20462;
+    const when=e.time?`${e.date} · ${e.time}`:e.date;
+    return `<div class="log-entry"><span class="log-date">${when}</span><span class="log-value">${disp.toFixed(1)} ${unitLabel}</span><button class="log-delete no-print" onclick="deleteWeightEntry(${i})">✕</button></div>`;
+  }).join('') || `<p class="tracker-empty-note">${t.logNoEntries}</p>`;
+  const viewAllBtn=log.length>LOG_DISPLAY_COUNT
+    ? `<button class="log-viewall-btn no-print" onclick="toggleWeightShowAll()">${weightShowAll?t.weightShowLess:t.weightViewAll.replace('{count}',log.length)}</button>` : '';
+  const backupReminder=(log.length>0 && log.length%LOG_BACKUP_REMINDER_EVERY===0)
+    ? `<div class="tracker-reminder no-print">💾 ${t.weightBackupReminder.replace('{count}',log.length)} <button class="log-viewall-btn" style="margin-top:4px" onclick="exportBackup()">${t.backupNow}</button></div>` : '';
+  const chart=log.length>=2 ? renderWeightChart(log) : `<p class="tracker-empty-note no-print">${t.weightChartEmpty}</p>`;
+  return `<div class="tracker-section" id="weight-tracker-section">
+    <div class="tracker-header"><div class="tracker-title">⚖️ ${t.weightLogTitle}</div><div class="tracker-sub">${t.weightLogSub}</div></div>
+    <div class="disclaimer mb-14" style="font-size:0.78rem">${t.safeWeightNote}</div>
+    ${chart}
+    <div class="log-input-row no-print">
+      <input type="number" id="weight-val-input" placeholder="${t.weightValPlaceholder} (${unitLabel})" step="0.1">
+      <button onclick="addWeightEntry()">${t.logAdd}</button>
+    </div>
+    ${backupReminder}
+    ${entries}
+    ${viewAllBtn}
+    ${log.length?`<button class="tracker-print-btn no-print" onclick="window.print()">🖨️ ${t.weightLogPrintBtn}</button>`:''}
   </div>`;
 }
 
@@ -1348,19 +1524,18 @@ function renderLogs(){
   let html = `<div class="disclaimer mb-14 no-print">${t.logsDataNote}</div>`;
   html += renderBPLogWidget();
   html += renderSugarLogWidget();
+  html += renderBackupSection();
   document.getElementById('logs-content').innerHTML = html;
 }
 
-function renderNutrition(){
+function renderFood(){
   const t=T[lang];
   const plate=PLATE[plateGroup][lang];
   const meals=MEALS[lang];
   const tips=TIPS[lang];
-  const hCm=bmiHUnit==='cm', hIn=bmiHUnit==='in', hFt=bmiHUnit==='ft';
-  const wKgA=bmiWUnit==='kg';
   const plateOptions=['adult','pregnant','lactating','youngchild','schoolage'];
   const plateOptLabel={adult:t.plateAdult, pregnant:t.platePregnant, lactating:t.plateLactating, youngchild:t.plateYoungChild, schoolage:t.plateSchoolAge};
-  document.getElementById('nutrition-content').innerHTML=
+  document.getElementById('food-content').innerHTML=
     `<div class="info-card"><div class="info-card-title">🍽️ ${t.plateTitle}</div><p style="font-size:0.8rem;color:var(--muted);margin-bottom:10px">${t.plateNote}</p>`+
     `<label style="display:block;font-size:0.8rem;font-weight:600;color:var(--text);margin-bottom:5px">${t.plateSelectLabel}</label>`+
     `<select id="plate-group-select" onchange="setPlateGroup(this.value)" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:0.9rem;color:var(--text);background:#f9fafb;margin-bottom:14px">`+
@@ -1368,7 +1543,25 @@ function renderNutrition(){
     `</select>`+
     `<div id="plate-list">${renderPlateList(plate)}</div>`+
     `</div><div class="info-card"><div class="info-card-title">🛒 ${t.mealsTitle}</div><ul class="checklist">${meals.map(m=>`<li>${m}</li>`).join('')}</ul></div>`+
-    `<div class="info-card"><div class="info-card-title">💡 ${t.tipsTitle}</div><ul class="checklist">${tips.map(tp=>`<li>${tp}</li>`).join('')}</ul></div>`+
+    `<div class="info-card"><div class="info-card-title">💡 ${t.tipsTitle}</div><ul class="checklist">${tips.map(tp=>`<li>${tp}</li>`).join('')}</ul></div>`;
+}
+
+function renderPlateList(plate){
+  return plate.map(p=>`<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:9px"><span style="font-size:1.4rem;flex-shrink:0">${p.icon}</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--primary)">${p.label}</div><div style="font-size:0.86rem;color:#374151">${p.desc}</div></div></div>`).join('');
+}
+
+// Scoped to #plate-list only (not a full renderFood() re-render) so
+// switching the dropdown doesn't wipe out anything already typed elsewhere.
+function setPlateGroup(g){
+  plateGroup=g;
+  document.getElementById('plate-list').innerHTML = renderPlateList(PLATE[plateGroup][lang]);
+}
+
+function renderBMI(){
+  const t=T[lang];
+  const hCm=bmiHUnit==='cm', hIn=bmiHUnit==='in', hFt=bmiHUnit==='ft';
+  const wKgA=bmiWUnit==='kg';
+  document.getElementById('bmi-content').innerHTML=
     `<div class="bmi-form"><div style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:12px">⚖️ ${t.bmiTitle}</div>`+
     `<div class="disclaimer" style="margin-bottom:14px;font-size:0.8rem">${t.bmiDisclaimer}</div>`+
     `<label>${t.bmiAge}</label><input type="number" id="bmi-age" min="1" max="120" placeholder="e.g. 30">`+
@@ -1380,19 +1573,8 @@ function renderNutrition(){
     `<label>${t.bmiW}</label>`+
     `<div class="unit-seg"><button onclick="setBmiWUnit('kg')" id="wbtn-kg" class="${wKgA?'active':''}">${t.bmiUnitKg}</button><button onclick="setBmiWUnit('lbs')" id="wbtn-lbs" class="${wKgA?'':'active'}">${t.bmiUnitLbs}</button></div>`+
     `<input type="number" id="bmi-w-val" min="5" max="1500" placeholder="e.g. 65">`+
-    `<button class="bmi-calc-btn" onclick="calcBMI()">${t.bmiBtn}</button><div class="bmi-result" id="bmi-result"></div></div>`;
-}
-
-function renderPlateList(plate){
-  return plate.map(p=>`<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:9px"><span style="font-size:1.4rem;flex-shrink:0">${p.icon}</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--primary)">${p.label}</div><div style="font-size:0.86rem;color:#374151">${p.desc}</div></div></div>`).join('');
-}
-
-// Scoped to #plate-list only (not a full renderNutrition() re-render) so
-// switching the dropdown doesn't wipe out anything already typed into the
-// BMI calculator further down the same page.
-function setPlateGroup(g){
-  plateGroup=g;
-  document.getElementById('plate-list').innerHTML = renderPlateList(PLATE[plateGroup][lang]);
+    `<button class="bmi-calc-btn" onclick="calcBMI()">${t.bmiBtn}</button><div class="bmi-result" id="bmi-result"></div></div>`+
+    renderWeightLogWidget();
 }
 
 function setBmiHUnit(u){
@@ -1410,6 +1592,7 @@ function setBmiWUnit(u){
     const b=document.getElementById('wbtn-'+x);
     if(b) b.classList.toggle('active',x===u);
   });
+  refreshWeightWidget();
 }
 
 function calcBMI(){
@@ -1458,9 +1641,11 @@ function calcBMI(){
     const diffLbs=diffKg*2.20462;
     const dir=ci===0?t.bmiBelowNorm:t.bmiAboveNorm;
     const verb=ci===0?t.bmiToGain:t.bmiToLose;
+    const weeks=Math.max(1, Math.round(diffKg/0.75));
     outsideHtml=
       `<div class="bmi-outside" style="color:${cat.col}">${diffKg.toFixed(1)} kg (${diffLbs.toFixed(1)} lbs) ${dir}</div>`+
-      `<div style="font-size:0.81rem;color:var(--muted);margin-bottom:2px;text-align:center">${verb} ${diffKg.toFixed(1)} kg / ${diffLbs.toFixed(1)} lbs</div>`;
+      `<div style="font-size:0.81rem;color:var(--muted);margin-bottom:2px;text-align:center">${verb} ${diffKg.toFixed(1)} kg / ${diffLbs.toFixed(1)} lbs</div>`+
+      `<div style="font-size:0.78rem;color:var(--muted);margin-top:6px;text-align:center">${t.weeksToGoal.replace('{weeks}', weeks)}</div>`;
   }
   res.innerHTML=
     `<div class="bmi-number" style="color:${cat.col}">${bmi.toFixed(1)}</div>`+
