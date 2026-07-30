@@ -158,7 +158,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .log-entry:last-child{border-bottom:none}
 .log-entry .log-date{color:var(--muted);flex:1}
 .log-entry .log-value{color:var(--text);font-weight:700}
+.log-entry .log-value.log-warn{color:var(--warning)}
+.log-entry .log-value.log-danger{color:var(--danger)}
 .log-entry .log-type-tag{font-size:0.7rem;color:var(--primary);background:var(--blue-light);border-radius:6px;padding:2px 7px;font-weight:600}
+.log-flag{font-size:0.68rem;font-weight:700;border-radius:6px;padding:2px 7px}
+.log-flag.log-warn{color:var(--warning);background:#fffbeb}
+.log-flag.log-danger{color:var(--danger);background:var(--danger-bg)}
 .log-delete{background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.85rem;padding:4px 6px;min-height:28px}
 @media print{
   .app-header,.search-wrap,.bottom-nav,.emergency-banner,.back-btn,.no-print{display:none!important}
@@ -492,6 +497,7 @@ const T = {
     medPrintBtn:'Print My Checklist', medReminderBanner:'You haven\'t marked {meds} as taken today yet.',
     bpLogTitle:'My Blood Pressure Log', bpLogSub:'Keep track of your home blood pressure readings to discuss with your doctor. Stays only on this phone.',
     bpSysPlaceholder:'Systolic (e.g. 130)', bpDiaPlaceholder:'Diastolic (e.g. 85)', bpLogPrintBtn:'Print My BP Log',
+    flagWarn:'High', flagDanger:'Very High — Seek Care', flagLowDanger:'Low — Seek Care',
     sugarLogTitle:'My Blood Sugar Log', sugarLogSub:'Keep track of your home blood sugar readings to discuss with your doctor. Stays only on this phone.',
     sugarValPlaceholder:'Reading (mg/dL)', sugarFasting:'Fasting', sugarRandom:'Random/After meal', sugarLogPrintBtn:'Print My Sugar Log',
     logAdd:'+ Add', logNoEntries:'No entries yet.', logInvalid:'Please enter a valid reading.',
@@ -583,6 +589,7 @@ const T = {
     medPrintBtn:'I-print ang Aking Checklist', medReminderBanner:'Hindi mo pa nama-mark na inumin ngayon ang {meds}.',
     bpLogTitle:'Aking BP Log', bpLogSub:'Isulat dito ang iyong presyon ng dugo sa bahay para maidiskuti sa iyong doktor. Dito lang ito sa telepono mo mananatili.',
     bpSysPlaceholder:'Systolic (hal. 130)', bpDiaPlaceholder:'Diastolic (hal. 85)', bpLogPrintBtn:'I-print ang Aking BP Log',
+    flagWarn:'Mataas', flagDanger:'Napakataas — Magpatingin Agad', flagLowDanger:'Mababa — Magpatingin Agad',
     sugarLogTitle:'Aking Blood Sugar Log', sugarLogSub:'Isulat dito ang iyong blood sugar sa bahay para maidiskuti sa iyong doktor. Dito lang ito sa telepono mo mananatili.',
     sugarValPlaceholder:'Reading (mg/dL)', sugarFasting:'Fasting', sugarRandom:'Random/Pagkatapos kumain', sugarLogPrintBtn:'I-print ang Aking Sugar Log',
     logAdd:'+ Idagdag', logNoEntries:'Wala pang entry.', logInvalid:'Maglagay po ng tamang reading.',
@@ -1204,10 +1211,45 @@ function renderInfoSections(containerId, introKey, sectionKeys, prefixHtml){
   document.getElementById(containerId+'-content').innerHTML=html;
 }
 
+// Absolute danger/caution thresholds, not personal treatment targets (the
+// app already tells users their individual target may differ — see
+// htnNumbersBody/dmNumbersBody). These flag readings that are widely
+// recognized as concerning regardless of a person's own goal.
+// BP: 180/120 = hypertensive crisis (AHA/WHO/PSH); 140/90 = Stage 2 HTN.
+function bpFlag(sys, dia){
+  if(sys>=180 || dia>=120) return 'danger';
+  if(sys>=140 || dia>=90) return 'warn';
+  return null;
+}
+// Sugar: <70 = hypoglycemia (universal cutoff); >=250 = urgent-attention
+// ceiling for either test type; 126 (fasting) / 200 (random) = standard
+// ADA/WHO elevated thresholds.
+function sugarFlag(val, type){
+  if(val<70) return 'lowDanger';
+  if(val>=250) return 'danger';
+  if(type==='fasting' && val>=126) return 'warn';
+  if(type==='random' && val>=200) return 'warn';
+  return null;
+}
+function flagTag(t, flag){
+  if(flag==='danger') return `<span class="log-flag log-danger">${t.flagDanger}</span>`;
+  if(flag==='lowDanger') return `<span class="log-flag log-danger">${t.flagLowDanger}</span>`;
+  if(flag==='warn') return `<span class="log-flag log-warn">${t.flagWarn}</span>`;
+  return '';
+}
+function flagClass(flag){
+  if(flag==='danger' || flag==='lowDanger') return 'log-danger';
+  if(flag==='warn') return 'log-warn';
+  return '';
+}
+
 function renderBPLogWidget(){
   const t=T[lang];
   const log=getLog(BP_LOG_KEY);
-  const entries=log.map((e,i)=>`<div class="log-entry"><span class="log-date">${e.date}</span><span class="log-value">${e.sys}/${e.dia}</span><button class="log-delete no-print" onclick="deleteBPEntry(${i})">✕</button></div>`).join('') || `<p class="tracker-empty-note">${t.logNoEntries}</p>`;
+  const entries=log.map((e,i)=>{
+    const flag=bpFlag(e.sys,e.dia);
+    return `<div class="log-entry"><span class="log-date">${e.date}</span><span class="log-value ${flagClass(flag)}">${e.sys}/${e.dia}</span>${flagTag(t,flag)}<button class="log-delete no-print" onclick="deleteBPEntry(${i})">✕</button></div>`;
+  }).join('') || `<p class="tracker-empty-note">${t.logNoEntries}</p>`;
   return `<div class="tracker-section">
     <div class="tracker-header"><div class="tracker-title">📊 ${t.bpLogTitle}</div><div class="tracker-sub">${t.bpLogSub}</div></div>
     <div class="log-input-row no-print">
@@ -1224,7 +1266,10 @@ function renderBPLogWidget(){
 function renderSugarLogWidget(){
   const t=T[lang];
   const log=getLog(SUGAR_LOG_KEY);
-  const entries=log.map((e,i)=>`<div class="log-entry"><span class="log-date">${e.date}</span><span class="log-value">${e.val} mg/dL</span><span class="log-type-tag">${e.type==='fasting'?t.sugarFasting:t.sugarRandom}</span><button class="log-delete no-print" onclick="deleteSugarEntry(${i})">✕</button></div>`).join('') || `<p class="tracker-empty-note">${t.logNoEntries}</p>`;
+  const entries=log.map((e,i)=>{
+    const flag=sugarFlag(e.val,e.type);
+    return `<div class="log-entry"><span class="log-date">${e.date}</span><span class="log-value ${flagClass(flag)}">${e.val} mg/dL</span><span class="log-type-tag">${e.type==='fasting'?t.sugarFasting:t.sugarRandom}</span>${flagTag(t,flag)}<button class="log-delete no-print" onclick="deleteSugarEntry(${i})">✕</button></div>`;
+  }).join('') || `<p class="tracker-empty-note">${t.logNoEntries}</p>`;
   return `<div class="tracker-section">
     <div class="tracker-header"><div class="tracker-title">🩸 ${t.sugarLogTitle}</div><div class="tracker-sub">${t.sugarLogSub}</div></div>
     <div class="log-input-row no-print">
