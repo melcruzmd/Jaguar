@@ -275,12 +275,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="home-card" onclick="navigate('food')">
         <div class="card-icon">🥗</div><div class="card-label" id="lbl-food">Food</div>
       </div>
-      <div class="home-card med-home-card" onclick="navigate('medref')">
-        <div class="card-icon">📖</div><div class="card-label" id="lbl-medref">Medicines</div>
-      </div>
-      <div class="home-card" onclick="navigate('bmicalc')">
-        <div class="card-icon">⚖️</div><div class="card-label" id="lbl-bmicalc">BMI Calculator</div>
-      </div>
       <div class="home-card danger-card" onclick="navigate('nearby')">
         <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby">Nearby Care &amp; Emergency</div>
       </div>
@@ -360,50 +354,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
-<!-- WEIGHT (personal tracker only — BMI calculator lives on Home, see page-bmicalc) -->
+<!-- BMI & WEIGHT (bottom nav — calculator + personal weight tracker together) -->
 <div class="page" id="page-bmi">
   <div class="content-wrap">
     <div class="section-header">
       <button class="back-btn" onclick="goHome()">&#8249;</button>
-      <span class="section-icon">📈</span>
-      <h2 class="section-title" id="title-weight">My Weight</h2>
+      <span class="section-icon">⚖️</span>
+      <h2 class="section-title" id="title-bmi">BMI &amp; Weight</h2>
     </div>
+    <div id="bmicalc-content"></div>
     <div id="bmi-content"></div>
   </div>
 </div>
 
-<!-- MEDICATIONS (personal tracker only — reference guide lives on Home, see page-medref) -->
+<!-- MEDICATIONS (bottom nav — reference guide + personal tracker together) -->
 <div class="page" id="page-medications">
   <div class="content-wrap">
     <div class="section-header">
       <button class="back-btn" onclick="goHome()">&#8249;</button>
       <span class="section-icon">💊</span>
-      <h2 class="section-title" id="title-medtracker">My Medicines</h2>
+      <h2 class="section-title" id="title-meds">Medicines at the Health Center</h2>
     </div>
     <div id="medications-content"></div>
-  </div>
-</div>
-
-<!-- BMI CALCULATOR (Home — educational/self-assessment tool, not a saved record) -->
-<div class="page" id="page-bmicalc">
-  <div class="content-wrap">
-    <div class="section-header">
-      <button class="back-btn" onclick="goHome()">&#8249;</button>
-      <span class="section-icon">⚖️</span>
-      <h2 class="section-title" id="title-bmicalc">BMI Calculator</h2>
-    </div>
-    <div id="bmicalc-content"></div>
-  </div>
-</div>
-
-<!-- MEDICINES REFERENCE (Home — educational guide, not the personal tracker) -->
-<div class="page" id="page-medref">
-  <div class="content-wrap">
-    <div class="section-header">
-      <button class="back-btn" onclick="goHome()">&#8249;</button>
-      <span class="section-icon">📖</span>
-      <h2 class="section-title" id="title-medref">Medicines at the Health Center</h2>
-    </div>
     <div id="medref-content"></div>
   </div>
 </div>
@@ -466,10 +438,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <span class="nav-icon">📋</span><span id="nav-lbl-logs">My Logs</span>
   </button>
   <button class="nav-btn" id="nav-medications" onclick="navigate('medications')">
-    <span class="nav-icon">💊</span><span id="nav-lbl-meds">My Medicines</span>
+    <span class="nav-icon">💊</span><span id="nav-lbl-meds">Medicines</span>
   </button>
   <button class="nav-btn" id="nav-bmi" onclick="navigate('bmi')">
-    <span class="nav-icon">📈</span><span id="nav-lbl-bmi">My Weight</span>
+    <span class="nav-icon">⚖️</span><span id="nav-lbl-bmi">BMI &amp; Weight</span>
   </button>
 </nav>
 
@@ -489,16 +461,16 @@ const T = {
     disclaimer:'This app gives health guidance only. It does not diagnose or replace a doctor, nurse, or health center.',
     navHome:'Home', navLogs:'My Logs',
     lblRF:'Red Flags', lblHTN:'Hypertension', lblDM:'Diabetes', lblDys:'Cholesterol',
-    lblFood:'Food', lblMeds:'Medicines', lblBMICalc:'BMI Calculator', lblLogs:'My Logs', lblNearby:'Nearby Care &amp; Emergency',
+    lblFood:'Food', lblMeds:'Medicines', lblLogs:'My Logs', lblNearby:'Nearby Care &amp; Emergency',
     titleRF:'Red Flags', titleHTN:'Hypertension', titleDM:'Diabetes', titleDys:'Cholesterol (Dyslipidemia)',
-    titleFood:'Food', titleBMICalc:'BMI Calculator', titleWeight:'My Weight', titleMeds:'Medicines at the Health Center', titleMedTracker:'My Medicines', titleLogs:'My Logs', titleNearby:'Nearby Care &amp; Emergency Numbers',
+    titleFood:'Food', titleBMI:'BMI &amp; Weight', titleMeds:'Medicines at the Health Center', titleLogs:'My Logs', titleNearby:'Nearby Care &amp; Emergency Numbers',
     howtoLinkLabel:'How to Use This App',
     howtoIntro:'Here\'s a quick guide to what this app can do and how to use it.',
-    howto1Title:'🏠 Browse Health Topics', howto1Body:'From the Home screen, tap any card — Red Flags, Hypertension, Diabetes, Cholesterol, Food, Medicines, BMI Calculator, or Nearby Care & Emergency — to read guidance on that topic. Tap the logo at the top anytime to return Home.',
+    howto1Title:'🏠 Browse Health Topics', howto1Body:'From the Home screen, tap any card — Red Flags, Hypertension, Diabetes, Cholesterol, Food, or Nearby Care & Emergency — to read guidance on that topic. Tap the logo at the top anytime to return Home.',
     howto2Title:'🔍 Search', howto2Body:'Tap the search bar at the top and type a symptom or topic, like "chest pain" or "BMI", to jump straight to the relevant section.',
     howto3Title:'📋 My Logs', howto3Body:'Keep your own blood pressure and blood sugar readings here — with date and time. The list shows your last 5 readings; tap "View all" to see more. You\'ll get a reminder to back up your data every 15 entries.',
-    howto4Title:'💊 Medicines', howto4Body:'On the Home screen, tap Medicines to see what common medicines are for and how they\'re usually taken. On the bottom nav, tap My Medicines to add any medicine — from the list or typed in yourself — and check off your doses each day.',
-    howto5Title:'⚖️ BMI & Weight', howto5Body:'On the Home screen, tap BMI Calculator to check your BMI and get simple food advice based on the result. On the bottom nav, tap My Weight to track your weight over time and see it as a graph.',
+    howto4Title:'💊 Medicines', howto4Body:'See what common medicines are for and how they\'re usually taken. Add any medicine — from the list or typed in yourself — to My Medicine Tracker to check off your doses each day and see your weekly progress.',
+    howto5Title:'⚖️ BMI & Weight', howto5Body:'Calculate your BMI and get simple food advice based on the result. Track your weight over time and see it as a graph.',
     howto6Title:'🌐 Switch Language', howto6Body:'Tap EN or FIL at the top right anytime to switch the app\'s language.',
     howto7Title:'🔒 Your Privacy', howto7Body:'This app works offline and does not diagnose or replace a doctor. Everything you log (medicines, BP, sugar, weight) stays only on your phone — it is never sent anywhere.',
     howto8Title:'💾 Back Up Your Data', howto8Body:'On the My Logs page, tap "Download Backup" to save a copy of everything (medicines, BP, sugar, weight) as one file — useful before clearing your browser, switching phones, or reinstalling. Use "Restore from Backup File" to bring it back.',
@@ -615,16 +587,16 @@ const T = {
     disclaimer:'Gabay pangkalusugan lamang ito. Hindi ito kapalit ng doktor, nurse, o health center.',
     navHome:'Home', navLogs:'Aking Logs',
     lblRF:'Mga Babala', lblHTN:'Altapresyon', lblDM:'Diyabetis', lblDys:'Kolesterol',
-    lblFood:'Pagkain', lblMeds:'Mga Gamot', lblBMICalc:'Kalkulahin ang BMI', lblLogs:'Aking Logs', lblNearby:'Malapit na Tulong at Emergency',
+    lblFood:'Pagkain', lblMeds:'Mga Gamot', lblLogs:'Aking Logs', lblNearby:'Malapit na Tulong at Emergency',
     titleRF:'Mga Babala', titleHTN:'Altapresyon (Hypertension)', titleDM:'Diyabetis', titleDys:'Kolesterol (Dyslipidemia)',
-    titleFood:'Pagkain', titleBMICalc:'Kalkulahin ang BMI', titleWeight:'Aking Timbang', titleMeds:'Mga Gamot sa Health Center', titleMedTracker:'Aking mga Gamot', titleLogs:'Aking Logs', titleNearby:'Malapit na Tulong at Mga Numero sa Emergency',
+    titleFood:'Pagkain', titleBMI:'BMI at Timbang', titleMeds:'Mga Gamot sa Health Center', titleLogs:'Aking Logs', titleNearby:'Malapit na Tulong at Mga Numero sa Emergency',
     howtoLinkLabel:'Paano Gamitin ang App na Ito',
     howtoIntro:'Narito ang maikling gabay kung ano ang kaya ng app na ito at paano ito gamitin.',
-    howto1Title:'🏠 Tingnan ang mga Paksa sa Kalusugan', howto1Body:'Mula sa Home screen, pindutin ang alinmang card — Mga Babala, Altapresyon, Diyabetis, Kolesterol, Pagkain, Mga Gamot, Kalkulahin ang BMI, o Malapit na Tulong at Emergency — para basahin ang gabay sa paksang iyon. Pindutin ang logo sa itaas kahit kailan para bumalik sa Home.',
+    howto1Title:'🏠 Tingnan ang mga Paksa sa Kalusugan', howto1Body:'Mula sa Home screen, pindutin ang alinmang card — Mga Babala, Altapresyon, Diyabetis, Kolesterol, Pagkain, o Malapit na Tulong at Emergency — para basahin ang gabay sa paksang iyon. Pindutin ang logo sa itaas kahit kailan para bumalik sa Home.',
     howto2Title:'🔍 Paghahanap', howto2Body:'Pindutin ang search bar sa itaas at i-type ang sintomas o paksa, tulad ng "sakit ng dibdib" o "BMI", para direktang mapunta sa may kaugnayang seksyon.',
     howto3Title:'📋 Aking Logs', howto3Body:'Itala dito ang sarili mong presyon ng dugo at blood sugar — kasama ang petsa at oras. Makikita sa listahan ang huling 5 reading mo; pindutin ang "Tingnan Lahat" para makita pa ang iba. May paalala na mag-backup ng data tuwing 15 entry.',
-    howto4Title:'💊 Mga Gamot', howto4Body:'Sa Home screen, pindutin ang Mga Gamot para malaman kung para saan ang karaniwang gamot at kung paano ito karaniwang iniinom. Sa ibaba, pindutin ang Aking mga Gamot para magdagdag ng gamot — mula sa listahan o i-type mo mismo — at ma-check ang inumin mo araw-araw.',
-    howto5Title:'⚖️ BMI at Timbang', howto5Body:'Sa Home screen, pindutin ang Kalkulahin ang BMI para malaman ang iyong BMI at makakuha ng simpleng payo sa pagkain. Sa ibaba, pindutin ang Aking Timbang para subaybayan ang iyong timbang sa paglipas ng panahon at makita ito bilang graph.',
+    howto4Title:'💊 Mga Gamot', howto4Body:'Alamin kung para saan ang karaniwang gamot at kung paano ito karaniwang iniinom. Idagdag ang anumang gamot — mula sa listahan o i-type mo mismo — sa Aking Medicine Tracker para ma-check ang iyong inumin araw-araw at makita ang progress mo linggu-linggo.',
+    howto5Title:'⚖️ BMI at Timbang', howto5Body:'Kalkulahin ang iyong BMI at makakuha ng simpleng payo sa pagkain base sa resulta. Subaybayan ang iyong timbang sa paglipas ng panahon at makita ito bilang graph.',
     howto6Title:'🌐 Palitan ang Wika', howto6Body:'Pindutin ang EN o FIL sa kanang itaas kahit kailan para palitan ang wika ng app.',
     howto7Title:'🔒 Ang Iyong Privacy', howto7Body:'Gumagana ang app na ito kahit walang internet at hindi ito nagdadagnos o kapalit ng doktor. Ang lahat ng itinatala mo (gamot, BP, sugar, timbang) ay dito lamang mananatili sa iyong telepono — hindi ito ipinapadala kahit saan.',
     howto8Title:'💾 I-backup ang Iyong Data', howto8Body:'Sa My Logs page, pindutin ang "I-download ang Backup" para i-save ang kopya ng lahat (gamot, BP, sugar, timbang) bilang isang file — mainam bago i-clear ang browser, lumipat ng telepono, o i-reinstall ang app. Gamitin ang "I-restore mula sa Backup File" para maibalik ito.',
@@ -1397,24 +1369,20 @@ function applyStaticStrings(){
   document.getElementById('lbl-dm').innerHTML=t.lblDM;
   document.getElementById('lbl-dys').innerHTML=t.lblDys;
   document.getElementById('lbl-food').innerHTML=t.lblFood;
-  document.getElementById('lbl-medref').innerHTML=t.lblMeds;
-  document.getElementById('lbl-bmicalc').innerHTML=t.lblBMICalc;
   document.getElementById('lbl-nearby').innerHTML=t.lblNearby;
   document.getElementById('title-rf').innerHTML=t.titleRF;
   document.getElementById('title-htn').innerHTML=t.titleHTN;
   document.getElementById('title-dm').innerHTML=t.titleDM;
   document.getElementById('title-dys').innerHTML=t.titleDys;
   document.getElementById('title-food').innerHTML=t.titleFood;
-  document.getElementById('title-weight').innerHTML=t.titleWeight;
-  document.getElementById('title-bmicalc').innerHTML=t.titleBMICalc;
-  document.getElementById('title-medtracker').innerHTML=t.titleMedTracker;
-  document.getElementById('title-medref').innerHTML=t.titleMeds;
+  document.getElementById('title-bmi').innerHTML=t.titleBMI;
+  document.getElementById('title-meds').innerHTML=t.titleMeds;
   document.getElementById('title-logs').innerHTML=t.titleLogs;
   document.getElementById('title-nearby').innerHTML=t.titleNearby;
   document.getElementById('nav-lbl-home').textContent=t.navHome;
   document.getElementById('nav-lbl-logs').textContent=t.navLogs;
-  document.getElementById('nav-lbl-meds').textContent=t.titleMedTracker;
-  document.getElementById('nav-lbl-bmi').innerHTML=t.titleWeight;
+  document.getElementById('nav-lbl-meds').textContent=t.lblMeds;
+  document.getElementById('nav-lbl-bmi').innerHTML=t.titleBMI;
   document.getElementById('lbl-howto-link').textContent=t.howtoLinkLabel;
   document.getElementById('title-howto').textContent=t.howtoLinkLabel;
   document.getElementById('howto-intro').textContent=t.howtoIntro;
@@ -1439,18 +1407,17 @@ const SEARCH_IDX = [
   {sec:'diabetes',kw:['diabetes','sugar','insulin','diyabetis','asukal','blood sugar']},
   {sec:'dyslipidemia',kw:['cholesterol','dyslipidemia','lipid','kolesterol','taba']},
   {sec:'food',kw:['food','nutrition','pinggang pinoy','vegetable','rice','protein','pagkain','nutrisyon','gulay','kanin']},
-  {sec:'bmicalc',kw:['bmi','body mass']},
-  {sec:'bmi',kw:['weight','timbang','katawan']},
-  {sec:'medref',kw:['medicine','medication','losartan','metformin','amlodipine','atorvastatin','gamot','dosage','dose']},
+  {sec:'bmi',kw:['bmi','body mass','weight','timbang','katawan']},
+  {sec:'medications',kw:['medicine','medication','losartan','metformin','amlodipine','atorvastatin','gamot','dosage','dose']},
   {sec:'nearby',kw:['health center','clinic','bayanan','alabang','ospital','klinika','emergency','137','hotline','ambulance','irespond','ambulansya']}
 ];
 const SEC_NAMES = {
-  en:{'red-flags':'Red Flags',hypertension:'Hypertension',diabetes:'Diabetes',dyslipidemia:'Cholesterol',food:'Food',bmicalc:'BMI Calculator',bmi:'My Weight',medref:'Medicines',nearby:'Nearby Care & Emergency'},
-  fil:{'red-flags':'Mga Babala',hypertension:'Altapresyon',diabetes:'Diyabetis',dyslipidemia:'Kolesterol',food:'Pagkain',bmicalc:'Kalkulahin ang BMI',bmi:'Aking Timbang',medref:'Mga Gamot',nearby:'Malapit na Tulong at Emergency'}
+  en:{'red-flags':'Red Flags',hypertension:'Hypertension',diabetes:'Diabetes',dyslipidemia:'Cholesterol',food:'Food',bmi:'BMI & Weight',medications:'Medicines',nearby:'Nearby Care & Emergency'},
+  fil:{'red-flags':'Mga Babala',hypertension:'Altapresyon',diabetes:'Diyabetis',dyslipidemia:'Kolesterol',food:'Pagkain',bmi:'BMI at Timbang',medications:'Mga Gamot',nearby:'Malapit na Tulong at Emergency'}
 };
 const SEC_DESC = {
-  en:{'red-flags':'Symptom red flags and when to seek care','hypertension':'Managing high blood pressure','diabetes':'Managing diabetes and foot care','dyslipidemia':'Managing cholesterol','food':'Pinggang Pinoy plate guide','bmicalc':'Calculate your BMI','bmi':'Track your weight over time','medref':'Common medicines available at the health center','nearby':'Muntinlupa health centers and emergency hotline numbers'},
-  fil:{'red-flags':'Mga babala ng sintomas at kung kailan magpatingin','hypertension':'Pamamahala ng altapresyon','diabetes':'Pamamahala ng diyabetis at pag-aalaga ng paa','dyslipidemia':'Pamamahala ng kolesterol','food':'Pinggang Pinoy','bmicalc':'Kalkulahin ang iyong BMI','bmi':'Subaybayan ang iyong timbang','medref':'Karaniwang gamot na available sa health center','nearby':'Mga health center at mga numero sa emergency sa Muntinlupa'}
+  en:{'red-flags':'Symptom red flags and when to seek care','hypertension':'Managing high blood pressure','diabetes':'Managing diabetes and foot care','dyslipidemia':'Managing cholesterol','food':'Pinggang Pinoy plate guide','bmi':'BMI calculator and weight tracker','medications':'Common medicines available at the health center','nearby':'Muntinlupa health centers and emergency hotline numbers'},
+  fil:{'red-flags':'Mga babala ng sintomas at kung kailan magpatingin','hypertension':'Pamamahala ng altapresyon','diabetes':'Pamamahala ng diyabetis at pag-aalaga ng paa','dyslipidemia':'Pamamahala ng kolesterol','food':'Pinggang Pinoy','bmi':'BMI calculator at weight tracker','medications':'Karaniwang gamot na available sa health center','nearby':'Mga health center at mga numero sa emergency sa Muntinlupa'}
 };
 
 function handleSearch(val){
@@ -1790,9 +1757,9 @@ function setPlateVariant(v){
   document.getElementById('plate-group-body').innerHTML = renderPlateGroup();
 }
 
-// BMI Calculator — a self-assessment tool with no saved history, so it lives
-// on Home with the other educational content (see renderBMI() below for the
-// Weight tracker, which is the actual personal record on the bottom nav).
+// BMI Calculator — renders into #bmicalc-content, which sits above the
+// Weight tracker (#bmi-content, see renderBMI() below) on the same
+// bottom-nav "BMI & Weight" page.
 function renderBMICalc(){
   const t=T[lang];
   const hCm=bmiHUnit==='cm', hIn=bmiHUnit==='in', hFt=bmiHUnit==='ft';
@@ -1812,10 +1779,9 @@ function renderBMICalc(){
     `<button class="bmi-calc-btn" onclick="calcBMI()">${t.bmiBtn}</button><div class="bmi-result" id="bmi-result"></div></div>`;
 }
 
-// Weight tracker — the actual personal record, on the bottom nav ("My
-// Weight"). setBmiWUnit()/refreshWeightWidget() keep this in sync with the
-// kg/lbs toggle on the Home BMI Calculator even though the two now live on
-// different pages, since both read the shared bmiWUnit state.
+// Weight tracker — renders into #bmi-content, below the BMI Calculator
+// (#bmicalc-content) on the same page. Shares the bmiWUnit state with the
+// calculator's kg/lbs toggle, via setBmiWUnit()/refreshWeightWidget().
 function renderBMI(){
   document.getElementById('bmi-content').innerHTML =
     renderWeightLogWidget();
@@ -1998,25 +1964,26 @@ function renderMedTracker(){
   </div>`;
 }
 
-// My Medicines — personal tracker only (bottom nav). The reference guide
-// (what each medicine is for) lives on Home; see renderMedRef() below.
+// Medicine tracker — renders into #medications-content, which sits above
+// the reference guide (#medref-content, see renderMedRef() below) on the
+// same bottom-nav "Medicines" page.
 function renderMedications(){
   document.getElementById('medications-content').innerHTML = renderMedTracker();
 }
 
-// Medicines at the Health Center — educational reference guide (Home). Not
-// the personal tracker, so nothing here is user-editable or saved.
+// Medicines at the Health Center — reference guide, renders into
+// #medref-content below the tracker. Not user-editable or saved.
 function renderMedRef(){
   const t=T[lang];
-  let html = `<div class="med-safety-banner"><b>⚠ ${t.medSafetyTitle}</b>${t.medSafetyBody}</div>`;
+  let html = `<div class="med-safety-banner no-print"><b>⚠ ${t.medSafetyTitle}</b>${t.medSafetyBody}</div>`;
   MEDS.forEach(group=>{
     const groupLabel = lang==='en' ? group.group_en : group.group_fil;
-    html += `<div class="med-group-title">${groupLabel}</div>`;
+    html += `<div class="med-group-title no-print">${groupLabel}</div>`;
     group.items.forEach(m=>{
       const what = lang==='en' ? m.what_en : m.what_fil;
       const dose = lang==='en' ? m.dose_en : m.dose_fil;
       const freq = lang==='en' ? m.freq_en : m.freq_fil;
-      html += `<div class="med-item-card">
+      html += `<div class="med-item-card no-print">
         <div class="med-name">${m.name}</div>
         <div class="med-row"><b>${t.medWhatFor}:</b> ${what}</div>
         ${dose ? `<div class="med-row"><b>${t.medUsualDose}:</b> ${dose}</div>` : ''}
@@ -2025,7 +1992,7 @@ function renderMedRef(){
       </div>`;
     });
   });
-  html += `<div class="disclaimer mt-10">${t.medListNote}</div>`;
+  html += `<div class="disclaimer mt-10 no-print">${t.medListNote}</div>`;
   document.getElementById('medref-content').innerHTML = html;
 }
 
