@@ -258,6 +258,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby">Nearby Care &amp; Emergency</div>
       </div>
     </div>
+    <div style="text-align:center;margin-top:14px">
+      <a href="javascript:void(0)" onclick="navigate('howto')" id="lbl-howto-link" style="font-size:0.85rem;color:var(--muted);text-decoration:underline">❓ How to Use This App</a>
+    </div>
   </div>
 </div>
 
@@ -374,6 +377,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
+<!-- HOW TO USE -->
+<div class="page" id="page-howto">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <span class="section-icon">❓</span>
+      <h2 class="section-title" id="title-howto">How to Use This App</h2>
+    </div>
+    <p id="howto-intro" style="font-size:0.87rem;color:var(--muted);margin-bottom:12px">Here's a quick guide to what this app can do and how to use it.</p>
+    <div class="info-card"><div class="info-card-title" id="howto1-title">🏠 Browse Health Topics</div><p id="howto1-body">From the Home screen, tap any card to read guidance on that topic. Tap the logo at the top anytime to return Home.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto2-title">🔍 Search</div><p id="howto2-body">Tap the search bar at the top and type a symptom or topic to jump straight to the relevant section.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto3-title">📋 My Logs</div><p id="howto3-body">Keep your own blood pressure and blood sugar readings, with date and time. Tap "View all" to see your full history.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto4-title">💊 Medicines</div><p id="howto4-body">See what common medicines are for and how they're usually taken, and track your own doses day by day.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto5-title">⚖️ BMI &amp; Weight</div><p id="howto5-body">Calculate your BMI and track your weight over time with a simple graph.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto6-title">🌐 Switch Language</div><p id="howto6-body">Tap EN or FIL at the top right anytime to switch the app's language.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto7-title">🔒 Your Privacy</div><p id="howto7-body">This app works offline and does not diagnose or replace a doctor. Everything you log stays only on your phone.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto8-title">💾 Back Up Your Data</div><p id="howto8-body">On the My Logs page, tap "Download Backup" to save a copy of everything as one file.</p></div>
+  </div>
+</div>
+
 <!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <button class="nav-btn active" id="nav-home" onclick="navigate('home')">
@@ -409,6 +432,16 @@ const T = {
     lblFood:'Food', lblMeds:'Medicines', lblLogs:'My Logs', lblNearby:'Nearby Care &amp; Emergency',
     titleRF:'Red Flags', titleHTN:'Hypertension', titleDM:'Diabetes', titleDys:'Cholesterol (Dyslipidemia)',
     titleFood:'Food', titleBMI:'BMI &amp; Weight', titleMeds:'Medicines at the Health Center', titleLogs:'My Logs', titleNearby:'Nearby Care &amp; Emergency Numbers',
+    howtoLinkLabel:'How to Use This App',
+    howtoIntro:'Here\'s a quick guide to what this app can do and how to use it.',
+    howto1Title:'🏠 Browse Health Topics', howto1Body:'From the Home screen, tap any card — Red Flags, Hypertension, Diabetes, Cholesterol, Food, or Nearby Care & Emergency — to read guidance on that topic. Tap the logo at the top anytime to return Home.',
+    howto2Title:'🔍 Search', howto2Body:'Tap the search bar at the top and type a symptom or topic, like "chest pain" or "BMI", to jump straight to the relevant section.',
+    howto3Title:'📋 My Logs', howto3Body:'Keep your own blood pressure and blood sugar readings here — with date and time. The list shows your last 5 readings; tap "View all" to see more. You\'ll get a reminder to back up your data every 15 entries.',
+    howto4Title:'💊 Medicines', howto4Body:'See what common medicines are for and how they\'re usually taken. Add any medicine — from the list or typed in yourself — to My Medicine Tracker to check off your doses each day and see your weekly progress.',
+    howto5Title:'⚖️ BMI & Weight', howto5Body:'Calculate your BMI and get simple food advice based on the result. Track your weight over time and see it as a graph.',
+    howto6Title:'🌐 Switch Language', howto6Body:'Tap EN or FIL at the top right anytime to switch the app\'s language.',
+    howto7Title:'🔒 Your Privacy', howto7Body:'This app works offline and does not diagnose or replace a doctor. Everything you log (medicines, BP, sugar, weight) stays only on your phone — it is never sent anywhere.',
+    howto8Title:'💾 Back Up Your Data', howto8Body:'On the My Logs page, tap "Download Backup" to save a copy of everything (medicines, BP, sugar, weight) as one file — useful before clearing your browser, switching phones, or reinstalling. Use "Restore from Backup File" to bring it back.',
     logsDataNote:'These entries are saved only on this phone — never sent anywhere. They stay available for as long as you keep using this app on this device. They will be deleted if you clear your browser\'s site data, uninstall or reset the app, or switch to a new phone. If you want to keep a copy, use the Print button to save or print your log before that happens.',
     backupTitle:'Backup & Restore', backupSub:'Save a copy of all your logs (medicines, blood pressure, blood sugar, and weight) as one file, so you don\'t lose them if you clear your browser, switch phones, or reinstall the app.',
     backupBtn:'Download Backup', restoreBtn:'Restore from Backup File', backupNow:'Back up now',
@@ -519,6 +552,16 @@ const T = {
     lblFood:'Pagkain', lblMeds:'Mga Gamot', lblLogs:'Aking Logs', lblNearby:'Malapit na Tulong at Emergency',
     titleRF:'Mga Babala', titleHTN:'Altapresyon (Hypertension)', titleDM:'Diyabetis', titleDys:'Kolesterol (Dyslipidemia)',
     titleFood:'Pagkain', titleBMI:'BMI at Timbang', titleMeds:'Mga Gamot sa Health Center', titleLogs:'Aking Logs', titleNearby:'Malapit na Tulong at Mga Numero sa Emergency',
+    howtoLinkLabel:'Paano Gamitin ang App na Ito',
+    howtoIntro:'Narito ang maikling gabay kung ano ang kaya ng app na ito at paano ito gamitin.',
+    howto1Title:'🏠 Tingnan ang mga Paksa sa Kalusugan', howto1Body:'Mula sa Home screen, pindutin ang alinmang card — Mga Babala, Altapresyon, Diyabetis, Kolesterol, Pagkain, o Malapit na Tulong at Emergency — para basahin ang gabay sa paksang iyon. Pindutin ang logo sa itaas kahit kailan para bumalik sa Home.',
+    howto2Title:'🔍 Paghahanap', howto2Body:'Pindutin ang search bar sa itaas at i-type ang sintomas o paksa, tulad ng "sakit ng dibdib" o "BMI", para direktang mapunta sa may kaugnayang seksyon.',
+    howto3Title:'📋 Aking Logs', howto3Body:'Itala dito ang sarili mong presyon ng dugo at blood sugar — kasama ang petsa at oras. Makikita sa listahan ang huling 5 reading mo; pindutin ang "Tingnan Lahat" para makita pa ang iba. May paalala na mag-backup ng data tuwing 15 entry.',
+    howto4Title:'💊 Mga Gamot', howto4Body:'Alamin kung para saan ang karaniwang gamot at kung paano ito karaniwang iniinom. Idagdag ang anumang gamot — mula sa listahan o i-type mo mismo — sa Aking Medicine Tracker para ma-check ang iyong inumin araw-araw at makita ang progress mo linggu-linggo.',
+    howto5Title:'⚖️ BMI at Timbang', howto5Body:'Kalkulahin ang iyong BMI at makakuha ng simpleng payo sa pagkain base sa resulta. Subaybayan ang iyong timbang sa paglipas ng panahon at makita ito bilang graph.',
+    howto6Title:'🌐 Palitan ang Wika', howto6Body:'Pindutin ang EN o FIL sa kanang itaas kahit kailan para palitan ang wika ng app.',
+    howto7Title:'🔒 Ang Iyong Privacy', howto7Body:'Gumagana ang app na ito kahit walang internet at hindi ito nagdadagnos o kapalit ng doktor. Ang lahat ng itinatala mo (gamot, BP, sugar, timbang) ay dito lamang mananatili sa iyong telepono — hindi ito ipinapadala kahit saan.',
+    howto8Title:'💾 I-backup ang Iyong Data', howto8Body:'Sa My Logs page, pindutin ang "I-download ang Backup" para i-save ang kopya ng lahat (gamot, BP, sugar, timbang) bilang isang file — mainam bago i-clear ang browser, lumipat ng telepono, o i-reinstall ang app. Gamitin ang "I-restore mula sa Backup File" para maibalik ito.',
     logsDataNote:'Ang mga entry na ito ay naka-save lang sa telepono mong ito — hindi ito ipinapadala kahit saan. Mananatili itong available hangga\'t ginagamit mo ang app sa device na ito. Mabubura ito kapag na-clear mo ang site data ng iyong browser, in-uninstall o na-reset ang app, o lumipat ka ng bagong telepono. Kung gusto mong magkaroon ng kopya, gamitin ang Print button para i-save o i-print ang iyong log bago ito mangyari.',
     backupTitle:'Backup at Restore', backupSub:'I-save ang kopya ng lahat ng iyong logs (gamot, blood pressure, blood sugar, at timbang) bilang isang file, para hindi mawala kahit i-clear mo ang browser, lumipat ng telepono, o i-reinstall ang app.',
     backupBtn:'I-download ang Backup', restoreBtn:'I-restore mula sa Backup File', backupNow:'Mag-backup ngayon',
@@ -1278,6 +1321,13 @@ function applyStaticStrings(){
   document.getElementById('nav-lbl-logs').textContent=t.navLogs;
   document.getElementById('nav-lbl-meds').textContent=t.lblMeds;
   document.getElementById('nav-lbl-bmi').innerHTML=t.titleBMI;
+  document.getElementById('lbl-howto-link').textContent=t.howtoLinkLabel;
+  document.getElementById('title-howto').textContent=t.howtoLinkLabel;
+  document.getElementById('howto-intro').textContent=t.howtoIntro;
+  for(let i=1;i<=8;i++){
+    document.getElementById('howto'+i+'-title').textContent=t['howto'+i+'Title'];
+    document.getElementById('howto'+i+'-body').textContent=t['howto'+i+'Body'];
+  }
 }
 
 // ── Search ────────────────────────────────────────────────────────────────────
