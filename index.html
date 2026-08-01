@@ -100,6 +100,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .unit-seg button{flex:1;padding:9px 4px;font-size:0.82rem;font-weight:600;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:background 0.15s,color 0.15s;min-height:40px;border-right:1px solid var(--border)}
 .unit-seg button:last-child{border-right:none}
 .unit-seg button.active{background:var(--primary);color:white}
+.ggg-plate-wrap{display:flex;justify-content:center;margin:6px 0 16px}
+.ggg-plate{width:180px;height:180px;border-radius:50%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;overflow:hidden;border:5px solid white;box-shadow:0 2px 10px rgba(17,24,39,0.18)}
+.ggg-quad{display:flex;align-items:center;justify-content:center;text-align:center;font-size:0.72rem;font-weight:800;color:white;letter-spacing:0.3px;text-shadow:0 1px 2px rgba(0,0,0,0.15);padding:4px}
+.ggg-go{background:#c9992e}
+.ggg-grow{background:#e0186e}
+.ggg-glow-veg{background:#4caf1f}
+.ggg-glow-fruit{background:#f4791f}
+.ggg-card{border-radius:12px;padding:14px 15px;margin-bottom:10px;color:white;box-shadow:0 1px 3px rgba(17,24,39,0.08)}
+.ggg-card-title{font-size:0.92rem;font-weight:800;margin-bottom:6px;letter-spacing:0.3px}
+.ggg-card p{font-size:0.85rem;line-height:1.5;margin-bottom:6px;opacity:0.97}
+.ggg-card .ggg-portion{background:rgba(255,255,255,0.18);border-radius:8px;padding:8px 10px;font-size:0.83rem;line-height:1.5;margin-top:6px}
+.ggg-card.ggg-go{color:#3a2c05}
+.ggg-card.ggg-go .ggg-portion{background:rgba(255,255,255,0.35)}
+.ggg-card.ggg-glow-fruit .ggg-portion{background:rgba(255,255,255,0.22)}
+.ggg-legend{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:14px;font-size:0.72rem;font-weight:600;color:var(--muted)}
+.ggg-legend span{display:flex;align-items:center;gap:4px}
+.ggg-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.ggg-meta-row{display:flex;gap:10px;margin-bottom:14px}
+.ggg-meta{flex:1;background:var(--blue-light);border-radius:10px;padding:9px 10px;text-align:center}
+.ggg-meta-label{font-size:0.7rem;color:var(--muted);font-weight:600}
+.ggg-meta-value{font-size:0.86rem;font-weight:700;color:var(--primary-dark);margin-top:2px}
 .bmi-ft-row{display:flex;gap:8px;margin-bottom:12px}
 .bmi-ft-row input{flex:1;margin-bottom:0!important}
 .bmi-ft-row .ft-sublabel{font-size:0.75rem;color:var(--muted);text-align:center;display:block;margin-top:3px}
@@ -254,6 +275,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="home-card" onclick="navigate('food')">
         <div class="card-icon">🥗</div><div class="card-label" id="lbl-food">Food</div>
       </div>
+      <div class="home-card med-home-card" onclick="navigate('medref')">
+        <div class="card-icon">📖</div><div class="card-label" id="lbl-medref">Medicines</div>
+      </div>
+      <div class="home-card" onclick="navigate('bmicalc')">
+        <div class="card-icon">⚖️</div><div class="card-label" id="lbl-bmicalc">BMI Calculator</div>
+      </div>
       <div class="home-card danger-card" onclick="navigate('nearby')">
         <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby">Nearby Care &amp; Emergency</div>
       </div>
@@ -329,27 +356,51 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
-<!-- BMI & WEIGHT -->
+<!-- WEIGHT (personal tracker only — BMI calculator lives on Home, see page-bmicalc) -->
 <div class="page" id="page-bmi">
   <div class="content-wrap">
     <div class="section-header">
       <button class="back-btn" onclick="goHome()">&#8249;</button>
-      <span class="section-icon">⚖️</span>
-      <h2 class="section-title" id="title-bmi">BMI &amp; Weight</h2>
+      <span class="section-icon">📈</span>
+      <h2 class="section-title" id="title-weight">My Weight</h2>
     </div>
     <div id="bmi-content"></div>
   </div>
 </div>
 
-<!-- MEDICATIONS -->
+<!-- MEDICATIONS (personal tracker only — reference guide lives on Home, see page-medref) -->
 <div class="page" id="page-medications">
   <div class="content-wrap">
     <div class="section-header">
       <button class="back-btn" onclick="goHome()">&#8249;</button>
       <span class="section-icon">💊</span>
-      <h2 class="section-title" id="title-meds">Medicines at the Health Center</h2>
+      <h2 class="section-title" id="title-medtracker">My Medicines</h2>
     </div>
     <div id="medications-content"></div>
+  </div>
+</div>
+
+<!-- BMI CALCULATOR (Home — educational/self-assessment tool, not a saved record) -->
+<div class="page" id="page-bmicalc">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <span class="section-icon">⚖️</span>
+      <h2 class="section-title" id="title-bmicalc">BMI Calculator</h2>
+    </div>
+    <div id="bmicalc-content"></div>
+  </div>
+</div>
+
+<!-- MEDICINES REFERENCE (Home — educational guide, not the personal tracker) -->
+<div class="page" id="page-medref">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <span class="section-icon">📖</span>
+      <h2 class="section-title" id="title-medref">Medicines at the Health Center</h2>
+    </div>
+    <div id="medref-content"></div>
   </div>
 </div>
 
@@ -394,6 +445,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="info-card"><div class="info-card-title" id="howto6-title">🌐 Switch Language</div><p id="howto6-body">Tap EN or FIL at the top right anytime to switch the app's language.</p></div>
     <div class="info-card"><div class="info-card-title" id="howto7-title">🔒 Your Privacy</div><p id="howto7-body">This app works offline and does not diagnose or replace a doctor. Everything you log stays only on your phone.</p></div>
     <div class="info-card"><div class="info-card-title" id="howto8-title">💾 Back Up Your Data</div><p id="howto8-body">On the My Logs page, tap "Download Backup" to save a copy of everything as one file.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howtoRefs-title">📚 References &amp; Sources</div>
+      <p id="howtoRefs-intro">The food guidance and plate images in this app are based on:</p>
+      <ul class="checklist" id="howtoRefs-list"></ul>
+      <p id="howtoRefs-note" style="font-size:0.78rem;color:var(--muted);margin-top:6px"></p>
+    </div>
   </div>
 </div>
 
@@ -406,10 +462,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <span class="nav-icon">📋</span><span id="nav-lbl-logs">My Logs</span>
   </button>
   <button class="nav-btn" id="nav-medications" onclick="navigate('medications')">
-    <span class="nav-icon">💊</span><span id="nav-lbl-meds">Medicines</span>
+    <span class="nav-icon">💊</span><span id="nav-lbl-meds">My Medicines</span>
   </button>
   <button class="nav-btn" id="nav-bmi" onclick="navigate('bmi')">
-    <span class="nav-icon">⚖️</span><span id="nav-lbl-bmi">BMI &amp; Weight</span>
+    <span class="nav-icon">📈</span><span id="nav-lbl-bmi">My Weight</span>
   </button>
 </nav>
 
@@ -429,19 +485,22 @@ const T = {
     disclaimer:'This app gives health guidance only. It does not diagnose or replace a doctor, nurse, or health center.',
     navHome:'Home', navLogs:'My Logs',
     lblRF:'Red Flags', lblHTN:'Hypertension', lblDM:'Diabetes', lblDys:'Cholesterol',
-    lblFood:'Food', lblMeds:'Medicines', lblLogs:'My Logs', lblNearby:'Nearby Care &amp; Emergency',
+    lblFood:'Food', lblMeds:'Medicines', lblBMICalc:'BMI Calculator', lblLogs:'My Logs', lblNearby:'Nearby Care &amp; Emergency',
     titleRF:'Red Flags', titleHTN:'Hypertension', titleDM:'Diabetes', titleDys:'Cholesterol (Dyslipidemia)',
-    titleFood:'Food', titleBMI:'BMI &amp; Weight', titleMeds:'Medicines at the Health Center', titleLogs:'My Logs', titleNearby:'Nearby Care &amp; Emergency Numbers',
+    titleFood:'Food', titleBMICalc:'BMI Calculator', titleWeight:'My Weight', titleMeds:'Medicines at the Health Center', titleMedTracker:'My Medicines', titleLogs:'My Logs', titleNearby:'Nearby Care &amp; Emergency Numbers',
     howtoLinkLabel:'How to Use This App',
     howtoIntro:'Here\'s a quick guide to what this app can do and how to use it.',
-    howto1Title:'🏠 Browse Health Topics', howto1Body:'From the Home screen, tap any card — Red Flags, Hypertension, Diabetes, Cholesterol, Food, or Nearby Care & Emergency — to read guidance on that topic. Tap the logo at the top anytime to return Home.',
+    howto1Title:'🏠 Browse Health Topics', howto1Body:'From the Home screen, tap any card — Red Flags, Hypertension, Diabetes, Cholesterol, Food, Medicines, BMI Calculator, or Nearby Care & Emergency — to read guidance on that topic. Tap the logo at the top anytime to return Home.',
     howto2Title:'🔍 Search', howto2Body:'Tap the search bar at the top and type a symptom or topic, like "chest pain" or "BMI", to jump straight to the relevant section.',
     howto3Title:'📋 My Logs', howto3Body:'Keep your own blood pressure and blood sugar readings here — with date and time. The list shows your last 5 readings; tap "View all" to see more. You\'ll get a reminder to back up your data every 15 entries.',
-    howto4Title:'💊 Medicines', howto4Body:'See what common medicines are for and how they\'re usually taken. Add any medicine — from the list or typed in yourself — to My Medicine Tracker to check off your doses each day and see your weekly progress.',
-    howto5Title:'⚖️ BMI & Weight', howto5Body:'Calculate your BMI and get simple food advice based on the result. Track your weight over time and see it as a graph.',
+    howto4Title:'💊 Medicines', howto4Body:'On the Home screen, tap Medicines to see what common medicines are for and how they\'re usually taken. On the bottom nav, tap My Medicines to add any medicine — from the list or typed in yourself — and check off your doses each day.',
+    howto5Title:'⚖️ BMI & Weight', howto5Body:'On the Home screen, tap BMI Calculator to check your BMI and get simple food advice based on the result. On the bottom nav, tap My Weight to track your weight over time and see it as a graph.',
     howto6Title:'🌐 Switch Language', howto6Body:'Tap EN or FIL at the top right anytime to switch the app\'s language.',
     howto7Title:'🔒 Your Privacy', howto7Body:'This app works offline and does not diagnose or replace a doctor. Everything you log (medicines, BP, sugar, weight) stays only on your phone — it is never sent anywhere.',
     howto8Title:'💾 Back Up Your Data', howto8Body:'On the My Logs page, tap "Download Backup" to save a copy of everything (medicines, BP, sugar, weight) as one file — useful before clearing your browser, switching phones, or reinstalling. Use "Restore from Backup File" to bring it back.',
+    howtoRefsTitle:'📚 References & Sources', howtoRefsIntro:'The food guidance and plate images in this app are based on:',
+    howtoRefsList:['Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Adults (19–59 years old)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Older Persons (60 years old and above)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Pregnant and Lactating Women (© 2016)'],
+    howtoRefsNote:'Pinggang Pinoy® is a registered trademark of FNRI-DOST, used here for educational purposes. Visit fnri.dost.gov.ph for the original materials.',
     logsDataNote:'These entries are saved only on this phone — never sent anywhere. They stay available for as long as you keep using this app on this device. They will be deleted if you clear your browser\'s site data, uninstall or reset the app, or switch to a new phone. If you want to keep a copy, use the Print button to save or print your log before that happens.',
     backupTitle:'Backup & Restore', backupSub:'Save a copy of all your logs (medicines, blood pressure, blood sugar, and weight) as one file, so you don\'t lose them if you clear your browser, switch phones, or reinstall the app.',
     backupBtn:'Download Backup', restoreBtn:'Restore from Backup File', backupNow:'Back up now',
@@ -477,10 +536,12 @@ const T = {
     whatToDo:'What to do', catEm:'Emergency', catHC:'Health Centers', catHosp:'Hospitals',
     nearbyVerify:'Contact numbers below were verified against official Muntinlupa City Government sources. Numbers can still change — please confirm before an urgent visit.',
     plateTitle:'Pinggang Pinoy — Balanced Plate Guide',
-    plateNote:'Based on DOH/FNRI Pinggang Pinoy guidelines. Choose who the plate is for below — the recommended portions are different for adults, pregnant or breastfeeding mothers, and children.',
+    plateNote:'Based on the official FNRI-DOST Pinggang Pinoy food guides. Choose who the plate is for, then Male/Female (or Pregnant/Lactating) for the exact portions that apply to you.',
     plateSelectLabel:'Choose who this is for',
-    plateAdult:'Adults', platePregnant:'Pregnant Women', plateLactating:'Breastfeeding Mothers',
-    plateYoungChild:'Young Children (2–5 years old)', plateSchoolAge:'School-age Children (6–12 years old)',
+    plateWaterLabel:'Water', plateMilkLabel:'Milk', plateKcalLabel:'Daily Calories',
+    plateTipsTitle:'Health Tips',
+    plateMealTitle:'Sample One-Day Meal', plateMealBreakfast:'Breakfast', plateMealLunch:'Lunch', plateMealDinner:'Dinner', plateMealAM:'A.M. Snack', plateMealPM:'P.M. Snack',
+    plateSourceNote:'Source: FNRI-DOST Pinggang Pinoy — see the "How to Use This App" page for full citation.',
     mealsTitle:'Budget-Friendly, Heart-Healthy Meals',
     tipsTitle:'Simple Food Reminders',
     bmiTitle:'BMI Calculator (Adults)',
@@ -518,7 +579,7 @@ const T = {
     dysRiskTitle:'Who Is at Higher Risk', dysRiskBody:'Your risk of dyslipidemia is higher if you have a diet high in fried and fatty foods, are overweight, are not physically active, smoke, drink alcohol regularly, or have a family history of high cholesterol or early heart disease. Having diabetes or hypertension also raises your risk of dyslipidemia.',
     dysNumbersTitle:'Know Your Numbers', dysNumbersBody:'Ask your health center about lipid (cholesterol) testing, especially if you have hypertension, diabetes, or a family history of heart disease. This is usually a simple blood test that your doctor can help interpret.',
     dysMedTitle:'Taking Your Medicine', dysMedBody:'If prescribed a cholesterol medicine, take it exactly as instructed, usually at the same time each day. Never stop or change your dose without talking to your doctor or health worker first.',
-    dysDietTitle:'Eating for Healthy Cholesterol', dysDietBody:'Reduce fried, fatty, and processed foods, including lechon, crispy pata, and processed meats. Choose fish, skinless chicken, and plant-based protein (beans, monggo, tokwa) more often than red meat. Use less oil in cooking and choose healthier oils when possible. Eat more vegetables, fruits, and high-fiber foods like oats and legumes, which can help lower cholesterol.',
+    dysDietTitle:'Eating for Healthy Cholesterol', dysDietBody:'Reduce fried, fatty, and processed foods, including lechon, crispy pata, and processed meats. Choose fish, skinless chicken, and plant-based protein (beans, monggo, tokwa) more often than red meat. When cooking with oil, use less overall, and choose healthier oils — canola, corn, sunflower, safflower, or olive oil — instead of coconut oil, palm oil, lard (mantika ng baboy), butter, or margarine, which are higher in saturated fat. Canola and corn oil are usually the most affordable healthier options at local groceries. Eat more vegetables, fruits, and high-fiber foods like oats and legumes, which can help lower cholesterol.',
     dysActivityTitle:'Staying Active', dysActivityBody:'Regular physical activity can help raise your "good" HDL cholesterol and lower triglycerides. Aim for at least 30 minutes of activity, such as brisk walking, most days of the week. Combined with a healthier diet, staying active is one of the most effective ways to improve your cholesterol levels without medicine, or to help medicine work better.',
     emergMainLabel:'Main Emergency Hotline (24/7)',
     emergOtherTitle:'Other Ways to Reach Emergency Response',
@@ -549,19 +610,22 @@ const T = {
     disclaimer:'Gabay pangkalusugan lamang ito. Hindi ito kapalit ng doktor, nurse, o health center.',
     navHome:'Home', navLogs:'Aking Logs',
     lblRF:'Mga Babala', lblHTN:'Altapresyon', lblDM:'Diyabetis', lblDys:'Kolesterol',
-    lblFood:'Pagkain', lblMeds:'Mga Gamot', lblLogs:'Aking Logs', lblNearby:'Malapit na Tulong at Emergency',
+    lblFood:'Pagkain', lblMeds:'Mga Gamot', lblBMICalc:'Kalkulahin ang BMI', lblLogs:'Aking Logs', lblNearby:'Malapit na Tulong at Emergency',
     titleRF:'Mga Babala', titleHTN:'Altapresyon (Hypertension)', titleDM:'Diyabetis', titleDys:'Kolesterol (Dyslipidemia)',
-    titleFood:'Pagkain', titleBMI:'BMI at Timbang', titleMeds:'Mga Gamot sa Health Center', titleLogs:'Aking Logs', titleNearby:'Malapit na Tulong at Mga Numero sa Emergency',
+    titleFood:'Pagkain', titleBMICalc:'Kalkulahin ang BMI', titleWeight:'Aking Timbang', titleMeds:'Mga Gamot sa Health Center', titleMedTracker:'Aking mga Gamot', titleLogs:'Aking Logs', titleNearby:'Malapit na Tulong at Mga Numero sa Emergency',
     howtoLinkLabel:'Paano Gamitin ang App na Ito',
     howtoIntro:'Narito ang maikling gabay kung ano ang kaya ng app na ito at paano ito gamitin.',
-    howto1Title:'🏠 Tingnan ang mga Paksa sa Kalusugan', howto1Body:'Mula sa Home screen, pindutin ang alinmang card — Mga Babala, Altapresyon, Diyabetis, Kolesterol, Pagkain, o Malapit na Tulong at Emergency — para basahin ang gabay sa paksang iyon. Pindutin ang logo sa itaas kahit kailan para bumalik sa Home.',
+    howto1Title:'🏠 Tingnan ang mga Paksa sa Kalusugan', howto1Body:'Mula sa Home screen, pindutin ang alinmang card — Mga Babala, Altapresyon, Diyabetis, Kolesterol, Pagkain, Mga Gamot, Kalkulahin ang BMI, o Malapit na Tulong at Emergency — para basahin ang gabay sa paksang iyon. Pindutin ang logo sa itaas kahit kailan para bumalik sa Home.',
     howto2Title:'🔍 Paghahanap', howto2Body:'Pindutin ang search bar sa itaas at i-type ang sintomas o paksa, tulad ng "sakit ng dibdib" o "BMI", para direktang mapunta sa may kaugnayang seksyon.',
     howto3Title:'📋 Aking Logs', howto3Body:'Itala dito ang sarili mong presyon ng dugo at blood sugar — kasama ang petsa at oras. Makikita sa listahan ang huling 5 reading mo; pindutin ang "Tingnan Lahat" para makita pa ang iba. May paalala na mag-backup ng data tuwing 15 entry.',
-    howto4Title:'💊 Mga Gamot', howto4Body:'Alamin kung para saan ang karaniwang gamot at kung paano ito karaniwang iniinom. Idagdag ang anumang gamot — mula sa listahan o i-type mo mismo — sa Aking Medicine Tracker para ma-check ang iyong inumin araw-araw at makita ang progress mo linggu-linggo.',
-    howto5Title:'⚖️ BMI at Timbang', howto5Body:'Kalkulahin ang iyong BMI at makakuha ng simpleng payo sa pagkain base sa resulta. Subaybayan ang iyong timbang sa paglipas ng panahon at makita ito bilang graph.',
+    howto4Title:'💊 Mga Gamot', howto4Body:'Sa Home screen, pindutin ang Mga Gamot para malaman kung para saan ang karaniwang gamot at kung paano ito karaniwang iniinom. Sa ibaba, pindutin ang Aking mga Gamot para magdagdag ng gamot — mula sa listahan o i-type mo mismo — at ma-check ang inumin mo araw-araw.',
+    howto5Title:'⚖️ BMI at Timbang', howto5Body:'Sa Home screen, pindutin ang Kalkulahin ang BMI para malaman ang iyong BMI at makakuha ng simpleng payo sa pagkain. Sa ibaba, pindutin ang Aking Timbang para subaybayan ang iyong timbang sa paglipas ng panahon at makita ito bilang graph.',
     howto6Title:'🌐 Palitan ang Wika', howto6Body:'Pindutin ang EN o FIL sa kanang itaas kahit kailan para palitan ang wika ng app.',
     howto7Title:'🔒 Ang Iyong Privacy', howto7Body:'Gumagana ang app na ito kahit walang internet at hindi ito nagdadagnos o kapalit ng doktor. Ang lahat ng itinatala mo (gamot, BP, sugar, timbang) ay dito lamang mananatili sa iyong telepono — hindi ito ipinapadala kahit saan.',
     howto8Title:'💾 I-backup ang Iyong Data', howto8Body:'Sa My Logs page, pindutin ang "I-download ang Backup" para i-save ang kopya ng lahat (gamot, BP, sugar, timbang) bilang isang file — mainam bago i-clear ang browser, lumipat ng telepono, o i-reinstall ang app. Gamitin ang "I-restore mula sa Backup File" para maibalik ito.',
+    howtoRefsTitle:'📚 Mga Sanggunian', howtoRefsIntro:'Ang gabay sa pagkain at mga larawan ng plato sa app na ito ay batay sa:',
+    howtoRefsList:['Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Mga Nasa Hustong Gulang (19–59 taon)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Nakatatandang Edad (60 taon pataas)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Buntis at Nagpapasusong Kababaihan (© 2016)'],
+    howtoRefsNote:'Ang Pinggang Pinoy® ay rehistradong trademark ng FNRI-DOST, ginamit dito para sa layuning pang-edukasyon lamang. Bisitahin ang fnri.dost.gov.ph para sa orihinal na materyales.',
     logsDataNote:'Ang mga entry na ito ay naka-save lang sa telepono mong ito — hindi ito ipinapadala kahit saan. Mananatili itong available hangga\'t ginagamit mo ang app sa device na ito. Mabubura ito kapag na-clear mo ang site data ng iyong browser, in-uninstall o na-reset ang app, o lumipat ka ng bagong telepono. Kung gusto mong magkaroon ng kopya, gamitin ang Print button para i-save o i-print ang iyong log bago ito mangyari.',
     backupTitle:'Backup at Restore', backupSub:'I-save ang kopya ng lahat ng iyong logs (gamot, blood pressure, blood sugar, at timbang) bilang isang file, para hindi mawala kahit i-clear mo ang browser, lumipat ng telepono, o i-reinstall ang app.',
     backupBtn:'I-download ang Backup', restoreBtn:'I-restore mula sa Backup File', backupNow:'Mag-backup ngayon',
@@ -597,10 +661,12 @@ const T = {
     whatToDo:'Dapat gawin', catEm:'Emergency', catHC:'Mga Health Center', catHosp:'Mga Ospital',
     nearbyVerify:'Ang mga numerong nasa ibaba ay na-verify laban sa opisyal na mapagkukunan ng Lungsod ng Muntinlupa. Maaari pa ring magbago ang mga ito, kumpirmahin bago pumunta para sa agarang pangangailangan.',
     plateTitle:'Pinggang Pinoy — Gabay sa Balanseng Pagkain',
-    plateNote:'Batay sa alituntunin ng DOH/FNRI Pinggang Pinoy. Piliin sa ibaba kung para kanino ang plato — iba-iba ang inirekomendang bahagi para sa matatanda, buntis o nagpapasusong ina, at mga bata.',
+    plateNote:'Batay sa opisyal na Pinggang Pinoy food guide ng FNRI-DOST. Piliin kung para kanino ang plato, tapos Lalaki/Babae (o Buntis/Nagpapasuso) para makita ang eksaktong bahaging para sa iyo.',
     plateSelectLabel:'Piliin kung para kanino',
-    plateAdult:'Matatanda', platePregnant:'Buntis', plateLactating:'Nagpapasusong Ina',
-    plateYoungChild:'Batang Paslit (2–5 taong gulang)', plateSchoolAge:'Batang Nag-aaral (6–12 taong gulang)',
+    plateWaterLabel:'Tubig', plateMilkLabel:'Gatas', plateKcalLabel:'Kcal Kada Araw',
+    plateTipsTitle:'Mga Health Tip',
+    plateMealTitle:'Halimbawang Isang-Araw na Pagkain', plateMealBreakfast:'Almusal', plateMealLunch:'Tanghalian', plateMealDinner:'Hapunan', plateMealAM:'Meryenda sa Umaga', plateMealPM:'Meryenda sa Hapon',
+    plateSourceNote:'Pinagmulan: FNRI-DOST Pinggang Pinoy — tingnan ang "Paano Gamitin ang App na Ito" para sa buong sanggunian.',
     mealsTitle:'Abot-Kayang Pagkain na Mabuti sa Puso',
     tipsTitle:'Simpleng Paalala sa Pagkain',
     bmiTitle:'BMI Calculator (Para sa Matatanda)',
@@ -630,7 +696,7 @@ const T = {
     dmFootTitle:'Pag-aalaga ng Paa', dmFootBody:'Suriin ang iyong paa araw-araw para sa mga hiwa, paltos, pamumula, o sugat, dahil maaaring mabawasan ng diyabetis ang pakiramdam sa paa, kaya madaling hindi mapansin ang injury. Hugasan at patuyuin ang paa araw-araw, lalo na sa pagitan ng mga daliri, at lagyan ng lotion ang tuyong balat (pero huwag sa pagitan ng daliri). Huwag maglakad nang walang sapin, kahit sa bahay. Gupitin ang kuko ng paa nang tuwid. Magpatingin agad sa health worker kung may sugat na hindi gumagaling, dahil mabilis lumala ang sugat sa paa kapag may diyabetis.',
     dmDietTitle:'Pagkain Para sa Kontrol ng Blood Sugar', dmDietBody:'Kumain nang regular at balanse sa halip na laktawan ang mga kainan, na maaaring magdulot ng biglaang pagbabago ng blood sugar. Bantayan ang bahagi ng carbohydrate (kanin, tinapay, kamote) at isabay ito sa protina at gulay para mabagalan ang pagsipsip ng asukal. Bawasan ang matamis na pagkain, inumin, at dessert. Piliin ang buong prutas kaysa juice. Ang pagkain sa magkasingsabay na oras araw-araw ay tumutulong din panatilihing stable ang blood sugar.',
     dmActivityTitle:'Pananatiling Aktibo', dmActivityBody:'Ang pisikal na aktibidad ay tumutulong sa katawan na mas mabuting gamitin ang insulin at maaaring pababain ang blood sugar. Layunin ang regular na aktibidad halos araw-araw, tulad ng paglalakad. Kung umiinom ka ng gamot na maaaring magdulot ng mababang blood sugar, magdala ng maliit na matamis na meryenda kung sakaling manginig, mahilo, o malito habang nag-eehersisyo. Suriin ang paa pagkatapos ng aktibidad, lalo na kung sumusuot ng bagong sapatos.',
-    dmUrgentTitle:'Kailan Dapat Magpatingin Agad', dmUrgentBody:'Ang pagsusuka at hindi makatago ng likido, matinding panghihina o pagkalito, antok, napakatuyong bibig, o biglang panginginig na may malamig na pawis ay senyales ng emergency. Tingnan ang seksyong Mga Babala at magpatingin agad.',
+    dmUrgentTitle:'Kailan Dapat Magpatingin Agad', dmUrgentBody:'Ang pagsusuka nang paulit-ulit at hindi kayang uminom ng tubig, matinding panghihina o pagkalito, antok, napakatuyong bibig, o biglang panginginig na may malamig na pawis ay senyales ng emergency. Tingnan ang seksyong Mga Babala at magpatingin agad.',
     // Dyslipidemia (Kolesterol)
     dysIntro:'Ang pag-unawa sa kolesterol ay tumutulong ipaliwanag kung bakit mahalaga ang parehong pagbabago sa pamumuhay at gamot, kahit walang sintomas.',
     dysWhatTitle:'Ano ang Kolesterol?', dysWhatBody:'Ang kolesterol ay parang-tabang substance na kailangan ng katawan sa maliit na dami, ngunit maaaring makasama ang labis na dami ng ilang uri nito. Ang LDL ("masamang" kolesterol) ay maaaring mag-ipon sa iyong mga ugat, habang ang HDL ("mabuting" kolesterol) ay tumutulong alisin ito. Ang triglycerides ay isa pang uri ng taba sa dugo na, kapag mataas, ay nagpapataas din ng panganib sa kalusugan. Ang dyslipidemia ay nangangahulugang hindi malusog ang balanse ng mga ito.',
@@ -638,7 +704,7 @@ const T = {
     dysRiskTitle:'Sino ang Mas Nanganganib', dysRiskBody:'Mas mataas ang panganib mong magkaroon ng dyslipidemia kung ang iyong pagkain ay mataas sa pritong at mamantikang pagkain, sobra sa timbang, hindi aktibo, naninigarilyo, regular na umiinom ng alak, o may family history ng mataas na kolesterol o maagang sakit sa puso. Ang pagkakaroon ng diyabetis o hypertension ay nagpapataas din ng panganib ng dyslipidemia.',
     dysNumbersTitle:'Alamin ang Iyong Numero', dysNumbersBody:'Magtanong sa iyong health center tungkol sa lipid (kolesterol) test, lalo na kung may hypertension, diyabetis, o family history ng sakit sa puso. Karaniwan itong simpleng blood test na matutulungan kang maintindihan ng iyong doktor.',
     dysMedTitle:'Pag-inom ng Gamot', dysMedBody:'Kung may nireseta na gamot para sa kolesterol, inumin ito nang eksakto sa payo, karaniwang sa parehong oras araw-araw. Huwag itigil o baguhin ang dosage nang hindi muna kumukonsulta sa doktor o health worker.',
-    dysDietTitle:'Pagkain Para sa Malusog na Kolesterol', dysDietBody:'Bawasan ang pritong, mamantika, at processed na pagkain, kasama ang lechon, crispy pata, at processed na karne. Piliin ang isda, manok na walang balat, at plant-based na protina (beans, munggo, tokwa) nang mas madalas kaysa pulang karne. Gumamit ng kaunting mantika sa pagluluto at piliin ang mas malusog na mantika kung maaari. Kumain ng mas maraming gulay, prutas, at mataas sa fiber na pagkain tulad ng oats at legumes, na maaaring makatulong pababain ang kolesterol.',
+    dysDietTitle:'Pagkain Para sa Malusog na Kolesterol', dysDietBody:'Bawasan ang pritong, mamantika, at processed na pagkain, kasama ang lechon, crispy pata, at processed na karne. Piliin ang isda, manok na walang balat, at plant-based na protina (beans, munggo, tokwa) nang mas madalas kaysa pulang karne. Kapag nagluluto gamit ang mantika, gumamit ng kaunti lang, at piliin ang mas malusog na klase — canola, corn, sunflower, safflower, o olive oil — sa halip na coconut oil, palm oil, mantika ng baboy (lard), o margarine, na mas mataas sa saturated fat. Ang canola at corn oil ang karaniwang mas mura at madaling makuha sa mga lokal na grocery. Kumain ng mas maraming gulay, prutas, at mataas sa fiber na pagkain tulad ng oats at legumes, na maaaring makatulong pababain ang kolesterol.',
     dysActivityTitle:'Pananatiling Aktibo', dysActivityBody:'Ang regular na pisikal na aktibidad ay maaaring makatulong itaas ang "mabuting" HDL kolesterol at pababain ang triglycerides. Layunin ang hindi bababa sa 30 minuto ng aktibidad, tulad ng mabilis na paglalakad, halos araw-araw. Kasabay ng mas malusog na pagkain, ang pananatiling aktibo ay isa sa pinaka-epektibong paraan para mapabuti ang antas ng kolesterol nang walang gamot, o para makatulong na mas gumana ang gamot.',
     emergMainLabel:'Pangunahing Emergency Hotline (24/7)',
     emergOtherTitle:'Iba Pang Paraan Para Maabot ang Emergency Response',
@@ -651,13 +717,13 @@ const T = {
     medResetBtn:'I-reset Para sa Bagong Linggo', medResetConfirm:'Buburahin nito ang mga check-in ng gamot mo para makapagsimula kang muli. Mananatili ang mga gamot na sinusubaybayan mo at ang iskedyul ng dosis nila. Hindi na ito maibabalik pa. Ituloy?',
     thisWeek:'Ngayong Linggo', streakLabel:'Streak', dosesUnit:'dosis', dayUnit:'araw', daysUnit:'araw',
     timesPerDayLabel:'Ilang beses sa isang araw', doseAM:'Umaga', doseNoon:'Tanghali', dosePM:'Gabi',
-    bpLogTitle:'Aking BP Log', bpLogSub:'Isulat dito ang iyong presyon ng dugo sa bahay para maidiskuti sa iyong doktor. Dito lang ito sa telepono mo mananatili.',
+    bpLogTitle:'Aking BP Log', bpLogSub:'Isulat dito ang iyong presyon ng dugo sa bahay para mapag-usapan ninyo ng iyong doktor. Dito lang ito sa telepono mo mananatili.',
     bpSysPlaceholder:'Systolic (hal. 130)', bpDiaPlaceholder:'Diastolic (hal. 85)', bpLogPrintBtn:'I-print ang Aking BP Log',
     flagWarn:'Mataas', flagDanger:'Napakataas — Magpatingin Agad', flagLowDanger:'Mababa — Magpatingin Agad',
-    sugarLogTitle:'Aking Blood Sugar Log', sugarLogSub:'Isulat dito ang iyong blood sugar sa bahay para maidiskuti sa iyong doktor. Dito lang ito sa telepono mo mananatili.',
+    sugarLogTitle:'Aking Blood Sugar Log', sugarLogSub:'Isulat dito ang iyong blood sugar sa bahay para mapag-usapan ninyo ng iyong doktor. Dito lang ito sa telepono mo mananatili.',
     sugarValPlaceholder:'Reading (mg/dL)', sugarFasting:'Fasting', sugarRandom:'Random/Pagkatapos kumain', sugarLogPrintBtn:'I-print ang Aking Sugar Log',
     logAdd:'+ Idagdag', logNoEntries:'Wala pang entry.', logInvalid:'Maglagay po ng tamang reading.',
-    weightLogTitle:'Aking Timbang Log', weightLogSub:'Isulat dito ang iyong timbang para maidiskuti sa iyong doktor. Dito lang ito sa telepono mo mananatili.',
+    weightLogTitle:'Aking Timbang Log', weightLogSub:'Isulat dito ang iyong timbang para mapag-usapan ninyo ng iyong doktor. Dito lang ito sa telepono mo mananatili.',
     weightValPlaceholder:'Timbang', weightLogPrintBtn:'I-print ang Aking Weight Log', weightChartEmpty:'Magdagdag ng hindi bababa sa 2 entry para makita ang graph ng iyong timbang.',
     safeWeightNote:'Ang ligtas na bilis ng pagbabago ng timbang ay humigit-kumulang 0.5–1 kg (mga 1–2 lbs) kada linggo. Ang mas mabilis na pagbabago ay dapat lang gawin sa ilalim ng gabay ng doktor o nutrisyonista.',
     weeksToGoal:'Sa ligtas na bilis na 0.5–1 kg kada linggo, mga {weeks} linggo ito.',
@@ -695,7 +761,7 @@ const RF = [
       danger:['Vomiting and unable to keep fluids down','Severe weakness or confusion','Drowsiness or altered consciousness','Sunken eyes or very dry mouth (dehydration)','Shaking, cold sweat, or sudden confusion (possible very low blood sugar)'],
       action:'Consult health center or doctor. Go to the nearest health center or hospital immediately if danger signs appear.'},
     fil:{title:'Diabetes Emergency', signs:['Laging nauuhaw','Madalas umihi','Malabong paningin','Hindi maipaliwanag na pagbaba ng timbang','Sugat na matagal gumaling','Pamamanhid o tusok-tusok sa paa'],
-      danger:['Pagsusuka at hindi makatago ng likido','Matinding panghihina o pagkalito','Antok o pagbabago ng kamalayan','Lubog ang mata o napakatuyong bibig (dehydration)','Panginginig, malamig na pawis, o biglang pagkalito (posibleng sobrang baba ng blood sugar)'],
+      danger:['Pagsusuka nang paulit-ulit at hindi kayang uminom ng tubig','Matinding panghihina o pagkalito','Antok o pagbabago ng kamalayan','Lubog ang mata o napakatuyong bibig (dehydration)','Panginginig, malamig na pawis, o biglang pagkalito (posibleng sobrang baba ng blood sugar)'],
       action:'Magpatingin sa health center o doktor. Pumunta agad sa pinakamalapit na health center o ospital kung may delikadong senyales.'}
   }
 ];
@@ -731,90 +797,107 @@ const DYS_SECTIONS = [
   {key:'dysActivity', icon:'🚶'}
 ];
 
-// Pinggang Pinoy — the five DOH/FNRI life-stage plate guides. Selected via a
-// dropdown on the Food & BMI page (see plateGroup / setPlateGroup). Adults is
-// the default since it is the primary audience for this app's NCD focus; the
-// other four are included for household members (pregnant/lactating mothers,
-// young/school-age children) who may also use the family's phone.
+// Pinggang Pinoy Go-Grow-Glow food guide. Content and portion amounts are
+// sourced directly from the official FNRI-DOST Pinggang Pinoy pamphlets for
+// Adults, Older Persons, and Pregnant & Lactating Women — see the "How to
+// Use This App" page for full citation. Only these 3 life-stage classes are
+// included (young child / school-age removed per project scope).
+const GGG = {
+  en:{
+    go:{title:'GO — Energy Giving', body:'Go for rice, root crops, pasta, bread, and other carbohydrate-rich foods, which give you energy for your body\'s functions and physical activity. Choose whole grains like brown rice, corn, whole wheat bread, and oatmeal when you can — they have more fiber and are linked to a lower risk of heart disease and diabetes.'},
+    grow:{title:'GROW — Body Building', body:'Eat fish, shellfish, lean meat, poultry, eggs, and dried beans and nuts — these are needed to grow, maintain, and repair your body\'s tissues. Include fatty fish like tuna, sardines, and mackerel 2–3 times a week for fatty acids that help protect your heart. Have milk, milk products, and other calcium-rich foods like dilis and small shrimp for strong bones and teeth.'},
+    glowVeg:{title:'GLOW — Vegetables', body:'Enjoy a wide variety of vegetables — they\'re packed with the vitamins, minerals, and fiber your body needs to regulate itself.'},
+    glowFruit:{title:'GLOW — Fruits', body:'Enjoy a wide variety of fruits too, for the same reason — vitamins, minerals, and fiber your body needs.'},
+    growExtraPreglact:'You need enough animal-based protein now — it gives you iron that\'s easier for your body to absorb. Fatty fish 2–3 times a week also supports your baby\'s brain development.',
+    glowExtraPreglact:'Make it a habit to include dark green leafy vegetables like malunggay and kangkong — they\'re high in iron and folate, which you need more of right now.'
+  },
+  fil:{
+    go:{title:'GO — Nagbibigay ng Enerhiya', body:'Kumain ng kanin, kamote, pasta, tinapay, at iba pang pagkaing mataas sa carbohydrates — dito ka kumukuha ng enerhiya para sa mga gawain ng katawan at pisikal na aktibidad. Kung maaari, piliin ang whole grains tulad ng brown rice, mais, whole wheat bread, at oatmeal — mas mataas ang fiber nito at may kaugnayan sa mas mababang panganib ng sakit sa puso at diabetes.'},
+    grow:{title:'GROW — Pagpapalusog ng Katawan', body:'Kumain ng isda, shellfish, lean na karne, manok, itlog, at dried beans o nuts — kailangan ito para lumaki, mapanatili, at ma-repair ang tisyu ng iyong katawan. Isama ang mataba/fatty fish tulad ng tuna, sardinas, at mackerel 2–3 beses sa isang linggo para sa fatty acids na tumutulong protektahan ang puso. Uminom ng gatas, kumain ng produktong gatas, at iba pang mataas-sa-calcium na pagkain tulad ng dilis at maliliit na hipon para sa malakas na buto at ngipin.'},
+    glowVeg:{title:'GLOW — Mga Gulay', body:'Kumain ng iba\'t ibang gulay — dito galing ang bitamina, minerals, at fiber na kailangan ng katawan para gumana nang maayos.'},
+    glowFruit:{title:'GLOW — Mga Prutas', body:'Kumain din ng iba\'t ibang prutas, sa parehong dahilan — bitamina, minerals, at fiber na kailangan ng katawan.'},
+    growExtraPreglact:'Kailangan mo ngayon ng sapat na animal-based protein — mas madali nitong maibigay ang iron na kaya ng katawan mong i-absorb. Ang fatty fish 2–3 beses sa isang linggo ay tumutulong din sa brain development ng sanggol mo.',
+    glowExtraPreglact:'Gawing ugali ang pagsama ng madahong gulay na berde tulad ng malunggay at kangkong — mataas ito sa iron at folate, na mas kailangan mo ngayon.'
+  }
+};
 const PLATE = {
   adult:{
-    en:[
-      {icon:'🥦',label:'Half the plate',desc:'Vegetables and fruits'},
-      {icon:'🍚',label:'One-fourth of the plate',desc:'Rice, corn, root crops, bread, or other carbohydrates (choose whole grain where possible)'},
-      {icon:'🐟',label:'One-fourth of the plate',desc:'Fish, egg, beans, lean meat, or other protein'},
-      {icon:'💧',label:'Drink',desc:'Water (not sugary drinks); a glass of milk daily if available'}
-    ],
-    fil:[
-      {icon:'🥦',label:'Kalahati ng plato',desc:'Mga gulay at prutas'},
-      {icon:'🍚',label:'Isang-kapat ng plato',desc:'Kanin, mais, kamote, tinapay, o iba pang karbohidrato (piliin ang whole grain kung maaari)'},
-      {icon:'🐟',label:'Isang-kapat ng plato',desc:'Isda, itlog, monggo/sitaw/toyo, karne, o iba pang protina'},
-      {icon:'💧',label:'Inumin',desc:'Tubig (hindi matamis na inumin); isang basong gatas araw-araw kung available'}
-    ]
+    label_en:'Adults (19–59 y)', label_fil:'Mga Nasa Hustong Gulang (19–59 taon)',
+    variants:['male','female'], variantLabel_en:{male:'Male',female:'Female'}, variantLabel_fil:{male:'Lalaki',female:'Babae'},
+    male:{
+      go_en:'1½ cups cooked rice, or 6 pcs small pandesal, or 6 slices small bread, or 1½ cups cooked noodles (pansit), or 1½ medium pieces root crop (kamote)',
+      go_fil:'1½ tasang kanin, o 6 piraso maliit na pandesal, o 6 hiwa ng maliit na tinapay, o 1½ tasang lutong pansit, o 1½ katamtamang kamote',
+      grow_en:'2 pcs small galunggong, or 2 slices bangus, or 2 pcs small chicken leg, or 2 servings (30g each) lean meat, or 2 pcs tokwa (6×6×2cm), or 1 egg plus 1 piece of any of the above',
+      grow_fil:'2 piraso maliit na galunggong, o 2 hiwa ng bangus, o 2 piraso maliit na chicken leg, o 2 servings (30g bawat isa) ng lean na karne, o 2 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1 piraso pa mula sa nabanggit',
+      glowVeg_en:'1–1½ cups cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'1–1½ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, carrots, sitaw)',
+      glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
+      water_en:'10 or more glasses of water a day', water_fil:'10 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'2450 kcal/day'
+    },
+    female:{
+      go_en:'1 cup cooked rice, or 4 pcs small pandesal, or 4 slices small bread, or 1 cup cooked noodles (pansit), or 1 medium piece root crop (kamote)',
+      go_fil:'1 tasang kanin, o 4 piraso maliit na pandesal, o 4 hiwa ng maliit na tinapay, o 1 tasang lutong pansit, o 1 katamtamang kamote',
+      grow_en:'2 pcs small galunggong, or 2 slices bangus, or 2 pcs small chicken leg, or 2 servings (30g each) lean meat, or 2 pcs tokwa (6×6×2cm), or 1 egg plus 1 piece of any of the above',
+      grow_fil:'2 piraso maliit na galunggong, o 2 hiwa ng bangus, o 2 piraso maliit na chicken leg, o 2 servings (30g bawat isa) ng lean na karne, o 2 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1 piraso pa mula sa nabanggit',
+      glowVeg_en:'¾–1 cup cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'¾–1 tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, carrots, sitaw)',
+      glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
+      water_en:'8 or more glasses of water a day', water_fil:'8 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'1890 kcal/day'
+    }
   },
-  pregnant:{
-    en:[
-      {icon:'🥦',label:'Half the plate',desc:'Vegetables and fruits — choose iron-rich leafy greens (malunggay, kangkong) when possible'},
-      {icon:'🍚',label:'One-fourth of the plate',desc:'Rice, corn, root crops, or bread — an extra serving may be needed compared to before pregnancy'},
-      {icon:'🐟',label:'One-fourth of the plate',desc:'Fish, egg, beans, or lean meat — an extra serving supports your baby’s growth'},
-      {icon:'🥛',label:'Extra',desc:'A glass of milk daily if available, plus iron and folic acid supplements as advised at your prenatal check-up'},
-      {icon:'💧',label:'Drink',desc:'Plenty of water; avoid alcohol and limit caffeine'}
-    ],
-    fil:[
-      {icon:'🥦',label:'Kalahati ng plato',desc:'Mga gulay at prutas — piliin ang madahong gulay na mayaman sa iron (malunggay, kangkong) kung maaari'},
-      {icon:'🍚',label:'Isang-kapat ng plato',desc:'Kanin, mais, kamote, o tinapay — maaaring kailangan ng dagdag na serving kumpara noong hindi pa buntis'},
-      {icon:'🐟',label:'Isang-kapat ng plato',desc:'Isda, itlog, monggo, o lean na karne — tumutulong ang dagdag na serving sa paglaki ng sanggol'},
-      {icon:'🥛',label:'Dagdag',desc:'Isang basong gatas araw-araw kung available, kasama ang iron at folic acid supplement ayon sa payo sa prenatal check-up'},
-      {icon:'💧',label:'Inumin',desc:'Maraming tubig; iwasan ang alak at bawasan ang caffeine'}
-    ]
+  older:{
+    label_en:'Older Persons (60 y and above)', label_fil:'Nakatatandang Edad (60 taon pataas)',
+    variants:['male','female'], variantLabel_en:{male:'Male',female:'Female'}, variantLabel_fil:{male:'Lalaki',female:'Babae'},
+    male:{
+      go_en:'1 cup cooked rice, or 4 pcs small pandesal, or 4 slices small bread, or 1 cup cooked noodles (pansit), or 1 medium piece root crop (kamote)',
+      go_fil:'1 tasang kanin, o 4 piraso maliit na pandesal, o 4 hiwa ng maliit na tinapay, o 1 tasang lutong pansit, o 1 katamtamang kamote',
+      grow_en:'2 pcs small galunggong, or 2 slices bangus, or 2 pcs small chicken leg, or 2 servings (30g each) lean meat, or 2 pcs tokwa (6×6×2cm), or 1 egg plus 1 piece of any of the above',
+      grow_fil:'2 piraso maliit na galunggong, o 2 hiwa ng bangus, o 2 piraso maliit na chicken leg, o 2 servings (30g bawat isa) ng lean na karne, o 2 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1 piraso pa mula sa nabanggit',
+      glowVeg_en:'¾–1 cup cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'¾–1 tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, carrots, sitaw)',
+      glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
+      water_en:'8 or more glasses of water a day', water_fil:'8 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'2000 kcal/day'
+    },
+    female:{
+      go_en:'¾ cup cooked rice, or 3 pcs small pandesal, or 3 slices small bread, or ¾ cup cooked noodles (pansit), or ¾ medium piece root crop (kamote)',
+      go_fil:'¾ tasang kanin, o 3 piraso maliit na pandesal, o 3 hiwa ng maliit na tinapay, o ¾ tasang lutong pansit, o ¾ katamtamang kamote',
+      grow_en:'2 pcs small galunggong, or 2 slices bangus, or 2 pcs small chicken leg, or 2 servings (30g each) lean meat, or 2 pcs tokwa (6×6×2cm), or 1 egg plus 1 piece of any of the above',
+      grow_fil:'2 piraso maliit na galunggong, o 2 hiwa ng bangus, o 2 piraso maliit na chicken leg, o 2 servings (30g bawat isa) ng lean na karne, o 2 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1 piraso pa mula sa nabanggit',
+      glowVeg_en:'¾ cup cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'¾ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, carrots, sitaw)',
+      glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
+      water_en:'7 or more glasses of water a day', water_fil:'7 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'1575 kcal/day'
+    }
   },
-  lactating:{
-    en:[
-      {icon:'🥦',label:'Half the plate',desc:'Vegetables and fruits — malunggay is commonly recommended to help support milk supply'},
-      {icon:'🍚',label:'One-fourth of the plate',desc:'Rice, corn, root crops, or bread — extra servings support the energy needed for breastfeeding'},
-      {icon:'🐟',label:'One-fourth of the plate',desc:'Fish, egg, beans, or lean meat — extra servings support milk production'},
-      {icon:'🥛',label:'Extra',desc:'A glass of milk daily if available, and continue iron/vitamin supplements as advised'},
-      {icon:'💧',label:'Drink',desc:'Drink more water than usual — breastfeeding increases fluid needs'}
-    ],
-    fil:[
-      {icon:'🥦',label:'Kalahati ng plato',desc:'Mga gulay at prutas — karaniwang inirerekomenda ang malunggay para makatulong sa gatas'},
-      {icon:'🍚',label:'Isang-kapat ng plato',desc:'Kanin, mais, kamote, o tinapay — tumutulong ang dagdag na serving sa enerhiyang kailangan sa pagpapasuso'},
-      {icon:'🐟',label:'Isang-kapat ng plato',desc:'Isda, itlog, monggo, o lean na karne — tumutulong ang dagdag na serving sa produksyon ng gatas'},
-      {icon:'🥛',label:'Dagdag',desc:'Isang basong gatas araw-araw kung available, at ipagpatuloy ang iron/vitamin supplement ayon sa payo'},
-      {icon:'💧',label:'Inumin',desc:'Uminom ng mas maraming tubig kaysa dati — nagdaragdag ang pagpapasuso ng pangangailangan sa likido'}
-    ]
-  },
-  youngchild:{
-    en:[
-      {icon:'🥦',label:'Half the small plate',desc:'Vegetables and fruits, cut into small, easy-to-chew pieces'},
-      {icon:'🍚',label:'One-fourth of the plate',desc:'Rice, root crops, or bread, in child-sized portions'},
-      {icon:'🐟',label:'One-fourth of the plate',desc:'Fish, egg, beans, or lean meat, in child-sized portions'},
-      {icon:'🥛',label:'Milk',desc:'A glass of milk daily supports growth'},
-      {icon:'🍽️',label:'Meals',desc:'Offer 3 small meals plus 2 healthy snacks a day; avoid sweetened drinks and junk food'}
-    ],
-    fil:[
-      {icon:'🥦',label:'Kalahati ng maliit na plato',desc:'Mga gulay at prutas, gupitin nang maliliit at madaling nguyain'},
-      {icon:'🍚',label:'Isang-kapat ng plato',desc:'Kanin, kamote, o tinapay, sa sukat na angkop sa bata'},
-      {icon:'🐟',label:'Isang-kapat ng plato',desc:'Isda, itlog, monggo, o lean na karne, sa sukat na angkop sa bata'},
-      {icon:'🥛',label:'Gatas',desc:'Tumutulong sa paglaki ang isang basong gatas araw-araw'},
-      {icon:'🍽️',label:'Pagkain',desc:'Magbigay ng 3 maliit na kainan at 2 malusog na meryenda sa isang araw; iwasan ang matamis na inumin at junk food'}
-    ]
-  },
-  schoolage:{
-    en:[
-      {icon:'🥦',label:'Half the plate',desc:'Vegetables and fruits'},
-      {icon:'🍚',label:'One-fourth of the plate',desc:'Rice, corn, root crops, or bread'},
-      {icon:'🐟',label:'One-fourth of the plate',desc:'Fish, egg, beans, or lean meat'},
-      {icon:'🥛',label:'Milk',desc:'A glass of milk daily supports growth and bone health'},
-      {icon:'🏃',label:'Habits',desc:'Eat breakfast before school, stay physically active, and limit sweetened drinks and junk food'}
-    ],
-    fil:[
-      {icon:'🥦',label:'Kalahati ng plato',desc:'Mga gulay at prutas'},
-      {icon:'🍚',label:'Isang-kapat ng plato',desc:'Kanin, mais, kamote, o tinapay'},
-      {icon:'🐟',label:'Isang-kapat ng plato',desc:'Isda, itlog, monggo, o lean na karne'},
-      {icon:'🥛',label:'Gatas',desc:'Tumutulong sa paglaki at lakas ng buto ang isang basong gatas araw-araw'},
-      {icon:'🏃',label:'Ugali',desc:'Kumain ng almusal bago pumasok, manatiling aktibo, at bawasan ang matamis na inumin at junk food'}
-    ]
+  preglact:{
+    label_en:'Pregnant & Lactating', label_fil:'Buntis at Nagpapasuso',
+    variants:['pregnant','lactating'], variantLabel_en:{pregnant:'Pregnant',lactating:'Lactating'}, variantLabel_fil:{pregnant:'Buntis',lactating:'Nagpapasuso'},
+    pregnant:{
+      go_en:'1½ cups cooked rice, or 6 pcs small pandesal, or 6 slices small bread, or 1½ cups cooked noodles (pansit), or 1½ medium pieces root crop (kamote)',
+      go_fil:'1½ tasang kanin, o 6 piraso maliit na pandesal, o 6 hiwa ng maliit na tinapay, o 1½ tasang lutong pansit, o 1½ katamtamang kamote',
+      grow_en:'2 pcs medium galunggong, or 3 slices bangus, or 2 pcs medium chicken leg, or 3 servings (30g each) lean meat, or 3 pcs tokwa (6×6×2cm), or 1 egg plus 1–2 pieces of any of the above',
+      grow_fil:'2 piraso katamtamang galunggong, o 3 hiwa ng bangus, o 2 piraso katamtamang chicken leg, o 3 servings (30g bawat isa) ng lean na karne, o 3 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1–2 piraso pa mula sa nabanggit',
+      glowVeg_en:'1–1½ cups cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'1–1½ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, carrots, sitaw)',
+      glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
+      water_en:'9 or more glasses of water a day', water_fil:'9 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'2230 kcal/day'
+    },
+    lactating:{
+      go_en:'1½ cups cooked rice, or 6 pcs small pandesal, or 6 slices small bread, or 1½ cups cooked noodles (pansit), or 1½ medium pieces root crop (kamote)',
+      go_fil:'1½ tasang kanin, o 6 piraso maliit na pandesal, o 6 hiwa ng maliit na tinapay, o 1½ tasang lutong pansit, o 1½ katamtamang kamote',
+      grow_en:'2 pcs medium galunggong, or 3 slices bangus, or 2 pcs medium chicken leg, or 3 servings (30g each) lean meat, or 3 pcs tokwa (6×6×2cm), or 1 egg plus 1–2 pieces of any of the above',
+      grow_fil:'2 piraso katamtamang galunggong, o 3 hiwa ng bangus, o 2 piraso katamtamang chicken leg, o 3 servings (30g bawat isa) ng lean na karne, o 3 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1–2 piraso pa mula sa nabanggit',
+      glowVeg_en:'1–1½ cups cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'1–1½ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, carrots, sitaw)',
+      glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
+      water_en:'10 or more glasses of water a day', water_fil:'10 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'2430 kcal/day'
+    }
   }
+};
+const PLATE_TIPS = {
+  common_en:['Eat less salty, fried, fatty, and sugar-rich food to help prevent chronic disease.','Check nutrition labels on packaged food to make smarter choices.'],
+  common_fil:['Bawasan ang maalat, pritong, mamantika, at matamis na pagkain para makatulong maiwasan ang chronic disease.','Tingnan ang nutrition label ng packaged na pagkain para makapili nang mas matalino.'],
+  adultOlder_en:['Stay physically active every day — even a daily walk helps.'], adultOlder_fil:['Manatiling aktibo araw-araw — nakakatulong na ang simpleng paglalakad.'],
+  preglact_en:['Take folic acid/iron supplements as advised by your health worker, to meet your daily needs.','Do not smoke or drink alcoholic beverages.','Go to your regular prenatal check-ups, and plan to deliver your baby at a health care facility.'],
+  preglact_fil:['Uminom ng folic acid/iron supplement ayon sa payo ng iyong health worker, para matugunan ang pangangailangan mo araw-araw.','Huwag manigarilyo o uminom ng alak.','Pumunta sa regular na prenatal check-up, at magplano na manganak sa isang health facility.']
+};
+const PLATE_MEAL = {
+  en:{note:'This is the same sample day used across all 3 official FNRI plate guides — only the portion sizes and calorie target above change by group.', breakfast:'Fried bangus, camote tops salad with tomatoes, rice, banana', lunch:'Chicken tinola with green papaya and malunggay, rice, mango', dinner:'Fried galunggong, pinakbet, rice, watermelon', amSnack:'Suman', pmSnack:'Boiled camote'},
+  fil:{note:'Ito ang parehong sample na araw na ginamit sa lahat ng 3 opisyal na Pinggang Pinoy guide — ang laki lang ng serving at kcal target sa itaas ang nagbabago depende sa grupo.', breakfast:'Piniritong bangus, ensaladang talbos ng kamote na may kamatis, kanin, saging', lunch:'Tinolang manok na may green papaya at malunggay, kanin, mangga', dinner:'Piniritong galunggong, pinakbet, kanin, pakwan', amSnack:'Suman', pmSnack:'Nilagang kamote'}
 };
 const MEALS = {
   en:['Rice + monggo + malunggay (low salt)','Rice + boiled or grilled egg + sautéed vegetables (less oil)','Rice + grilled or steamed fish + vegetables','Rice + tofu or tokwa + vegetables','Banana, papaya, or seasonal fruit as snack instead of sweets'],
@@ -912,7 +995,8 @@ const EMERGENCY = {
 let lang = localStorage.getItem('bida-lang') || 'en';
 let bmiHUnit = 'cm';   // 'cm' | 'in' | 'ft'
 let bmiWUnit = 'kg';   // 'kg' | 'lbs'
-let plateGroup = 'adult';   // 'adult' | 'pregnant' | 'lactating' | 'youngchild' | 'schoolage'
+let plateGroup = 'adult';   // 'adult' | 'older' | 'preglact'
+let plateVariant = 'male';  // sub-toggle within plateGroup — see PLATE[plateGroup].variants
 let bpShowAll = false;      // each log defaults to showing only the last 5 entries
 let sugarShowAll = false;
 let weightShowAll = false;
@@ -1307,20 +1391,24 @@ function applyStaticStrings(){
   document.getElementById('lbl-dm').innerHTML=t.lblDM;
   document.getElementById('lbl-dys').innerHTML=t.lblDys;
   document.getElementById('lbl-food').innerHTML=t.lblFood;
+  document.getElementById('lbl-medref').innerHTML=t.lblMeds;
+  document.getElementById('lbl-bmicalc').innerHTML=t.lblBMICalc;
   document.getElementById('lbl-nearby').innerHTML=t.lblNearby;
   document.getElementById('title-rf').innerHTML=t.titleRF;
   document.getElementById('title-htn').innerHTML=t.titleHTN;
   document.getElementById('title-dm').innerHTML=t.titleDM;
   document.getElementById('title-dys').innerHTML=t.titleDys;
   document.getElementById('title-food').innerHTML=t.titleFood;
-  document.getElementById('title-bmi').innerHTML=t.titleBMI;
-  document.getElementById('title-meds').innerHTML=t.titleMeds;
+  document.getElementById('title-weight').innerHTML=t.titleWeight;
+  document.getElementById('title-bmicalc').innerHTML=t.titleBMICalc;
+  document.getElementById('title-medtracker').innerHTML=t.titleMedTracker;
+  document.getElementById('title-medref').innerHTML=t.titleMeds;
   document.getElementById('title-logs').innerHTML=t.titleLogs;
   document.getElementById('title-nearby').innerHTML=t.titleNearby;
   document.getElementById('nav-lbl-home').textContent=t.navHome;
   document.getElementById('nav-lbl-logs').textContent=t.navLogs;
-  document.getElementById('nav-lbl-meds').textContent=t.lblMeds;
-  document.getElementById('nav-lbl-bmi').innerHTML=t.titleBMI;
+  document.getElementById('nav-lbl-meds').textContent=t.titleMedTracker;
+  document.getElementById('nav-lbl-bmi').innerHTML=t.titleWeight;
   document.getElementById('lbl-howto-link').textContent=t.howtoLinkLabel;
   document.getElementById('title-howto').textContent=t.howtoLinkLabel;
   document.getElementById('howto-intro').textContent=t.howtoIntro;
@@ -1328,6 +1416,10 @@ function applyStaticStrings(){
     document.getElementById('howto'+i+'-title').textContent=t['howto'+i+'Title'];
     document.getElementById('howto'+i+'-body').textContent=t['howto'+i+'Body'];
   }
+  document.getElementById('howtoRefs-title').textContent=t.howtoRefsTitle;
+  document.getElementById('howtoRefs-intro').textContent=t.howtoRefsIntro;
+  document.getElementById('howtoRefs-list').innerHTML=t.howtoRefsList.map(r=>`<li>${r}</li>`).join('');
+  document.getElementById('howtoRefs-note').textContent=t.howtoRefsNote;
 }
 
 // ── Search ────────────────────────────────────────────────────────────────────
@@ -1340,17 +1432,18 @@ const SEARCH_IDX = [
   {sec:'diabetes',kw:['diabetes','sugar','insulin','diyabetis','asukal','blood sugar']},
   {sec:'dyslipidemia',kw:['cholesterol','dyslipidemia','lipid','kolesterol','taba']},
   {sec:'food',kw:['food','nutrition','pinggang pinoy','vegetable','rice','protein','pagkain','nutrisyon','gulay','kanin']},
-  {sec:'bmi',kw:['bmi','weight','body mass','timbang','katawan']},
-  {sec:'medications',kw:['medicine','medication','losartan','metformin','amlodipine','atorvastatin','gamot','dosage','dose']},
+  {sec:'bmicalc',kw:['bmi','body mass']},
+  {sec:'bmi',kw:['weight','timbang','katawan']},
+  {sec:'medref',kw:['medicine','medication','losartan','metformin','amlodipine','atorvastatin','gamot','dosage','dose']},
   {sec:'nearby',kw:['health center','clinic','bayanan','alabang','ospital','klinika','emergency','137','hotline','ambulance','irespond','ambulansya']}
 ];
 const SEC_NAMES = {
-  en:{'red-flags':'Red Flags',hypertension:'Hypertension',diabetes:'Diabetes',dyslipidemia:'Cholesterol',food:'Food',bmi:'BMI & Weight',medications:'Medicines',nearby:'Nearby Care & Emergency'},
-  fil:{'red-flags':'Mga Babala',hypertension:'Altapresyon',diabetes:'Diyabetis',dyslipidemia:'Kolesterol',food:'Pagkain',bmi:'BMI at Timbang',medications:'Mga Gamot',nearby:'Malapit na Tulong at Emergency'}
+  en:{'red-flags':'Red Flags',hypertension:'Hypertension',diabetes:'Diabetes',dyslipidemia:'Cholesterol',food:'Food',bmicalc:'BMI Calculator',bmi:'My Weight',medref:'Medicines',nearby:'Nearby Care & Emergency'},
+  fil:{'red-flags':'Mga Babala',hypertension:'Altapresyon',diabetes:'Diyabetis',dyslipidemia:'Kolesterol',food:'Pagkain',bmicalc:'Kalkulahin ang BMI',bmi:'Aking Timbang',medref:'Mga Gamot',nearby:'Malapit na Tulong at Emergency'}
 };
 const SEC_DESC = {
-  en:{'red-flags':'Symptom red flags and when to seek care','hypertension':'Managing high blood pressure','diabetes':'Managing diabetes and foot care','dyslipidemia':'Managing cholesterol','food':'Pinggang Pinoy plate guide','bmi':'BMI calculator and weight tracker','medications':'Common medicines available at the health center','nearby':'Muntinlupa health centers and emergency hotline numbers'},
-  fil:{'red-flags':'Mga babala ng sintomas at kung kailan magpatingin','hypertension':'Pamamahala ng altapresyon','diabetes':'Pamamahala ng diyabetis at pag-aalaga ng paa','dyslipidemia':'Pamamahala ng kolesterol','food':'Pinggang Pinoy','bmi':'BMI calculator at weight tracker','medications':'Karaniwang gamot na available sa health center','nearby':'Mga health center at mga numero sa emergency sa Muntinlupa'}
+  en:{'red-flags':'Symptom red flags and when to seek care','hypertension':'Managing high blood pressure','diabetes':'Managing diabetes and foot care','dyslipidemia':'Managing cholesterol','food':'Pinggang Pinoy plate guide','bmicalc':'Calculate your BMI','bmi':'Track your weight over time','medref':'Common medicines available at the health center','nearby':'Muntinlupa health centers and emergency hotline numbers'},
+  fil:{'red-flags':'Mga babala ng sintomas at kung kailan magpatingin','hypertension':'Pamamahala ng altapresyon','diabetes':'Pamamahala ng diyabetis at pag-aalaga ng paa','dyslipidemia':'Pamamahala ng kolesterol','food':'Pinggang Pinoy','bmicalc':'Kalkulahin ang iyong BMI','bmi':'Subaybayan ang iyong timbang','medref':'Karaniwang gamot na available sa health center','nearby':'Mga health center at mga numero sa emergency sa Muntinlupa'}
 };
 
 function handleSearch(val){
@@ -1381,7 +1474,9 @@ function renderAll(){
   renderDys();
   renderFood();
   renderBMI();
+  renderBMICalc();
   renderMedications();
+  renderMedRef();
   renderLogs();
   renderNearby();
 }
@@ -1611,38 +1706,91 @@ function renderLogs(){
 
 function renderFood(){
   const t=T[lang];
-  const plate=PLATE[plateGroup][lang];
   const meals=MEALS[lang];
   const tips=TIPS[lang];
-  const plateOptions=['adult','pregnant','lactating','youngchild','schoolage'];
-  const plateOptLabel={adult:t.plateAdult, pregnant:t.platePregnant, lactating:t.plateLactating, youngchild:t.plateYoungChild, schoolage:t.plateSchoolAge};
+  const plateOptions=['adult','older','preglact'];
   document.getElementById('food-content').innerHTML=
     `<div class="info-card"><div class="info-card-title">🍽️ ${t.plateTitle}</div><p style="font-size:0.8rem;color:var(--muted);margin-bottom:10px">${t.plateNote}</p>`+
     `<label style="display:block;font-size:0.8rem;font-weight:600;color:var(--text);margin-bottom:5px">${t.plateSelectLabel}</label>`+
     `<select id="plate-group-select" onchange="setPlateGroup(this.value)" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:0.9rem;color:var(--text);background:#f9fafb;margin-bottom:14px">`+
-    plateOptions.map(g=>`<option value="${g}"${g===plateGroup?' selected':''}>${plateOptLabel[g]}</option>`).join('')+
+    plateOptions.map(g=>`<option value="${g}"${g===plateGroup?' selected':''}>${lang==='en'?PLATE[g].label_en:PLATE[g].label_fil}</option>`).join('')+
     `</select>`+
-    `<div id="plate-list">${renderPlateList(plate)}</div>`+
+    `<div id="plate-group-body">${renderPlateGroup()}</div>`+
     `</div><div class="info-card"><div class="info-card-title">🛒 ${t.mealsTitle}</div><ul class="checklist">${meals.map(m=>`<li>${m}</li>`).join('')}</ul></div>`+
     `<div class="info-card"><div class="info-card-title">💡 ${t.tipsTitle}</div><ul class="checklist">${tips.map(tp=>`<li>${tp}</li>`).join('')}</ul></div>`;
 }
 
-function renderPlateList(plate){
-  return plate.map(p=>`<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:9px"><span style="font-size:1.4rem;flex-shrink:0">${p.icon}</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--primary)">${p.label}</div><div style="font-size:0.86rem;color:#374151">${p.desc}</div></div></div>`).join('');
+// Renders the plate visual + Go/Grow/Glow cards + tips + sample meal for the
+// currently selected plateGroup/plateVariant. Scoped to #plate-group-body
+// (not a full renderFood() re-render) so switching the toggle doesn't wipe
+// out anything already typed elsewhere on the page.
+function renderPlateGroup(){
+  const t=T[lang];
+  const suf = lang==='en' ? '_en' : '_fil';
+  const g=PLATE[plateGroup];
+  if(!g.variants.includes(plateVariant)) plateVariant=g.variants[0];
+  const variantLabel = lang==='en' ? g.variantLabel_en : g.variantLabel_fil;
+  const v=g[plateVariant];
+  const ggg=GGG[lang];
+  const isPreglact = plateGroup==='preglact';
+
+  const variantToggle = `<div class="unit-seg" style="margin-bottom:14px">${g.variants.map(vr=>`<button onclick="setPlateVariant('${vr}')" class="${vr===plateVariant?'active':''}">${variantLabel[vr]}</button>`).join('')}</div>`;
+
+  const plateVisual = `<div class="ggg-plate-wrap"><div class="ggg-plate">`+
+    `<div class="ggg-quad ggg-grow">GROW</div><div class="ggg-quad ggg-glow-fruit">GLOW</div>`+
+    `<div class="ggg-quad ggg-go">GO</div><div class="ggg-quad ggg-glow-veg">GLOW</div>`+
+    `</div></div>`;
+
+  const metaRow = `<div class="ggg-meta-row">`+
+    `<div class="ggg-meta"><div class="ggg-meta-label">💧 ${t.plateWaterLabel}</div><div class="ggg-meta-value">${v['water'+suf]}</div></div>`+
+    `<div class="ggg-meta"><div class="ggg-meta-label">🥛 ${t.plateMilkLabel}</div><div class="ggg-meta-value">${v['milk'+suf]}</div></div>`+
+    `<div class="ggg-meta"><div class="ggg-meta-label">🔥 ${t.plateKcalLabel}</div><div class="ggg-meta-value">${v.kcal}</div></div>`+
+    `</div>`;
+
+  const growExtra = isPreglact ? `<p>${ggg.growExtraPreglact}</p>` : '';
+  const glowExtra = isPreglact ? `<p>${ggg.glowExtraPreglact}</p>` : '';
+
+  const cards =
+    `<div class="ggg-card ggg-go"><div class="ggg-card-title">${ggg.go.title}</div><p>${ggg.go.body}</p><div class="ggg-portion">${v['go'+suf]}</div></div>`+
+    `<div class="ggg-card ggg-grow"><div class="ggg-card-title">${ggg.grow.title}</div><p>${ggg.grow.body}</p>${growExtra}<div class="ggg-portion">${v['grow'+suf]}</div></div>`+
+    `<div class="ggg-card ggg-glow-veg"><div class="ggg-card-title">${ggg.glowVeg.title}</div><p>${ggg.glowVeg.body}</p>${glowExtra}<div class="ggg-portion">${v['glowVeg'+suf]}</div></div>`+
+    `<div class="ggg-card ggg-glow-fruit"><div class="ggg-card-title">${ggg.glowFruit.title}</div><p>${ggg.glowFruit.body}</p><div class="ggg-portion">${v['glowFruit'+suf]}</div></div>`;
+
+  const tipsArr = PLATE_TIPS['common'+suf].concat(isPreglact ? PLATE_TIPS['preglact'+suf] : PLATE_TIPS['adultOlder'+suf]);
+  const tipsHtml = `<div class="info-card" style="margin-top:10px"><div class="info-card-title">✅ ${t.plateTipsTitle}</div><ul class="checklist">${tipsArr.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+
+  const meal=PLATE_MEAL[lang];
+  const mealHtml = `<div class="info-card"><div class="info-card-title">🍛 ${t.plateMealTitle}</div>`+
+    `<p style="font-size:0.78rem;color:var(--muted);margin-bottom:8px">${meal.note}</p>`+
+    `<p><b>${t.plateMealBreakfast}:</b> ${meal.breakfast}</p>`+
+    `<p><b>${t.plateMealLunch}:</b> ${meal.lunch}</p>`+
+    `<p><b>${t.plateMealDinner}:</b> ${meal.dinner}</p>`+
+    `<p><b>${t.plateMealAM}:</b> ${meal.amSnack} &nbsp; <b>${t.plateMealPM}:</b> ${meal.pmSnack}</p>`+
+    `</div>`;
+
+  return variantToggle + plateVisual + metaRow + cards +
+    `<p style="font-size:0.72rem;color:var(--muted);margin:8px 0 0">${t.plateSourceNote}</p>` +
+    tipsHtml + mealHtml;
 }
 
-// Scoped to #plate-list only (not a full renderFood() re-render) so
-// switching the dropdown doesn't wipe out anything already typed elsewhere.
 function setPlateGroup(g){
   plateGroup=g;
-  document.getElementById('plate-list').innerHTML = renderPlateList(PLATE[plateGroup][lang]);
+  plateVariant=PLATE[g].variants[0];
+  document.getElementById('plate-group-body').innerHTML = renderPlateGroup();
+}
+function setPlateVariant(v){
+  plateVariant=v;
+  document.getElementById('plate-group-body').innerHTML = renderPlateGroup();
 }
 
-function renderBMI(){
+// BMI Calculator — a self-assessment tool with no saved history, so it lives
+// on Home with the other educational content (see renderBMI() below for the
+// Weight tracker, which is the actual personal record on the bottom nav).
+function renderBMICalc(){
   const t=T[lang];
   const hCm=bmiHUnit==='cm', hIn=bmiHUnit==='in', hFt=bmiHUnit==='ft';
   const wKgA=bmiWUnit==='kg';
-  document.getElementById('bmi-content').innerHTML=
+  document.getElementById('bmicalc-content').innerHTML=
     `<div class="bmi-form"><div style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:12px">⚖️ ${t.bmiTitle}</div>`+
     `<div class="disclaimer" style="margin-bottom:14px;font-size:0.8rem">${t.bmiDisclaimer}</div>`+
     `<label>${t.bmiAge}</label><input type="number" id="bmi-age" min="1" max="120" placeholder="e.g. 30">`+
@@ -1654,7 +1802,15 @@ function renderBMI(){
     `<label>${t.bmiW}</label>`+
     `<div class="unit-seg"><button onclick="setBmiWUnit('kg')" id="wbtn-kg" class="${wKgA?'active':''}">${t.bmiUnitKg}</button><button onclick="setBmiWUnit('lbs')" id="wbtn-lbs" class="${wKgA?'':'active'}">${t.bmiUnitLbs}</button></div>`+
     `<input type="number" id="bmi-w-val" min="5" max="1500" placeholder="e.g. 65">`+
-    `<button class="bmi-calc-btn" onclick="calcBMI()">${t.bmiBtn}</button><div class="bmi-result" id="bmi-result"></div></div>`+
+    `<button class="bmi-calc-btn" onclick="calcBMI()">${t.bmiBtn}</button><div class="bmi-result" id="bmi-result"></div></div>`;
+}
+
+// Weight tracker — the actual personal record, on the bottom nav ("My
+// Weight"). setBmiWUnit()/refreshWeightWidget() keep this in sync with the
+// kg/lbs toggle on the Home BMI Calculator even though the two now live on
+// different pages, since both read the shared bmiWUnit state.
+function renderBMI(){
+  document.getElementById('bmi-content').innerHTML =
     renderWeightLogWidget();
 }
 
@@ -1835,18 +1991,25 @@ function renderMedTracker(){
   </div>`;
 }
 
+// My Medicines — personal tracker only (bottom nav). The reference guide
+// (what each medicine is for) lives on Home; see renderMedRef() below.
 function renderMedications(){
+  document.getElementById('medications-content').innerHTML = renderMedTracker();
+}
+
+// Medicines at the Health Center — educational reference guide (Home). Not
+// the personal tracker, so nothing here is user-editable or saved.
+function renderMedRef(){
   const t=T[lang];
-  let html = renderMedTracker();
-  html += `<div class="med-safety-banner no-print"><b>⚠ ${t.medSafetyTitle}</b>${t.medSafetyBody}</div>`;
+  let html = `<div class="med-safety-banner"><b>⚠ ${t.medSafetyTitle}</b>${t.medSafetyBody}</div>`;
   MEDS.forEach(group=>{
     const groupLabel = lang==='en' ? group.group_en : group.group_fil;
-    html += `<div class="med-group-title no-print">${groupLabel}</div>`;
+    html += `<div class="med-group-title">${groupLabel}</div>`;
     group.items.forEach(m=>{
       const what = lang==='en' ? m.what_en : m.what_fil;
       const dose = lang==='en' ? m.dose_en : m.dose_fil;
       const freq = lang==='en' ? m.freq_en : m.freq_fil;
-      html += `<div class="med-item-card no-print">
+      html += `<div class="med-item-card">
         <div class="med-name">${m.name}</div>
         <div class="med-row"><b>${t.medWhatFor}:</b> ${what}</div>
         ${dose ? `<div class="med-row"><b>${t.medUsualDose}:</b> ${dose}</div>` : ''}
@@ -1855,8 +2018,8 @@ function renderMedications(){
       </div>`;
     });
   });
-  html += `<div class="disclaimer mt-10 no-print">${t.medListNote}</div>`;
-  document.getElementById('medications-content').innerHTML = html;
+  html += `<div class="disclaimer mt-10">${t.medListNote}</div>`;
+  document.getElementById('medref-content').innerHTML = html;
 }
 
 // Emergency Numbers and Nearby Care share one page (#page-nearby) so users
