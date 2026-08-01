@@ -288,6 +288,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div style="text-align:center;margin-top:14px">
       <a href="javascript:void(0)" onclick="navigate('howto')" id="lbl-howto-link" style="font-size:0.85rem;color:var(--muted);text-decoration:underline">❓ How to Use This App</a>
     </div>
+    <div style="text-align:center;margin-top:20px;padding-top:14px;border-top:1px solid var(--border)">
+      <div id="app-credits-line" style="font-size:0.76rem;color:var(--muted);line-height:1.5">An FEU-NRMF MPH Project by Catherine Perez, MD, Melanie Grace Cruz, MD, Ernalyn Pontrias, RMT, and Mary Joy Pereña, RND.</div>
+      <div style="font-size:0.76rem;color:var(--muted);margin-top:3px"><span id="app-inquiries-line">For inquiries and other matters, please email</span> <a href="mailto:melcruzmd.ent@gmail.com" style="color:var(--primary)">melcruzmd.ent@gmail.com</a></div>
+    </div>
   </div>
 </div>
 
@@ -501,6 +505,7 @@ const T = {
     howtoRefsTitle:'📚 References & Sources', howtoRefsIntro:'The food guidance and plate images in this app are based on:',
     howtoRefsList:['Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Adults (19–59 years old)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Older Persons (60 years old and above)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Pregnant and Lactating Women (© 2016)'],
     howtoRefsNote:'Pinggang Pinoy® is a registered trademark of FNRI-DOST, used here for educational purposes. Visit fnri.dost.gov.ph for the original materials.',
+    inquiriesLabel:'For inquiries and other matters, please email',
     logsDataNote:'These entries are saved only on this phone — never sent anywhere. They stay available for as long as you keep using this app on this device. They will be deleted if you clear your browser\'s site data, uninstall or reset the app, or switch to a new phone. If you want to keep a copy, use the Print button to save or print your log before that happens.',
     backupTitle:'Backup & Restore', backupSub:'Save a copy of all your logs (medicines, blood pressure, blood sugar, and weight) as one file, so you don\'t lose them if you clear your browser, switch phones, or reinstall the app.',
     backupBtn:'Download Backup', restoreBtn:'Restore from Backup File', backupNow:'Back up now',
@@ -626,6 +631,7 @@ const T = {
     howtoRefsTitle:'📚 Mga Sanggunian', howtoRefsIntro:'Ang gabay sa pagkain at mga larawan ng plato sa app na ito ay batay sa:',
     howtoRefsList:['Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Mga Nasa Hustong Gulang (19–59 taon)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Nakatatandang Edad (60 taon pataas)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Buntis at Nagpapasusong Kababaihan (© 2016)'],
     howtoRefsNote:'Ang Pinggang Pinoy® ay rehistradong trademark ng FNRI-DOST, ginamit dito para sa layuning pang-edukasyon lamang. Bisitahin ang fnri.dost.gov.ph para sa orihinal na materyales.',
+    inquiriesLabel:'Para sa mga katanungan at iba pang bagay, mag-email sa',
     logsDataNote:'Ang mga entry na ito ay naka-save lang sa telepono mong ito — hindi ito ipinapadala kahit saan. Mananatili itong available hangga\'t ginagamit mo ang app sa device na ito. Mabubura ito kapag na-clear mo ang site data ng iyong browser, in-uninstall o na-reset ang app, o lumipat ka ng bagong telepono. Kung gusto mong magkaroon ng kopya, gamitin ang Print button para i-save o i-print ang iyong log bago ito mangyari.',
     backupTitle:'Backup at Restore', backupSub:'I-save ang kopya ng lahat ng iyong logs (gamot, blood pressure, blood sugar, at timbang) bilang isang file, para hindi mawala kahit i-clear mo ang browser, lumipat ng telepono, o i-reinstall ang app.',
     backupBtn:'I-download ang Backup', restoreBtn:'I-restore mula sa Backup File', backupNow:'Mag-backup ngayon',
@@ -1420,6 +1426,7 @@ function applyStaticStrings(){
   document.getElementById('howtoRefs-intro').textContent=t.howtoRefsIntro;
   document.getElementById('howtoRefs-list').innerHTML=t.howtoRefsList.map(r=>`<li>${r}</li>`).join('');
   document.getElementById('howtoRefs-note').textContent=t.howtoRefsNote;
+  document.getElementById('app-inquiries-line').textContent=t.inquiriesLabel;
 }
 
 // ── Search ────────────────────────────────────────────────────────────────────
