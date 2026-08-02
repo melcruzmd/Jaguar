@@ -19,12 +19,14 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;overscroll-behavior-y:none;height:100%}
+html[data-textsize="large"]{font-size:19px}
+html[data-textsize="xlarge"]{font-size:22px}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f7fb;color:#111827;line-height:1.5;min-height:100vh;padding-bottom:calc(100px + env(safe-area-inset-bottom));overscroll-behavior:none;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
 :root{--primary:#1d4ed8;--primary-dark:#1e3a8a;--accent:#dc2626;--danger:#dc2626;--danger-bg:#fef2f2;--warning:#d97706;--success:#16a34a;--success-bg:#f0fdf4;--card:#ffffff;--bg:#f5f7fb;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--blue-light:#eff6ff}
 .emergency-banner{position:sticky;top:0;z-index:100;background:var(--danger);color:white;text-align:center;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;font-size:0.92rem;font-weight:600;line-height:1.4}
 .emergency-banner a{color:white;text-decoration:underline}
 .app-header{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);color:white;padding:14px 16px 12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(30,58,138,0.25);user-select:none}
-.app-header .brand{display:flex;align-items:center;gap:10px}
+.app-header .brand{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
 .app-header .brand h1{font-size:1.25rem;font-weight:700;letter-spacing:-0.4px}
 .app-header .brand p{font-size:0.78rem;opacity:0.88;margin-top:1px}
 .header-logo{background:white;border-radius:10px;padding:4px 9px;display:flex;align-items:center;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,0.18)}
@@ -38,6 +40,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .search-bar input{flex:1;border:none;outline:none;font-size:0.95rem;padding:11px 0;background:transparent;color:var(--text)}
 .search-bar input::placeholder{color:var(--muted)}
 .search-clear{background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:4px;display:none}
+.textsize-wrap{display:flex;align-items:center;justify-content:center;gap:10px;padding:7px 16px;background:#f9fafb;border-bottom:1px solid var(--border)}
+.textsize-label{font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.4px}
+.textsize-seg{display:flex;gap:0;border-radius:8px;overflow:hidden;border:1.5px solid var(--border);background:white}
+.textsize-btn{background:transparent;border:none;color:var(--text);font-weight:700;cursor:pointer;padding:4px 14px;min-height:34px;line-height:1;font-family:inherit;border-right:1px solid var(--border);transition:background 0.15s,color 0.15s}
+.textsize-btn:last-child{border-right:none}
+.textsize-btn.active{background:var(--primary);color:white}
+.textsize-btn[data-size="normal"]{font-size:14px}
+.textsize-btn[data-size="large"]{font-size:18px}
+.textsize-btn[data-size="xlarge"]{font-size:22px}
 .page{display:none}
 .page.active{display:block;animation:bidaFadeIn 0.18s ease}
 @keyframes bidaFadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
@@ -215,7 +226,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .search-result-card:active{background:#f9fafb}
 .result-section{font-size:0.72rem;color:var(--primary);font-weight:700;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:3px}
 .result-title{font-size:0.92rem;font-weight:600;color:var(--text)}
-.home-card:focus-visible,.symptom-card-header:focus-visible,.search-result-card:focus-visible,.nav-btn:focus-visible,.lang-btn:focus-visible,.back-btn:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+.home-card:focus-visible,.symptom-card-header:focus-visible,.search-result-card:focus-visible,.nav-btn:focus-visible,.lang-btn:focus-visible,.back-btn:focus-visible,.textsize-btn:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
 .mt-10{margin-top:10px}
 .mb-14{margin-bottom:14px}
 .text-danger{color:var(--danger)}
@@ -247,6 +258,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <button class="lang-btn" id="btn-fil" onclick="setLang('fil')" aria-pressed="false">FIL</button>
   </div>
 </header>
+
+<div class="textsize-wrap">
+  <span class="textsize-label" id="textsize-label">Text Size</span>
+  <div class="textsize-seg" role="group" aria-label="Text size">
+    <button type="button" class="textsize-btn active" id="textsize-btn-normal" data-size="normal" onclick="setTextSize('normal')" aria-pressed="true" aria-label="Normal text size">A</button>
+    <button type="button" class="textsize-btn" id="textsize-btn-large" data-size="large" onclick="setTextSize('large')" aria-pressed="false" aria-label="Large text size">A</button>
+    <button type="button" class="textsize-btn" id="textsize-btn-xlarge" data-size="xlarge" onclick="setTextSize('xlarge')" aria-pressed="false" aria-label="Extra large text size">A</button>
+  </div>
+</div>
 
 <div class="search-wrap" id="search-wrap">
   <div class="search-bar">
@@ -461,6 +481,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 const T = {
   en: {
     subtitle:'Better Informed for Disease Awareness — Muntinlupa City',
+    textSizeLabel:'Text Size',
     banner:'Emergency? Call <a href="tel:137175">137-175</a> or go to the emergency department of the nearest hospital.',
     search:'Search symptom or topic…',
     disclaimer:'This app provides general health guidance only. It does not diagnose illness or replace assessment by a doctor, nurse, pharmacist, nutritionist, or health center.',
@@ -590,6 +611,7 @@ const T = {
   },
   fil: {
     subtitle:'Better Informed for Disease Awareness — Lungsod ng Muntinlupa',
+    textSizeLabel:'Sukat ng Teksto',
     banner:'Emergency? Tumawag sa <a href="tel:137175">137-175</a> o pumunta agad sa emergency room ng pinakamalapit na ospital.',
     search:'Hanapin ang sintomas o paksa…',
     disclaimer:'Gabay pangkalusugan lamang ang app na ito. Hindi ito nagbibigay ng diagnosis at hindi nito mapapalitan ang pagsusuri ng doktor, nurse, pharmacist, nutritionist, o health center.',
@@ -974,6 +996,7 @@ const EMERGENCY = {
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let lang = localStorage.getItem('bida-lang') || 'en';
+let textSize = localStorage.getItem('bida-textsize') || 'normal';   // 'normal' | 'large' | 'xlarge'
 let bmiHUnit = 'cm';   // 'cm' | 'in' | 'ft'
 let bmiWUnit = 'kg';   // 'kg' | 'lbs'
 let plateGroup = 'adult';   // 'adult' | 'older' | 'preglact'
@@ -1266,9 +1289,25 @@ function setLang(l){
   renderAll();
 }
 
+// Scales the whole app by changing the root font-size only — every text
+// size in the CSS is set in rem, so this scales every page proportionally
+// without touching layout, padding, or spacing rules.
+function setTextSize(size){
+  textSize=size;
+  localStorage.setItem('bida-textsize',size);
+  if(size==='normal') document.documentElement.removeAttribute('data-textsize');
+  else document.documentElement.setAttribute('data-textsize',size);
+  ['normal','large','xlarge'].forEach(s=>{
+    const b=document.getElementById('textsize-btn-'+s);
+    b.classList.toggle('active',s===size);
+    b.setAttribute('aria-pressed',String(s===size));
+  });
+}
+
 function applyStaticStrings(){
   const t=T[lang];
   document.getElementById('hdr-subtitle').textContent=t.subtitle;
+  document.getElementById('textsize-label').textContent=t.textSizeLabel;
   document.getElementById('emergency-banner').innerHTML=t.banner;
   document.getElementById('search-input').placeholder=t.search;
   document.getElementById('search-input').setAttribute('aria-label',t.search);
@@ -1957,6 +1996,7 @@ applyStaticStrings();
 renderAll();
 navigate('home');
 if(lang==='fil'){setLang('fil');}
+if(textSize!=='normal'){setTextSize(textSize);}
 </script>
 </body>
 </html>
