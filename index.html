@@ -44,7 +44,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .content-wrap{padding:14px 14px 24px}
 .disclaimer{background:var(--blue-light);border:1px solid #bfdbfe;border-radius:10px;padding:11px 14px;font-size:0.83rem;color:#1e3a8a;margin-bottom:14px;line-height:1.5}
 .home-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.home-card{background:var(--card);border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;border:1.5px solid var(--border);transition:transform 0.12s,box-shadow 0.12s;box-shadow:0 1px 4px rgba(17,24,39,0.06);min-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;-webkit-tap-highlight-color:transparent}
+.home-card{background:var(--card);font:inherit;width:100%;border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;border:1.5px solid var(--border);transition:transform 0.12s,box-shadow 0.12s;box-shadow:0 1px 4px rgba(17,24,39,0.06);min-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;-webkit-tap-highlight-color:transparent}
 .home-card:active{transform:scale(0.97);box-shadow:0 1px 2px rgba(17,24,39,0.05)}
 .home-card.danger-card{border-color:#fca5a5;background:#fff5f5}
 .home-card.danger-card .card-icon{background:#fee2e2;color:var(--danger)}
@@ -58,7 +58,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .section-title{font-size:1.1rem;font-weight:700;color:var(--text);flex:1}
 .section-icon{font-size:1.3rem}
 .symptom-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);margin-bottom:10px;overflow:hidden;box-shadow:0 1px 3px rgba(17,24,39,0.05)}
-.symptom-card-header{display:flex;justify-content:space-between;align-items:center;padding:14px 15px;cursor:pointer;min-height:52px;-webkit-tap-highlight-color:transparent}
+.symptom-card-header{display:flex;width:100%;border:none;background:transparent;text-align:left;font:inherit;justify-content:space-between;align-items:center;padding:14px 15px;cursor:pointer;min-height:52px;-webkit-tap-highlight-color:transparent}
 .symptom-card-header:active{background:#f9fafb}
 .symptom-card-title{font-size:0.95rem;font-weight:600;color:var(--text);flex:1;padding-right:8px}
 .chevron{color:var(--muted);font-size:1rem;transition:transform 0.2s;flex-shrink:0}
@@ -211,10 +211,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   .tracker-print-btn{display:none!important}
 }
 .nav-icon{font-size:1.2rem;line-height:1}
-.search-result-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.search-result-card{background:var(--card);display:block;width:100%;text-align:left;font:inherit;border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .search-result-card:active{background:#f9fafb}
 .result-section{font-size:0.72rem;color:var(--primary);font-weight:700;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:3px}
 .result-title{font-size:0.92rem;font-weight:600;color:var(--text)}
+.home-card:focus-visible,.symptom-card-header:focus-visible,.search-result-card:focus-visible,.nav-btn:focus-visible,.lang-btn:focus-visible,.back-btn:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
 .mt-10{margin-top:10px}
 .mb-14{margin-bottom:14px}
 .text-danger{color:var(--danger)}
@@ -231,7 +232,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 
 <header class="app-header">
-  <div class="brand" onclick="goHome()" role="button" tabindex="0" aria-label="Go to Home" style="cursor:pointer">
+  <div class="brand" onclick="goHome()" role="button" tabindex="0" aria-label="Go to Home" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goHome()}" style="cursor:pointer">
     <div class="header-logo" aria-hidden="true"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 90'>
   <text x='110' y='52' font-family='Arial, sans-serif' font-size='44' font-weight='800' text-anchor='middle'><tspan fill='#1e3a8a'>B</tspan><tspan fill='#14b8a6'>i</tspan><tspan fill='#16a34a'>D</tspan><tspan fill='#2563eb'>A</tspan></text>
   <text x='110' y='76' font-family='Arial, sans-serif' font-size='16' font-weight='700' letter-spacing='4' fill='#1e3a8a' text-anchor='middle'>HEALTH</text>
@@ -242,42 +243,44 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     </div>
   </div>
   <div class="lang-toggle">
-    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-    <button class="lang-btn" id="btn-fil" onclick="setLang('fil')">FIL</button>
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-pressed="true">EN</button>
+    <button class="lang-btn" id="btn-fil" onclick="setLang('fil')" aria-pressed="false">FIL</button>
   </div>
 </header>
 
 <div class="search-wrap" id="search-wrap">
   <div class="search-bar">
     <span>🔍</span>
-    <input type="text" id="search-input" placeholder="Search symptom or topic…" oninput="handleSearch(this.value)" autocomplete="off">
+    <input type="text" id="search-input" placeholder="Search symptom or topic…" aria-label="Search symptom or topic" oninput="handleSearch(this.value)" autocomplete="off">
     <button class="search-clear" id="search-clear" onclick="clearSearch()">✕</button>
   </div>
 </div>
+
+<main id="main-content">
 
 <!-- HOME -->
 <div class="page active" id="page-home">
   <div class="content-wrap">
     <div class="disclaimer" id="home-disclaimer">This app gives health guidance only. It does not diagnose or replace a doctor, nurse, or health center.</div>
     <div class="home-grid">
-      <div class="home-card danger-card" onclick="navigate('red-flags')">
+      <button type="button" class="home-card danger-card" onclick="navigate('red-flags')">
         <div class="card-icon">🚨</div><div class="card-label" id="lbl-rf">Red Flags</div>
-      </div>
-      <div class="home-card" onclick="navigate('hypertension')">
+      </button>
+      <button type="button" class="home-card" onclick="navigate('hypertension')">
         <div class="card-icon">🩺</div><div class="card-label" id="lbl-htn">Hypertension</div>
-      </div>
-      <div class="home-card" onclick="navigate('diabetes')">
+      </button>
+      <button type="button" class="home-card" onclick="navigate('diabetes')">
         <div class="card-icon">🩸</div><div class="card-label" id="lbl-dm">Diabetes</div>
-      </div>
-      <div class="home-card" onclick="navigate('dyslipidemia')">
+      </button>
+      <button type="button" class="home-card" onclick="navigate('dyslipidemia')">
         <div class="card-icon">❤️</div><div class="card-label" id="lbl-dys">Cholesterol</div>
-      </div>
-      <div class="home-card" onclick="navigate('food')">
+      </button>
+      <button type="button" class="home-card" onclick="navigate('food')">
         <div class="card-icon">🥗</div><div class="card-label" id="lbl-food">Food</div>
-      </div>
-      <div class="home-card danger-card" onclick="navigate('nearby')">
+      </button>
+      <button type="button" class="home-card danger-card" onclick="navigate('nearby')">
         <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby">Nearby Care &amp; Emergency</div>
-      </div>
+      </button>
     </div>
     <div style="text-align:center;margin-top:14px">
       <a href="javascript:void(0)" onclick="navigate('howto')" id="lbl-howto-link" style="font-size:0.85rem;color:var(--muted);text-decoration:underline">❓ How to Use This App</a>
@@ -298,7 +301,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="page" id="page-red-flags">
   <div class="content-wrap">
     <div class="section-header">
-      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
       <span class="section-icon">🚨</span>
       <h2 class="section-title" id="title-rf">Red Flags</h2>
     </div>
@@ -310,7 +313,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="page" id="page-hypertension">
   <div class="content-wrap">
     <div class="section-header">
-      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
       <span class="section-icon">🩺</span>
       <h2 class="section-title" id="title-htn">Hypertension</h2>
     </div>
@@ -322,7 +325,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="page" id="page-diabetes">
   <div class="content-wrap">
     <div class="section-header">
-      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
       <span class="section-icon">🩸</span>
       <h2 class="section-title" id="title-dm">Diabetes</h2>
     </div>
@@ -334,7 +337,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="page" id="page-dyslipidemia">
   <div class="content-wrap">
     <div class="section-header">
-      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
       <span class="section-icon">❤️</span>
       <h2 class="section-title" id="title-dys">Cholesterol (Dyslipidemia)</h2>
     </div>
@@ -346,7 +349,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="page" id="page-food">
   <div class="content-wrap">
     <div class="section-header">
-      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
       <span class="section-icon">🥗</span>
       <h2 class="section-title" id="title-food">Food</h2>
     </div>
@@ -358,7 +361,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="page" id="page-bmi">
   <div class="content-wrap">
     <div class="section-header">
-      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
       <span class="section-icon">⚖️</span>
       <h2 class="section-title" id="title-bmi">BMI &amp; Weight</h2>
     </div>
@@ -371,7 +374,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="page" id="page-medications">
   <div class="content-wrap">
     <div class="section-header">
-      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
       <span class="section-icon">💊</span>
       <h2 class="section-title" id="title-meds">Medicines at the Health Center</h2>
     </div>
@@ -384,7 +387,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="page" id="page-logs">
   <div class="content-wrap">
     <div class="section-header">
-      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
       <span class="section-icon">📋</span>
       <h2 class="section-title" id="title-logs">My Logs</h2>
     </div>
@@ -396,7 +399,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="page" id="page-nearby">
   <div class="content-wrap">
     <div class="section-header">
-      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
       <span class="section-icon">🏥</span>
       <h2 class="section-title" id="title-nearby">Nearby Care &amp; Emergency Numbers</h2>
     </div>
@@ -408,7 +411,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="page" id="page-howto">
   <div class="content-wrap">
     <div class="section-header">
-      <button class="back-btn" onclick="goHome()">&#8249;</button>
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
       <span class="section-icon">❓</span>
       <h2 class="section-title" id="title-howto">How to Use This App</h2>
     </div>
@@ -429,9 +432,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
+</main>
+
 <!-- BOTTOM NAV -->
-<nav class="bottom-nav">
-  <button class="nav-btn active" id="nav-home" onclick="navigate('home')">
+<nav class="bottom-nav" aria-label="Primary navigation">
+  <button class="nav-btn active" id="nav-home" onclick="navigate('home')" aria-current="page">
     <span class="nav-icon">🏠</span><span id="nav-lbl-home">Home</span>
   </button>
   <button class="nav-btn" id="nav-logs" onclick="navigate('logs')">
@@ -456,9 +461,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 const T = {
   en: {
     subtitle:'Better Informed for Disease Awareness — Muntinlupa City',
-    banner:'Emergency? Call <a href="tel:137175">137-175</a> or go to the nearest health center.',
+    banner:'Emergency? Call <a href="tel:137175">137-175</a> or go to the emergency department of the nearest hospital.',
     search:'Search symptom or topic…',
-    disclaimer:'This app gives health guidance only. It does not diagnose or replace a doctor, nurse, or health center.',
+    disclaimer:'This app provides general health guidance only. It does not diagnose illness or replace assessment by a doctor, nurse, pharmacist, nutritionist, or health center.',
     navHome:'Home', navLogs:'My Logs',
     lblRF:'Red Flags', lblHTN:'Hypertension', lblDM:'Diabetes', lblDys:'Cholesterol',
     lblFood:'Food', lblMeds:'Medicines', lblLogs:'My Logs', lblNearby:'Nearby Care &amp; Emergency',
@@ -472,13 +477,13 @@ const T = {
     howto4Title:'💊 Medicines', howto4Body:'See what common medicines are for and how they\'re usually taken. Add any medicine — from the list or typed in yourself — to My Medicine Tracker to check off your doses each day and see your weekly progress.',
     howto5Title:'⚖️ BMI & Weight', howto5Body:'Calculate your BMI and get simple food advice based on the result. Track your weight over time and see it as a graph.',
     howto6Title:'🌐 Switch Language', howto6Body:'Tap EN or FIL at the top right anytime to switch the app\'s language.',
-    howto7Title:'🔒 Your Privacy', howto7Body:'This app works offline and does not diagnose or replace a doctor. Everything you log (medicines, BP, sugar, weight) stays only on your phone — it is never sent anywhere.',
+    howto7Title:'🔒 Your Privacy', howto7Body:'This app works offline. Your records are stored only in this browser on this device and are not sent to BIDA Health. Anyone who can open this app on your device may be able to view them.',
     howto8Title:'💾 Back Up Your Data', howto8Body:'On the My Logs page, tap "Download Backup" to save a copy of everything (medicines, BP, sugar, weight) as one file — useful before clearing your browser, switching phones, or reinstalling. Use "Restore from Backup File" to bring it back.',
     howtoRefsTitle:'📚 References & Sources', howtoRefsIntro:'The food guidance and plate images in this app are based on:',
     howtoRefsList:['Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Adults (19–59 years old)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Older Persons (60 years old and above)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Pregnant and Lactating Women (© 2016)'],
     howtoRefsNote:'Pinggang Pinoy® is a registered trademark of FNRI-DOST, used here for educational purposes. Visit fnri.dost.gov.ph for the original materials.',
     inquiriesLabel:'For inquiries and other matters, please email',
-    logsDataNote:'These entries are saved only on this phone — never sent anywhere. They stay available for as long as you keep using this app on this device. They will be deleted if you clear your browser\'s site data, uninstall or reset the app, or switch to a new phone. If you want to keep a copy, use the Print button to save or print your log before that happens.',
+    logsDataNote:'These entries are stored only in this browser on this device and are not sent to BIDA Health. Anyone who can open this app on your device may be able to view them. They may be deleted if you clear the browser\'s site data, uninstall or reset the app, or switch devices. Use Backup or Print if you need a copy.',
     backupTitle:'Backup & Restore', backupSub:'Save a copy of all your logs (medicines, blood pressure, blood sugar, and weight) as one file, so you don\'t lose them if you clear your browser, switch phones, or reinstall the app.',
     backupBtn:'Download Backup', restoreBtn:'Restore from Backup File', backupNow:'Back up now',
     restoreConfirm:'This will replace all your current logs with the ones in this backup file. This cannot be undone. Continue?',
@@ -497,7 +502,7 @@ const T = {
     bmiFtLabel:'ft', bmiInLabel:'in (extra)',
     bmiDisclaimer:'Asia-Pacific BMI cutoffs are used — these are lower than standard WHO values and more appropriate for Filipino adults. BMI is a screening guide only and does not diagnose your health status. For those under 18, consult a health center, doctor, or nutritionist.',
     bmiResultNote:'Asia-Pacific cutoffs applied. Screening estimate only — consult a health professional for proper assessment.',
-    bmiUnder:'Underweight', bmiNormal:'Normal weight', bmiOver:'Overweight', bmiObese1:'Obese Class I', bmiObese2:'Obese Class II (Morbidly Obese)',
+    bmiUnder:'Underweight', bmiNormal:'Normal weight', bmiOver:'Overweight', bmiObese1:'Obese Class I', bmiObese2:'Obesity Class II',
     bmiRanges:'Asia-Pacific BMI Ranges', bmiCatCol:'Category', bmiRangeCol:'BMI Range',
     bmiTeen:'For those under 18: adult BMI categories do not apply. Please consult a health center, doctor, or nutritionist for a proper weight-for-age assessment.',
     bmiInvalid:'Please enter valid age, height, and weight.',
@@ -507,8 +512,8 @@ const T = {
     bmiRecUnder:'Eat more protein-rich and calorie-dense foods, such as eggs, fish, chicken, legumes (monggo, patani), and dairy. Aim for regular, balanced meals. Consider seeing a nutritionist or doctor.',
     bmiRecNormal:'Great! Maintain your healthy lifestyle. Keep eating balanced meals with plenty of vegetables and lean protein, and stay physically active.',
     bmiRecOver:'Try reducing refined carbohydrates and sweet drinks. Eat more vegetables and lean protein, and limit processed and salty foods. Walking at least 30 minutes most days helps. Consult a doctor or nutritionist for a personalized plan.',
-    bmiRecObese1:'Lifestyle changes are important now. Reduce processed, high-calorie, salty, and sugary foods. Increase physical activity gradually. See a doctor and nutritionist for a personalized weight management plan.',
-    bmiRecObese2:'Please see a doctor as soon as possible. Significant weight management support is needed. Do not attempt crash dieting without medical supervision.',
+    bmiRecObese1:'Lifestyle changes are important. Reduce processed foods and foods high in calories, salt, or added sugar. Increase physical activity gradually and discuss a suitable plan with a doctor or nutritionist.',
+    bmiRecObese2:'Discuss your result with a doctor or nutritionist for an individualized assessment. Avoid crash diets or rapid weight-loss plans without professional guidance.',
     signsSym:'Signs / Symptoms', dangerSigns:'⚠ Danger signs — seek urgent care:',
     whatToDo:'What to do', catEm:'Emergency', catHC:'Health Centers', catHosp:'Hospitals',
     nearbyVerify:'Contact numbers below were verified against official Muntinlupa City Government sources. Numbers can still change — please confirm before an urgent visit.',
@@ -523,9 +528,9 @@ const T = {
     tipsTitle:'Simple Food Reminders',
     bmiTitle:'BMI Calculator (Adults)',
     medSafetyTitle:'Please Read Before Using This List',
-    medSafetyBody:'This list is for general information only. It does not replace your doctor\'s prescription. Your doctor or health worker decides your exact medicine and dose based on your own health condition. Never start, stop, or change any medicine on your own. If you notice side effects or have questions, go to your health center right away.',
-    medWhatFor:'What it\'s for', medHowTaken:'How it\'s usually taken', medUsualDose:'Usual Adult Dose',
-    medReminder:'Every patient is different. Always take the exact dose your doctor or health worker prescribed for you, not just what is written here.',
+    medSafetyBody:'The dose examples are included only to help you recognize the medicine or dose written on your prescription or label. They are not instructions for choosing your own dose. Follow the exact medicine, formulation, dose, and schedule prescribed for you. Never start, stop, or change a medicine without consulting your doctor or health worker.',
+    medWhatFor:'What it\'s for', medHowTaken:'Common schedule examples', medUsualDose:'Common dose examples — for recognition only',
+    medReminder:'Use this only to recognize your medicine. Follow the exact formulation, dose, and schedule on your prescription or medicine label.',
     medListNote:'This list reflects medicines commonly available through the Muntinlupa City Health Office as of this app\'s development. Availability may change — please confirm at your health center.',
     // Hypertension
     htnIntro:'Understanding hypertension helps you manage it, not just take medicine for it. Here is what it is, why it matters, and what you can do.',
@@ -537,18 +542,18 @@ const T = {
     htnDietTitle:'Eating for Healthy Blood Pressure', htnDietBody:'Reduce salty foods such as processed meats, instant noodles, canned goods, and extra patis or toyo. Choose fresh fruits and vegetables, especially those rich in potassium like banana and leafy greens, which help balance sodium in the body. Read food labels when available and choose lower-sodium options. Cooking at home with fresh ingredients gives you more control over salt than eating out or buying processed food.',
     htnActivityTitle:'Staying Active', htnActivityBody:'Regular physical activity helps lower and control blood pressure. Aim for at least 30 minutes of moderate activity, such as brisk walking, most days of the week. If you are not used to exercise, start slowly and build up gradually. Simple activities like walking to the market, taking the stairs, or light household chores also count. Ask your doctor before starting a new exercise routine if you have other health conditions.',
     htnStressTitle:'Managing Stress', htnStressBody:'Ongoing stress can raise blood pressure and make it harder to manage. Simple habits that may help include getting enough sleep, talking to family or friends about what is bothering you, taking short breaks during a busy day, and practicing slow, deep breathing when feeling overwhelmed. If stress feels difficult to manage on your own, it is okay to ask your health worker for support.',
-    htnUrgentTitle:'When to Seek Urgent Care', htnUrgentBody:'Severe headache, chest pain, difficulty breathing, sudden confusion, vision changes, or weakness on one side, together with high blood pressure, are signs of a hypertensive emergency. See the Red Flags section and seek care immediately.',
+    htnUrgentTitle:'When to Seek Urgent Care', htnUrgentBody:'If your BP is above 180/120, wait at least 1 minute and measure again. If it remains that high and you have chest pain, difficulty breathing, weakness or numbness on one side of the body, vision changes, confusion, or trouble speaking, call 137-175 immediately.',
     // Diabetes
     dmIntro:'Understanding diabetes helps you manage it day to day, not just when you visit the doctor. Here is what it is, why it matters, and what you can do.',
     dmWhatTitle:'What Is Diabetes?', dmWhatBody:'Diabetes means your blood sugar (glucose) stays higher than normal because your body does not make enough insulin or cannot use it well. Insulin is a hormone that helps move sugar from your blood into your cells for energy. Most adults with diabetes have Type 2, which is often linked to lifestyle and can be managed well with medicine, diet, and activity.',
     dmWhyTitle:'Why It Matters', dmWhyBody:'Uncontrolled diabetes over time can damage blood vessels and nerves throughout the body. This raises the risk of heart disease, stroke, kidney disease, vision loss, and nerve damage, especially in the feet. Good blood sugar control significantly lowers these risks, which is why consistent management matters even when you feel fine.',
     dmRiskTitle:'Who Is at Higher Risk', dmRiskBody:'Your risk of Type 2 diabetes is higher if you have a family history of diabetes, are overweight, are not physically active, are older, or have high blood pressure or high cholesterol. Having hypertension, diabetes, and high cholesterol together is common, and each condition can make the others harder to manage, so treating them together matters.',
-    dmNumbersTitle:'Know Your Numbers', dmNumbersBody:'Follow up on blood sugar testing at the health center or with your doctor as advised. If you test at home, ask your doctor or health worker what target range is right for you, since this can vary by person. Keep a record of your readings, including whether you tested fasting (before eating) or random (after eating), to help your doctor see your pattern over time.',
+    dmNumbersTitle:'Know Your Numbers', dmNumbersBody:'Follow up on blood sugar testing at the health center or with your doctor as advised. If you test at home, ask what target range is right for you. Record whether the reading was fasting, 2 hours after eating, or random, because these are different measurements.',
     dmMedTitle:'Taking Your Medicine', dmMedBody:'Take your diabetes medicine exactly as prescribed and at the same times each day where possible. Never stop or change your dose on your own, even if your blood sugar reading looks good, since that may simply mean the medicine is working.',
     dmFootTitle:'Foot Care', dmFootBody:'Check your feet every day for cuts, blisters, redness, or sores, since diabetes can reduce feeling in the feet, making injuries easy to miss. Wash and dry your feet daily, especially between the toes, and moisturize dry skin (but not between the toes). Do not walk barefoot, even at home. Trim toenails straight across. See a health worker right away for any wound that is not healing, since foot injuries can worsen quickly in diabetes.',
     dmDietTitle:'Eating for Blood Sugar Control', dmDietBody:'Eat regular, balanced meals rather than skipping meals, which can cause blood sugar swings. Be mindful of carbohydrate portions (rice, bread, root crops) and pair them with protein and vegetables to slow sugar absorption. Reduce sugary foods, drinks, and desserts. Choose whole fruit over fruit juice. Eating at consistent times each day also helps keep blood sugar more stable.',
     dmActivityTitle:'Staying Active', dmActivityBody:'Physical activity helps your body use insulin better and can lower blood sugar. Aim for regular activity most days, such as walking. If you take medicine that can cause low blood sugar, carry a small sugary snack in case you feel shaky, dizzy, or confused during exercise. Check your feet after activity, especially if wearing new shoes.',
-    dmUrgentTitle:'When to Seek Urgent Care', dmUrgentBody:'Vomiting with inability to keep fluids down, severe weakness or confusion, drowsiness, very dry mouth, or sudden shaking with cold sweat are emergency signs. See the Red Flags section and seek care immediately.',
+    dmUrgentTitle:'When to Seek Urgent Care', dmUrgentBody:'This is an emergency if you have repeated vomiting and can\'t keep down fluids, severe weakness or confusion, difficulty waking up or not responding normally, a very dry mouth, or sudden shaking with cold sweat. See the Red Flags section and seek care immediately.',
     // Dyslipidemia (Cholesterol)
     dysIntro:'Understanding cholesterol helps explain why lifestyle changes and medicine both matter, even without symptoms.',
     dysWhatTitle:'What Is Cholesterol?', dysWhatBody:'Cholesterol is a fat-like substance your body needs in small amounts, but too much of certain types can be harmful. LDL ("bad" cholesterol) can build up in your blood vessels, while HDL ("good" cholesterol) helps remove it. Triglycerides are another type of blood fat that, when high, also raise health risks. Dyslipidemia means these levels are not at a healthy balance.',
@@ -561,30 +566,33 @@ const T = {
     emergMainLabel:'Main Emergency Hotline (24/7)',
     emergOtherTitle:'Other Ways to Reach Emergency Response',
     emergAppNote:'Muntinlupa City also offers the iRESPOND Muntinlupa mobile app for reporting emergencies (disaster, police, fire, ambulance). Available on Google Play and the App Store.',
-    medTrackerTitle:'My Medicine Tracker', medTrackerSub:'Track your own medicine intake here. This stays only on this phone — nothing is sent anywhere, and no one else can see it.',
+    medTrackerTitle:'My Medicine Tracker', medTrackerSub:'Mark the doses listed in your tracker. The record stays in this browser on this device and is not sent to BIDA Health. Anyone who can open the app on this device may be able to view it.',
     medTrackerEmpty:'You haven\'t added any medicines to track yet.', medAdd:'Add', medAllAdded:'All listed medicines have been added to your tracker.',
     medOtherLabel:'Taking something not on this list? Add it here:', medOtherPlaceholder:'Type the medicine name',
     medPrintBtn:'Print My Checklist', medReminderBanner:'You haven\'t marked {meds} as taken today yet.',
-    medCongratsTitle:'🎉 Great job!', medCongratsBody:'You\'ve taken every dose you tracked this week. Keep it up!',
+    medCongratsTitle:'🎉 Great job!', medCongratsBody:'You marked all scheduled doses in this tracker for the week. Keep following the instructions on your prescription.',
     medResetBtn:'Reset for a New Week', medResetConfirm:'This will clear your medicine check-ins so you can start fresh. Your tracked medicines and their dose schedule will stay the same. This cannot be undone. Continue?',
     thisWeek:'This week', streakLabel:'Streak', dosesUnit:'doses', dayUnit:'day', daysUnit:'days',
-    timesPerDayLabel:'Times a day', doseAM:'AM', doseNoon:'Noon', dosePM:'PM',
+    timesPerDayLabel:'Times a day', doseAM:'Dose 1', doseNoon:'Dose 2', dosePM:'Dose 3',
     bpLogTitle:'My Blood Pressure Log', bpLogSub:'Keep track of your home blood pressure readings to discuss with your doctor. Stays only on this phone.',
     bpSysPlaceholder:'Systolic (e.g. 130)', bpDiaPlaceholder:'Diastolic (e.g. 85)', bpLogPrintBtn:'Print My BP Log',
-    flagWarn:'High', flagDanger:'Very High — Seek Care', flagLowDanger:'Low — Seek Care',
+    flagWarn:'High', flagDanger:'Very High — Act Now', flagLowDanger:'Low — Act Now',
+    bpCrisisAdvice:'Repeat the BP after at least 1 minute. If it is still above 180/120 and there is chest pain, difficulty breathing, weakness or numbness, vision change, confusion, or trouble speaking, call 137-175 immediately. If there are no new symptoms, contact a health professional promptly.',
+    sugarLowAdvice:'If the person is awake and can swallow safely, take 15 grams of fast-acting carbohydrate, wait 15 minutes, then check again. Repeat if the reading is still below 70 mg/dL.',
+    sugarLowEmergency:'If the person is unconscious, having a seizure, very confused, or unable to swallow, do not give food or drink. Call 137-175 immediately.',
     sugarLogTitle:'My Blood Sugar Log', sugarLogSub:'Keep track of your home blood sugar readings to discuss with your doctor. Stays only on this phone.',
-    sugarValPlaceholder:'Reading (mg/dL)', sugarFasting:'Fasting', sugarRandom:'Random/After meal', sugarLogPrintBtn:'Print My Sugar Log',
+    sugarValPlaceholder:'Reading (mg/dL)', sugarFasting:'Fasting', sugarPostMeal:'2 hours after eating', sugarRandom:'Random / any time', sugarLogPrintBtn:'Print My Sugar Log',
     logAdd:'+ Add', logNoEntries:'No entries yet.', logInvalid:'Please enter a valid reading.',
-    weightLogTitle:'My Weight Log', weightLogSub:'Keep track of your weight over time to discuss with your doctor. Stays only on this phone.',
+    weightLogTitle:'My Weight Log', weightLogSub:'Record your weight here to show and discuss with your doctor or nutritionist. It is stored only in this browser on this device.',
     weightValPlaceholder:'Weight', weightLogPrintBtn:'Print My Weight Log', weightChartEmpty:'Add at least 2 entries to see your weight graph.',
-    safeWeightNote:'A safe pace for gaining or losing weight is about 0.5–1 kg (roughly 1–2 lbs) a week. Faster changes should only be done under a doctor\'s or nutritionist\'s supervision.',
+    safeWeightNote:'Weight goals should be individualized. Discuss rapid or unexpected weight change with a doctor or nutritionist.',
     weeksToGoal:'At a safe pace of 0.5–1 kg a week, this is about {weeks} weeks.',
   },
   fil: {
     subtitle:'Better Informed for Disease Awareness — Lungsod ng Muntinlupa',
-    banner:'Emergency? Tumawag sa <a href="tel:137175">137-175</a> o pumunta sa pinakamalapit na health center.',
+    banner:'Emergency? Tumawag sa <a href="tel:137175">137-175</a> o pumunta agad sa emergency room ng pinakamalapit na ospital.',
     search:'Hanapin ang sintomas o paksa…',
-    disclaimer:'Gabay pangkalusugan lamang ito. Hindi ito kapalit ng doktor, nurse, o health center.',
+    disclaimer:'Gabay pangkalusugan lamang ang app na ito. Hindi ito nagbibigay ng diagnosis at hindi nito mapapalitan ang pagsusuri ng doktor, nurse, pharmacist, nutritionist, o health center.',
     navHome:'Home', navLogs:'Aking Logs',
     lblRF:'Mga Babala', lblHTN:'Altapresyon', lblDM:'Diyabetis', lblDys:'Kolesterol',
     lblFood:'Pagkain', lblMeds:'Mga Gamot', lblLogs:'Aking Logs', lblNearby:'Malapit na Tulong at Emergency',
@@ -598,13 +606,13 @@ const T = {
     howto4Title:'💊 Mga Gamot', howto4Body:'Alamin kung para saan ang karaniwang gamot at kung paano ito karaniwang iniinom. Idagdag ang anumang gamot — mula sa listahan o i-type mo mismo — sa Aking Medicine Tracker para ma-check ang iyong inumin araw-araw at makita ang progress mo linggu-linggo.',
     howto5Title:'⚖️ BMI at Timbang', howto5Body:'Kalkulahin ang iyong BMI at makakuha ng simpleng payo sa pagkain base sa resulta. Subaybayan ang iyong timbang sa paglipas ng panahon at makita ito bilang graph.',
     howto6Title:'🌐 Palitan ang Wika', howto6Body:'Pindutin ang EN o FIL sa kanang itaas kahit kailan para palitan ang wika ng app.',
-    howto7Title:'🔒 Ang Iyong Privacy', howto7Body:'Gumagana ang app na ito kahit walang internet at hindi ito nagdadagnos o kapalit ng doktor. Ang lahat ng itinatala mo (gamot, BP, sugar, timbang) ay dito lamang mananatili sa iyong telepono — hindi ito ipinapadala kahit saan.',
+    howto7Title:'🔒 Ang Iyong Privacy', howto7Body:'Gumagana ang app na ito kahit walang internet. Sa browser ng device na ito lamang naka-save ang iyong mga record at hindi ito ipinapadala sa BIDA Health. Maaaring makita ito ng sinumang makapagbubukas ng app sa iyong device.',
     howto8Title:'💾 I-backup ang Iyong Data', howto8Body:'Sa My Logs page, pindutin ang "I-download ang Backup" para i-save ang kopya ng lahat (gamot, BP, sugar, timbang) bilang isang file — mainam bago i-clear ang browser, lumipat ng telepono, o i-reinstall ang app. Gamitin ang "I-restore mula sa Backup File" para maibalik ito.',
     howtoRefsTitle:'📚 Mga Sanggunian', howtoRefsIntro:'Ang gabay sa pagkain at mga larawan ng plato sa app na ito ay batay sa:',
     howtoRefsList:['Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Mga Nasa Hustong Gulang (19–59 taon)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Nakatatandang Edad (60 taon pataas)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Buntis at Nagpapasusong Kababaihan (© 2016)'],
     howtoRefsNote:'Ang Pinggang Pinoy® ay rehistradong trademark ng FNRI-DOST, ginamit dito para sa layuning pang-edukasyon lamang. Bisitahin ang fnri.dost.gov.ph para sa orihinal na materyales.',
     inquiriesLabel:'Para sa mga katanungan at iba pang bagay, mag-email sa',
-    logsDataNote:'Ang mga entry na ito ay naka-save lang sa telepono mong ito — hindi ito ipinapadala kahit saan. Mananatili itong available hangga\'t ginagamit mo ang app sa device na ito. Mabubura ito kapag na-clear mo ang site data ng iyong browser, in-uninstall o na-reset ang app, o lumipat ka ng bagong telepono. Kung gusto mong magkaroon ng kopya, gamitin ang Print button para i-save o i-print ang iyong log bago ito mangyari.',
+    logsDataNote:'Sa browser ng device na ito lamang naka-save ang mga entry na ito at hindi ito ipinapadala sa BIDA Health. Maaaring makita ito ng sinumang makapagbubukas ng app sa iyong device. Maaari itong mabura kapag na-clear mo ang site data ng browser, in-uninstall o na-reset ang app, o lumipat ka ng device. Gamitin ang Backup o Print kung kailangan mo ng kopya.',
     backupTitle:'Backup at Restore', backupSub:'I-save ang kopya ng lahat ng iyong logs (gamot, blood pressure, blood sugar, at timbang) bilang isang file, para hindi mawala kahit i-clear mo ang browser, lumipat ng telepono, o i-reinstall ang app.',
     backupBtn:'I-download ang Backup', restoreBtn:'I-restore mula sa Backup File', backupNow:'Mag-backup ngayon',
     restoreConfirm:'Papalitan nito ang lahat ng kasalukuyang logs mo ng laman ng backup file na ito. Hindi na ito maibabalik pa. Ituloy?',
@@ -617,24 +625,24 @@ const T = {
     weightBackupReminder:'May {count} na weight entry ka na naka-save. Mainam nang mag-backup ng iyong data.',
     goNow:'⚠ Magpatingin agad', callNow:'⚠ Emergency? Tumawag sa 137-175',
     noResults:'Walang nahanap. Subukan ang ibang salita.',
-    verify:'⚠ I-VERIFY BAGO GAMITIN',
+    verify:'⚠ Kumpirmahin muna bago gamitin',
     bmiBtn:'Kalkulahin ang BMI', bmiAge:'Edad (taon)', bmiH:'Taas', bmiW:'Timbang',
-    bmiUnitCm:'cm', bmiUnitIn:'pulgada', bmiUnitFt:'ft + in', bmiUnitKg:'kg', bmiUnitLbs:'lbs',
+    bmiUnitCm:'cm', bmiUnitIn:'inches', bmiUnitFt:'ft + in', bmiUnitKg:'kg', bmiUnitLbs:'lbs',
     bmiFtLabel:'ft', bmiInLabel:'in (dagdag)',
-    bmiDisclaimer:'Ginagamit ang Asia-Pacific na pamantayan ng BMI, mas mababa ito kaysa sa karaniwang WHO at mas angkop para sa mga Pilipinong adulto. Gabay lamang ang BMI at hindi ito diagnosis. Para sa edad 17 pababa, kumonsulta sa health center, doktor, o nutrisyonista.',
-    bmiResultNote:'Ginamit ang Asia-Pacific na pamantayan. Gabay lamang ito, kumonsulta sa health professional para sa wastong pagsusuri.',
-    bmiUnder:'Kulang ang timbang', bmiNormal:'Normal ang timbang', bmiOver:'Sobra ang timbang', bmiObese1:'Obese Class I', bmiObese2:'Obese Class II (Matinding Obesity)',
+    bmiDisclaimer:'Ginagamit ang Asia-Pacific na pamantayan ng BMI, mas mababa ito kaysa sa karaniwang WHO at mas angkop para sa mga Pilipinong adulto. Gabay lamang ang BMI at hindi ito diagnosis. Para sa edad 17 pababa, kumonsulta sa health center, doktor, o nutritionist.',
+    bmiResultNote:'Ginamit ang Asia-Pacific na pamantayan. Gabay lamang ito, kumonsulta sa doktor o health worker para sa wastong pagsusuri.',
+    bmiUnder:'Kulang ang timbang', bmiNormal:'Normal ang timbang', bmiOver:'Sobra ang timbang', bmiObese1:'Obese Class I', bmiObese2:'Obesity Class II',
     bmiRanges:'Asia-Pacific na Pamantayan ng BMI', bmiCatCol:'Kategorya', bmiRangeCol:'Saklaw ng BMI',
-    bmiTeen:'Para sa edad 17 pababa: hindi angkop ang adult BMI categories. Kumonsulta sa health center, doktor, o nutrisyonista para sa wastong pagtatasa.',
+    bmiTeen:'Para sa edad 17 pababa: hindi angkop ang mga BMI category para sa nasa hustong gulang. Kumonsulta sa health center, doktor, o nutritionist para sa wastong pagtatasa.',
     bmiInvalid:'Mangyaring maglagay ng tamang edad, taas, at timbang.',
     bmiAboveNorm:'na sobra sa malusog na timbang', bmiBelowNorm:'na kulang sa malusog na timbang',
     bmiToLose:'Para maabot ang malusog na timbang, maaaring kailangang mabawasan ng',
     bmiToGain:'Para maabot ang malusog na timbang, maaaring kailangang madagdagan ng',
-    bmiRecUnder:'Kumain ng mas maraming protina at masustansyang pagkain, tulad ng itlog, isda, manok, munggo, at gatas. Subukang kumain nang regular at balanse. Kumonsulta sa nutrisyonista o doktor.',
+    bmiRecUnder:'Kumain ng mas maraming protina at masustansyang pagkain, tulad ng itlog, isda, manok, munggo, at gatas. Subukang kumain nang regular at balanse. Kumonsulta sa nutritionist o doktor.',
     bmiRecNormal:'Napakahusay! Ipagpatuloy ang malusog na pamumuhay. Kumain ng balanseng pagkain na may maraming gulay at lean na protina, at manatiling aktibo.',
-    bmiRecOver:'Subukang bawasan ang kanin, matamis, at inuming may asukal. Kumain ng mas maraming gulay at lean na protina, at bawasan ang processed at maalat na pagkain. Ang paglalakad nang 30 minuto sa araw ay nakakatulong. Kumonsulta sa doktor o nutrisyonista.',
-    bmiRecObese1:'Mahalaga na ang pagbabago sa pamumuhay. Iwasan ang processed, mataas-kaloriya, maalat, at matamis na pagkain. Mag-ehersisyo nang dahan-dahan. Kumonsulta sa doktor at nutrisyonista para sa personalisadong plano.',
-    bmiRecObese2:'Pumunta sa doktor agad. Kailangan ng malaking tulong sa pamamahala ng timbang. Huwag mag-crash diet nang walang gabay ng doktor.',
+    bmiRecOver:'Subukang bawasan ang kanin, matamis, at inuming may asukal. Kumain ng mas maraming gulay at lean na protina, at bawasan ang processed at maalat na pagkain. Ang paglalakad nang 30 minuto sa araw ay nakakatulong. Kumonsulta sa doktor o nutritionist.',
+    bmiRecObese1:'Mahalaga ang unti-unting pagbabago sa pagkain at aktibidad. Bawasan ang processed na pagkain at mga pagkaing mataas sa calories, asin, o dagdag na asukal. Kumonsulta sa doktor o nutritionist para sa planong angkop sa iyo.',
+    bmiRecObese2:'Ipakonsulta ang resulta sa doktor o nutritionist para sa mas angkop na pagtatasa. Iwasan ang crash diet o mabilisang pagpapapayat nang walang propesyonal na gabay.',
     signsSym:'Mga Senyales / Sintomas', dangerSigns:'⚠ Delikadong senyales — magpatingin agad:',
     whatToDo:'Dapat gawin', catEm:'Emergency', catHC:'Mga Health Center', catHosp:'Mga Ospital',
     nearbyVerify:'Ang mga numerong nasa ibaba ay na-verify laban sa opisyal na mapagkukunan ng Lungsod ng Muntinlupa. Maaari pa ring magbago ang mga ito, kumpirmahin bago pumunta para sa agarang pangangailangan.',
@@ -647,63 +655,66 @@ const T = {
     plateSourceNote:'Pinagmulan: FNRI-DOST Pinggang Pinoy — tingnan ang "Paano Gamitin ang App na Ito" para sa buong sanggunian.',
     mealsTitle:'Abot-Kayang Pagkain na Mabuti sa Puso',
     tipsTitle:'Simpleng Paalala sa Pagkain',
-    bmiTitle:'BMI Calculator (Para sa Matatanda)',
+    bmiTitle:'BMI Calculator para sa 18 Taong Gulang Pataas',
     medSafetyTitle:'Basahin Muna Bago Gamitin ang Listahang Ito',
-    medSafetyBody:'Para sa pangkalahatang kaalaman lamang ang listahang ito. Hindi ito kapalit ng reseta ng iyong doktor. Ang iyong doktor o health worker ang magpapasya ng tamang gamot at dosage para sa iyong kalagayan. Huwag simulan, itigil, o palitan ang anumang gamot nang mag-isa. Kung may napansing side effect o may tanong, pumunta agad sa iyong health center.',
-    medWhatFor:'Para saan', medHowTaken:'Karaniwang pag-inom', medUsualDose:'Karaniwang Dosage (Matanda)',
-    medReminder:'Iba-iba ang pangangailangan ng bawat pasyente. Laging inumin ang eksaktong dosage na inireseta sa iyo ng iyong doktor o health worker, hindi lang basta ang nakasulat dito.',
+    medSafetyBody:'Nakalagay lamang ang mga halimbawang dosis para matulungan kang makilala ang gamot o dosis na nasa reseta o label mo. Hindi ito gabay para pumili ng sarili mong dosis. Sundin ang eksaktong gamot, formulation, dosis, at iskedyul na inireseta para sa iyo. Huwag simulan, itigil, o baguhin ang gamot nang hindi kumukonsulta sa doktor o health worker.',
+    medWhatFor:'Para saan', medHowTaken:'Halimbawang karaniwang iskedyul', medUsualDose:'Halimbawang karaniwang dosis — para makilala lamang',
+    medReminder:'Gamitin lamang ito para makilala ang iyong gamot. Sundin ang eksaktong formulation, dosis, at iskedyul na nasa reseta o label ng gamot mo.',
     medListNote:'Makikita sa listahang ito ang mga gamot na karaniwang available sa Muntinlupa City Health Office noong ginawa ang app na ito. Maaaring magbago ang availability, kumpirmahin sa iyong health center.',
     // Hypertension
     htnIntro:'Ang pag-unawa sa hypertension ay tumutulong sa iyo na pamahalaan ito, hindi lang basta uminom ng gamot dito. Narito kung ano ito, bakit mahalaga, at ano ang magagawa mo.',
     htnWhatTitle:'Ano ang Hypertension?', htnWhatBody:'Ang presyon ng dugo ay ang lakas ng dugo na dumadaloy laban sa dingding ng iyong mga ugat. Isinusulat ito bilang dalawang numero, halimbawa 120/80: ang taas na numero (systolic) ay ang presyon kapag tumitibok ang puso, at ang mababang numero (diastolic) ay ang presyon kapag nagpapahinga ang puso sa pagitan ng tibok. Ang hypertension ay nangangahulugang mas mataas sa normal ang iyong presyon ng dugo sa mahabang panahon.',
     htnWhyTitle:'Bakit Mahalaga Ito', htnWhyBody:'Karaniwang walang sintomas ang altapresyon, kaya ito tinatawag na "tahimik" na kondisyon. Sa loob ng mga buwan o taon, unti-unting nasisira ng hindi kontroladong hypertension ang iyong mga ugat, puso, bato, at mata. Pinapataas nito ang panganib ng stroke, heart attack, heart failure, at sakit sa bato, kadalasan nang walang babala hanggang magkaroon ng komplikasyon.',
-    htnRiskTitle:'Sino ang Mas Nanganganib', htnRiskBody:'Mas mataas ang panganib mong magkaroon ng hypertension kung may family history ka ng altapresyon, matanda na, kumakain ng maalat, sobra sa timbang, hindi aktibo, regular na umiinom ng alak, naninigarilyo, o palaging stressed. Marami sa mga salik na ito ay maaaring mapabuti sa pamamagitan ng pagbabago sa pamumuhay, kahit hindi mababago ang family history.',
+    htnRiskTitle:'Sino ang Mas Nanganganib', htnRiskBody:'Mas mataas ang panganib mong magkaroon ng hypertension kung may family history ka ng altapresyon, mas may edad, kumakain ng maalat, sobra sa timbang, hindi aktibo, regular na umiinom ng alak, naninigarilyo, o palaging stressed. Marami sa mga salik na ito ay maaaring mapabuti sa pamamagitan ng pagbabago sa pamumuhay, kahit hindi mababago ang family history.',
     htnNumbersTitle:'Alamin ang Iyong BP', htnNumbersBody:'Ipasuri ang iyong presyon ng dugo nang regular sa health center. Kung magsusukat ka sa bahay, umupo nang tahimik ng 5 minuto bago magsukat, itaas ang braso sa antas ng puso, iwasan ang caffeine, ehersisyo, o paninigarilyo 30 minuto bago magsukat, at kumuha ng dalawang reading na may pagitan ng ilang minuto. Ang regular na pagsusuri ang tanging paraan para malaman kung kontrolado ang iyong hypertension, dahil karaniwang walang sintomas ito.',
-    htnMedTitle:'Pag-inom ng Gamot', htnMedBody:'Kung may nireseta sa iyong gamot para sa altapresyon, inumin ito nang eksakto sa payo, kahit pakiramdam mo ay maayos ka. Pinakamabisa ang mga gamot na ito kapag regular na iniinom, kadalasan habambuhay. Huwag itigil o baguhin ang dosage nang hindi muna kumukonsulta sa doktor o health worker, kahit normal na ang mababasa mong BP — kadalasan ang normal na reading ay senyales na gumagana ang gamot.',
+    htnMedTitle:'Pag-inom ng Gamot', htnMedBody:'Kung may nireseta sa iyong gamot para sa altapresyon, inumin ito nang eksakto sa payo, kahit pakiramdam mo ay maayos ka. Pinakamabisa ang mga gamot na ito kapag regular na iniinom, kadalasan habambuhay. Huwag itigil o baguhin ang dosis nang hindi muna kumukonsulta sa doktor o health worker, kahit normal na ang mababasa mong BP — kadalasan ang normal na reading ay senyales na gumagana ang gamot.',
     htnDietTitle:'Pagkain Para sa Malusog na Presyon ng Dugo', htnDietBody:'Bawasan ang maalat na pagkain tulad ng processed na karne, instant noodles, de-lata, at dagdag na patis o toyo. Piliin ang sariwang prutas at gulay, lalo na ang mayaman sa potassium tulad ng saging at madahong gulay, na tumutulong balansehin ang sodium sa katawan. Basahin ang food label kung available at piliin ang mas mababa sa sodium. Ang pagluluto sa bahay gamit ang sariwang sangkap ay nagbibigay sa iyo ng mas maraming kontrol sa asin kumpara sa pagkain sa labas o processed na pagkain.',
     htnActivityTitle:'Pananatiling Aktibo', htnActivityBody:'Ang regular na pisikal na aktibidad ay tumutulong pababain at kontrolin ang presyon ng dugo. Layunin ang hindi bababa sa 30 minuto ng katamtamang aktibidad, tulad ng mabilis na paglalakad, halos araw-araw. Kung hindi ka sanay mag-ehersisyo, magsimula nang dahan-dahan at unti-unting dagdagan. Ang simpleng aktibidad tulad ng paglalakad papuntang palengke, pag-akyat ng hagdan, o magaang gawaing bahay ay may bisa rin. Magtanong sa iyong doktor bago magsimula ng bagong ehersisyo kung may iba ka pang kondisyon sa kalusugan.',
     htnStressTitle:'Pamamahala sa Stress', htnStressBody:'Ang patuloy na stress ay maaaring magpataas ng presyon ng dugo at mahirapan itong pamahalaan. Ang simpleng ugali na makakatulong ay ang sapat na tulog, pakikipag-usap sa pamilya o kaibigan tungkol sa nakakaabala sa iyo, pagkuha ng maikling break sa abalang araw, at mahinahong paghinga kapag nararamdamang overwhelmed. Kung mahirap pamahalaan ang stress nang mag-isa, okay lang humingi ng suporta sa iyong health worker.',
-    htnUrgentTitle:'Kailan Dapat Magpatingin Agad', htnUrgentBody:'Ang matinding sakit ng ulo, pananakit ng dibdib, hirap huminga, biglang pagkalito, pagbabago ng paningin, o panghihina sa isang panig, kasabay ng mataas na BP, ay senyales ng hypertensive emergency. Tingnan ang seksyong Mga Babala at magpatingin agad.',
+    htnUrgentTitle:'Kailan Dapat Magpatingin Agad', htnUrgentBody:'Kung lampas 180/120 ang BP, maghintay nang hindi bababa sa 1 minuto at sukatin ulit. Kung ganoon pa rin kataas at may pananakit ng dibdib, hirap huminga, panghihina o pamamanhid sa isang side ng katawan, pagbabago ng paningin, pagkalito, o hirap magsalita, tumawag agad sa 137-175.',
     // Diabetes
     dmIntro:'Ang pag-unawa sa diyabetis ay tumutulong sa iyo na pamahalaan ito araw-araw, hindi lang kapag bumibisita sa doktor. Narito kung ano ito, bakit mahalaga, at ano ang magagawa mo.',
     dmWhatTitle:'Ano ang Diyabetis?', dmWhatBody:'Ang diyabetis ay nangangahulugang mas mataas sa normal ang iyong blood sugar (glucose) dahil hindi sapat ang ginagawang insulin ng katawan o hindi ito magamit nang maayos. Ang insulin ay hormone na tumutulong ilipat ang asukal mula sa dugo papunta sa mga selula para sa enerhiya. Karamihan sa mga matanda na may diyabetis ay may Type 2, na kadalasang konektado sa pamumuhay at maaaring mapamahalaan nang maayos sa gamot, pagkain, at aktibidad.',
     dmWhyTitle:'Bakit Mahalaga Ito', dmWhyBody:'Ang hindi kontroladong diyabetis sa paglipas ng panahon ay maaaring makasira sa mga ugat at nerbiyos sa buong katawan. Pinapataas nito ang panganib ng sakit sa puso, stroke, sakit sa bato, pagkawala ng paningin, at pinsala sa nerbiyos, lalo na sa paa. Ang mahusay na kontrol ng blood sugar ay malaking nakakabawas ng mga panganib na ito, kaya mahalaga ang patuloy na pamamahala kahit pakiramdam mo ay maayos ka.',
-    dmRiskTitle:'Sino ang Mas Nanganganib', dmRiskBody:'Mas mataas ang panganib mong magkaroon ng Type 2 diabetes kung may family history ka ng diyabetis, sobra sa timbang, hindi aktibo, matanda na, o may hypertension o mataas na kolesterol. Karaniwan ang pagsasabay ng hypertension, diyabetis, at mataas na kolesterol, at ang bawat kondisyon ay maaaring magpahirap sa pamamahala ng iba, kaya mahalagang gamutin ang mga ito nang sabay.',
-    dmNumbersTitle:'Alamin ang Iyong Blood Sugar', dmNumbersBody:'Sundan ang follow-up na blood sugar test sa health center o sa iyong doktor ayon sa payo. Kung nagsusuri ka sa bahay, itanong sa iyong doktor o health worker kung anong target range ang tama para sa iyo, dahil maaaring iba-iba ito depende sa tao. Itala ang iyong mga reading, kasama kung fasting (bago kumain) o random (pagkatapos kumain), para matulungan ang doktor na makita ang iyong pattern sa paglipas ng panahon.',
-    dmMedTitle:'Pag-inom ng Gamot', dmMedBody:'Inumin ang iyong gamot sa diyabetis nang eksakto sa reseta at sa parehong oras araw-araw kung maaari. Huwag itigil o baguhin ang dosage nang mag-isa, kahit maganda ang iyong blood sugar reading, dahil maaaring ito ay dahil gumagana ang gamot.',
-    dmFootTitle:'Pag-aalaga ng Paa', dmFootBody:'Suriin ang iyong paa araw-araw para sa mga hiwa, paltos, pamumula, o sugat, dahil maaaring mabawasan ng diyabetis ang pakiramdam sa paa, kaya madaling hindi mapansin ang injury. Hugasan at patuyuin ang paa araw-araw, lalo na sa pagitan ng mga daliri, at lagyan ng lotion ang tuyong balat (pero huwag sa pagitan ng daliri). Huwag maglakad nang walang sapin, kahit sa bahay. Gupitin ang kuko ng paa nang tuwid. Magpatingin agad sa health worker kung may sugat na hindi gumagaling, dahil mabilis lumala ang sugat sa paa kapag may diyabetis.',
-    dmDietTitle:'Pagkain Para sa Kontrol ng Blood Sugar', dmDietBody:'Kumain nang regular at balanse sa halip na laktawan ang mga kainan, na maaaring magdulot ng biglaang pagbabago ng blood sugar. Bantayan ang bahagi ng carbohydrate (kanin, tinapay, kamote) at isabay ito sa protina at gulay para mabagalan ang pagsipsip ng asukal. Bawasan ang matamis na pagkain, inumin, at dessert. Piliin ang buong prutas kaysa juice. Ang pagkain sa magkasingsabay na oras araw-araw ay tumutulong din panatilihing stable ang blood sugar.',
+    dmRiskTitle:'Sino ang Mas Nanganganib', dmRiskBody:'Mas mataas ang panganib mong magkaroon ng Type 2 diabetes kung may family history ka ng diyabetis, sobra sa timbang, hindi aktibo, mas may edad, o may hypertension o mataas na kolesterol. Karaniwan ang pagsasabay ng hypertension, diyabetis, at mataas na kolesterol, at ang bawat kondisyon ay maaaring magpahirap sa pamamahala ng iba, kaya mahalagang gamutin ang mga ito nang sabay.',
+    dmNumbersTitle:'Alamin ang Iyong Blood Sugar', dmNumbersBody:'Magpa-blood sugar test ayon sa payo ng iyong doktor o health worker. Kung nagsusuri ka sa bahay, itanong kung anong target range ang angkop sa iyo. Itala kung fasting, 2 oras pagkatapos kumain, o random ang reading, dahil magkakaiba ang mga sukat na ito.',
+    dmMedTitle:'Pag-inom ng Gamot', dmMedBody:'Inumin ang iyong gamot sa diyabetis nang eksakto sa reseta at sa parehong oras araw-araw kung maaari. Huwag itigil o baguhin ang dosis nang mag-isa, kahit maganda ang iyong blood sugar reading, dahil maaaring ito ay dahil gumagana ang gamot.',
+    dmFootTitle:'Pag-aalaga ng Paa', dmFootBody:'Suriin ang iyong paa araw-araw para sa mga hiwa, paltos, pamumula, o sugat, dahil maaaring mabawasan ng diyabetis ang pakiramdam sa paa, kaya madaling hindi mapansin ang sugat. Hugasan at patuyuin ang paa araw-araw, lalo na sa pagitan ng mga daliri, at lagyan ng lotion ang tuyong balat (pero huwag sa pagitan ng daliri). Huwag maglakad nang walang sapin, kahit sa bahay. Gupitin ang kuko ng paa nang tuwid. Magpatingin agad sa health worker kung may sugat na hindi gumagaling, dahil mabilis lumala ang sugat sa paa kapag may diyabetis.',
+    dmDietTitle:'Pagkain Para sa Kontrol ng Blood Sugar', dmDietBody:'Kumain nang regular at balanse sa halip na laktawan ang mga kainan, na maaaring magdulot ng biglaang pagbabago ng blood sugar. Bantayan ang bahagi ng carbohydrate (kanin, tinapay, kamote) at isabay ito sa protina at gulay para mabagalan ang pagsipsip ng asukal. Bawasan ang matamis na pagkain, inumin, at panghimagas/dessert. Piliin ang buong prutas kaysa juice. Ang pagkain sa magkasingsabay na oras araw-araw ay tumutulong din panatilihing stable ang blood sugar.',
     dmActivityTitle:'Pananatiling Aktibo', dmActivityBody:'Ang pisikal na aktibidad ay tumutulong sa katawan na mas mabuting gamitin ang insulin at maaaring pababain ang blood sugar. Layunin ang regular na aktibidad halos araw-araw, tulad ng paglalakad. Kung umiinom ka ng gamot na maaaring magdulot ng mababang blood sugar, magdala ng maliit na matamis na meryenda kung sakaling manginig, mahilo, o malito habang nag-eehersisyo. Suriin ang paa pagkatapos ng aktibidad, lalo na kung sumusuot ng bagong sapatos.',
-    dmUrgentTitle:'Kailan Dapat Magpatingin Agad', dmUrgentBody:'Ang pagsusuka nang paulit-ulit at hindi kayang uminom ng tubig, matinding panghihina o pagkalito, antok, napakatuyong bibig, o biglang panginginig na may malamig na pawis ay senyales ng emergency. Tingnan ang seksyong Mga Babala at magpatingin agad.',
+    dmUrgentTitle:'Kailan Dapat Magpatingin Agad', dmUrgentBody:'Emergency ito kung paulit-ulit ang pagsusuka at hindi kayang uminom ng tubig, matinding panghihina o pagkalito, hirap gisingin o hindi tumutugon nang maayos, napakatuyong bibig, o biglang panginginig na may malamig na pawis. Tingnan ang seksyong Mga Babala at magpatingin agad.',
     // Dyslipidemia (Kolesterol)
     dysIntro:'Ang pag-unawa sa kolesterol ay tumutulong ipaliwanag kung bakit mahalaga ang parehong pagbabago sa pamumuhay at gamot, kahit walang sintomas.',
     dysWhatTitle:'Ano ang Kolesterol?', dysWhatBody:'Ang kolesterol ay parang-tabang substance na kailangan ng katawan sa maliit na dami, ngunit maaaring makasama ang labis na dami ng ilang uri nito. Ang LDL ("masamang" kolesterol) ay maaaring mag-ipon sa iyong mga ugat, habang ang HDL ("mabuting" kolesterol) ay tumutulong alisin ito. Ang triglycerides ay isa pang uri ng taba sa dugo na, kapag mataas, ay nagpapataas din ng panganib sa kalusugan. Ang dyslipidemia ay nangangahulugang hindi malusog ang balanse ng mga ito.',
     dysWhyTitle:'Bakit Mahalaga Ito', dysWhyBody:'Ang mataas na kolesterol ay nag-aambag sa pag-ipon ng mataba na deposito sa mga ugat sa paglipas ng panahon, isang proseso na tinatawag na atherosclerosis. Pinapaliit at pinapatigas nito ang mga arterya, na nagpapataas ng panganib ng heart attack at stroke, lalo na kung kasabay ng hypertension o diyabetis. Ang sabay na pamamahala sa tatlong kondisyon, kung mayroon ka ng higit sa isa, ang nagbibigay ng pinakamahusay na proteksyon para sa iyong puso at mga ugat.',
     dysRiskTitle:'Sino ang Mas Nanganganib', dysRiskBody:'Mas mataas ang panganib mong magkaroon ng dyslipidemia kung ang iyong pagkain ay mataas sa pritong at mamantikang pagkain, sobra sa timbang, hindi aktibo, naninigarilyo, regular na umiinom ng alak, o may family history ng mataas na kolesterol o maagang sakit sa puso. Ang pagkakaroon ng diyabetis o hypertension ay nagpapataas din ng panganib ng dyslipidemia.',
     dysNumbersTitle:'Alamin ang Iyong Numero', dysNumbersBody:'Magtanong sa iyong health center tungkol sa lipid (kolesterol) test, lalo na kung may hypertension, diyabetis, o family history ng sakit sa puso. Karaniwan itong simpleng blood test na matutulungan kang maintindihan ng iyong doktor.',
-    dysMedTitle:'Pag-inom ng Gamot', dysMedBody:'Kung may nireseta na gamot para sa kolesterol, inumin ito nang eksakto sa payo, karaniwang sa parehong oras araw-araw. Huwag itigil o baguhin ang dosage nang hindi muna kumukonsulta sa doktor o health worker.',
+    dysMedTitle:'Pag-inom ng Gamot', dysMedBody:'Kung may nireseta na gamot para sa kolesterol, inumin ito nang eksakto sa payo, karaniwang sa parehong oras araw-araw. Huwag itigil o baguhin ang dosis nang hindi muna kumukonsulta sa doktor o health worker.',
     dysDietTitle:'Pagkain Para sa Malusog na Kolesterol', dysDietBody:'Bawasan ang pritong, mamantika, at processed na pagkain, kasama ang lechon, crispy pata, at processed na karne. Piliin ang isda, manok na walang balat, at plant-based na protina (beans, munggo, tokwa) nang mas madalas kaysa pulang karne. Kapag nagluluto gamit ang mantika, gumamit ng kaunti lang, at piliin ang mas malusog na klase — canola, corn, sunflower, safflower, o olive oil — sa halip na coconut oil, palm oil, mantika ng baboy (lard), o margarine, na mas mataas sa saturated fat. Ang canola at corn oil ang karaniwang mas mura at madaling makuha sa mga lokal na grocery. Kumain ng mas maraming gulay, prutas, at mataas sa fiber na pagkain tulad ng oats at legumes, na maaaring makatulong pababain ang kolesterol.',
     dysActivityTitle:'Pananatiling Aktibo', dysActivityBody:'Ang regular na pisikal na aktibidad ay maaaring makatulong itaas ang "mabuting" HDL kolesterol at pababain ang triglycerides. Layunin ang hindi bababa sa 30 minuto ng aktibidad, tulad ng mabilis na paglalakad, halos araw-araw. Kasabay ng mas malusog na pagkain, ang pananatiling aktibo ay isa sa pinaka-epektibong paraan para mapabuti ang antas ng kolesterol nang walang gamot, o para makatulong na mas gumana ang gamot.',
     emergMainLabel:'Pangunahing Emergency Hotline (24/7)',
-    emergOtherTitle:'Iba Pang Paraan Para Maabot ang Emergency Response',
-    emergAppNote:'May iRESPOND Muntinlupa mobile app din ang Lungsod ng Muntinlupa para sa pag-uulat ng emergency (disaster, pulis, sunog, ambulansya). Available sa Google Play at App Store.',
-    medTrackerTitle:'Aking Medicine Tracker', medTrackerSub:'Subaybayan dito ang iyong pag-inom ng gamot. Dito lang ito sa telepono mo mananatili, walang ipinapadala kahit saan, at walang ibang makakakita nito.',
+    emergOtherTitle:'Iba Pang Emergency Contact',
+    emergAppNote:'May iRESPOND Muntinlupa mobile app din ang Lungsod ng Muntinlupa para sa pag-uulat ng emergency (kalamidad, pulis, sunog, ambulansya). Available sa Google Play at App Store.',
+    medTrackerTitle:'Aking Medicine Tracker', medTrackerSub:'Markahan dito ang mga dosis na nasa tracker mo. Sa browser ng device na ito lamang naka-save ang record at hindi ito ipinapadala sa BIDA Health. Maaaring makita ito ng sinumang makapagbubukas ng app sa device mo.',
     medTrackerEmpty:'Wala ka pang naidadagdag na gamot para subaybayan.', medAdd:'Idagdag', medAllAdded:'Naidagdag na ang lahat ng nakalistang gamot sa iyong tracker.',
     medOtherLabel:'May iniinom ka bang hindi nasa listahan? Idagdag dito:', medOtherPlaceholder:'I-type ang pangalan ng gamot',
     medPrintBtn:'I-print ang Aking Checklist', medReminderBanner:'Hindi mo pa nama-mark na inumin ngayon ang {meds}.',
-    medCongratsTitle:'🎉 Magaling!', medCongratsBody:'Nainom mo ang lahat ng dosis na sinusubaybayan mo ngayong linggo. Ipagpatuloy mo!',
+    medCongratsTitle:'🎉 Magaling!', medCongratsBody:'Namarkahan mo ang lahat ng nakaiskedyul na dosis sa tracker na ito ngayong linggo. Ipagpatuloy ang pagsunod sa reseta mo.',
     medResetBtn:'I-reset Para sa Bagong Linggo', medResetConfirm:'Buburahin nito ang mga check-in ng gamot mo para makapagsimula kang muli. Mananatili ang mga gamot na sinusubaybayan mo at ang iskedyul ng dosis nila. Hindi na ito maibabalik pa. Ituloy?',
-    thisWeek:'Ngayong Linggo', streakLabel:'Streak', dosesUnit:'dosis', dayUnit:'araw', daysUnit:'araw',
-    timesPerDayLabel:'Ilang beses sa isang araw', doseAM:'Umaga', doseNoon:'Tanghali', dosePM:'Gabi',
+    thisWeek:'Ngayong Linggo', streakLabel:'Sunod-sunod na Araw', dosesUnit:'dosis', dayUnit:'araw', daysUnit:'araw',
+    timesPerDayLabel:'Ilang beses sa isang araw', doseAM:'Dosis 1', doseNoon:'Dosis 2', dosePM:'Dosis 3',
     bpLogTitle:'Aking BP Log', bpLogSub:'Isulat dito ang iyong presyon ng dugo sa bahay para mapag-usapan ninyo ng iyong doktor. Dito lang ito sa telepono mo mananatili.',
     bpSysPlaceholder:'Systolic (hal. 130)', bpDiaPlaceholder:'Diastolic (hal. 85)', bpLogPrintBtn:'I-print ang Aking BP Log',
-    flagWarn:'Mataas', flagDanger:'Napakataas — Magpatingin Agad', flagLowDanger:'Mababa — Magpatingin Agad',
+    flagWarn:'Mataas', flagDanger:'Napakataas — Kumilos Agad', flagLowDanger:'Mababa — Kumilos Agad',
+    bpCrisisAdvice:'Maghintay nang hindi bababa sa 1 minuto at sukatin ulit ang BP. Kung lampas 180/120 pa rin at may pananakit ng dibdib, hirap huminga, panghihina o pamamanhid, pagbabago ng paningin, pagkalito, o hirap magsalita, tumawag agad sa 137-175. Kung walang bagong sintomas, kumontak agad ng doktor o health worker.',
+    sugarLowAdvice:'Kung gising at ligtas makalunok ang tao, magbigay ng 15 gramo ng fast-acting carbohydrate, maghintay ng 15 minuto, at sukatin ulit. Ulitin kung mababa pa rin sa 70 mg/dL.',
+    sugarLowEmergency:'Kung walang malay, nangingisay, sobrang nalilito, o hindi makalunok, huwag pakainin o painumin. Tumawag agad sa 137-175.',
     sugarLogTitle:'Aking Blood Sugar Log', sugarLogSub:'Isulat dito ang iyong blood sugar sa bahay para mapag-usapan ninyo ng iyong doktor. Dito lang ito sa telepono mo mananatili.',
-    sugarValPlaceholder:'Reading (mg/dL)', sugarFasting:'Fasting', sugarRandom:'Random/Pagkatapos kumain', sugarLogPrintBtn:'I-print ang Aking Sugar Log',
-    logAdd:'+ Idagdag', logNoEntries:'Wala pang entry.', logInvalid:'Maglagay po ng tamang reading.',
-    weightLogTitle:'Aking Timbang Log', weightLogSub:'Isulat dito ang iyong timbang para mapag-usapan ninyo ng iyong doktor. Dito lang ito sa telepono mo mananatili.',
+    sugarValPlaceholder:'Reading (mg/dL)', sugarFasting:'Fasting', sugarPostMeal:'2 oras pagkatapos kumain', sugarRandom:'Random / kahit anong oras', sugarLogPrintBtn:'I-print ang Aking Sugar Log',
+    logAdd:'+ Idagdag', logNoEntries:'Wala pang entry.', logInvalid:'Maglagay ng wastong reading.',
+    weightLogTitle:'Aking Timbang Log', weightLogSub:'Isulat dito ang iyong timbang para maipakita at mapag-usapan ninyo ng iyong doktor o nutritionist. Sa browser ng device na ito lamang ito naka-save.',
     weightValPlaceholder:'Timbang', weightLogPrintBtn:'I-print ang Aking Weight Log', weightChartEmpty:'Magdagdag ng hindi bababa sa 2 entry para makita ang graph ng iyong timbang.',
-    safeWeightNote:'Ang ligtas na bilis ng pagbabago ng timbang ay humigit-kumulang 0.5–1 kg (mga 1–2 lbs) kada linggo. Ang mas mabilis na pagbabago ay dapat lang gawin sa ilalim ng gabay ng doktor o nutrisyonista.',
+    safeWeightNote:'Dapat naaayon sa iyong kalagayan ang target na timbang. Ipakonsulta sa doktor o nutritionist ang mabilis o hindi inaasahang pagbabago ng timbang.',
     weeksToGoal:'Sa ligtas na bilis na 0.5–1 kg kada linggo, mga {weeks} linggo ito.',
   }
 };
@@ -716,21 +727,21 @@ const RF = [
   {
     en:{title:'Stroke Signs', signs:['Sudden drooping of one side of the face','Sudden weakness or numbness of one arm or leg (one side of body)','Sudden trouble speaking or understanding speech','Sudden vision trouble in one or both eyes','Sudden severe headache with no known cause','Sudden dizziness or loss of balance'],
       action:'Call 137-175 or go to the nearest health center or hospital immediately. Do not wait. Do not give food or water.'},
-    fil:{title:'Senyales ng Stroke', signs:['Biglang pagtabingi ng isang bahagi ng mukha','Biglang panghihina o pamamanhid ng braso o binti sa isang panig ng katawan','Biglang hirap magsalita o umintindi','Biglang paglabo ng paningin sa isa o dalawang mata','Biglang matinding sakit ng ulo nang walang malinaw na dahilan','Biglang pagkahilo o pagkawala ng balanse'],
+    fil:{title:'Senyales ng Stroke', signs:['Biglang pagtabingi ng isang bahagi ng mukha','Biglang panghihina o pamamanhid ng braso o binti sa isang side ng katawan','Biglang hirap magsalita o umintindi','Biglang paglabo ng paningin sa isa o parehong mata','Biglang matinding sakit ng ulo nang walang malinaw na dahilan','Biglang pagkahilo o pagkawala ng balanse'],
       action:'Tumawag sa 137-175 o pumunta agad sa pinakamalapit na health center o ospital. Huwag maghintay. Huwag magpakain o magpainom.'},
     emergency:true
   },
   {
     en:{title:'Chest Pain / Possible Heart Attack', signs:['Chest pain, heaviness, pressure, or tightness','Pain spreading to arm, jaw, neck, back, or stomach','Shortness of breath','Cold sweat, nausea, or vomiting','Fainting or severe weakness'],
       action:'Emergency care now. Call 137-175 or go to the nearest health center or hospital. Do not drive yourself.'},
-    fil:{title:'Pananakit ng Dibdib / Posibleng Heart Attack', signs:['Pananakit, bigat, presyon, o paninikip ng dibdib','Sakit na kumakalat sa braso, panga, leeg, likod, o sikmura','Hirap huminga','Malamig na pawis, pagduduwal, o pagsusuka','Himatay o matinding panghihina'],
+    fil:{title:'Pananakit ng Dibdib / Posibleng Heart Attack', signs:['Pananakit, bigat, presyon, o paninikip ng dibdib','Sakit na kumakalat sa braso, panga, leeg, likod, o itaas na bahagi ng tiyan','Hirap huminga','Malamig na pawis, pagduduwal, o pagsusuka','Himatay o matinding panghihina'],
       action:'Emergency agad. Tumawag sa 137-175 o pumunta sa pinakamalapit na health center o ospital. Huwag magmaneho nang mag-isa.'},
     emergency:true
   },
   {
-    en:{title:'Very High BP / Hypertensive Emergency', signs:['Severe headache','Chest pain','Difficulty breathing','Confusion or trouble speaking','Vision changes','Weakness or numbness on one side'],
+    en:{title:'Very High BP / Hypertensive Emergency', signs:['BP above 180/120 that remains very high when repeated','Severe headache','Chest pain','Difficulty breathing','Confusion or trouble speaking','Vision changes','Weakness or numbness on one side'],
       action:'Seek urgent care. Do not stop or change BP medicines without a doctor. Do not self-medicate.'},
-    fil:{title:'Napataas na BP / Hypertensive Emergency', signs:['Matinding sakit ng ulo','Pananakit ng dibdib','Hirap huminga','Pagkalito o hirap magsalita','Pagbabago ng paningin','Panghihina o pamamanhid sa isang panig'],
+    fil:{title:'Napakataas na BP / Hypertensive Emergency', signs:['BP na lampas 180/120 at nananatiling napakataas kahit sukatin ulit','Matinding sakit ng ulo','Pananakit ng dibdib','Hirap huminga','Pagkalito o hirap magsalita','Pagbabago ng paningin','Panghihina o pamamanhid sa isang side'],
       action:'Magpatingin agad. Huwag itigil o palitan ang gamot sa BP nang walang doktor.'},
     emergency:true
   },
@@ -738,7 +749,7 @@ const RF = [
     en:{title:'Diabetes Emergency', signs:['Always thirsty','Frequent urination','Blurred vision','Unexplained weight loss','Slow-healing wounds','Numbness or tingling in feet'],
       danger:['Vomiting and unable to keep fluids down','Severe weakness or confusion','Drowsiness or altered consciousness','Sunken eyes or very dry mouth (dehydration)','Shaking, cold sweat, or sudden confusion (possible very low blood sugar)'],
       action:'Consult health center or doctor. Go to the nearest health center or hospital immediately if danger signs appear.'},
-    fil:{title:'Diabetes Emergency', signs:['Laging nauuhaw','Madalas umihi','Malabong paningin','Hindi maipaliwanag na pagbaba ng timbang','Sugat na matagal gumaling','Pamamanhid o tusok-tusok sa paa'],
+    fil:{title:'Emergency sa Diyabetis', signs:['Laging nauuhaw','Madalas umihi','Malabong paningin','Hindi maipaliwanag na pagbaba ng timbang','Sugat na matagal gumaling','Pamamanhid o tusok-tusok sa paa'],
       danger:['Pagsusuka nang paulit-ulit at hindi kayang uminom ng tubig','Matinding panghihina o pagkalito','Antok o pagbabago ng kamalayan','Lubog ang mata o napakatuyong bibig (dehydration)','Panginginig, malamig na pawis, o biglang pagkalito (posibleng sobrang baba ng blood sugar)'],
       action:'Magpatingin sa health center o doktor. Pumunta agad sa pinakamalapit na health center o ospital kung may delikadong senyales.'}
   }
@@ -746,16 +757,9 @@ const RF = [
 
 // Condition education content (Hypertension, Diabetes, Dyslipidemia) lives as
 // keyed strings in the T object below (e.g. T.en.htnWhatTitle / T.fil.htnWhatBody),
-// NOT in a separate data object. This is deliberate: it means this content is
-// automatically covered by the same Google Sheet content-sync system used for
-// UI text (see SHEET_ID setup notes further down), so whoever receives this
-// project can update health advice by editing the shared Sheet directly, with
-// no code and no developer required.
-//
-// IMPORTANT — if you extend the Sheet to cover these keys: this is clinical
-// content read directly by patients. Restrict Sheet edit access to your
-// clinical team, and have a licensed clinician review any change before it
-// goes live, the same way you would review a code change to this file.
+// NOT in a separate data object, so all bilingual copy for a condition page
+// stays in one place. This is clinical content read directly by patients —
+// have a licensed clinician review any change to these keys before deploying.
 //
 // Below: just the structure (which sections exist, in what order, with which
 // icon) for each condition page. The actual title/body text is pulled from T.
@@ -791,7 +795,7 @@ const GGG = {
   },
   fil:{
     go:{title:'GO — Nagbibigay ng Enerhiya', body:'Kumain ng kanin, kamote, pasta, tinapay, at iba pang pagkaing mataas sa carbohydrates — dito ka kumukuha ng enerhiya para sa mga gawain ng katawan at pisikal na aktibidad. Kung maaari, piliin ang whole grains tulad ng brown rice, mais, whole wheat bread, at oatmeal — mas mataas ang fiber nito at may kaugnayan sa mas mababang panganib ng sakit sa puso at diabetes.'},
-    grow:{title:'GROW — Pagpapalusog ng Katawan', body:'Kumain ng isda, shellfish, lean na karne, manok, itlog, at dried beans o nuts — kailangan ito para lumaki, mapanatili, at ma-repair ang tisyu ng iyong katawan. Isama ang mataba/fatty fish tulad ng tuna, sardinas, at mackerel 2–3 beses sa isang linggo para sa fatty acids na tumutulong protektahan ang puso. Uminom ng gatas, kumain ng produktong gatas, at iba pang mataas-sa-calcium na pagkain tulad ng dilis at maliliit na hipon para sa malakas na buto at ngipin.'},
+    grow:{title:'GROW — Pagpapalusog ng Katawan', body:'Kumain ng isda, shellfish, lean na karne, manok, itlog, at dried beans o nuts — kailangan ito para lumaki, mapanatili, at ma-repair ang tisyu ng iyong katawan. Isama ang mataba/fatty fish tulad ng tuna, sardinas, at mackerel 2–3 beses sa isang linggo para sa fatty acids na tumutulong protektahan ang puso. Uminom ng gatas, kumain ng produktong gatas, at iba pang pagkaing mataas sa calcium tulad ng dilis at maliliit na hipon para sa malakas na buto at ngipin.'},
     glowVeg:{title:'GLOW — Mga Gulay', body:'Kumain ng iba\'t ibang gulay — dito galing ang bitamina, minerals, at fiber na kailangan ng katawan para gumana nang maayos.'},
     glowFruit:{title:'GLOW — Mga Prutas', body:'Kumain din ng iba\'t ibang prutas, sa parehong dahilan — bitamina, minerals, at fiber na kailangan ng katawan.'},
     growExtraPreglact:'Kailangan mo ngayon ng sapat na animal-based protein — mas madali nitong maibigay ang iron na kaya ng katawan mong i-absorb. Ang fatty fish 2–3 beses sa isang linggo ay tumutulong din sa brain development ng sanggol mo.',
@@ -807,7 +811,7 @@ const PLATE = {
       go_fil:'1½ tasang kanin, o 6 piraso maliit na pandesal, o 6 hiwa ng maliit na tinapay, o 1½ tasang lutong pansit, o 1½ katamtamang kamote',
       grow_en:'2 pcs small galunggong, or 2 slices bangus, or 2 pcs small chicken leg, or 2 servings (30g each) lean meat, or 2 pcs tokwa (6×6×2cm), or 1 egg plus 1 piece of any of the above',
       grow_fil:'2 piraso maliit na galunggong, o 2 hiwa ng bangus, o 2 piraso maliit na chicken leg, o 2 servings (30g bawat isa) ng lean na karne, o 2 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1 piraso pa mula sa nabanggit',
-      glowVeg_en:'1–1½ cups cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'1–1½ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, carrots, sitaw)',
+      glowVeg_en:'1–1½ cups cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'1–1½ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, karot, sitaw)',
       glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
       water_en:'10 or more glasses of water a day', water_fil:'10 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'2450 kcal/day'
     },
@@ -816,7 +820,7 @@ const PLATE = {
       go_fil:'1 tasang kanin, o 4 piraso maliit na pandesal, o 4 hiwa ng maliit na tinapay, o 1 tasang lutong pansit, o 1 katamtamang kamote',
       grow_en:'2 pcs small galunggong, or 2 slices bangus, or 2 pcs small chicken leg, or 2 servings (30g each) lean meat, or 2 pcs tokwa (6×6×2cm), or 1 egg plus 1 piece of any of the above',
       grow_fil:'2 piraso maliit na galunggong, o 2 hiwa ng bangus, o 2 piraso maliit na chicken leg, o 2 servings (30g bawat isa) ng lean na karne, o 2 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1 piraso pa mula sa nabanggit',
-      glowVeg_en:'¾–1 cup cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'¾–1 tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, carrots, sitaw)',
+      glowVeg_en:'¾–1 cup cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'¾–1 tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, karot, sitaw)',
       glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
       water_en:'8 or more glasses of water a day', water_fil:'8 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'1890 kcal/day'
     }
@@ -829,7 +833,7 @@ const PLATE = {
       go_fil:'1 tasang kanin, o 4 piraso maliit na pandesal, o 4 hiwa ng maliit na tinapay, o 1 tasang lutong pansit, o 1 katamtamang kamote',
       grow_en:'2 pcs small galunggong, or 2 slices bangus, or 2 pcs small chicken leg, or 2 servings (30g each) lean meat, or 2 pcs tokwa (6×6×2cm), or 1 egg plus 1 piece of any of the above',
       grow_fil:'2 piraso maliit na galunggong, o 2 hiwa ng bangus, o 2 piraso maliit na chicken leg, o 2 servings (30g bawat isa) ng lean na karne, o 2 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1 piraso pa mula sa nabanggit',
-      glowVeg_en:'¾–1 cup cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'¾–1 tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, carrots, sitaw)',
+      glowVeg_en:'¾–1 cup cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'¾–1 tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, karot, sitaw)',
       glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
       water_en:'8 or more glasses of water a day', water_fil:'8 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'2000 kcal/day'
     },
@@ -838,7 +842,7 @@ const PLATE = {
       go_fil:'¾ tasang kanin, o 3 piraso maliit na pandesal, o 3 hiwa ng maliit na tinapay, o ¾ tasang lutong pansit, o ¾ katamtamang kamote',
       grow_en:'2 pcs small galunggong, or 2 slices bangus, or 2 pcs small chicken leg, or 2 servings (30g each) lean meat, or 2 pcs tokwa (6×6×2cm), or 1 egg plus 1 piece of any of the above',
       grow_fil:'2 piraso maliit na galunggong, o 2 hiwa ng bangus, o 2 piraso maliit na chicken leg, o 2 servings (30g bawat isa) ng lean na karne, o 2 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1 piraso pa mula sa nabanggit',
-      glowVeg_en:'¾ cup cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'¾ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, carrots, sitaw)',
+      glowVeg_en:'¾ cup cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'¾ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, karot, sitaw)',
       glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
       water_en:'7 or more glasses of water a day', water_fil:'7 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'1575 kcal/day'
     }
@@ -851,7 +855,7 @@ const PLATE = {
       go_fil:'1½ tasang kanin, o 6 piraso maliit na pandesal, o 6 hiwa ng maliit na tinapay, o 1½ tasang lutong pansit, o 1½ katamtamang kamote',
       grow_en:'2 pcs medium galunggong, or 3 slices bangus, or 2 pcs medium chicken leg, or 3 servings (30g each) lean meat, or 3 pcs tokwa (6×6×2cm), or 1 egg plus 1–2 pieces of any of the above',
       grow_fil:'2 piraso katamtamang galunggong, o 3 hiwa ng bangus, o 2 piraso katamtamang chicken leg, o 3 servings (30g bawat isa) ng lean na karne, o 3 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1–2 piraso pa mula sa nabanggit',
-      glowVeg_en:'1–1½ cups cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'1–1½ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, carrots, sitaw)',
+      glowVeg_en:'1–1½ cups cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'1–1½ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, karot, sitaw)',
       glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
       water_en:'9 or more glasses of water a day', water_fil:'9 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'2230 kcal/day'
     },
@@ -860,7 +864,7 @@ const PLATE = {
       go_fil:'1½ tasang kanin, o 6 piraso maliit na pandesal, o 6 hiwa ng maliit na tinapay, o 1½ tasang lutong pansit, o 1½ katamtamang kamote',
       grow_en:'2 pcs medium galunggong, or 3 slices bangus, or 2 pcs medium chicken leg, or 3 servings (30g each) lean meat, or 3 pcs tokwa (6×6×2cm), or 1 egg plus 1–2 pieces of any of the above',
       grow_fil:'2 piraso katamtamang galunggong, o 3 hiwa ng bangus, o 2 piraso katamtamang chicken leg, o 3 servings (30g bawat isa) ng lean na karne, o 3 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1–2 piraso pa mula sa nabanggit',
-      glowVeg_en:'1–1½ cups cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'1–1½ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, carrots, sitaw)',
+      glowVeg_en:'1–1½ cups cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'1–1½ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, karot, sitaw)',
       glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
       water_en:'10 or more glasses of water a day', water_fil:'10 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'2430 kcal/day'
     }
@@ -879,7 +883,7 @@ const PLATE_MEAL = {
 };
 const MEALS = {
   en:['Rice + monggo + malunggay (low salt)','Rice + boiled or grilled egg + sautéed vegetables (less oil)','Rice + grilled or steamed fish + vegetables','Rice + tofu or tokwa + vegetables','Banana, papaya, or seasonal fruit as snack instead of sweets'],
-  fil:['Kanin + monggo + malunggay (kaunting asin)','Kanin + nilagang o inihaw na itlog + sautéed na gulay (kaunting mantika)','Kanin + inihaw o pinalutong na isda + gulay','Kanin + tofu o tokwa + gulay','Saging, papaya, o panapanahong prutas bilang meryenda sa halip na matamis']
+  fil:['Kanin + monggo + malunggay (kaunting asin)','Kanin + nilagang o inihaw na itlog + ginisang gulay (kaunting mantika)','Kanin + inihaw o pinasingawang isda + gulay','Kanin + tofu o tokwa + gulay','Saging, papaya, o napapanahong prutas bilang meryenda sa halip na matamis']
 };
 const TIPS = {
   en:['Use less salt, try calamansi, herbs, or vinegar for flavor instead','Drink water instead of soft drinks or sweetened juices','Limit fried and processed foods','Choose fresh fish or lean meat over processed meats (hotdog, longganisa, corned beef)','Eat a variety of vegetables and fruits when budget allows'],
@@ -890,10 +894,9 @@ const TIPS = {
 // medicine list as of app development. dose_en/dose_fil give a general usual
 // adult dose range for orientation only — NOT a prescription. Every card
 // pairs the dose with T.medReminder, reinforcing that the patient's actual
-// dose is whatever their doctor/health worker prescribed. Update via the
-// linked Google Sheet once configured (see SHEET_ID below); otherwise edit
-// MEDS directly and have a licensed clinician review the change, including
-// the dose text, before deploying.
+// dose is whatever their doctor/health worker prescribed. Edit MEDS directly
+// and have a licensed clinician review the change, including the dose text,
+// before deploying.
 const MEDS = [
   {group_en:'For High Blood Pressure and Heart Conditions', group_fil:'Para sa Altapresyon at Sakit sa Puso', items:[
     {name:'Losartan', what_en:'Helps control high blood pressure', what_fil:'Tumutulong kontrolin ang altapresyon', dose_en:'Usually started at 50 mg once a day; some patients take 25 mg or up to 100 mg a day', dose_fil:'Karaniwang sinisimulan sa 50 mg isang beses sa isang araw; may mga pasyenteng umiinom ng 25 mg o hanggang 100 mg sa isang araw', freq_en:'Usually taken once a day', freq_fil:'Karaniwang iniinom isang beses sa isang araw'},
@@ -902,15 +905,15 @@ const MEDS = [
     {name:'Carvedilol', what_en:'Helps control high blood pressure and certain heart conditions', what_fil:'Tumutulong kontrolin ang altapresyon at ilang kondisyon ng puso', dose_en:'Usually started at 6.25 mg twice a day; your doctor may increase this gradually', dose_fil:'Karaniwang sinisimulan sa 6.25 mg dalawang beses sa isang araw; maaaring unti-unting dagdagan ng doktor', freq_en:'Usually taken once or twice a day', freq_fil:'Karaniwang iniinom isang beses o dalawang beses sa isang araw'}
   ]},
   {group_en:'For Heart Care and Clot Prevention', group_fil:'Para sa Pangangalaga sa Puso at Pag-iwas sa Clot', items:[
-    {name:'Trimetazidine', what_en:'Helps with chest discomfort related to certain heart conditions', what_fil:'Tumutulong sa hapdi ng dibdib na may kaugnayan sa ilang sakit sa puso', dose_en:'Usually 20 mg two to three times a day, with meals', dose_fil:'Karaniwang 20 mg dalawa hanggang tatlong beses sa isang araw, kasabay ng pagkain', freq_en:'Usually taken two to three times a day, with meals', freq_fil:'Karaniwang iniinom dalawa hanggang tatlong beses sa isang araw, kasabay ng pagkain'},
+    {name:'Trimetazidine', what_en:'Helps with chest discomfort related to certain heart conditions; it does not treat sudden chest pain or a heart attack', what_fil:'Tumutulong sa paninikip o pananakit ng dibdib na may kaugnayan sa ilang sakit sa puso; hindi ito gamot para sa biglaang pananakit ng dibdib o heart attack', dose_en:'Usually 20 mg two to three times a day, with meals', dose_fil:'Karaniwang 20 mg dalawa hanggang tatlong beses sa isang araw, kasabay ng pagkain', freq_en:'Usually taken two to three times a day, with meals', freq_fil:'Karaniwang iniinom dalawa hanggang tatlong beses sa isang araw, kasabay ng pagkain'},
     {name:'Clopidogrel', what_en:'A blood thinner that helps prevent blood clots', what_fil:'Pampanipis ng dugo na tumutulong maiwasan ang pamumuo ng dugo', dose_en:'Usually 75 mg once a day', dose_fil:'Karaniwang 75 mg isang beses sa isang araw', freq_en:'Usually taken once a day', freq_fil:'Karaniwang iniinom isang beses sa isang araw'}
   ]},
   {group_en:'For Cholesterol Management', group_fil:'Para sa Pamamahala ng Kolesterol', items:[
-    {name:'Atorvastatin', what_en:'Helps lower cholesterol', what_fil:'Tumutulong pababain ang kolesterol', dose_en:'Usually 10 mg to 20 mg once a day, often in the evening; some patients need a higher dose', dose_fil:'Karaniwang 10 mg hanggang 20 mg isang beses sa isang araw, kadalasan sa gabi; may mga pasyenteng nangangailangan ng mas mataas na dosage', freq_en:'Usually taken once a day, often in the evening', freq_fil:'Karaniwang iniinom isang beses sa isang araw, kadalasan sa gabi'}
+    {name:'Atorvastatin', what_en:'Helps lower cholesterol', what_fil:'Tumutulong pababain ang kolesterol', dose_en:'Usually 10 mg to 20 mg once a day, often in the evening; some patients need a higher dose', dose_fil:'Karaniwang 10 mg hanggang 20 mg isang beses sa isang araw, kadalasan sa gabi; may mga pasyenteng nangangailangan ng mas mataas na dosis', freq_en:'Usually taken once a day, often in the evening', freq_fil:'Karaniwang iniinom isang beses sa isang araw, kadalasan sa gabi'}
   ]},
   {group_en:'For Diabetes', group_fil:'Para sa Diyabetis', items:[
     {name:'Metformin', what_en:'Helps control blood sugar', what_fil:'Tumutulong kontrolin ang blood sugar', dose_en:'Usually 500 mg once or twice a day with meals; your doctor may increase this gradually', dose_fil:'Karaniwang 500 mg isang beses o dalawang beses sa isang araw kasabay ng pagkain; maaaring unti-unting dagdagan ng doktor', freq_en:'Usually taken with meals, one to two times a day', freq_fil:'Karaniwang iniinom kasabay ng pagkain, isang beses o dalawang beses sa isang araw'},
-    {name:'Gliclazide', what_en:'Helps control blood sugar', what_fil:'Tumutulong kontrolin ang blood sugar', dose_en:'Usually 40 mg to 80 mg, once or twice a day before meals', dose_fil:'Karaniwang 40 mg hanggang 80 mg, isang beses o dalawang beses sa isang araw bago kumain', freq_en:'Usually taken once or twice a day, before meals', freq_fil:'Karaniwang iniinom isang beses o dalawang beses sa isang araw, bago kumain'}
+    {name:'Gliclazide', what_en:'Helps control blood sugar', what_fil:'Tumutulong kontrolin ang blood sugar', dose_en:'Immediate-release tablets are commonly 40 mg to 80 mg once or twice daily before meals; modified-release tablets use a different dose and schedule', dose_fil:'Ang immediate-release tablet ay karaniwang 40 mg hanggang 80 mg isang beses o dalawang beses bago kumain; iba ang dosis at iskedyul ng modified-release tablet', freq_en:'Check whether your label says immediate-release or modified-release and follow that exact instruction', freq_fil:'Tingnan kung immediate-release o modified-release ang nasa label at sundin ang eksaktong instruksyon'}
   ]},
   {group_en:'Vitamin Supplement', group_fil:'Bitamina', items:[
     {name:'Vitamin B Complex', what_en:'General nutritional support', what_fil:'Pangkalahatang suporta sa nutrisyon', dose_en:'Usually 1 tablet a day, or as written on the product label', dose_fil:'Karaniwang 1 tablet sa isang araw, o ayon sa nakasulat sa label ng produkto', freq_en:'Usually taken once a day', freq_fil:'Karaniwang iniinom isang beses sa isang araw'}
@@ -946,7 +949,7 @@ const NEARBY = {
         {name:'Muntinlupa City Health Office',type:'Pamahalaan ng Lungsod',addr:'Centennial Avenue, Laguerta, Brgy. Tunasan, Muntinlupa City, 1773',phones:[],verified:true,note:'Para sa pangkalahatang katanungan at koordinasyon. Tingnan ang Emergency Numbers para sa agarang pangangailangan.'}
       ]},
       {label:'Mga Ospital',facilities:[
-        {name:'Ospital ng Muntinlupa',type:'Government Hospital',addr:'Muntinlupa City',phones:[],verified:false,note:'Magtanong sa iyong health center para sa referral at kasalukuyang contact information.'}
+        {name:'Ospital ng Muntinlupa',type:'Ospital ng Pamahalaan',addr:'Muntinlupa City',phones:[],verified:false,note:'Magtanong sa iyong health center para sa referral at kasalukuyang contact information.'}
       ]}
     ]
   }
@@ -1033,7 +1036,8 @@ function defaultTimesPerDay(name){
   return 1;
 }
 function doseSlotLabel(t, n, i){
-  if(n===2) return i===0?t.doseAM:t.dosePM;
+  if(n===1) return t.doseAM;
+  if(n===2) return i===0?t.doseAM:t.doseNoon;
   if(n===3) return i===0?t.doseAM:(i===1?t.doseNoon:t.dosePM);
   return '';
 }
@@ -1223,114 +1227,15 @@ function logVisit(module){
   }catch(e){ /* offline or blocked — ignore, no retry */ }
 }
 
-// ── Remote content sync (Google Sheet) ───────────────────────────────────────
-// Lets non-technical team members, including whoever this project is handed
-// off to, update content from a shared Google Sheet with no code and no login
-// page required. Leave SHEET_ID blank to run entirely on the built-in content
-// below (safe default).
-//
-// COVERAGE: The UIText tab covers every piece of text in T.en/T.fil — this
-// INCLUDES the Hypertension, Diabetes, and Cholesterol page content (keys
-// like htnWhatTitle, htnWhatBody, dmDietBody, etc. — see those keys in the T
-// object above for the full list). This is a deliberate handoff decision:
-// making this content Sheet-editable means it can be kept current without a
-// developer, but it also means the code-level "you must edit a file to change
-// this" friction is gone.
-//
-// >>> SAFETY: Restrict who has EDIT access to this Sheet to your clinical
-// >>> team. Sheet access control is now the safety mechanism for clinical
-// >>> content that used to require a code change — treat granting edit
-// >>> access the same way you would treat approving a code change, and have
-// >>> a licensed clinician review any edit to a health-advice row before it
-// >>> goes live.
-//
-// SETUP (once you have a Sheet):
-// 1. Create a Google Sheet with tabs named exactly: UIText, Medications,
-//    Facilities, Emergency (see column layouts in each fetch function below).
-//    UIText needs three columns: key, en, fil — one row per T-object key.
-// 2. File > Share > people you trust with edit access; everyone else (or
-//    "Anyone with the link") only needs Viewer, since the app only reads.
-// 3. Paste the Sheet's ID (the long string in its URL between /d/ and /edit)
-//    into SHEET_ID below.
-const SHEET_ID = '';
-const CACHE_KEY = 'bida-remote-cache-v1';
-
-async function fetchSheetTab(tabName){
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(tabName)}`;
-  const res = await fetch(url);
-  const text = await res.text();
-  const json = JSON.parse(text.substring(text.indexOf('(')+1, text.lastIndexOf(')')));
-  const cols = json.table.cols.map(c=>c.label || c.id);
-  return json.table.rows.map(r=>{
-    const obj = {};
-    r.c.forEach((cell,i)=>{ obj[cols[i]] = cell ? cell.v : ''; });
-    return obj;
-  });
-}
-
-async function syncRemoteContent(){
-  if(!SHEET_ID) return;
-  try{
-    const [uiRows, medRows, facRows, emergRows] = await Promise.all([
-      fetchSheetTab('UIText').catch(()=>null),
-      fetchSheetTab('Medications').catch(()=>null),
-      fetchSheetTab('Facilities').catch(()=>null),
-      fetchSheetTab('Emergency').catch(()=>null)
-    ]);
-    const remote = { uiRows, medRows, facRows, emergRows, ts: Date.now() };
-    localStorage.setItem(CACHE_KEY, JSON.stringify(remote));
-    applyRemoteContent(remote);
-  }catch(e){
-    // Offline or fetch failed — fall back to last cached remote content, if any.
-    const cached = localStorage.getItem(CACHE_KEY);
-    if(cached){ try{ applyRemoteContent(JSON.parse(cached)); }catch(e2){} }
-    // Otherwise the built-in hardcoded content already on the page stays as-is.
-  }
-}
-
-function applyRemoteContent(remote){
-  if(remote.uiRows){
-    remote.uiRows.forEach(row=>{
-      if(row.key && T.en[row.key]!==undefined) T.en[row.key] = row.en || T.en[row.key];
-      if(row.key && T.fil[row.key]!==undefined) T.fil[row.key] = row.fil || T.fil[row.key];
-    });
-  }
-  if(remote.medRows && remote.medRows.length){
-    const groups = {};
-    const order = [];
-    remote.medRows.forEach(row=>{
-      const gKey = row.group_en || 'Other';
-      if(!groups[gKey]){ groups[gKey] = {group_en:row.group_en, group_fil:row.group_fil, items:[]}; order.push(gKey); }
-      groups[gKey].items.push({name:row.name, what_en:row.what_en, what_fil:row.what_fil, dose_en:row.dose_en, dose_fil:row.dose_fil, freq_en:row.freq_en, freq_fil:row.freq_fil});
-    });
-    MEDS.length = 0;
-    order.forEach(k=>MEDS.push(groups[k]));
-  }
-  if(remote.facRows && remote.facRows.length){
-    // Facilities from the sheet replace the "Health Centers (Pilot Sites)" group only.
-    const items = remote.facRows.map(row=>({
-      name:row.name, type:row.type_en||row.type, addr:row.addr,
-      phones:(row.phones||'').split(',').filter(Boolean).map(p=>({num:p.trim(),label:p.trim()})),
-      verified: String(row.verified).toLowerCase()==='true'
-    }));
-    if(items.length){ NEARBY.en.cats[0].facilities = items; NEARBY.fil.cats[0].facilities = items; }
-  }
-  if(remote.emergRows && remote.emergRows.length){
-    const items = remote.emergRows.map((row,i)=>({label:row.label_en, num:row.num, display:row.display||row.num, big:i===0}));
-    if(items.length){ EMERGENCY.en = items; EMERGENCY.fil = remote.emergRows.map((row,i)=>({label:row.label_fil||row.label_en, num:row.num, display:row.display||row.num, big:i===0})); }
-  }
-  applyStaticStrings();
-  renderAll();
-}
-
 // ── Navigation ────────────────────────────────────────────────────────────────
 function navigate(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>{b.classList.remove('active');b.removeAttribute('aria-current');});
   const sw = document.getElementById('search-wrap');
   if(page==='home'){
     document.getElementById('page-home').classList.add('active');
     document.getElementById('nav-home').classList.add('active');
+    document.getElementById('nav-home').setAttribute('aria-current','page');
     sw.style.display='';
     clearSearch(false);
   } else if(page==='search'){
@@ -1340,7 +1245,7 @@ function navigate(page){
     const pe=document.getElementById('page-'+page);
     if(pe) pe.classList.add('active');
     const ne=document.getElementById('nav-'+page);
-    if(ne) ne.classList.add('active');
+    if(ne){ne.classList.add('active');ne.setAttribute('aria-current','page');}
     sw.style.display='none';
   }
   logVisit(page);
@@ -1351,9 +1256,12 @@ function goHome(){ navigate('home'); }
 // ── Language ──────────────────────────────────────────────────────────────────
 function setLang(l){
   lang=l;
+  document.documentElement.lang=l==='fil'?'fil':'en';
   localStorage.setItem('bida-lang',l);
   document.getElementById('btn-en').classList.toggle('active',l==='en');
   document.getElementById('btn-fil').classList.toggle('active',l==='fil');
+  document.getElementById('btn-en').setAttribute('aria-pressed',String(l==='en'));
+  document.getElementById('btn-fil').setAttribute('aria-pressed',String(l==='fil'));
   applyStaticStrings();
   renderAll();
 }
@@ -1363,6 +1271,7 @@ function applyStaticStrings(){
   document.getElementById('hdr-subtitle').textContent=t.subtitle;
   document.getElementById('emergency-banner').innerHTML=t.banner;
   document.getElementById('search-input').placeholder=t.search;
+  document.getElementById('search-input').setAttribute('aria-label',t.search);
   document.getElementById('home-disclaimer').textContent=t.disclaimer;
   document.getElementById('lbl-rf').innerHTML=t.lblRF;
   document.getElementById('lbl-htn').innerHTML=t.lblHTN;
@@ -1395,6 +1304,7 @@ function applyStaticStrings(){
   document.getElementById('howtoRefs-list').innerHTML=t.howtoRefsList.map(r=>`<li>${r}</li>`).join('');
   document.getElementById('howtoRefs-note').textContent=t.howtoRefsNote;
   document.getElementById('app-inquiries-line').textContent=t.inquiriesLabel;
+  document.querySelectorAll('.back-btn').forEach(b=>b.setAttribute('aria-label',lang==='fil'?'Bumalik sa Home':'Back to Home'));
 }
 
 // ── Search ────────────────────────────────────────────────────────────────────
@@ -1408,7 +1318,7 @@ const SEARCH_IDX = [
   {sec:'dyslipidemia',kw:['cholesterol','dyslipidemia','lipid','kolesterol','taba']},
   {sec:'food',kw:['food','nutrition','pinggang pinoy','vegetable','rice','protein','pagkain','nutrisyon','gulay','kanin']},
   {sec:'bmi',kw:['bmi','body mass','weight','timbang','katawan']},
-  {sec:'medications',kw:['medicine','medication','losartan','metformin','amlodipine','atorvastatin','gamot','dosage','dose']},
+  {sec:'medications',kw:['medicine','medication','losartan','metformin','amlodipine','atorvastatin','gamot','dosis','dose']},
   {sec:'nearby',kw:['health center','clinic','bayanan','alabang','ospital','klinika','emergency','137','hotline','ambulance','irespond','ambulansya']}
 ];
 const SEC_NAMES = {
@@ -1429,7 +1339,7 @@ function handleSearch(val){
   SEARCH_IDX.forEach(item=>{if(item.kw.some(k=>k.toLowerCase().includes(q)||q.includes(k.toLowerCase())))matched.add(item.sec);});
   const list=document.getElementById('search-results-list');
   if(!matched.size){list.innerHTML=`<div class="disclaimer">${T[lang].noResults}</div>`;return;}
-  list.innerHTML=[...matched].map(s=>`<div class="search-result-card" onclick="navigate('${s}')"><div class="result-section">${SEC_NAMES[lang][s]}</div><div class="result-title">${SEC_DESC[lang][s]}</div></div>`).join('');
+  list.innerHTML=[...matched].map(s=>`<button type="button" class="search-result-card" onclick="navigate('${s}')"><div class="result-section">${SEC_NAMES[lang][s]}</div><div class="result-title">${SEC_DESC[lang][s]}</div></button>`).join('');
 }
 function clearSearch(nav=true){
   document.getElementById('search-input').value='';
@@ -1438,7 +1348,7 @@ function clearSearch(nav=true){
 }
 
 // ── Collapsibles ──────────────────────────────────────────────────────────────
-function toggleCard(id){document.getElementById(id).classList.toggle('open');}
+function toggleCard(id){const card=document.getElementById(id);const open=card.classList.toggle('open');const btn=card.querySelector('.symptom-card-header');if(btn)btn.setAttribute('aria-expanded',String(open));}
 
 // ── Renderers ─────────────────────────────────────────────────────────────────
 function renderAll(){
@@ -1461,24 +1371,22 @@ function renderRedFlags(){
     const d=c[lang];
     const signsHtml=`<div class="card-section-label">${t.signsSym}</div><ul class="checklist">${d.signs.map(s=>`<li>${s}</li>`).join('')}</ul>`;
     const dangerHtml=d.danger?`<div class="danger-strip"><div class="strip-label">${t.dangerSigns}</div><ul>${d.danger.map(s=>`<li>${s}</li>`).join('')}</ul></div>`:'';
-    const actionHtml=c.emergency
-      ?`<a href="tel:137175" class="go-now-btn">${t.goNow}</a>`
-      :`<div class="action-strip"><div class="strip-label">✔ ${t.whatToDo}</div><p style="font-size:0.88rem;color:#1e3a8a;margin:0">${d.action}</p></div>`;
+    const actionHtml=`<div class="action-strip"><div class="strip-label">✔ ${t.whatToDo}</div><p style="font-size:0.88rem;color:#1e3a8a;margin:0">${d.action}</p></div>`+
+      (c.emergency?`<a href="tel:137175" class="go-now-btn">${t.callNow}</a>`:'');
     const border=c.emergency?'border-color:#fca5a5':'';
     return `<div class="symptom-card" id="rf-${i}" style="${border}">
-      <div class="symptom-card-header" onclick="toggleCard('rf-${i}')">
+      <button type="button" class="symptom-card-header" onclick="toggleCard('rf-${i}')" aria-expanded="false" aria-controls="rf-${i}-body">
         <div class="symptom-card-title">🚨 ${d.title}</div>
-        <span class="chevron">⌄</span>
-      </div>
-      <div class="symptom-card-body">${signsHtml}${dangerHtml}${actionHtml}</div>
+        <span class="chevron" aria-hidden="true">⌄</span>
+      </button>
+      <div class="symptom-card-body" id="rf-${i}-body">${signsHtml}${dangerHtml}${actionHtml}</div>
     </div>`;
   }).join('');
 }
 
 // Renders a condition page from keyed T strings (e.g. sectionKeys entry
-// {key:'htnWhat',icon:'❓'} pulls T[lang].htnWhatTitle / htnWhatBody). This is
-// what makes the content editable through the Google Sheet: edit the
-// matching key's row in the UIText tab, no code required.
+// {key:'htnWhat',icon:'❓'} pulls T[lang].htnWhatTitle / htnWhatBody). To edit
+// this content, find the matching key in the T.en / T.fil object above.
 function renderInfoSections(containerId, introKey, sectionKeys, prefixHtml){
   const t=T[lang];
   let html = prefixHtml || '';
@@ -1489,11 +1397,11 @@ function renderInfoSections(containerId, introKey, sectionKeys, prefixHtml){
     const title = t[s.key+'Title'];
     const body = t[s.key+'Body'];
     return `<div class="symptom-card no-print" id="${id}">
-      <div class="symptom-card-header" onclick="toggleCard('${id}')">
+      <button type="button" class="symptom-card-header" onclick="toggleCard('${id}')" aria-expanded="false" aria-controls="${id}-body">
         <div class="symptom-card-title">${s.icon} ${title}</div>
-        <span class="chevron">⌄</span>
-      </div>
-      <div class="symptom-card-body"><p style="font-size:0.87rem;color:#374151;line-height:1.55;padding-top:10px">${body}</p></div>
+        <span class="chevron" aria-hidden="true">⌄</span>
+      </button>
+      <div class="symptom-card-body" id="${id}-body"><p style="font-size:0.87rem;color:#374151;line-height:1.55;padding-top:10px">${body}</p></div>
     </div>`;
   }).join('');
   document.getElementById(containerId+'-content').innerHTML=html;
@@ -1516,7 +1424,7 @@ function sugarFlag(val, type){
   if(val<70) return 'lowDanger';
   if(val>=250) return 'danger';
   if(type==='fasting' && val>=126) return 'warn';
-  if(type==='random' && val>=200) return 'warn';
+  if((type==='random' || type==='postmeal') && val>=200) return 'warn';
   return null;
 }
 function flagTag(t, flag){
@@ -1549,6 +1457,7 @@ function renderBPLogWidget(){
     ? `<button class="log-viewall-btn no-print" onclick="toggleBPShowAll()">${bpShowAll?t.bpShowLess:t.bpViewAll.replace('{count}',log.length)}</button>` : '';
   const backupReminder=(log.length>0 && log.length%LOG_BACKUP_REMINDER_EVERY===0)
     ? `<div class="tracker-reminder no-print">💾 ${t.bpBackupReminder.replace('{count}',log.length)} <button class="log-viewall-btn" style="margin-top:4px" onclick="exportBackup()">${t.backupNow}</button></div>` : '';
+  const crisisAdvice=(log[0] && bpFlag(log[0].sys,log[0].dia)==='danger')?`<div class="danger-strip no-print"><div class="strip-label">⚠ ${t.flagDanger}</div><p style="font-size:0.84rem;color:#7f1d1d">${t.bpCrisisAdvice}</p></div>`:'';
   return `<div class="tracker-section">
     <div class="tracker-header"><div class="tracker-title">📊 ${t.bpLogTitle}</div><div class="tracker-sub">${t.bpLogSub}</div></div>
     <div class="log-input-row no-print">
@@ -1557,6 +1466,7 @@ function renderBPLogWidget(){
       <input type="number" id="bp-dia-input" placeholder="${t.bpDiaPlaceholder}">
       <button onclick="addBPEntry()">${t.logAdd}</button>
     </div>
+    ${crisisAdvice}
     ${backupReminder}
     ${entries}
     ${viewAllBtn}
@@ -1576,19 +1486,22 @@ function renderSugarLogWidget(){
     const i=log.indexOf(e);
     const flag=sugarFlag(e.val,e.type);
     const when=e.time?`${e.date} · ${e.time}`:e.date;
-    return `<div class="log-entry"><span class="log-date">${when}</span><span class="log-value ${flagClass(flag)}">${e.val} mg/dL</span><span class="log-type-tag">${e.type==='fasting'?t.sugarFasting:t.sugarRandom}</span>${flagTag(t,flag)}<button class="log-delete no-print" onclick="deleteSugarEntry(${i})">✕</button></div>`;
+    const typeLabel=e.type==='fasting'?t.sugarFasting:(e.type==='postmeal'?t.sugarPostMeal:t.sugarRandom);
+    return `<div class="log-entry"><span class="log-date">${when}</span><span class="log-value ${flagClass(flag)}">${e.val} mg/dL</span><span class="log-type-tag">${typeLabel}</span>${flagTag(t,flag)}<button class="log-delete no-print" onclick="deleteSugarEntry(${i})">✕</button></div>`;
   }).join('') || `<p class="tracker-empty-note">${t.logNoEntries}</p>`;
   const viewAllBtn=log.length>LOG_DISPLAY_COUNT
     ? `<button class="log-viewall-btn no-print" onclick="toggleSugarShowAll()">${sugarShowAll?t.sugarShowLess:t.sugarViewAll.replace('{count}',log.length)}</button>` : '';
   const backupReminder=(log.length>0 && log.length%LOG_BACKUP_REMINDER_EVERY===0)
     ? `<div class="tracker-reminder no-print">💾 ${t.sugarBackupReminder.replace('{count}',log.length)} <button class="log-viewall-btn" style="margin-top:4px" onclick="exportBackup()">${t.backupNow}</button></div>` : '';
+  const lowAdvice=(log[0] && log[0].val<70)?`<div class="danger-strip no-print"><div class="strip-label">⚠ ${t.flagLowDanger}</div><p style="font-size:0.84rem;color:#7f1d1d;margin-bottom:6px">${t.sugarLowAdvice}</p><p style="font-size:0.84rem;color:#7f1d1d">${t.sugarLowEmergency}</p></div>`:'';
   return `<div class="tracker-section">
     <div class="tracker-header"><div class="tracker-title">🩸 ${t.sugarLogTitle}</div><div class="tracker-sub">${t.sugarLogSub}</div></div>
     <div class="log-input-row no-print">
       <input type="number" id="sugar-val-input" placeholder="${t.sugarValPlaceholder}">
-      <select id="sugar-type-input"><option value="fasting">${t.sugarFasting}</option><option value="random">${t.sugarRandom}</option></select>
+      <select id="sugar-type-input" aria-label="${lang==='fil'?'Oras ng pagsukat':'Measurement timing'}"><option value="fasting">${t.sugarFasting}</option><option value="postmeal">${t.sugarPostMeal}</option><option value="random">${t.sugarRandom}</option></select>
       <button onclick="addSugarEntry()">${t.logAdd}</button>
     </div>
+    ${lowAdvice}
     ${backupReminder}
     ${entries}
     ${viewAllBtn}
@@ -2044,7 +1957,6 @@ applyStaticStrings();
 renderAll();
 navigate('home');
 if(lang==='fil'){setLang('fil');}
-syncRemoteContent();
 </script>
 </body>
 </html>
