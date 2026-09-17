@@ -1,0 +1,2058 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>BIDA Health App</title>
+
+<!-- PWA / "installed app" metadata. See handoff doc, section "Editing the App Icon", before changing the icon SVG below.
+     Favicon = simplified colored "BiDA HEALTH" wordmark (legible at tiny sizes).
+     Apple touch icon + manifest icon = full circular seal logo (rendered large enough to read). -->
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIkJJREEgSGVhbHRoIEFwcCIsICJzaG9ydF9uYW1lIjogIkJJREEgSGVhbHRoIiwgImRlc2NyaXB0aW9uIjogIkJldHRlciBJbmZvcm1lZCBmb3IgRGlzZWFzZSBBd2FyZW5lc3Mg4oCUIE11bnRpbmx1cGEgQ2l0eSIsICJzdGFydF91cmwiOiAiLiIsICJpZCI6ICIuIiwgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmNWY3ZmIiLCAidGhlbWVfY29sb3IiOiAiIzFkNGVkOCIsICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdC1wcmltYXJ5IiwgImljb25zIjogW3sic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owbmFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jbklIWnBaWGRDYjNnOUp6QWdNQ0F5TURBZ01qQXdKejRLSUNBOFpHVm1jejRLSUNBZ0lEeHdZWFJvSUdsa1BTZGlhV1JoVkc5d1FYSmpKeUJrUFNkTklESTJJREV3TUNCQklEYzBJRGMwSURBZ01DQXhJREUzTkNBeE1EQW5JR1pwYkd3OUoyNXZibVVuTHo0S0lDQWdJRHh3WVhSb0lHbGtQU2RpYVdSaFFtOTBRWEpqSnlCa1BTZE5JREkySURFd01DQkJJRGMwSURjMElEQWdNQ0F3SURFM05DQXhNREFuSUdacGJHdzlKMjV2Ym1Vbkx6NEtJQ0E4TDJSbFpuTStDaUFnUEdOcGNtTnNaU0JqZUQwbk1UQXdKeUJqZVQwbk1UQXdKeUJ5UFNjNU5DY2dabWxzYkQwbmQyaHBkR1VuSUhOMGNtOXJaVDBuSXpGbE0yRTRZU2NnYzNSeWIydGxMWGRwWkhSb1BTY3pKeTgrQ2lBZ1BHTnBjbU5zWlNCamVEMG5NVEF3SnlCamVUMG5NVEF3SnlCeVBTYzROaWNnWm1sc2JEMG5ibTl1WlNjZ2MzUnliMnRsUFNjak1XVXpZVGhoSnlCemRISnZhMlV0ZDJsa2RHZzlKekVuTHo0S0lDQThZMmx5WTJ4bElHTjRQU2N4TkNjZ1kzazlKekV3TUNjZ2NqMG5NaWNnWm1sc2JEMG5JekZsTTJFNFlTY3ZQZ29nSUR4amFYSmpiR1VnWTNnOUp6RTROaWNnWTNrOUp6RXdNQ2NnY2owbk1pY2dabWxzYkQwbkl6RmxNMkU0WVNjdlBnb2dJRHgwWlhoMElHWnZiblF0Wm1GdGFXeDVQU2RCY21saGJDd2djMkZ1Y3kxelpYSnBaaWNnWm05dWRDMXphWHBsUFNjeE1TY2dabTl1ZEMxM1pXbG5hSFE5Snpjd01DY2diR1YwZEdWeUxYTndZV05wYm1jOUp6RXVOU2NnWm1sc2JEMG5JekZsTTJFNFlTYytDaUFnSUNBOGRHVjRkRkJoZEdnZ2FISmxaajBuSTJKcFpHRlViM0JCY21NbklITjBZWEowVDJabWMyVjBQU2MxTUNVbklIUmxlSFF0WVc1amFHOXlQU2R0YVdSa2JHVW5Qa0pGVkZSRlVpQkpUa1pQVWsxRlJEd3ZkR1Y0ZEZCaGRHZytDaUFnUEM5MFpYaDBQZ29nSUR4MFpYaDBJR1p2Ym5RdFptRnRhV3g1UFNkQmNtbGhiQ3dnYzJGdWN5MXpaWEpwWmljZ1ptOXVkQzF6YVhwbFBTY3hNQ2NnWm05dWRDMTNaV2xuYUhROUp6Y3dNQ2NnYkdWMGRHVnlMWE53WVdOcGJtYzlKekVuSUdacGJHdzlKeU14WlROaE9HRW5QZ29nSUNBZ1BIUmxlSFJRWVhSb0lHaHlaV1k5SnlOaWFXUmhRbTkwUVhKakp5QnpkR0Z5ZEU5bVpuTmxkRDBuTlRBbEp5QjBaWGgwTFdGdVkyaHZjajBuYldsa1pHeGxKejVHVDFJZ1JFbFRSVUZUUlNCQlYwRlNSVTVGVTFNOEwzUmxlSFJRWVhSb1Bnb2dJRHd2ZEdWNGRENEtJQ0E4ZEdWNGRDQjRQU2N4TURBbklIazlKems0SnlCbWIyNTBMV1poYldsc2VUMG5RWEpwWVd3c0lITmhibk10YzJWeWFXWW5JR1p2Ym5RdGMybDZaVDBuTXpnbklHWnZiblF0ZDJWcFoyaDBQU2M0TURBbklIUmxlSFF0WVc1amFHOXlQU2R0YVdSa2JHVW5QangwYzNCaGJpQm1hV3hzUFNjak1XVXpZVGhoSno1Q1BDOTBjM0JoYmo0OGRITndZVzRnWm1sc2JEMG5JekUwWWpoaE5pYythVHd2ZEhOd1lXNCtQSFJ6Y0dGdUlHWnBiR3c5SnlNeE5tRXpOR0VuUGtROEwzUnpjR0Z1UGp4MGMzQmhiaUJtYVd4c1BTY2pNalUyTTJWaUp6NUJQQzkwYzNCaGJqNDhMM1JsZUhRK0NpQWdQSFJsZUhRZ2VEMG5NVEF3SnlCNVBTY3hNVFVuSUdadmJuUXRabUZ0YVd4NVBTZEJjbWxoYkN3Z2MyRnVjeTF6WlhKcFppY2dabTl1ZEMxemFYcGxQU2N4TXljZ1ptOXVkQzEzWldsbmFIUTlKemN3TUNjZ2JHVjBkR1Z5TFhOd1lXTnBibWM5SnpNdU5TY2dabWxzYkQwbkl6RmxNMkU0WVNjZ2RHVjRkQzFoYm1Ob2IzSTlKMjFwWkdSc1pTYytTRVZCVEZSSVBDOTBaWGgwUGdvZ0lEeG5QZ29nSUNBZ1BHTnBjbU5zWlNCamVEMG5OakVuSUdONVBTY3hNamduSUhJOUp6RXdKeUJtYVd4c1BTY2pNVFJpT0dFMkp5OCtDaUFnSUNBOGNHRjBhQ0JrUFNkTk5UY2dNVEkwSUdnekxqVWdkamdnYUMwekxqVjZJRTAyTWlBeE1qUWdhRE11TlNCMk9DQm9MVE11TlhvbklHWnBiR3c5SjNkb2FYUmxKeTgrQ2lBZ0lDQThZMmx5WTJ4bElHTjRQU2M0TnljZ1kzazlKekV5T0NjZ2NqMG5NVEFuSUdacGJHdzlKeU13WkRrME9EZ25MejRLSUNBZ0lEeHdiMng1YkdsdVpTQndiMmx1ZEhNOUp6Z3hMREV5T0NBNE5Td3hNamdnT0Rjc01USXlJRGc1TERFek5DQTVNU3d4TWpnZ09UVXNNVEk0SnlCbWFXeHNQU2R1YjI1bEp5QnpkSEp2YTJVOUozZG9hWFJsSnlCemRISnZhMlV0ZDJsa2RHZzlKekV1TkNjZ2MzUnliMnRsTFd4cGJtVmpZWEE5SjNKdmRXNWtKeUJ6ZEhKdmEyVXRiR2x1WldwdmFXNDlKM0p2ZFc1a0p5OCtDaUFnSUNBOFkybHlZMnhsSUdONFBTY3hNVE1uSUdONVBTY3hNamduSUhJOUp6RXdKeUJtYVd4c1BTY2pNVFpoTXpSaEp5OCtDaUFnSUNBOGNtVmpkQ0I0UFNjeE1UQXVOU2NnZVQwbk1USXpKeUIzYVdSMGFEMG5OU2NnYUdWcFoyaDBQU2N4TUNjZ1ptbHNiRDBuZDJocGRHVW5MejRLSUNBZ0lEeHlaV04wSUhnOUp6RXdPQ2NnZVQwbk1USTFMalVuSUhkcFpIUm9QU2N4TUNjZ2FHVnBaMmgwUFNjMUp5Qm1hV3hzUFNkM2FHbDBaU2N2UGdvZ0lDQWdQR05wY21Oc1pTQmplRDBuTVRNNUp5QmplVDBuTVRJNEp5QnlQU2N4TUNjZ1ptbHNiRDBuSXpJMU5qTmxZaWN2UGdvZ0lDQWdQR05wY21Oc1pTQmplRDBuTVRNMUp5QmplVDBuTVRJMUp5QnlQU2N5TGpZbklHWnBiR3c5SjNkb2FYUmxKeTgrQ2lBZ0lDQThZMmx5WTJ4bElHTjRQU2N4TkRNbklHTjVQU2N4TWpVbklISTlKekl1TmljZ1ptbHNiRDBuZDJocGRHVW5MejRLSUNBZ0lEeHdZWFJvSUdROUowMHhNekVzTVRNMUlIRTBMQzAyTGpVZ09Dd3dJRTB4TXprc01UTTFJSEUwTEMwMkxqVWdPQ3d3SnlCemRISnZhMlU5SjNkb2FYUmxKeUJ6ZEhKdmEyVXRkMmxrZEdnOUp6RXVOQ2NnWm1sc2JEMG5ibTl1WlNjZ2MzUnliMnRsTFd4cGJtVmpZWEE5SjNKdmRXNWtKeTgrQ2lBZ1BDOW5QZ284TDNOMlp6ND0iLCAic2l6ZXMiOiAiYW55IiwgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIsICJwdXJwb3NlIjogImFueSJ9LCB7InNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MG5hSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY25JSFpwWlhkQ2IzZzlKekFnTUNBeU1EQWdNakF3Sno0S0lDQThaR1ZtY3o0S0lDQWdJRHh3WVhSb0lHbGtQU2RpYVdSaFZHOXdRWEpqSnlCa1BTZE5JREkySURFd01DQkJJRGMwSURjMElEQWdNQ0F4SURFM05DQXhNREFuSUdacGJHdzlKMjV2Ym1Vbkx6NEtJQ0FnSUR4d1lYUm9JR2xrUFNkaWFXUmhRbTkwUVhKakp5QmtQU2ROSURJMklERXdNQ0JCSURjMElEYzBJREFnTUNBd0lERTNOQ0F4TURBbklHWnBiR3c5SjI1dmJtVW5MejRLSUNBOEwyUmxabk0rQ2lBZ1BHTnBjbU5zWlNCamVEMG5NVEF3SnlCamVUMG5NVEF3SnlCeVBTYzVOQ2NnWm1sc2JEMG5kMmhwZEdVbklITjBjbTlyWlQwbkl6RmxNMkU0WVNjZ2MzUnliMnRsTFhkcFpIUm9QU2N6Snk4K0NpQWdQR05wY21Oc1pTQmplRDBuTVRBd0p5QmplVDBuTVRBd0p5QnlQU2M0TmljZ1ptbHNiRDBuYm05dVpTY2djM1J5YjJ0bFBTY2pNV1V6WVRoaEp5QnpkSEp2YTJVdGQybGtkR2c5SnpFbkx6NEtJQ0E4WTJseVkyeGxJR040UFNjeE5DY2dZM2s5SnpFd01DY2djajBuTWljZ1ptbHNiRDBuSXpGbE0yRTRZU2N2UGdvZ0lEeGphWEpqYkdVZ1kzZzlKekU0TmljZ1kzazlKekV3TUNjZ2NqMG5NaWNnWm1sc2JEMG5JekZsTTJFNFlTY3ZQZ29nSUR4MFpYaDBJR1p2Ym5RdFptRnRhV3g1UFNkQmNtbGhiQ3dnYzJGdWN5MXpaWEpwWmljZ1ptOXVkQzF6YVhwbFBTY3hNU2NnWm05dWRDMTNaV2xuYUhROUp6Y3dNQ2NnYkdWMGRHVnlMWE53WVdOcGJtYzlKekV1TlNjZ1ptbHNiRDBuSXpGbE0yRTRZU2MrQ2lBZ0lDQThkR1Y0ZEZCaGRHZ2dhSEpsWmowbkkySnBaR0ZVYjNCQmNtTW5JSE4wWVhKMFQyWm1jMlYwUFNjMU1DVW5JSFJsZUhRdFlXNWphRzl5UFNkdGFXUmtiR1VuUGtKRlZGUkZVaUJKVGtaUFVrMUZSRHd2ZEdWNGRGQmhkR2crQ2lBZ1BDOTBaWGgwUGdvZ0lEeDBaWGgwSUdadmJuUXRabUZ0YVd4NVBTZEJjbWxoYkN3Z2MyRnVjeTF6WlhKcFppY2dabTl1ZEMxemFYcGxQU2N4TUNjZ1ptOXVkQzEzWldsbmFIUTlKemN3TUNjZ2JHVjBkR1Z5TFhOd1lXTnBibWM5SnpFbklHWnBiR3c5SnlNeFpUTmhPR0VuUGdvZ0lDQWdQSFJsZUhSUVlYUm9JR2h5WldZOUp5TmlhV1JoUW05MFFYSmpKeUJ6ZEdGeWRFOW1abk5sZEQwbk5UQWxKeUIwWlhoMExXRnVZMmh2Y2owbmJXbGtaR3hsSno1R1QxSWdSRWxUUlVGVFJTQkJWMEZTUlU1RlUxTThMM1JsZUhSUVlYUm9QZ29nSUR3dmRHVjRkRDRLSUNBOGRHVjRkQ0I0UFNjeE1EQW5JSGs5SnprNEp5Qm1iMjUwTFdaaGJXbHNlVDBuUVhKcFlXd3NJSE5oYm5NdGMyVnlhV1luSUdadmJuUXRjMmw2WlQwbk16Z25JR1p2Ym5RdGQyVnBaMmgwUFNjNE1EQW5JSFJsZUhRdFlXNWphRzl5UFNkdGFXUmtiR1VuUGp4MGMzQmhiaUJtYVd4c1BTY2pNV1V6WVRoaEp6NUNQQzkwYzNCaGJqNDhkSE53WVc0Z1ptbHNiRDBuSXpFMFlqaGhOaWMrYVR3dmRITndZVzQrUEhSemNHRnVJR1pwYkd3OUp5TXhObUV6TkdFblBrUThMM1J6Y0dGdVBqeDBjM0JoYmlCbWFXeHNQU2NqTWpVMk0yVmlKejVCUEM5MGMzQmhiajQ4TDNSbGVIUStDaUFnUEhSbGVIUWdlRDBuTVRBd0p5QjVQU2N4TVRVbklHWnZiblF0Wm1GdGFXeDVQU2RCY21saGJDd2djMkZ1Y3kxelpYSnBaaWNnWm05dWRDMXphWHBsUFNjeE15Y2dabTl1ZEMxM1pXbG5hSFE5Snpjd01DY2diR1YwZEdWeUxYTndZV05wYm1jOUp6TXVOU2NnWm1sc2JEMG5JekZsTTJFNFlTY2dkR1Y0ZEMxaGJtTm9iM0k5SjIxcFpHUnNaU2MrU0VWQlRGUklQQzkwWlhoMFBnb2dJRHhuUGdvZ0lDQWdQR05wY21Oc1pTQmplRDBuTmpFbklHTjVQU2N4TWpnbklISTlKekV3SnlCbWFXeHNQU2NqTVRSaU9HRTJKeTgrQ2lBZ0lDQThjR0YwYUNCa1BTZE5OVGNnTVRJMElHZ3pMalVnZGpnZ2FDMHpMalY2SUUwMk1pQXhNalFnYURNdU5TQjJPQ0JvTFRNdU5Yb25JR1pwYkd3OUozZG9hWFJsSnk4K0NpQWdJQ0E4WTJseVkyeGxJR040UFNjNE55Y2dZM2s5SnpFeU9DY2djajBuTVRBbklHWnBiR3c5SnlNd1pEazBPRGduTHo0S0lDQWdJRHh3YjJ4NWJHbHVaU0J3YjJsdWRITTlKemd4TERFeU9DQTROU3d4TWpnZ09EY3NNVEl5SURnNUxERXpOQ0E1TVN3eE1qZ2dPVFVzTVRJNEp5Qm1hV3hzUFNkdWIyNWxKeUJ6ZEhKdmEyVTlKM2RvYVhSbEp5QnpkSEp2YTJVdGQybGtkR2c5SnpFdU5DY2djM1J5YjJ0bExXeHBibVZqWVhBOUozSnZkVzVrSnlCemRISnZhMlV0YkdsdVpXcHZhVzQ5SjNKdmRXNWtKeTgrQ2lBZ0lDQThZMmx5WTJ4bElHTjRQU2N4TVRNbklHTjVQU2N4TWpnbklISTlKekV3SnlCbWFXeHNQU2NqTVRaaE16UmhKeTgrQ2lBZ0lDQThjbVZqZENCNFBTY3hNVEF1TlNjZ2VUMG5NVEl6SnlCM2FXUjBhRDBuTlNjZ2FHVnBaMmgwUFNjeE1DY2dabWxzYkQwbmQyaHBkR1VuTHo0S0lDQWdJRHh5WldOMElIZzlKekV3T0NjZ2VUMG5NVEkxTGpVbklIZHBaSFJvUFNjeE1DY2dhR1ZwWjJoMFBTYzFKeUJtYVd4c1BTZDNhR2wwWlNjdlBnb2dJQ0FnUEdOcGNtTnNaU0JqZUQwbk1UTTVKeUJqZVQwbk1USTRKeUJ5UFNjeE1DY2dabWxzYkQwbkl6STFOak5sWWljdlBnb2dJQ0FnUEdOcGNtTnNaU0JqZUQwbk1UTTFKeUJqZVQwbk1USTFKeUJ5UFNjeUxqWW5JR1pwYkd3OUozZG9hWFJsSnk4K0NpQWdJQ0E4WTJseVkyeGxJR040UFNjeE5ETW5JR041UFNjeE1qVW5JSEk5SnpJdU5pY2dabWxzYkQwbmQyaHBkR1VuTHo0S0lDQWdJRHh3WVhSb0lHUTlKMDB4TXpFc01UTTFJSEUwTEMwMkxqVWdPQ3d3SUUweE16a3NNVE0xSUhFMExDMDJMalVnT0N3d0p5QnpkSEp2YTJVOUozZG9hWFJsSnlCemRISnZhMlV0ZDJsa2RHZzlKekV1TkNjZ1ptbHNiRDBuYm05dVpTY2djM1J5YjJ0bExXeHBibVZqWVhBOUozSnZkVzVrSnk4K0NpQWdQQzluUGdvOEwzTjJaejQ9IiwgInNpemVzIjogImFueSIsICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLCAicHVycG9zZSI6ICJtYXNrYWJsZSJ9XX0=">
+<meta name="theme-color" content="#1d4ed8">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BIDA Health">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyMjAgOTAnPgogIDx0ZXh0IHg9JzExMCcgeT0nNTInIGZvbnQtZmFtaWx5PSdBcmlhbCwgc2Fucy1zZXJpZicgZm9udC1zaXplPSc0NCcgZm9udC13ZWlnaHQ9JzgwMCcgdGV4dC1hbmNob3I9J21pZGRsZSc+PHRzcGFuIGZpbGw9JyMxZTNhOGEnPkI8L3RzcGFuPjx0c3BhbiBmaWxsPScjMTRiOGE2Jz5pPC90c3Bhbj48dHNwYW4gZmlsbD0nIzE2YTM0YSc+RDwvdHNwYW4+PHRzcGFuIGZpbGw9JyMyNTYzZWInPkE8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PScxMTAnIHk9Jzc2JyBmb250LWZhbWlseT0nQXJpYWwsIHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTYnIGZvbnQtd2VpZ2h0PSc3MDAnIGxldHRlci1zcGFjaW5nPSc0JyBmaWxsPScjMWUzYThhJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJz5IRUFMVEg8L3RleHQ+Cjwvc3ZnPg==">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyMDAgMjAwJz4KICA8ZGVmcz4KICAgIDxwYXRoIGlkPSdiaWRhVG9wQXJjJyBkPSdNIDI2IDEwMCBBIDc0IDc0IDAgMCAxIDE3NCAxMDAnIGZpbGw9J25vbmUnLz4KICAgIDxwYXRoIGlkPSdiaWRhQm90QXJjJyBkPSdNIDI2IDEwMCBBIDc0IDc0IDAgMCAwIDE3NCAxMDAnIGZpbGw9J25vbmUnLz4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0nMTAwJyBjeT0nMTAwJyByPSc5NCcgZmlsbD0nd2hpdGUnIHN0cm9rZT0nIzFlM2E4YScgc3Ryb2tlLXdpZHRoPSczJy8+CiAgPGNpcmNsZSBjeD0nMTAwJyBjeT0nMTAwJyByPSc4NicgZmlsbD0nbm9uZScgc3Ryb2tlPScjMWUzYThhJyBzdHJva2Utd2lkdGg9JzEnLz4KICA8Y2lyY2xlIGN4PScxNCcgY3k9JzEwMCcgcj0nMicgZmlsbD0nIzFlM2E4YScvPgogIDxjaXJjbGUgY3g9JzE4NicgY3k9JzEwMCcgcj0nMicgZmlsbD0nIzFlM2E4YScvPgogIDx0ZXh0IGZvbnQtZmFtaWx5PSdBcmlhbCwgc2Fucy1zZXJpZicgZm9udC1zaXplPScxMScgZm9udC13ZWlnaHQ9JzcwMCcgbGV0dGVyLXNwYWNpbmc9JzEuNScgZmlsbD0nIzFlM2E4YSc+CiAgICA8dGV4dFBhdGggaHJlZj0nI2JpZGFUb3BBcmMnIHN0YXJ0T2Zmc2V0PSc1MCUnIHRleHQtYW5jaG9yPSdtaWRkbGUnPkJFVFRFUiBJTkZPUk1FRDwvdGV4dFBhdGg+CiAgPC90ZXh0PgogIDx0ZXh0IGZvbnQtZmFtaWx5PSdBcmlhbCwgc2Fucy1zZXJpZicgZm9udC1zaXplPScxMCcgZm9udC13ZWlnaHQ9JzcwMCcgbGV0dGVyLXNwYWNpbmc9JzEnIGZpbGw9JyMxZTNhOGEnPgogICAgPHRleHRQYXRoIGhyZWY9JyNiaWRhQm90QXJjJyBzdGFydE9mZnNldD0nNTAlJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJz5GT1IgRElTRUFTRSBBV0FSRU5FU1M8L3RleHRQYXRoPgogIDwvdGV4dD4KICA8dGV4dCB4PScxMDAnIHk9Jzk4JyBmb250LWZhbWlseT0nQXJpYWwsIHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMzgnIGZvbnQtd2VpZ2h0PSc4MDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnPjx0c3BhbiBmaWxsPScjMWUzYThhJz5CPC90c3Bhbj48dHNwYW4gZmlsbD0nIzE0YjhhNic+aTwvdHNwYW4+PHRzcGFuIGZpbGw9JyMxNmEzNGEnPkQ8L3RzcGFuPjx0c3BhbiBmaWxsPScjMjU2M2ViJz5BPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0nMTAwJyB5PScxMTUnIGZvbnQtZmFtaWx5PSdBcmlhbCwgc2Fucy1zZXJpZicgZm9udC1zaXplPScxMycgZm9udC13ZWlnaHQ9JzcwMCcgbGV0dGVyLXNwYWNpbmc9JzMuNScgZmlsbD0nIzFlM2E4YScgdGV4dC1hbmNob3I9J21pZGRsZSc+SEVBTFRIPC90ZXh0PgogIDxnPgogICAgPGNpcmNsZSBjeD0nNjEnIGN5PScxMjgnIHI9JzEwJyBmaWxsPScjMTRiOGE2Jy8+CiAgICA8cGF0aCBkPSdNNTcgMTI0IGgzLjUgdjggaC0zLjV6IE02MiAxMjQgaDMuNSB2OCBoLTMuNXonIGZpbGw9J3doaXRlJy8+CiAgICA8Y2lyY2xlIGN4PSc4NycgY3k9JzEyOCcgcj0nMTAnIGZpbGw9JyMwZDk0ODgnLz4KICAgIDxwb2x5bGluZSBwb2ludHM9JzgxLDEyOCA4NSwxMjggODcsMTIyIDg5LDEzNCA5MSwxMjggOTUsMTI4JyBmaWxsPSdub25lJyBzdHJva2U9J3doaXRlJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJy8+CiAgICA8Y2lyY2xlIGN4PScxMTMnIGN5PScxMjgnIHI9JzEwJyBmaWxsPScjMTZhMzRhJy8+CiAgICA8cmVjdCB4PScxMTAuNScgeT0nMTIzJyB3aWR0aD0nNScgaGVpZ2h0PScxMCcgZmlsbD0nd2hpdGUnLz4KICAgIDxyZWN0IHg9JzEwOCcgeT0nMTI1LjUnIHdpZHRoPScxMCcgaGVpZ2h0PSc1JyBmaWxsPSd3aGl0ZScvPgogICAgPGNpcmNsZSBjeD0nMTM5JyBjeT0nMTI4JyByPScxMCcgZmlsbD0nIzI1NjNlYicvPgogICAgPGNpcmNsZSBjeD0nMTM1JyBjeT0nMTI1JyByPScyLjYnIGZpbGw9J3doaXRlJy8+CiAgICA8Y2lyY2xlIGN4PScxNDMnIGN5PScxMjUnIHI9JzIuNicgZmlsbD0nd2hpdGUnLz4KICAgIDxwYXRoIGQ9J00xMzEsMTM1IHE0LC02LjUgOCwwIE0xMzksMTM1IHE0LC02LjUgOCwwJyBzdHJva2U9J3doaXRlJyBzdHJva2Utd2lkdGg9JzEuNCcgZmlsbD0nbm9uZScgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CiAgPC9nPgo8L3N2Zz4=">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;overscroll-behavior-y:none;height:100%}
+html[data-textsize="large"]{font-size:19px}
+html[data-textsize="xlarge"]{font-size:22px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f7fb;color:#111827;line-height:1.5;min-height:100vh;padding-bottom:calc(100px + env(safe-area-inset-bottom));overscroll-behavior:none;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+:root{--primary:#1d4ed8;--primary-dark:#1e3a8a;--accent:#dc2626;--danger:#dc2626;--danger-bg:#fef2f2;--warning:#d97706;--success:#16a34a;--success-bg:#f0fdf4;--card:#ffffff;--bg:#f5f7fb;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--blue-light:#eff6ff}
+.emergency-banner{position:sticky;top:0;z-index:100;background:var(--danger);color:white;text-align:center;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;font-size:0.92rem;font-weight:600;line-height:1.4}
+.emergency-banner a{color:white;text-decoration:underline}
+.app-header{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);color:white;padding:14px 16px 12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(30,58,138,0.25);user-select:none}
+.app-header .brand{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.app-header .brand h1{font-size:1.25rem;font-weight:700;letter-spacing:-0.4px}
+.app-header .brand p{font-size:0.78rem;opacity:0.88;margin-top:1px}
+.header-logo{background:white;border-radius:10px;padding:4px 9px;display:flex;align-items:center;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,0.18)}
+.header-logo svg{display:block;height:26px;width:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.lang-toggle{display:flex;gap:4px;background:rgba(255,255,255,0.18);border-radius:8px;padding:3px}
+.lang-btn{background:transparent;border:none;color:white;font-size:0.8rem;font-weight:600;padding:5px 10px;border-radius:6px;cursor:pointer;min-height:34px;transition:background 0.15s}
+.lang-btn.active{background:white;color:var(--primary)}
+.search-wrap{padding:12px 16px 10px;background:var(--primary)}
+.search-bar{display:flex;align-items:center;background:white;border-radius:10px;padding:0 12px;gap:8px}
+.search-bar input{flex:1;min-width:0;border:none;outline:none;font-size:0.95rem;padding:11px 0;background:transparent;color:var(--text)}
+.search-bar input::placeholder{color:var(--muted)}
+.search-clear{background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:4px;display:none}
+.textsize-wrap{display:flex;align-items:center;justify-content:center;gap:10px;padding:7px 16px;background:#f9fafb;border-bottom:1px solid var(--border)}
+.textsize-label{font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.4px}
+.textsize-seg{display:flex;gap:0;border-radius:8px;overflow:hidden;border:1.5px solid var(--border);background:white}
+.textsize-btn{background:transparent;border:none;color:var(--text);font-weight:700;cursor:pointer;padding:4px 14px;min-height:34px;line-height:1;font-family:inherit;border-right:1px solid var(--border);transition:background 0.15s,color 0.15s}
+.textsize-btn:last-child{border-right:none}
+.textsize-btn.active{background:var(--primary);color:white}
+.textsize-btn[data-size="normal"]{font-size:14px}
+.textsize-btn[data-size="large"]{font-size:18px}
+.textsize-btn[data-size="xlarge"]{font-size:22px}
+.page{display:none}
+.page.active{display:block;animation:bidaFadeIn 0.18s ease}
+@keyframes bidaFadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.content-wrap{padding:14px 14px 24px}
+.disclaimer{background:var(--blue-light);border:1px solid #bfdbfe;border-radius:10px;padding:11px 14px;font-size:0.83rem;color:#1e3a8a;margin-bottom:14px;line-height:1.5}
+.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.home-card{background:var(--card);font:inherit;width:100%;border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;border:1.5px solid var(--border);transition:transform 0.12s,box-shadow 0.12s;box-shadow:0 1px 4px rgba(17,24,39,0.06);min-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;-webkit-tap-highlight-color:transparent}
+.home-card:active{transform:scale(0.97);box-shadow:0 1px 2px rgba(17,24,39,0.05)}
+.home-card.danger-card{border-color:#fca5a5;background:#fff5f5}
+.home-card.danger-card .card-icon{background:#fee2e2;color:var(--danger)}
+.home-card.med-home-card{border-color:#fde68a;background:#fffdf5}
+.home-card.med-home-card .card-icon{background:#fef3c7}
+.home-card.wide{grid-column:1/-1}
+.card-icon{font-size:1.55rem;line-height:1;width:46px;height:46px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center}
+.card-label{font-size:0.82rem;font-weight:600;color:var(--text);line-height:1.3}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--border)}
+.back-btn{background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--primary);padding:4px 8px 4px 0;min-height:44px;display:flex;align-items:center;line-height:1}
+.section-title{font-size:1.1rem;font-weight:700;color:var(--text);flex:1}
+.section-icon{font-size:1.3rem}
+.symptom-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);margin-bottom:10px;overflow:hidden;box-shadow:0 1px 3px rgba(17,24,39,0.05)}
+.symptom-card-header{display:flex;width:100%;border:none;background:transparent;text-align:left;font:inherit;justify-content:space-between;align-items:center;padding:14px 15px;cursor:pointer;min-height:52px;-webkit-tap-highlight-color:transparent}
+.symptom-card-header:active{background:#f9fafb}
+.symptom-card-title{font-size:0.95rem;font-weight:600;color:var(--text);flex:1;padding-right:8px}
+.chevron{color:var(--muted);font-size:1rem;transition:transform 0.2s;flex-shrink:0}
+.symptom-card.open .chevron{transform:rotate(180deg)}
+.symptom-card-body{display:none;padding:0 15px 15px;border-top:1px solid var(--border)}
+.symptom-card.open .symptom-card-body{display:block}
+.card-section-label{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);margin:12px 0 6px}
+.danger-strip{background:var(--danger-bg);border:1px solid #fca5a5;border-radius:8px;padding:10px 12px;margin-top:10px}
+.danger-strip .strip-label{font-size:0.8rem;font-weight:700;color:var(--danger);margin-bottom:5px}
+.danger-strip ul,.action-strip ul,.info-card ul{padding-left:17px;margin:4px 0 0}
+.danger-strip li{font-size:0.88rem;line-height:1.5;margin-bottom:3px;color:#7f1d1d}
+.action-strip{background:var(--blue-light);border:1px solid #bfdbfe;border-radius:8px;padding:10px 12px;margin-top:10px}
+.action-strip .strip-label{font-size:0.8rem;font-weight:700;color:var(--primary);margin-bottom:5px}
+.action-strip li{color:#1e3a8a}
+.go-now-btn{display:block;width:100%;background:var(--danger);color:white;border:none;border-radius:10px;padding:13px 16px;font-size:0.95rem;font-weight:700;text-align:center;margin-top:12px;cursor:pointer;min-height:48px;-webkit-tap-highlight-color:transparent;text-decoration:none;box-shadow:0 2px 8px rgba(220,38,38,0.28)}
+.step-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 1px 3px rgba(17,24,39,0.05)}
+.step-num{background:var(--primary);color:white;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;flex-shrink:0;margin-top:1px}
+.step-content{flex:1}
+.step-title{font-size:0.92rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.step-desc{font-size:0.86rem;color:#374151;line-height:1.5}
+.info-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px;box-shadow:0 1px 3px rgba(17,24,39,0.05)}
+.info-card-title{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.info-card p{font-size:0.87rem;color:#374151;line-height:1.55;margin-bottom:6px}
+.info-card li{font-size:0.87rem;color:#374151;line-height:1.5;margin-bottom:3px}
+.legal-lead{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:13px 14px;margin-bottom:12px;font-size:0.86rem;color:#7c2d12;line-height:1.55}
+.legal-section{background:var(--card);border-radius:10px;border:1.5px solid var(--border);padding:13px 14px;margin-bottom:10px}
+.legal-section h3{font-size:0.94rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.legal-section p{font-size:0.86rem;color:#374151;line-height:1.55;margin:0}
+.legal-ack{background:var(--blue-light);border:1.5px solid #bfdbfe;border-radius:10px;padding:13px 14px;margin-top:12px;font-size:0.86rem;color:var(--primary-dark);line-height:1.55}
+.checklist{list-style:none;padding:0;margin:0}
+.checklist li{font-size:0.88rem;color:#374151;padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:8px;line-height:1.45}
+.checklist li:last-child{border-bottom:none}
+.checklist li::before{content:"✓";color:var(--primary);font-weight:700;font-size:0.9rem;flex-shrink:0;margin-top:1px}
+.bmi-form{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:16px;margin-bottom:10px;box-shadow:0 1px 3px rgba(17,24,39,0.05)}
+.bmi-form label{display:block;font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:5px}
+.bmi-form input[type=number]{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:11px 12px;font-size:1rem;color:var(--text);background:#f9fafb;margin-bottom:12px;outline:none;-webkit-appearance:none}
+.bmi-form input[type=number]:focus{border-color:var(--primary);background:white}
+.bmi-calc-btn{width:100%;background:var(--primary);color:white;border:none;border-radius:10px;padding:13px;font-size:1rem;font-weight:700;cursor:pointer;min-height:48px;box-shadow:0 2px 8px rgba(29,78,216,0.28)}
+.bmi-result{display:none;background:var(--blue-light);border:1.5px solid #bfdbfe;border-radius:10px;padding:14px 16px;margin-top:10px;text-align:center}
+.bmi-number{font-size:2rem;font-weight:800;color:var(--primary)}
+.bmi-category{font-size:1rem;font-weight:700;color:var(--text);margin-top:2px}
+.bmi-weight-note{font-size:0.84rem;color:#1e3a8a;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:9px 11px;margin-top:10px;line-height:1.5}
+.bmi-note{font-size:0.8rem;color:var(--muted);margin-top:8px;line-height:1.5}
+.unit-seg{display:flex;gap:0;margin-bottom:12px;border-radius:8px;overflow:hidden;border:1.5px solid var(--border);background:#f9fafb}
+.unit-seg button{flex:1;padding:9px 4px;font-size:0.82rem;font-weight:600;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:background 0.15s,color 0.15s;min-height:40px;border-right:1px solid var(--border)}
+.unit-seg button:last-child{border-right:none}
+.unit-seg button.active{background:var(--primary);color:white}
+.ggg-plate-wrap{display:flex;justify-content:center;margin:6px 0 16px}
+.ggg-plate{width:180px;height:180px;border-radius:50%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;overflow:hidden;border:5px solid white;box-shadow:0 2px 10px rgba(17,24,39,0.18)}
+.ggg-quad{display:flex;align-items:center;justify-content:center;text-align:center;font-size:0.72rem;font-weight:800;color:white;letter-spacing:0.3px;text-shadow:0 1px 2px rgba(0,0,0,0.15);padding:4px}
+.ggg-go{background:#c9992e}
+.ggg-grow{background:#e0186e}
+.ggg-glow-veg{background:#4caf1f}
+.ggg-glow-fruit{background:#f4791f}
+.ggg-card{border-radius:12px;padding:14px 15px;margin-bottom:10px;color:white;box-shadow:0 1px 3px rgba(17,24,39,0.08)}
+.ggg-card-title{font-size:0.92rem;font-weight:800;margin-bottom:6px;letter-spacing:0.3px}
+.ggg-card p{font-size:0.85rem;line-height:1.5;margin-bottom:6px;opacity:0.97}
+.ggg-card .ggg-portion{background:rgba(255,255,255,0.18);border-radius:8px;padding:8px 10px;font-size:0.83rem;line-height:1.5;margin-top:6px}
+.ggg-card.ggg-go{color:#3a2c05}
+.ggg-card.ggg-go .ggg-portion{background:rgba(255,255,255,0.35)}
+.ggg-card.ggg-glow-fruit .ggg-portion{background:rgba(255,255,255,0.22)}
+.ggg-legend{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:14px;font-size:0.72rem;font-weight:600;color:var(--muted)}
+.ggg-legend span{display:flex;align-items:center;gap:4px}
+.ggg-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.ggg-meta-row{display:flex;gap:10px;margin-bottom:14px}
+.ggg-meta{flex:1;background:var(--blue-light);border-radius:10px;padding:9px 10px;text-align:center}
+.ggg-meta-label{font-size:0.7rem;color:var(--muted);font-weight:600}
+.ggg-meta-value{font-size:0.86rem;font-weight:700;color:var(--primary-dark);margin-top:2px}
+.bmi-ft-row{display:flex;gap:8px;margin-bottom:12px}
+.bmi-ft-row input{flex:1;margin-bottom:0!important}
+.bmi-ft-row .ft-sublabel{font-size:0.75rem;color:var(--muted);text-align:center;display:block;margin-top:3px}
+.bmi-range-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.8rem;text-align:left}
+.bmi-range-table th{background:var(--primary);color:white;padding:6px 8px;font-size:0.78rem}
+.bmi-range-table td{padding:6px 8px;border-bottom:1px solid var(--border);color:#374151}
+.bmi-range-table tr.bmi-hl td{background:var(--blue-light);font-weight:700;color:var(--primary)}
+.bmi-rec{font-size:0.87rem;color:#1e3a8a;background:var(--blue-light);border-left:3px solid var(--primary);padding:10px 12px;border-radius:0 8px 8px 0;margin-top:10px;text-align:left;line-height:1.55}
+.bmi-outside{font-size:0.88rem;font-weight:700;margin:8px 0 2px;text-align:center}
+.facility-card{background:var(--card);border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px;box-shadow:0 1px 3px rgba(17,24,39,0.05)}
+.facility-name{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.facility-type{font-size:0.75rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px}
+.facility-type.emerg{color:var(--danger)}
+.facility-address{font-size:0.84rem;color:var(--muted);margin-bottom:8px;line-height:1.4}
+.facility-phone{display:inline-flex;align-items:center;gap:6px;background:var(--blue-light);color:var(--primary-dark);border:1px solid #bfdbfe;border-radius:8px;padding:8px 12px;font-size:0.88rem;font-weight:600;text-decoration:none;min-height:40px;margin-top:2px}
+.verify-label{font-size:0.72rem;color:var(--warning);font-weight:600;margin-top:5px;display:block}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:90;background:white;border-top:1.5px solid var(--border);display:flex;height:calc(64px + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 10px rgba(17,24,39,0.05)}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:0.63rem;font-weight:600;padding:6px 2px;min-height:44px;-webkit-tap-highlight-color:transparent;transition:color 0.15s;position:relative;user-select:none}
+.nav-btn.active{color:var(--primary)}
+.nav-btn.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:26px;height:3px;background:var(--primary);border-radius:0 0 3px 3px}
+
+/* ── Trackers & Logs (My Medicines, BP Log, Sugar Log) ─────────────────── */
+.tracker-section{background:var(--card);border-radius:14px;border:1.5px solid var(--border);padding:16px;margin-bottom:16px;box-shadow:0 1px 4px rgba(17,24,39,0.06)}
+.tracker-header{margin-bottom:10px}
+.tracker-title{font-size:1rem;font-weight:700;color:var(--text)}
+.tracker-sub{font-size:0.78rem;color:var(--muted);margin-top:2px;line-height:1.45}
+.tracker-reminder{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:9px 11px;font-size:0.82rem;color:#92400e;margin:10px 0;line-height:1.4}
+.tracker-congrats{background:var(--success-bg);border:1px solid #bbf7d0;border-radius:10px;padding:14px;margin:0 0 14px;text-align:center}
+.tracker-congrats-title{font-size:1rem;font-weight:700;color:var(--success);margin-bottom:4px}
+.tracker-congrats-body{font-size:0.83rem;color:#166534;line-height:1.45;margin-bottom:10px}
+.tracker-reset-btn{background:var(--success);color:white;border:none;border-radius:8px;padding:10px 16px;font-size:0.82rem;font-weight:700;cursor:pointer}
+.tracker-row{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.tracker-row:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.tracker-row-name{font-size:0.88rem;font-weight:600;color:var(--text);margin-bottom:7px;display:flex;justify-content:space-between;align-items:center}
+.tracker-note-label{display:block;font-size:0.72rem;color:var(--muted);margin:2px 0 4px}
+.tracker-note-input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 10px;font-size:0.82rem;background:#f9fafb;color:var(--text);margin-bottom:8px}
+.tracker-remove{background:none;border:none;color:var(--muted);font-size:0.85rem;cursor:pointer;padding:2px 6px;min-height:28px}
+.tracker-days{display:flex;gap:4px;justify-content:space-between}
+.day-cell{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:#f9fafb;border:1.5px solid var(--border);border-radius:8px;padding:7px 2px;font-size:0.62rem;font-weight:700;color:var(--muted);cursor:pointer;min-height:46px;-webkit-tap-highlight-color:transparent}
+.day-cell.taken{background:var(--blue-light);border-color:var(--primary);color:var(--primary)}
+.day-dot{font-size:0.85rem}
+.tracker-add-row{display:flex;gap:8px;margin-top:12px}
+.tracker-add-row select,.tracker-add-row input[type=text]{flex:1;border:1.5px solid var(--border);border-radius:8px;padding:10px;font-size:0.85rem;background:#f9fafb;min-width:0}
+.tracker-other-label{font-size:0.72rem;color:var(--muted);margin-top:12px;margin-bottom:0}
+.tracker-add-btn{background:var(--primary);color:white;border:none;border-radius:8px;padding:10px 14px;font-size:0.82rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.tracker-empty-note{font-size:0.82rem;color:var(--muted);padding:6px 0}
+.tracker-print-btn{width:100%;background:var(--blue-light);color:var(--primary-dark);border:1.5px solid #bfdbfe;border-radius:10px;padding:11px;font-size:0.86rem;font-weight:700;cursor:pointer;margin-top:12px;-webkit-tap-highlight-color:transparent}
+.tracker-summary{display:flex;gap:8px;margin-bottom:14px}
+.tracker-stat{flex:1;background:var(--blue-light);border-radius:10px;padding:8px 10px}
+.tracker-stat-label{font-size:0.68rem;color:var(--primary-dark);font-weight:600}
+.tracker-stat-value{font-size:1.05rem;font-weight:700;color:var(--primary)}
+.tracker-freq-picker{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.tracker-freq-label{font-size:0.72rem;color:var(--muted)}
+.freq-btn{background:#f9fafb;border:1.5px solid var(--border);color:var(--muted);border-radius:6px;padding:3px 9px;font-size:0.72rem;font-weight:700;cursor:pointer}
+.freq-btn.active{background:var(--primary);border-color:var(--primary);color:white}
+.dose-slot-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.dose-slot-row:last-child{margin-bottom:0}
+.dose-slot-label{width:34px;flex-shrink:0;font-size:0.68rem;font-weight:700;color:var(--muted)}
+.log-input-row{display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.log-input-row input[type=number]{flex:1;border:1.5px solid var(--border);border-radius:8px;padding:10px;font-size:0.92rem;background:#f9fafb;min-width:70px;margin-bottom:0}
+.log-input-row select{border:1.5px solid var(--border);border-radius:8px;padding:10px;font-size:0.82rem;background:#f9fafb}
+.log-input-row button{background:var(--primary);color:white;border:none;border-radius:8px;padding:10px 14px;font-size:0.82rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.log-slash{font-weight:800;color:var(--muted);font-size:1.1rem}
+.log-entry{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:0.86rem}
+.log-entry:last-child{border-bottom:none}
+.log-entry .log-date{color:var(--muted);flex:1}
+.log-entry .log-value{color:var(--text);font-weight:700}
+.log-entry .log-value.log-warn{color:var(--warning)}
+.log-entry .log-value.log-danger{color:var(--danger)}
+.log-entry .log-type-tag{font-size:0.7rem;color:var(--primary);background:var(--blue-light);border-radius:6px;padding:2px 7px;font-weight:600}
+.log-flag{font-size:0.68rem;font-weight:700;border-radius:6px;padding:2px 7px}
+.log-flag.log-warn{color:var(--warning);background:#fffbeb}
+.log-flag.log-danger{color:var(--danger);background:var(--danger-bg)}
+.log-viewall-btn{display:block;width:100%;background:none;border:none;color:var(--primary);font-size:0.82rem;font-weight:700;cursor:pointer;padding:8px 0;text-align:center}
+.log-delete{background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.85rem;padding:4px 6px;min-height:28px}
+@media print{
+  .app-header,.search-wrap,.bottom-nav,.emergency-banner,.back-btn,.no-print{display:none!important}
+  body{padding-bottom:0}
+  .page{display:none!important;animation:none!important}
+  .page.active{display:block!important}
+  .tracker-print-btn{display:none!important}
+}
+.nav-icon{font-size:1.2rem;line-height:1}
+.search-result-card{background:var(--card);display:block;width:100%;text-align:left;font:inherit;border-radius:12px;border:1.5px solid var(--border);padding:14px 15px;margin-bottom:10px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.search-result-card:active{background:#f9fafb}
+.result-section{font-size:0.72rem;color:var(--primary);font-weight:700;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:3px}
+.result-title{font-size:0.92rem;font-weight:600;color:var(--text)}
+.home-card:focus-visible,.symptom-card-header:focus-visible,.search-result-card:focus-visible,.nav-btn:focus-visible,.lang-btn:focus-visible,.back-btn:focus-visible,.textsize-btn:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+.mt-10{margin-top:10px}
+.mb-14{margin-bottom:14px}
+.text-danger{color:var(--danger)}
+.emerg-big-btn{display:flex;align-items:center;gap:12px;width:100%;background:var(--danger);color:white;border:none;border-radius:14px;padding:18px 16px;margin-bottom:12px;cursor:pointer;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.emerg-big-num{font-size:1.7rem;font-weight:800;line-height:1}
+.emerg-big-label{font-size:0.8rem;opacity:0.92;margin-top:2px}
+@media(max-width:360px){.card-label{font-size:0.76rem}.nav-btn{font-size:0.6rem}}
+</style>
+</head>
+<body>
+
+<div class="emergency-banner" id="emergency-banner">
+  Emergency? Call <a href="tel:137175">137-175</a> or go to the nearest health center.
+</div>
+
+<header class="app-header">
+  <div class="brand" onclick="goHome()" role="button" tabindex="0" aria-label="Go to Home" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goHome()}" style="cursor:pointer">
+    <div class="header-logo" aria-hidden="true"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 90'>
+  <text x='110' y='52' font-family='Arial, sans-serif' font-size='44' font-weight='800' text-anchor='middle'><tspan fill='#1e3a8a'>B</tspan><tspan fill='#14b8a6'>i</tspan><tspan fill='#16a34a'>D</tspan><tspan fill='#2563eb'>A</tspan></text>
+  <text x='110' y='76' font-family='Arial, sans-serif' font-size='16' font-weight='700' letter-spacing='4' fill='#1e3a8a' text-anchor='middle'>HEALTH</text>
+</svg></div>
+    <div>
+      <h1 class="sr-only">BIDA Health App</h1>
+      <p id="hdr-subtitle">Better Informed for Disease Awareness — Muntinlupa City</p>
+    </div>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-pressed="true">EN</button>
+    <button class="lang-btn" id="btn-fil" onclick="setLang('fil')" aria-pressed="false">FIL</button>
+  </div>
+</header>
+
+<div class="textsize-wrap">
+  <span class="textsize-label" id="textsize-label">Text Size</span>
+  <div class="textsize-seg" role="group" aria-label="Text size">
+    <button type="button" class="textsize-btn active" id="textsize-btn-normal" data-size="normal" onclick="setTextSize('normal')" aria-pressed="true" aria-label="Normal text size">A</button>
+    <button type="button" class="textsize-btn" id="textsize-btn-large" data-size="large" onclick="setTextSize('large')" aria-pressed="false" aria-label="Large text size">A</button>
+    <button type="button" class="textsize-btn" id="textsize-btn-xlarge" data-size="xlarge" onclick="setTextSize('xlarge')" aria-pressed="false" aria-label="Extra large text size">A</button>
+  </div>
+</div>
+
+<div class="search-wrap" id="search-wrap">
+  <div class="search-bar">
+    <span>🔍</span>
+    <input type="text" id="search-input" placeholder="Search symptom or topic…" aria-label="Search symptom or topic" oninput="handleSearch(this.value)" autocomplete="off">
+    <button class="search-clear" id="search-clear" onclick="clearSearch()">✕</button>
+  </div>
+</div>
+
+<main id="main-content">
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="content-wrap">
+    <div class="disclaimer" id="home-disclaimer">This app provides general health information and self-monitoring support only. It does not diagnose or replace a healthcare professional or emergency care.</div>
+    <div class="home-grid">
+      <button type="button" class="home-card danger-card" onclick="navigate('red-flags')">
+        <div class="card-icon">🚨</div><div class="card-label" id="lbl-rf">Red Flags</div>
+      </button>
+      <button type="button" class="home-card" onclick="navigate('hypertension')">
+        <div class="card-icon">🩺</div><div class="card-label" id="lbl-htn">Hypertension</div>
+      </button>
+      <button type="button" class="home-card" onclick="navigate('diabetes')">
+        <div class="card-icon">🩸</div><div class="card-label" id="lbl-dm">Diabetes</div>
+      </button>
+      <button type="button" class="home-card" onclick="navigate('dyslipidemia')">
+        <div class="card-icon">❤️</div><div class="card-label" id="lbl-dys">Cholesterol</div>
+      </button>
+      <button type="button" class="home-card" onclick="navigate('food')">
+        <div class="card-icon">🥗</div><div class="card-label" id="lbl-food">Food</div>
+      </button>
+      <button type="button" class="home-card danger-card" onclick="navigate('nearby')">
+        <div class="card-icon">🏥</div><div class="card-label" id="lbl-nearby">Nearby Care &amp; Emergency</div>
+      </button>
+    </div>
+    <div style="text-align:center;margin-top:14px">
+      <a href="javascript:void(0)" onclick="navigate('howto')" id="lbl-howto-link" style="font-size:0.85rem;color:var(--muted);text-decoration:underline">❓ How to Use This App</a>
+    </div>
+    <div style="text-align:center;margin-top:8px">
+      <a href="javascript:void(0)" onclick="navigate('disclaimer')" id="lbl-disclaimer-link" style="font-size:0.85rem;color:var(--muted);text-decoration:underline">Full Disclaimer, Privacy Notice &amp; Terms of Use</a>
+    </div>
+    <div style="text-align:center;margin-top:20px;padding-top:14px;border-top:1px solid var(--border)">
+      <div id="app-credits-line" style="font-size:0.76rem;color:var(--muted);line-height:1.5">An FEU-NRMF MPH Project by Catherine Perez, MD, Melanie Grace Cruz, MD, Ernalyn Pontrias, RMT, and Mary Joy Pereña, RND.</div>
+      <div style="font-size:0.76rem;color:var(--muted);margin-top:3px"><span id="app-inquiries-line">For inquiries and other matters, please email</span> <a href="mailto:melcruzmd.ent@gmail.com" style="color:var(--primary)">melcruzmd.ent@gmail.com</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH RESULTS -->
+<div class="page" id="page-search">
+  <div class="content-wrap" id="search-results-list"></div>
+</div>
+
+<!-- RED FLAGS -->
+<div class="page" id="page-red-flags">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
+      <span class="section-icon">🚨</span>
+      <h2 class="section-title" id="title-rf">Red Flags</h2>
+    </div>
+    <div id="red-flags-cards"></div>
+  </div>
+</div>
+
+<!-- HYPERTENSION -->
+<div class="page" id="page-hypertension">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
+      <span class="section-icon">🩺</span>
+      <h2 class="section-title" id="title-htn">Hypertension</h2>
+    </div>
+    <div id="hypertension-content"></div>
+  </div>
+</div>
+
+<!-- DIABETES -->
+<div class="page" id="page-diabetes">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
+      <span class="section-icon">🩸</span>
+      <h2 class="section-title" id="title-dm">Diabetes</h2>
+    </div>
+    <div id="diabetes-content"></div>
+  </div>
+</div>
+
+<!-- DYSLIPIDEMIA -->
+<div class="page" id="page-dyslipidemia">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
+      <span class="section-icon">❤️</span>
+      <h2 class="section-title" id="title-dys">Cholesterol (Dyslipidemia)</h2>
+    </div>
+    <div id="dyslipidemia-content"></div>
+  </div>
+</div>
+
+<!-- FOOD -->
+<div class="page" id="page-food">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
+      <span class="section-icon">🥗</span>
+      <h2 class="section-title" id="title-food">Food</h2>
+    </div>
+    <div id="food-content"></div>
+  </div>
+</div>
+
+<!-- BMI & WEIGHT (bottom nav — calculator + personal weight tracker together) -->
+<div class="page" id="page-bmi">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
+      <span class="section-icon">⚖️</span>
+      <h2 class="section-title" id="title-bmi">BMI &amp; Weight</h2>
+    </div>
+    <div id="bmicalc-content"></div>
+    <div id="bmi-content"></div>
+  </div>
+</div>
+
+<!-- MEDICATIONS (bottom nav — personal tracker) -->
+<div class="page" id="page-medications">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
+      <span class="section-icon">💊</span>
+      <h2 class="section-title" id="title-meds">Medicines at the Health Center</h2>
+    </div>
+    <div id="medications-content"></div>
+  </div>
+</div>
+
+<!-- LOGS -->
+<div class="page" id="page-logs">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
+      <span class="section-icon">📋</span>
+      <h2 class="section-title" id="title-logs">My Logs</h2>
+    </div>
+    <div id="logs-content"></div>
+  </div>
+</div>
+
+<!-- NEARBY & EMERGENCY -->
+<div class="page" id="page-nearby">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
+      <span class="section-icon">🏥</span>
+      <h2 class="section-title" id="title-nearby">Nearby Care &amp; Emergency Numbers</h2>
+    </div>
+    <div id="nearby-content"></div>
+  </div>
+</div>
+
+<!-- HOW TO USE -->
+<div class="page" id="page-howto">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
+      <span class="section-icon">❓</span>
+      <h2 class="section-title" id="title-howto">How to Use This App</h2>
+    </div>
+    <p id="howto-intro" style="font-size:0.87rem;color:var(--muted);margin-bottom:12px">Here's a quick guide to what this app can do and how to use it.</p>
+    <div class="info-card"><div class="info-card-title" id="howto1-title">🏠 Browse Health Topics</div><p id="howto1-body">From the Home screen, tap any card to read guidance on that topic. Tap the logo at the top anytime to return Home.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto2-title">🔍 Search</div><p id="howto2-body">Tap the search bar at the top and type a symptom or topic to jump straight to the relevant section.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto3-title">📋 My Logs</div><p id="howto3-body">Keep your own blood pressure and blood sugar readings, with date and time. Tap "View all" to see your full history.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto4-title">💊 My Medicine Tracker</div><p id="howto4-body">Use the personal checklist to record medicines you already take and monitor your intake using a routine familiar to you.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto5-title">⚖️ BMI &amp; Weight</div><p id="howto5-body">Calculate your BMI and track your weight over time with a simple graph.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto6-title">🌐 Switch Language</div><p id="howto6-body">Tap EN or FIL at the top right anytime to switch the app's language.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto7-title">🔒 Your Privacy</div><p id="howto7-body">Your records are stored only in this browser on this device and are not intentionally sent to BIDA Health. Anyone who can open this app on your device may be able to view them.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howto8-title">💾 Back Up Your Data</div><p id="howto8-body">On the My Logs page, tap "Download Backup" to save a copy of everything as one file.</p></div>
+    <div class="info-card"><div class="info-card-title" id="howtoRefs-title">📚 References &amp; Sources</div>
+      <p id="howtoRefs-intro">The food guidance and plate images in this app are based on:</p>
+      <ul class="checklist" id="howtoRefs-list"></ul>
+      <p id="howtoRefs-note" style="font-size:0.78rem;color:var(--muted);margin-top:6px"></p>
+    </div>
+  </div>
+</div>
+
+<!-- DISCLAIMER / PRIVACY / TERMS -->
+<div class="page" id="page-disclaimer">
+  <div class="content-wrap">
+    <div class="section-header">
+      <button class="back-btn" onclick="goHome()" aria-label="Back to Home">&#8249;</button>
+      <span class="section-icon">⚖️</span>
+      <h2 class="section-title" id="title-disclaimer">Full Disclaimer, Privacy Notice &amp; Terms of Use</h2>
+    </div>
+    <div id="disclaimer-content"></div>
+  </div>
+</div>
+
+</main>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" aria-label="Primary navigation">
+  <button class="nav-btn active" id="nav-home" onclick="navigate('home')" aria-current="page">
+    <span class="nav-icon">🏠</span><span id="nav-lbl-home">Home</span>
+  </button>
+  <button class="nav-btn" id="nav-logs" onclick="navigate('logs')">
+    <span class="nav-icon">📋</span><span id="nav-lbl-logs">My Logs</span>
+  </button>
+  <button class="nav-btn" id="nav-medications" onclick="navigate('medications')">
+    <span class="nav-icon">💊</span><span id="nav-lbl-meds">Medicines</span>
+  </button>
+  <button class="nav-btn" id="nav-bmi" onclick="navigate('bmi')">
+    <span class="nav-icon">⚖️</span><span id="nav-lbl-bmi">BMI &amp; Weight</span>
+  </button>
+</nav>
+
+<script>
+// ══════════════════════════════════════════════════════════════════════════════
+// BIDA HEALTH APP — Better Informed for Disease Awareness
+// Muntinlupa City Health Office | NCD Phase 1 Pilot
+// Bilingual (English/Filipino) | Browser-local logs | No app-level analytics endpoint
+// ══════════════════════════════════════════════════════════════════════════════
+
+// ── i18n ──────────────────────────────────────────────────────────────────────
+const T = {
+  en: {
+    subtitle:'Better Informed for Disease Awareness — Muntinlupa City',
+    textSizeLabel:'Text Size',
+    banner:'Emergency? Call <a href="tel:137175">137-175</a> or go to the emergency department of the nearest hospital.',
+    search:'Search symptom or topic…',
+    disclaimer:'This app provides general health information and self-monitoring support only. It does not diagnose or replace a healthcare professional or emergency care.',
+    disclaimerLink:'Full Disclaimer, Privacy Notice & Terms of Use',
+    disclaimerTitle:'Full Disclaimer, Privacy Notice & Terms of Use',
+    disclaimerIntro:'Please read this page before using BIDA Health.',
+    disclaimerPurposeTitle:'Purpose and scope',
+    disclaimerPurposeBody:'BIDA Health is intended only for general health education and personal self-monitoring support for non-communicable diseases. It is not a clinic, telemedicine service, diagnostic tool, or prescribing system.',
+    disclaimerNoDiagnosisTitle:'No diagnosis or treatment',
+    disclaimerNoDiagnosisBody:'The app does not diagnose, confirm, rule out, or monitor a medical condition for clinical decision-making. It does not provide individualized medical advice, treatment, prescriptions, or medication instructions. Do not start, stop, or change a medicine, diet, exercise plan, or other treatment based only on this app.',
+    disclaimerResultsTitle:'Readings and results',
+    disclaimerResultsBody:'Blood pressure, blood sugar, BMI, weight, and other results are general calculations or reference interpretations only. A single reading may be inaccurate or may not reflect your health. Discuss results with a qualified healthcare professional before making health-related decisions.',
+    disclaimerEmergencyTitle:'Emergency care',
+    disclaimerEmergencyBody:'Do not use this app for emergency decisions or delay care while reading it. For severe or sudden symptoms, call 137-175 or go to the nearest emergency department. Contact numbers and facility details can change; confirm them when it is safe to do so.',
+    disclaimerProfessionalTitle:'Professional care',
+    disclaimerProfessionalBody:'This app does not create a doctor-patient relationship and is not a substitute for assessment by a doctor, nurse, pharmacist, nutritionist, or health center.',
+    disclaimerPrivacyTitle:'Privacy notice',
+    disclaimerPrivacyBody:'The app does not require registration and does not ask for your name or contact details. Health logs are stored in this browser on this device and are not intentionally sent to BIDA Health, the project team, or the Muntinlupa City Health Office. Anyone who can access this device or browser may be able to view them. Downloaded backups and printed logs may contain health information and should be protected. Clearing browser data, resetting the device, or changing devices may delete your records. The app itself does not use an analytics endpoint, but ordinary technical connection information may still be processed by the hosting or internet provider according to its policies.',
+    disclaimerTermsTitle:'Terms of use',
+    disclaimerTermsBody:'Use BIDA Health voluntarily and for general education or personal self-monitoring. The app content, calculations, contact numbers, and facility information may be incomplete, change over time, or contain errors. Report outdated or incorrect information to the project contact shown on the home page. Do not use the app as the sole basis for an emergency or treatment decision.',
+    disclaimerOwnershipTitle:'Ownership and permitted use',
+    disclaimerOwnershipBody:'Accessing this website does not transfer its source code, copyright, graphics, content, or other rights. Ownership of original project materials remains subject to applicable FEU-NRMF policies and written agreements among the creators. Do not copy, modify, redistribute, or present the app or its original materials as your own without permission. Third-party names, materials, and trademarks remain the property of their respective owners.',
+    disclaimerStatusTitle:'Project status',
+    disclaimerStatusBody:'BIDA Health was developed as an FEU-NRMF MPH student project. Unless separately authorized in writing, it is not an official service, endorsement, or clinical system of the Muntinlupa City Government or the Muntinlupa City Health Office.',
+    disclaimerMaintenanceTitle:'Content review',
+    disclaimerMaintenanceBody:'Health information, medicine information, emergency numbers, and health-center details require periodic review. Always confirm current information with a qualified healthcare professional or the relevant health center.',
+    disclaimerAcknowledge:'By using this app, you acknowledge these limitations and agree to use it only for the purposes described above.',
+    navHome:'Home', navLogs:'My Logs',
+    lblRF:'Red Flags', lblHTN:'Hypertension', lblDM:'Diabetes', lblDys:'Cholesterol',
+    lblFood:'Food', lblMeds:'Medicines', lblLogs:'My Logs', lblNearby:'Nearby Care &amp; Emergency',
+    titleRF:'Red Flags', titleHTN:'Hypertension', titleDM:'Diabetes', titleDys:'Cholesterol (Dyslipidemia)',
+    titleFood:'Food', titleBMI:'BMI &amp; Weight', titleMeds:'My Medicine Tracker', titleLogs:'My Logs', titleNearby:'Nearby Care &amp; Emergency Numbers',
+    howtoLinkLabel:'How to Use This App',
+    howtoIntro:'Here\'s a quick guide to what this app can do and how to use it.',
+    howto1Title:'🏠 Browse Health Topics', howto1Body:'From the Home screen, tap any card — Red Flags, Hypertension, Diabetes, Cholesterol, Food, or Nearby Care & Emergency — to read guidance on that topic. Tap the logo at the top anytime to return Home.',
+    howto2Title:'🔍 Search', howto2Body:'Tap the search bar at the top and type a symptom or topic, like "chest pain" or "BMI", to jump straight to the relevant section.',
+    howto3Title:'📋 My Logs', howto3Body:'Keep your own blood pressure and blood sugar readings here — with date and time. The list shows your last 5 readings; tap "View all" to see more. You\'ll get a reminder to back up your data every 15 entries.',
+    howto4Title:'💊 My Medicine Tracker', howto4Body:'Use the personal checklist to record medicines you already take and monitor your intake using a routine familiar to you.',
+    howto5Title:'⚖️ BMI & Weight', howto5Body:'Calculate your BMI and get simple food advice based on the result. Track your weight over time and see it as a graph.',
+    howto6Title:'🌐 Switch Language', howto6Body:'Tap EN or FIL at the top right anytime to switch the app\'s language.',
+    howto7Title:'🔒 Your Privacy', howto7Body:'Your records are stored only in this browser on this device and are not intentionally sent to BIDA Health. Anyone who can open this app on your device may be able to view them. Read the full Privacy Notice for more information.',
+    howto8Title:'💾 Back Up Your Data', howto8Body:'On the My Logs page, tap "Download Backup" to save a copy of everything (medicines, BP, sugar, weight) as one file — useful before clearing your browser, switching phones, or reinstalling. Use "Restore from Backup File" to bring it back.',
+    howtoRefsTitle:'📚 References & Sources', howtoRefsIntro:'The food guidance and plate images in this app are based on:',
+    howtoRefsList:['Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Adults (19–59 years old)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Older Persons (60 years old and above)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Pregnant and Lactating Women (© 2016)'],
+    howtoRefsNote:'Pinggang Pinoy® is a registered trademark of FNRI-DOST, used here for educational purposes. Visit fnri.dost.gov.ph for the original materials.',
+    inquiriesLabel:'For inquiries and other matters, please email',
+    logsDataNote:'These entries are stored only in this browser on this device and are not intentionally sent to BIDA Health. Anyone who can open this app on your device may be able to view them. They may be deleted if you clear the browser\'s site data, uninstall or reset the app, or switch devices. Use Backup or Print if you need a copy.',
+    logsClinicalNote:'These logs are for personal reference and discussion with a healthcare professional. Flags and readings are not diagnoses and should not be used as the sole basis for treatment decisions.',
+    backupTitle:'Backup & Restore', backupSub:'Save a copy of all your logs (medicines, blood pressure, blood sugar, and weight) as one file, so you don\'t lose them if you clear your browser, switch phones, or reinstall the app.',
+    backupBtn:'Download Backup', restoreBtn:'Restore from Backup File', backupNow:'Back up now',
+    restoreConfirm:'This will replace all your current logs with the ones in this backup file. This cannot be undone. Continue?',
+    restoreSuccess:'Backup restored successfully.', restoreError:'This doesn\'t look like a valid BIDA Health backup file.',
+    bpViewAll:'View all {count} readings', bpShowLess:'Show only the last 5',
+    bpBackupReminder:'You have {count} blood pressure readings saved. It\'s a good time to back up your data.',
+    sugarViewAll:'View all {count} readings', sugarShowLess:'Show only the last 5',
+    sugarBackupReminder:'You have {count} blood sugar readings saved. It\'s a good time to back up your data.',
+    weightViewAll:'View all {count} entries', weightShowLess:'Show only the last 5',
+    weightBackupReminder:'You have {count} weight entries saved. It\'s a good time to back up your data.',
+    goNow:'⚠ Seek care now', callNow:'⚠ Emergency? Call 137-175',
+    noResults:'No results found. Try a different keyword.',
+    verify:'⚠ VERIFY BEFORE USE',
+    bmiBtn:'Calculate BMI', bmiAge:'Age (years)', bmiH:'Height', bmiW:'Weight',
+    bmiUnitCm:'cm', bmiUnitIn:'inches', bmiUnitFt:'ft + in', bmiUnitKg:'kg', bmiUnitLbs:'lbs',
+    bmiFtLabel:'ft', bmiInLabel:'in (extra)',
+    bmiDisclaimer:'Asia-Pacific BMI cutoffs are used — these are lower than standard WHO values and more appropriate for Filipino adults. BMI is a screening guide only and does not diagnose your health status. For those under 18, consult a health center, doctor, or nutritionist.',
+    bmiResultNote:'The Asia-Pacific BMI cutoffs were used. Any weight difference shown is an approximate screening estimate, not a diagnosis or a personal weight-loss or weight-gain target. Please discuss the result with a doctor or nutritionist before making changes to your diet, activity, or weight.',
+    bmiUnder:'Underweight', bmiNormal:'Normal weight', bmiOver:'Overweight', bmiObese1:'Obese Class I', bmiObese2:'Obesity Class II',
+    bmiRanges:'Asia-Pacific BMI Ranges', bmiCatCol:'Category', bmiRangeCol:'BMI Range',
+    bmiTeen:'For those under 18: adult BMI categories do not apply. Please consult a health center, doctor, or nutritionist for a proper weight-for-age assessment.',
+    bmiInvalid:'Please enter valid age, height, and weight.',
+    bmiAboveNorm:'above the healthy weight range', bmiBelowNorm:'below the healthy weight range',
+    bmiWeightOver:'Based on the Asia-Pacific BMI guideline, your weight is approximately {kg} kg above the upper end of the healthy BMI range for your height.',
+    bmiWeightUnder:'Based on the Asia-Pacific BMI guideline, your weight is approximately {kg} kg below the lower end of the healthy BMI range for your height.',
+    bmiRecUnder:'Eat more protein-rich and calorie-dense foods, such as eggs, fish, chicken, legumes (monggo, patani), and dairy. Aim for regular, balanced meals. Consider seeing a nutritionist or doctor.',
+    bmiRecNormal:'Great! Maintain your healthy lifestyle. Keep eating balanced meals with plenty of vegetables and lean protein, and stay physically active.',
+    bmiRecOver:'Try reducing refined carbohydrates and sweet drinks. Eat more vegetables and lean protein, and limit processed and salty foods. Walking at least 30 minutes most days helps. Consult a doctor or nutritionist for a personalized plan.',
+    bmiRecObese1:'Lifestyle changes are important. Reduce processed foods and foods high in calories, salt, or added sugar. Increase physical activity gradually and discuss a suitable plan with a doctor or nutritionist.',
+    bmiRecObese2:'Discuss your result with a doctor or nutritionist for an individualized assessment. Avoid crash diets or rapid weight-loss plans without professional guidance.',
+    signsSym:'Signs / Symptoms', dangerSigns:'⚠ Danger signs — seek urgent care:',
+    whatToDo:'What to do', catEm:'Emergency', catHC:'Health Centers', catHosp:'Hospitals',
+    nearbyVerify:'Contact numbers below were verified against official Muntinlupa City Government sources. Numbers can still change — please confirm before an urgent visit.',
+    plateTitle:'Pinggang Pinoy — Balanced Plate Guide',
+    plateNote:'Based on the official FNRI-DOST Pinggang Pinoy food guides. Choose who the plate is for, then Male/Female (or Pregnant/Lactating) for the exact portions that apply to you.',
+    plateSelectLabel:'Choose who this is for',
+    plateWaterLabel:'Water', plateMilkLabel:'Milk', plateKcalLabel:'Daily Calories',
+    plateTipsTitle:'Health Tips',
+    plateMealTitle:'Sample One-Day Meal', plateMealBreakfast:'Breakfast', plateMealLunch:'Lunch', plateMealDinner:'Dinner', plateMealAM:'A.M. Snack', plateMealPM:'P.M. Snack',
+    plateSourceNote:'Source: FNRI-DOST Pinggang Pinoy — see the "How to Use This App" page for full citation.',
+    mealsTitle:'Budget-Friendly, Heart-Healthy Meals',
+    tipsTitle:'Simple Food Reminders',
+    bmiTitle:'BMI Calculator (Adults)',
+    // Hypertension
+    htnIntro:'Understanding hypertension helps you manage it day to day. Here is what it is, why it matters, and what you can do.',
+    htnWhatTitle:'What Is Hypertension?', htnWhatBody:'Blood pressure is the force of blood pushing against your artery walls. It is written as two numbers, for example 120/80: the top number (systolic) is the pressure when your heart beats, and the bottom number (diastolic) is the pressure when your heart rests between beats. Hypertension means your blood pressure stays higher than normal over time.',
+    htnWhyTitle:'Why It Matters', htnWhyBody:'High blood pressure usually has no symptoms, which is why it is called a "silent" condition. Over months or years, uncontrolled hypertension slowly damages your blood vessels, heart, kidneys, and eyes. This raises your risk of stroke, heart attack, heart failure, and kidney disease, often without warning until a complication happens.',
+    htnRiskTitle:'Who Is at Higher Risk', htnRiskBody:'Your risk of hypertension is higher if you have a family history of high blood pressure, are older, eat a high-salt diet, are overweight, are not physically active, drink alcohol regularly, smoke, or experience ongoing stress. Many of these factors can be improved with lifestyle changes, even if family history cannot be changed.',
+    htnNumbersTitle:'Know Your Numbers', htnNumbersBody:'Have your blood pressure checked regularly at the health center. If you monitor at home, sit quietly for 5 minutes before measuring, keep your arm supported at heart level, avoid caffeine, exercise, or smoking for 30 minutes before checking, and take two readings a few minutes apart. Regular monitoring is the only way to know if your hypertension is controlled, since it usually causes no symptoms.',
+    htnDietTitle:'Eating for Healthy Blood Pressure', htnDietBody:'Reduce salty foods such as processed meats, instant noodles, canned goods, and extra patis or toyo. Choose fresh fruits and vegetables, especially those rich in potassium like banana and leafy greens, which help balance sodium in the body. Read food labels when available and choose lower-sodium options. Cooking at home with fresh ingredients gives you more control over salt than eating out or buying processed food.',
+    htnActivityTitle:'Staying Active', htnActivityBody:'Regular physical activity helps lower and control blood pressure. Aim for at least 30 minutes of moderate activity, such as brisk walking, most days of the week. If you are not used to exercise, start slowly and build up gradually. Simple activities like walking to the market, taking the stairs, or light household chores also count. Ask your doctor before starting a new exercise routine if you have other health conditions.',
+    htnStressTitle:'Managing Stress', htnStressBody:'Ongoing stress can raise blood pressure and make it harder to manage. Simple habits that may help include getting enough sleep, talking to family or friends about what is bothering you, taking short breaks during a busy day, and practicing slow, deep breathing when feeling overwhelmed. If stress feels difficult to manage on your own, it is okay to ask your health worker for support.',
+    htnUrgentTitle:'When to Seek Urgent Care', htnUrgentBody:'A BP reading above 180/120 is very high. This is not a diagnosis. Seek urgent medical advice, especially if you have chest pain, difficulty breathing, weakness or numbness, vision changes, confusion, or trouble speaking. Call 137-175 for severe or sudden symptoms.',
+    // Diabetes
+    dmIntro:'Understanding diabetes helps you manage it day to day, not just when you visit the doctor. Here is what it is, why it matters, and what you can do.',
+    dmWhatTitle:'What Is Diabetes?', dmWhatBody:'Diabetes means your blood sugar (glucose) stays higher than normal because your body does not make enough insulin or cannot use it well. Insulin is a hormone that helps move sugar from your blood into your cells for energy. Most adults with diabetes have Type 2, which is often linked to lifestyle and can be managed with healthy eating, activity, and care from a health professional.',
+    dmWhyTitle:'Why It Matters', dmWhyBody:'Uncontrolled diabetes over time can damage blood vessels and nerves throughout the body. This raises the risk of heart disease, stroke, kidney disease, vision loss, and nerve damage, especially in the feet. Good blood sugar control significantly lowers these risks, which is why consistent management matters even when you feel fine.',
+    dmRiskTitle:'Who Is at Higher Risk', dmRiskBody:'Your risk of Type 2 diabetes is higher if you have a family history of diabetes, are overweight, are not physically active, are older, or have high blood pressure or high cholesterol. Having hypertension, diabetes, and high cholesterol together is common, and each condition can make the others harder to manage, so treating them together matters.',
+    dmNumbersTitle:'Know Your Numbers', dmNumbersBody:'Follow up on blood sugar testing at the health center or with your doctor as advised. If you test at home, ask what target range is right for you. Record whether the reading was fasting, 2 hours after eating, or random, because these are different measurements.',
+    dmFootTitle:'Foot Care', dmFootBody:'Check your feet every day for cuts, blisters, redness, or sores, since diabetes can reduce feeling in the feet, making injuries easy to miss. Wash and dry your feet daily, especially between the toes, and moisturize dry skin (but not between the toes). Do not walk barefoot, even at home. Trim toenails straight across. See a health worker right away for any wound that is not healing, since foot injuries can worsen quickly in diabetes.',
+    dmDietTitle:'Eating for Blood Sugar Control', dmDietBody:'Eat regular, balanced meals rather than skipping meals, which can cause blood sugar swings. Be mindful of carbohydrate portions (rice, bread, root crops) and pair them with protein and vegetables to slow sugar absorption. Reduce sugary foods, drinks, and desserts. Choose whole fruit over fruit juice. Eating at consistent times each day also helps keep blood sugar more stable.',
+    dmActivityTitle:'Staying Active', dmActivityBody:'Physical activity helps your body use insulin better and can lower blood sugar. Aim for regular activity most days, such as walking. If you have other health conditions or concerns about starting activity, ask a health professional for advice. Check your feet after activity, especially if wearing new shoes.',
+    dmUrgentTitle:'When to Seek Urgent Care', dmUrgentBody:'This is an emergency if you have repeated vomiting and can\'t keep down fluids, severe weakness or confusion, difficulty waking up or not responding normally, a very dry mouth, or sudden shaking with cold sweat. See the Red Flags section and seek care immediately.',
+    // Dyslipidemia (Cholesterol)
+    dysIntro:'Understanding cholesterol helps explain why lifestyle changes matter, even without symptoms.',
+    dysWhatTitle:'What Is Cholesterol?', dysWhatBody:'Cholesterol is a fat-like substance your body needs in small amounts, but too much of certain types can be harmful. LDL ("bad" cholesterol) can build up in your blood vessels, while HDL ("good" cholesterol) helps remove it. Triglycerides are another type of blood fat that, when high, also raise health risks. Dyslipidemia means these levels are not at a healthy balance.',
+    dysWhyTitle:'Why It Matters', dysWhyBody:'High cholesterol contributes to the buildup of fatty deposits in blood vessels over time, a process called atherosclerosis. This narrows and stiffens the arteries, increasing risk of heart attack and stroke, especially when combined with hypertension or diabetes. Managing all three conditions together, if you have more than one, gives the best protection for your heart and blood vessels.',
+    dysRiskTitle:'Who Is at Higher Risk', dysRiskBody:'Your risk of dyslipidemia is higher if you have a diet high in fried and fatty foods, are overweight, are not physically active, smoke, drink alcohol regularly, or have a family history of high cholesterol or early heart disease. Having diabetes or hypertension also raises your risk of dyslipidemia.',
+    dysNumbersTitle:'Know Your Numbers', dysNumbersBody:'Ask your health center about lipid (cholesterol) testing, especially if you have hypertension, diabetes, or a family history of heart disease. This is usually a simple blood test that your doctor can help interpret.',
+    dysDietTitle:'Eating for Healthy Cholesterol', dysDietBody:'Reduce fried, fatty, and processed foods, including lechon, crispy pata, and processed meats. Choose fish, skinless chicken, and plant-based protein (beans, monggo, tokwa) more often than red meat. When cooking with oil, use less overall, and choose healthier oils — canola, corn, sunflower, safflower, or olive oil — instead of coconut oil, palm oil, lard (mantika ng baboy), butter, or margarine, which are higher in saturated fat. Canola and corn oil are usually the most affordable healthier options at local groceries. Eat more vegetables, fruits, and high-fiber foods like oats and legumes, which can help lower cholesterol.',
+    dysActivityTitle:'Staying Active', dysActivityBody:'Regular physical activity can help raise your "good" HDL cholesterol and lower triglycerides. Aim for at least 30 minutes of activity, such as brisk walking, most days of the week. Combined with a healthier diet, staying active supports heart and blood-vessel health.',
+    emergMainLabel:'Main Emergency Hotline (24/7)',
+    emergOtherTitle:'Other Ways to Reach Emergency Response',
+    emergAppNote:'Muntinlupa City also offers the iRESPOND Muntinlupa mobile app for reporting emergencies (disaster, police, fire, ambulance). Available on Google Play and the App Store.',
+    medTrackerTitle:'My Medicine Tracker', medTrackerSub:'Use this personal checklist to record your own medicine intake. The record stays in this browser on this device and is not intentionally sent to BIDA Health.',
+    medTrackerNotice:'This tracker is only a personal reminder. It does not tell you which medicine to take, how much to take, or when to take it. Follow your prescription or medicine label, and continue using any reminder or monitoring method that is familiar and reliable for you. Any note you add is your own personal note, not verified medical advice. Ask your doctor or health worker if you are unsure.',
+    medTrackerEmpty:'You haven\'t added any medicines to track yet.', medAdd:'Add', medAllAdded:'All listed medicines have been added to your tracker.',
+    medOtherLabel:'Taking something not on this list? Add it here:', medOtherPlaceholder:'Type the medicine name',
+    medNoteLabel:'Personal note (optional)', medNotePlaceholder:'e.g., what you use it for (your own note)',
+    medPrintBtn:'Print My Checklist', medReminderBanner:'You haven\'t marked {meds} as taken today yet.',
+    medCongratsTitle:'🎉 Great job!', medCongratsBody:'You marked all scheduled doses in this tracker for the week. Keep following the instructions on your prescription.',
+    medResetBtn:'Reset for a New Week', medResetConfirm:'This will clear your medicine check-ins so you can start fresh. Your tracked medicines and tracker settings will stay the same. This cannot be undone. Continue?',
+    thisWeek:'This week', streakLabel:'Streak', dosesUnit:'doses', dayUnit:'day', daysUnit:'days',
+    timesPerDayLabel:'Times per day (your own routine)', doseAM:'Dose 1', doseNoon:'Dose 2', dosePM:'Dose 3',
+    bpLogTitle:'My Blood Pressure Log', bpLogSub:'Keep track of your home blood pressure readings for discussion with your doctor. Stored only on this device. These readings are not diagnoses.',
+    bpSysPlaceholder:'Systolic (e.g. 130)', bpDiaPlaceholder:'Diastolic (e.g. 85)', bpLogPrintBtn:'Print My BP Log',
+    flagWarn:'High', flagDanger:'Very High — Act Now', flagLowDanger:'Low — Act Now',
+    bpCrisisAdvice:'This flag is not a diagnosis. A reading above 180/120 is very high. Seek urgent medical advice. Call 137-175 for severe or sudden symptoms, including chest pain, difficulty breathing, weakness or numbness, vision changes, confusion, or trouble speaking.',
+    sugarLowAdvice:'This flag is not a diagnosis. A low blood-sugar reading is a warning that requires prompt medical advice. Contact a doctor or health worker.',
+    sugarLowEmergency:'If the person is unconscious, having a seizure, very confused, or unable to swallow, call 137-175 or seek emergency help immediately.',
+    sugarLogTitle:'My Blood Sugar Log', sugarLogSub:'Keep track of your home blood sugar readings for discussion with your doctor. Stored only on this device. These readings are not diagnoses.',
+    sugarValPlaceholder:'Reading (mg/dL)', sugarFasting:'Fasting', sugarPostMeal:'2 hours after eating', sugarRandom:'Random / any time', sugarLogPrintBtn:'Print My Sugar Log',
+    logAdd:'+ Add', logNoEntries:'No entries yet.', logInvalid:'Please enter a valid reading.',
+    weightLogTitle:'My Weight Log', weightLogSub:'Record your weight here to show and discuss with your doctor or nutritionist. It is stored only in this browser on this device.',
+    weightValPlaceholder:'Weight', weightLogPrintBtn:'Print My Weight Log', weightChartEmpty:'Add at least 2 entries to see your weight graph.',
+    safeWeightNote:'Weight goals should be individualized. Discuss rapid or unexpected weight change with a doctor or nutritionist.',
+  },
+  fil: {
+    subtitle:'Better Informed for Disease Awareness — Lungsod ng Muntinlupa',
+    textSizeLabel:'Sukat ng Teksto',
+    banner:'Emergency? Tumawag sa <a href="tel:137175">137-175</a> o pumunta agad sa emergency room ng pinakamalapit na ospital.',
+    search:'Hanapin ang sintomas o paksa…',
+    disclaimer:'Pangkalahatang impormasyon sa kalusugan at pansariling pagsubaybay lamang ang app na ito. Hindi ito nagbibigay ng diagnosis at hindi nito mapapalitan ang health professional o emergency care.',
+    disclaimerLink:'Buong Disclaimer, Privacy Notice at Terms of Use',
+    disclaimerTitle:'Buong Disclaimer, Privacy Notice at Terms of Use',
+    disclaimerIntro:'Basahin ang pahinang ito bago gamitin ang BIDA Health.',
+    disclaimerPurposeTitle:'Layunin at saklaw',
+    disclaimerPurposeBody:'Ang BIDA Health ay para lamang sa pangkalahatang edukasyon sa kalusugan at pansariling pagsubaybay kaugnay ng mga non-communicable disease (NCD). Hindi ito klinika, telemedicine service, diagnostic tool, o sistema ng pagrereseta.',
+    disclaimerNoDiagnosisTitle:'Hindi ito diagnosis o gamutan',
+    disclaimerNoDiagnosisBody:'Hindi sinusuri, kinukumpirma, inaalis, o sinusubaybayan ng app ang isang sakit para gamitin sa clinical decision-making. Hindi ito nagbibigay ng personal na payong medikal, gamutan, reseta, o tagubilin sa pag-inom ng gamot. Huwag magsimula, tumigil, o magpalit ng gamot, diyeta, ehersisyo, o iba pang gamutan batay lamang sa app na ito.',
+    disclaimerResultsTitle:'Mga reading at resulta',
+    disclaimerResultsBody:'Ang blood pressure, blood sugar, BMI, timbang, at iba pang resulta ay pangkalahatang kalkulasyon o reference interpretation lamang. Maaaring hindi tumpak ang isang reading o maaaring hindi nito maipakita ang tunay na kalagayan ng iyong kalusugan. Ipakita at pag-usapan ang mga resulta sa isang kwalipikadong health professional bago gumawa ng desisyong may kaugnayan sa kalusugan.',
+    disclaimerEmergencyTitle:'Pang-emergency na pangangalaga',
+    disclaimerEmergencyBody:'Huwag gamitin ang app na ito para magpasya sa emergency at huwag ipagpaliban ang pagpapagamot habang binabasa ito. Para sa malubha o biglaang sintomas, tumawag sa 137-175 o pumunta sa pinakamalapit na emergency department. Maaaring magbago ang mga numero at detalye ng pasilidad; kumpirmahin ang mga ito kung ligtas na gawin.',
+    disclaimerProfessionalTitle:'Kumonsulta sa health professional',
+    disclaimerProfessionalBody:'Hindi lumilikha ang app na ito ng doctor-patient relationship at hindi nito mapapalitan ang pagsusuri ng doktor, nurse, pharmacist, nutritionist, o health center.',
+    disclaimerPrivacyTitle:'Privacy notice',
+    disclaimerPrivacyBody:'Hindi kailangan ng registration at hindi hinihingi ng app ang iyong pangalan o contact details. Ang health logs ay naka-save lamang sa browser ng device na ito at hindi sadyang ipinapadala sa BIDA Health, sa project team, o sa Muntinlupa City Health Office. Maaaring makita ang mga ito ng sinumang may access sa device o browser. Maaaring may health information ang mga na-download na backup at printed logs kaya dapat itong ingatan. Maaaring mabura ang iyong records kapag na-clear ang browser data, na-reset ang device, o lumipat ng device. Walang analytics endpoint ang app mismo, ngunit maaaring iproseso ng hosting o internet provider ang karaniwang technical connection information ayon sa kanilang mga patakaran.',
+    disclaimerTermsTitle:'Terms of use',
+    disclaimerTermsBody:'Gamitin ang BIDA Health nang kusang-loob at para lamang sa pangkalahatang edukasyon o pansariling pagsubaybay. Maaaring kulang, magbago, o magkaroon ng error ang content, kalkulasyon, mga numero ng contact, at detalye ng pasilidad. I-report ang luma o maling impormasyon sa project contact na nasa home page. Huwag gamitin ang app bilang tanging batayan ng desisyon sa emergency o gamutan.',
+    disclaimerOwnershipTitle:'Pagmamay-ari at pinahihintulutang paggamit',
+    disclaimerOwnershipBody:'Ang pag-access sa website na ito ay hindi naglilipat ng source code, copyright, graphics, content, o iba pang karapatan. Ang pagmamay-ari ng mga orihinal na project materials ay nakabatay sa naaangkop na mga patakaran ng FEU-NRMF at sa mga nakasulat na kasunduan ng mga gumawa nito. Huwag kopyahin, baguhin, ipamahagi muli, o ipakitang ikaw ang gumawa ng app o ng mga orihinal na materyales nito nang walang pahintulot. Ang mga pangalan, materyales, at trademark ng ibang partido ay pagmamay-ari ng kani-kanilang may-ari.',
+    disclaimerStatusTitle:'Kalagayan ng proyekto',
+    disclaimerStatusBody:'Ang BIDA Health ay ginawa bilang isang FEU-NRMF MPH student project. Maliban kung may hiwalay na nakasulat na pahintulot, hindi ito opisyal na serbisyo, endorsement, o clinical system ng Muntinlupa City Government o ng Muntinlupa City Health Office.',
+    disclaimerMaintenanceTitle:'Pagsusuri at pag-update ng content',
+    disclaimerMaintenanceBody:'Kailangang regular na suriin ang health information, medicine information, emergency numbers, at mga detalye ng health center. Palaging kumpirmahin ang kasalukuyang impormasyon sa isang kwalipikadong health professional o sa kaugnay na health center.',
+    disclaimerAcknowledge:'Sa paggamit ng app na ito, kinikilala mo ang mga limitasyong ito at sumasang-ayon kang gamitin ito para lamang sa mga layuning nakasaad sa itaas.',
+    navHome:'Home', navLogs:'Aking Logs',
+    lblRF:'Mga Babala', lblHTN:'Altapresyon', lblDM:'Diyabetis', lblDys:'Kolesterol',
+    lblFood:'Pagkain', lblMeds:'Mga Gamot', lblLogs:'Aking Logs', lblNearby:'Malapit na Tulong at Emergency',
+    titleRF:'Mga Babala', titleHTN:'Altapresyon (Hypertension)', titleDM:'Diyabetis', titleDys:'Kolesterol (Dyslipidemia)',
+    titleFood:'Pagkain', titleBMI:'BMI at Timbang', titleMeds:'Aking Medicine Tracker', titleLogs:'Aking Logs', titleNearby:'Malapit na Tulong at Mga Numero sa Emergency',
+    howtoLinkLabel:'Paano Gamitin ang App na Ito',
+    howtoIntro:'Narito ang maikling gabay kung ano ang kaya ng app na ito at paano ito gamitin.',
+    howto1Title:'🏠 Tingnan ang mga Paksa sa Kalusugan', howto1Body:'Mula sa Home screen, pindutin ang alinmang card — Mga Babala, Altapresyon, Diyabetis, Kolesterol, Pagkain, o Malapit na Tulong at Emergency — para basahin ang gabay sa paksang iyon. Pindutin ang logo sa itaas kahit kailan para bumalik sa Home.',
+    howto2Title:'🔍 Paghahanap', howto2Body:'Pindutin ang search bar sa itaas at i-type ang sintomas o paksa, tulad ng "sakit ng dibdib" o "BMI", para direktang mapunta sa may kaugnayang seksyon.',
+    howto3Title:'📋 Aking Logs', howto3Body:'Itala dito ang sarili mong presyon ng dugo at blood sugar — kasama ang petsa at oras. Makikita sa listahan ang huling 5 reading mo; pindutin ang "Tingnan Lahat" para makita pa ang iba. May paalala na mag-backup ng data tuwing 15 entry.',
+    howto4Title:'💊 Aking Medicine Tracker', howto4Body:'Gamitin ang pansariling checklist para itala ang mga gamot na iniinom mo na at subaybayan ang pag-inom gamit ang pamilyar mong paraan.',
+    howto5Title:'⚖️ BMI at Timbang', howto5Body:'Kalkulahin ang iyong BMI at makakuha ng simpleng payo sa pagkain base sa resulta. Subaybayan ang iyong timbang sa paglipas ng panahon at makita ito bilang graph.',
+    howto6Title:'🌐 Palitan ang Wika', howto6Body:'Pindutin ang EN o FIL sa kanang itaas kahit kailan para palitan ang wika ng app.',
+    howto7Title:'🔒 Ang Iyong Privacy', howto7Body:'Sa browser ng device na ito lamang naka-save ang iyong mga record at hindi ito sadyang ipinapadala sa BIDA Health. Maaaring makita ito ng sinumang makapagbubukas ng app sa iyong device. Basahin ang buong Privacy Notice para sa karagdagang impormasyon.',
+    howto8Title:'💾 I-backup ang Iyong Data', howto8Body:'Sa My Logs page, pindutin ang "I-download ang Backup" para i-save ang kopya ng lahat (gamot, BP, sugar, timbang) bilang isang file — mainam bago i-clear ang browser, lumipat ng telepono, o i-reinstall ang app. Gamitin ang "I-restore mula sa Backup File" para maibalik ito.',
+    howtoRefsTitle:'📚 Mga Sanggunian', howtoRefsIntro:'Ang gabay sa pagkain at mga larawan ng plato sa app na ito ay batay sa:',
+    howtoRefsList:['Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Mga Nasa Hustong Gulang (19–59 taon)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Nakatatandang Edad (60 taon pataas)','Food and Nutrition Research Institute (FNRI), Department of Science and Technology (DOST) — Pinggang Pinoy®: Buntis at Nagpapasusong Kababaihan (© 2016)'],
+    howtoRefsNote:'Ang Pinggang Pinoy® ay rehistradong trademark ng FNRI-DOST, ginamit dito para sa layuning pang-edukasyon lamang. Bisitahin ang fnri.dost.gov.ph para sa orihinal na materyales.',
+    inquiriesLabel:'Para sa mga katanungan at iba pang bagay, mag-email sa',
+    logsDataNote:'Sa browser ng device na ito lamang naka-save ang mga entry na ito at hindi ito sadyang ipinapadala sa BIDA Health. Maaaring makita ito ng sinumang makapagbubukas ng app sa iyong device. Maaari itong mabura kapag na-clear mo ang site data ng browser, in-uninstall o na-reset ang app, o lumipat ka ng device. Gamitin ang Backup o Print kung kailangan mo ng kopya.',
+    logsClinicalNote:'Para sa pansariling reference at pag-uusap ninyo ng health professional ang mga log na ito. Ang mga flag at reading ay hindi diagnosis at hindi dapat gamitin bilang tanging batayan ng desisyon sa gamutan.',
+    backupTitle:'Backup at Restore', backupSub:'I-save ang kopya ng lahat ng iyong logs (gamot, blood pressure, blood sugar, at timbang) bilang isang file, para hindi mawala kahit i-clear mo ang browser, lumipat ng telepono, o i-reinstall ang app.',
+    backupBtn:'I-download ang Backup', restoreBtn:'I-restore mula sa Backup File', backupNow:'Mag-backup ngayon',
+    restoreConfirm:'Papalitan nito ang lahat ng kasalukuyang logs mo ng laman ng backup file na ito. Hindi na ito maibabalik pa. Ituloy?',
+    restoreSuccess:'Matagumpay na na-restore ang backup.', restoreError:'Mukhang hindi ito valid na BIDA Health backup file.',
+    bpViewAll:'Tingnan lahat ng {count} reading', bpShowLess:'5 pinakabago lang',
+    bpBackupReminder:'May {count} na blood pressure reading ka na naka-save. Mainam nang mag-backup ng iyong data.',
+    sugarViewAll:'Tingnan lahat ng {count} reading', sugarShowLess:'5 pinakabago lang',
+    sugarBackupReminder:'May {count} na blood sugar reading ka na naka-save. Mainam nang mag-backup ng iyong data.',
+    weightViewAll:'Tingnan lahat ng {count} entry', weightShowLess:'5 pinakabago lang',
+    weightBackupReminder:'May {count} na weight entry ka na naka-save. Mainam nang mag-backup ng iyong data.',
+    goNow:'⚠ Magpatingin agad', callNow:'⚠ Emergency? Tumawag sa 137-175',
+    noResults:'Walang nahanap. Subukan ang ibang salita.',
+    verify:'⚠ Kumpirmahin muna bago gamitin',
+    bmiBtn:'Kalkulahin ang BMI', bmiAge:'Edad (taon)', bmiH:'Taas', bmiW:'Timbang',
+    bmiUnitCm:'cm', bmiUnitIn:'inches', bmiUnitFt:'ft + in', bmiUnitKg:'kg', bmiUnitLbs:'lbs',
+    bmiFtLabel:'ft', bmiInLabel:'in (dagdag)',
+    bmiDisclaimer:'Ginagamit ang Asia-Pacific na pamantayan ng BMI, mas mababa ito kaysa sa karaniwang WHO at mas angkop para sa mga Pilipinong adulto. Gabay lamang ang BMI at hindi ito diagnosis. Para sa edad 17 pababa, kumonsulta sa health center, doktor, o nutritionist.',
+    bmiResultNote:'Ginamit ang Asia-Pacific na pamantayan ng BMI. Tantiya lamang ang ipinapakitang diperensya sa timbang; hindi ito diagnosis o personal na target sa pagpapapayat o pagtaba. Ipakita at pag-usapan ang resulta sa doktor o nutritionist bago gumawa ng pagbabago sa pagkain, aktibidad, o timbang.',
+    bmiUnder:'Kulang ang timbang', bmiNormal:'Normal ang timbang', bmiOver:'Sobra ang timbang', bmiObese1:'Obese Class I', bmiObese2:'Obesity Class II',
+    bmiRanges:'Asia-Pacific na Pamantayan ng BMI', bmiCatCol:'Kategorya', bmiRangeCol:'Saklaw ng BMI',
+    bmiTeen:'Para sa edad 17 pababa: hindi angkop ang mga BMI category para sa nasa hustong gulang. Kumonsulta sa health center, doktor, o nutritionist para sa wastong pagtatasa.',
+    bmiInvalid:'Mangyaring maglagay ng tamang edad, taas, at timbang.',
+    bmiAboveNorm:'na sobra sa malusog na timbang', bmiBelowNorm:'na kulang sa malusog na timbang',
+    bmiWeightOver:'Batay sa pamantayan ng Asia-Pacific para sa BMI, tinatayang {kg} kg na mas mataas ang iyong timbang kaysa sa pinakamataas na timbang na pasok sa malusog na BMI range para sa iyong taas.',
+    bmiWeightUnder:'Batay sa pamantayan ng Asia-Pacific para sa BMI, tinatayang {kg} kg na mas mababa ang iyong timbang kaysa sa pinakamababang timbang na pasok sa malusog na BMI range para sa iyong taas.',
+    bmiRecUnder:'Kumain ng mas maraming protina at masustansyang pagkain, tulad ng itlog, isda, manok, munggo, at gatas. Subukang kumain nang regular at balanse. Kumonsulta sa nutritionist o doktor.',
+    bmiRecNormal:'Napakahusay! Ipagpatuloy ang malusog na pamumuhay. Kumain ng balanseng pagkain na may maraming gulay at lean na protina, at manatiling aktibo.',
+    bmiRecOver:'Subukang bawasan ang kanin, matamis, at inuming may asukal. Kumain ng mas maraming gulay at lean na protina, at bawasan ang processed at maalat na pagkain. Ang paglalakad nang 30 minuto sa araw ay nakakatulong. Kumonsulta sa doktor o nutritionist.',
+    bmiRecObese1:'Mahalaga ang unti-unting pagbabago sa pagkain at aktibidad. Bawasan ang processed na pagkain at mga pagkaing mataas sa calories, asin, o dagdag na asukal. Kumonsulta sa doktor o nutritionist para sa planong angkop sa iyo.',
+    bmiRecObese2:'Ipakita at pag-usapan ang resulta sa doktor o nutritionist para sa mas angkop na pagtatasa. Iwasan ang crash diet o mabilisang pagpapapayat nang walang propesyonal na gabay.',
+    signsSym:'Mga Senyales / Sintomas', dangerSigns:'⚠ Delikadong senyales — magpatingin agad:',
+    whatToDo:'Dapat gawin', catEm:'Emergency', catHC:'Mga Health Center', catHosp:'Mga Ospital',
+    nearbyVerify:'Ang mga numerong nasa ibaba ay na-verify laban sa opisyal na mapagkukunan ng Lungsod ng Muntinlupa. Maaari pa ring magbago ang mga ito, kumpirmahin bago pumunta para sa agarang pangangailangan.',
+    plateTitle:'Pinggang Pinoy — Gabay sa Balanseng Pagkain',
+    plateNote:'Batay sa opisyal na Pinggang Pinoy food guide ng FNRI-DOST. Piliin kung para kanino ang plato, tapos Lalaki/Babae (o Buntis/Nagpapasuso) para makita ang eksaktong bahaging para sa iyo.',
+    plateSelectLabel:'Piliin kung para kanino',
+    plateWaterLabel:'Tubig', plateMilkLabel:'Gatas', plateKcalLabel:'Kcal Kada Araw',
+    plateTipsTitle:'Mga Health Tip',
+    plateMealTitle:'Halimbawang Isang-Araw na Pagkain', plateMealBreakfast:'Almusal', plateMealLunch:'Tanghalian', plateMealDinner:'Hapunan', plateMealAM:'Meryenda sa Umaga', plateMealPM:'Meryenda sa Hapon',
+    plateSourceNote:'Pinagmulan: FNRI-DOST Pinggang Pinoy — tingnan ang "Paano Gamitin ang App na Ito" para sa buong sanggunian.',
+    mealsTitle:'Abot-Kayang Pagkain na Mabuti sa Puso',
+    tipsTitle:'Simpleng Paalala sa Pagkain',
+    bmiTitle:'BMI Calculator para sa 18 Taong Gulang Pataas',
+    // Hypertension
+    htnIntro:'Ang pag-unawa sa hypertension ay tumutulong sa iyo na pamahalaan ito araw-araw. Narito kung ano ito, bakit mahalaga, at ano ang magagawa mo.',
+    htnWhatTitle:'Ano ang Hypertension?', htnWhatBody:'Ang presyon ng dugo ay ang lakas ng dugo na dumadaloy laban sa dingding ng iyong mga ugat. Isinusulat ito bilang dalawang numero, halimbawa 120/80: ang taas na numero (systolic) ay ang presyon kapag tumitibok ang puso, at ang mababang numero (diastolic) ay ang presyon kapag nagpapahinga ang puso sa pagitan ng tibok. Ang hypertension ay nangangahulugang mas mataas sa normal ang iyong presyon ng dugo sa mahabang panahon.',
+    htnWhyTitle:'Bakit Mahalaga Ito', htnWhyBody:'Karaniwang walang sintomas ang altapresyon, kaya ito tinatawag na "tahimik" na kondisyon. Sa loob ng mga buwan o taon, unti-unting nasisira ng hindi kontroladong hypertension ang iyong mga ugat, puso, bato, at mata. Pinapataas nito ang panganib ng stroke, heart attack, heart failure, at sakit sa bato, kadalasan nang walang babala hanggang magkaroon ng komplikasyon.',
+    htnRiskTitle:'Sino ang Mas Nanganganib', htnRiskBody:'Mas mataas ang panganib mong magkaroon ng hypertension kung may family history ka ng altapresyon, mas may edad, kumakain ng maalat, sobra sa timbang, hindi aktibo, regular na umiinom ng alak, naninigarilyo, o palaging stressed. Marami sa mga salik na ito ay maaaring mapabuti sa pamamagitan ng pagbabago sa pamumuhay, kahit hindi mababago ang family history.',
+    htnNumbersTitle:'Alamin ang Iyong BP', htnNumbersBody:'Ipasuri ang iyong presyon ng dugo nang regular sa health center. Kung magsusukat ka sa bahay, umupo nang tahimik ng 5 minuto bago magsukat, itaas ang braso sa antas ng puso, iwasan ang caffeine, ehersisyo, o paninigarilyo 30 minuto bago magsukat, at kumuha ng dalawang reading na may pagitan ng ilang minuto. Ang regular na pagsusuri ang tanging paraan para malaman kung kontrolado ang iyong hypertension, dahil karaniwang walang sintomas ito.',
+    htnDietTitle:'Pagkain Para sa Malusog na Presyon ng Dugo', htnDietBody:'Bawasan ang maalat na pagkain tulad ng processed na karne, instant noodles, de-lata, at dagdag na patis o toyo. Piliin ang sariwang prutas at gulay, lalo na ang mayaman sa potassium tulad ng saging at madahong gulay, na tumutulong balansehin ang sodium sa katawan. Basahin ang food label kung available at piliin ang mas mababa sa sodium. Ang pagluluto sa bahay gamit ang sariwang sangkap ay nagbibigay sa iyo ng mas maraming kontrol sa asin kumpara sa pagkain sa labas o processed na pagkain.',
+    htnActivityTitle:'Pananatiling Aktibo', htnActivityBody:'Ang regular na pisikal na aktibidad ay tumutulong pababain at kontrolin ang presyon ng dugo. Layunin ang hindi bababa sa 30 minuto ng katamtamang aktibidad, tulad ng mabilis na paglalakad, halos araw-araw. Kung hindi ka sanay mag-ehersisyo, magsimula nang dahan-dahan at unti-unting dagdagan. Ang simpleng aktibidad tulad ng paglalakad papuntang palengke, pag-akyat ng hagdan, o magaang gawaing bahay ay may bisa rin. Magtanong sa iyong doktor bago magsimula ng bagong ehersisyo kung may iba ka pang kondisyon sa kalusugan.',
+    htnStressTitle:'Pamamahala sa Stress', htnStressBody:'Ang patuloy na stress ay maaaring magpataas ng presyon ng dugo at mahirapan itong pamahalaan. Ang simpleng ugali na makakatulong ay ang sapat na tulog, pakikipag-usap sa pamilya o kaibigan tungkol sa nakakaabala sa iyo, pagkuha ng maikling break sa abalang araw, at mahinahong paghinga kapag nararamdamang overwhelmed. Kung mahirap pamahalaan ang stress nang mag-isa, okay lang humingi ng suporta sa iyong health worker.',
+    htnUrgentTitle:'Kailan Dapat Magpatingin Agad', htnUrgentBody:'Ang BP na lampas 180/120 ay napakataas. Hindi ito diagnosis. Magpatingin agad, lalo na kung may pananakit ng dibdib, hirap huminga, panghihina o pamamanhid, pagbabago ng paningin, pagkalito, o hirap magsalita. Tumawag sa 137-175 kung malubha o biglaan ang mga sintomas.',
+    // Diabetes
+    dmIntro:'Ang pag-unawa sa diyabetis ay tumutulong sa iyo na pamahalaan ito araw-araw, hindi lang kapag bumibisita sa doktor. Narito kung ano ito, bakit mahalaga, at ano ang magagawa mo.',
+    dmWhatTitle:'Ano ang Diyabetis?', dmWhatBody:'Ang diyabetis ay nangangahulugang mas mataas sa normal ang iyong blood sugar (glucose) dahil hindi sapat ang ginagawang insulin ng katawan o hindi ito magamit nang maayos. Ang insulin ay hormone na tumutulong ilipat ang asukal mula sa dugo papunta sa mga selula para sa enerhiya. Karamihan sa mga matanda na may diyabetis ay may Type 2, na kadalasang konektado sa pamumuhay at maaaring mapamahalaan sa masustansiyang pagkain, aktibidad, at pangangalaga mula sa health professional.',
+    dmWhyTitle:'Bakit Mahalaga Ito', dmWhyBody:'Ang hindi kontroladong diyabetis sa paglipas ng panahon ay maaaring makasira sa mga ugat at nerbiyos sa buong katawan. Pinapataas nito ang panganib ng sakit sa puso, stroke, sakit sa bato, pagkawala ng paningin, at pinsala sa nerbiyos, lalo na sa paa. Ang mahusay na kontrol ng blood sugar ay malaking nakakabawas ng mga panganib na ito, kaya mahalaga ang patuloy na pamamahala kahit pakiramdam mo ay maayos ka.',
+    dmRiskTitle:'Sino ang Mas Nanganganib', dmRiskBody:'Mas mataas ang panganib mong magkaroon ng Type 2 diabetes kung may family history ka ng diyabetis, sobra sa timbang, hindi aktibo, mas may edad, o may hypertension o mataas na kolesterol. Karaniwan ang pagsasabay ng hypertension, diyabetis, at mataas na kolesterol, at ang bawat kondisyon ay maaaring magpahirap sa pamamahala ng iba, kaya mahalagang gamutin ang mga ito nang sabay.',
+    dmNumbersTitle:'Alamin ang Iyong Blood Sugar', dmNumbersBody:'Magpa-blood sugar test ayon sa payo ng iyong doktor o health worker. Kung nagsusuri ka sa bahay, itanong kung anong target range ang angkop sa iyo. Itala kung fasting, 2 oras pagkatapos kumain, o random ang reading, dahil magkakaiba ang mga sukat na ito.',
+    dmFootTitle:'Pag-aalaga ng Paa', dmFootBody:'Suriin ang iyong paa araw-araw para sa mga hiwa, paltos, pamumula, o sugat, dahil maaaring mabawasan ng diyabetis ang pakiramdam sa paa, kaya madaling hindi mapansin ang sugat. Hugasan at patuyuin ang paa araw-araw, lalo na sa pagitan ng mga daliri, at lagyan ng lotion ang tuyong balat (pero huwag sa pagitan ng daliri). Huwag maglakad nang walang sapin, kahit sa bahay. Gupitin ang kuko ng paa nang tuwid. Magpatingin agad sa health worker kung may sugat na hindi gumagaling, dahil mabilis lumala ang sugat sa paa kapag may diyabetis.',
+    dmDietTitle:'Pagkain Para sa Kontrol ng Blood Sugar', dmDietBody:'Kumain nang regular at balanse sa halip na laktawan ang mga kainan, na maaaring magdulot ng biglaang pagbabago ng blood sugar. Bantayan ang bahagi ng carbohydrate (kanin, tinapay, kamote) at isabay ito sa protina at gulay para mabagalan ang pagsipsip ng asukal. Bawasan ang matamis na pagkain, inumin, at panghimagas/dessert. Piliin ang buong prutas kaysa juice. Ang pagkain sa magkasingsabay na oras araw-araw ay tumutulong din panatilihing stable ang blood sugar.',
+    dmActivityTitle:'Pananatiling Aktibo', dmActivityBody:'Ang pisikal na aktibidad ay tumutulong sa katawan na mas mabuting gamitin ang insulin at maaaring pababain ang blood sugar. Layunin ang regular na aktibidad halos araw-araw, tulad ng paglalakad. Kung may iba kang kondisyon o alalahanin tungkol sa pagsisimula ng aktibidad, magtanong sa health professional. Suriin ang paa pagkatapos ng aktibidad, lalo na kung sumusuot ng bagong sapatos.',
+    dmUrgentTitle:'Kailan Dapat Magpatingin Agad', dmUrgentBody:'Emergency ito kung paulit-ulit ang pagsusuka at hindi kayang uminom ng tubig, matinding panghihina o pagkalito, hirap gisingin o hindi tumutugon nang maayos, napakatuyong bibig, o biglang panginginig na may malamig na pawis. Tingnan ang seksyong Mga Babala at magpatingin agad.',
+    // Dyslipidemia (Kolesterol)
+    dysIntro:'Ang pag-unawa sa kolesterol ay tumutulong ipaliwanag kung bakit mahalaga ang pagbabago sa pamumuhay, kahit walang sintomas.',
+    dysWhatTitle:'Ano ang Kolesterol?', dysWhatBody:'Ang kolesterol ay parang-tabang substance na kailangan ng katawan sa maliit na dami, ngunit maaaring makasama ang labis na dami ng ilang uri nito. Ang LDL ("masamang" kolesterol) ay maaaring mag-ipon sa iyong mga ugat, habang ang HDL ("mabuting" kolesterol) ay tumutulong alisin ito. Ang triglycerides ay isa pang uri ng taba sa dugo na, kapag mataas, ay nagpapataas din ng panganib sa kalusugan. Ang dyslipidemia ay nangangahulugang hindi malusog ang balanse ng mga ito.',
+    dysWhyTitle:'Bakit Mahalaga Ito', dysWhyBody:'Ang mataas na kolesterol ay nag-aambag sa pag-ipon ng mataba na deposito sa mga ugat sa paglipas ng panahon, isang proseso na tinatawag na atherosclerosis. Pinapaliit at pinapatigas nito ang mga arterya, na nagpapataas ng panganib ng heart attack at stroke, lalo na kung kasabay ng hypertension o diyabetis. Ang sabay na pamamahala sa tatlong kondisyon, kung mayroon ka ng higit sa isa, ang nagbibigay ng pinakamahusay na proteksyon para sa iyong puso at mga ugat.',
+    dysRiskTitle:'Sino ang Mas Nanganganib', dysRiskBody:'Mas mataas ang panganib mong magkaroon ng dyslipidemia kung ang iyong pagkain ay mataas sa pritong at mamantikang pagkain, sobra sa timbang, hindi aktibo, naninigarilyo, regular na umiinom ng alak, o may family history ng mataas na kolesterol o maagang sakit sa puso. Ang pagkakaroon ng diyabetis o hypertension ay nagpapataas din ng panganib ng dyslipidemia.',
+    dysNumbersTitle:'Alamin ang Iyong Numero', dysNumbersBody:'Magtanong sa iyong health center tungkol sa lipid (kolesterol) test, lalo na kung may hypertension, diyabetis, o family history ng sakit sa puso. Karaniwan itong simpleng blood test na matutulungan kang maintindihan ng iyong doktor.',
+    dysDietTitle:'Pagkain Para sa Malusog na Kolesterol', dysDietBody:'Bawasan ang pritong, mamantika, at processed na pagkain, kasama ang lechon, crispy pata, at processed na karne. Piliin ang isda, manok na walang balat, at plant-based na protina (beans, munggo, tokwa) nang mas madalas kaysa pulang karne. Kapag nagluluto gamit ang mantika, gumamit ng kaunti lang, at piliin ang mas malusog na klase — canola, corn, sunflower, safflower, o olive oil — sa halip na coconut oil, palm oil, mantika ng baboy (lard), o margarine, na mas mataas sa saturated fat. Ang canola at corn oil ang karaniwang mas mura at madaling makuha sa mga lokal na grocery. Kumain ng mas maraming gulay, prutas, at mataas sa fiber na pagkain tulad ng oats at legumes, na maaaring makatulong pababain ang kolesterol.',
+    dysActivityTitle:'Pananatiling Aktibo', dysActivityBody:'Ang regular na pisikal na aktibidad ay maaaring makatulong itaas ang "mabuting" HDL kolesterol at pababain ang triglycerides. Layunin ang hindi bababa sa 30 minuto ng aktibidad, tulad ng mabilis na paglalakad, halos araw-araw. Kasabay ng mas malusog na pagkain, nakatutulong ang pagiging aktibo sa kalusugan ng puso at mga ugat.',
+    emergMainLabel:'Pangunahing Emergency Hotline (24/7)',
+    emergOtherTitle:'Iba Pang Emergency Contact',
+    emergAppNote:'May iRESPOND Muntinlupa mobile app din ang Lungsod ng Muntinlupa para sa pag-uulat ng emergency (kalamidad, pulis, sunog, ambulansya). Available sa Google Play at App Store.',
+    medTrackerTitle:'Aking Medicine Tracker', medTrackerSub:'Gamitin ang pansariling checklist na ito para itala ang sarili mong pag-inom ng gamot. Sa browser ng device na ito lamang naka-save ang record at hindi ito sadyang ipinapadala sa BIDA Health.',
+    medTrackerNotice:'Pansariling paalala lamang ang tracker na ito. Hindi nito sinasabi kung anong gamot, gaano karami, o kailan ito iinumin. Sundin ang iyong reseta o label ng gamot, at ipagpatuloy ang paraan ng pag-monitor na pamilyar at maaasahan para sa iyo. Ang anumang talang idaragdag mo ay pansarili at hindi beripikadong payong medikal. Magtanong sa doktor o health worker kung hindi ka sigurado.',
+    medTrackerEmpty:'Wala ka pang naidadagdag na gamot para subaybayan.', medAdd:'Idagdag', medAllAdded:'Naidagdag na ang lahat ng nakalistang gamot sa iyong tracker.',
+    medOtherLabel:'May iniinom ka bang hindi nasa listahan? Idagdag dito:', medOtherPlaceholder:'I-type ang pangalan ng gamot',
+    medNoteLabel:'Pansariling tala (opsyonal)', medNotePlaceholder:'hal., para saan mo ito (sarili mong tala)',
+    medPrintBtn:'I-print ang Aking Checklist', medReminderBanner:'Hindi mo pa nama-mark na inumin ngayon ang {meds}.',
+    medCongratsTitle:'🎉 Magaling!', medCongratsBody:'Namarkahan mo ang lahat ng nakaiskedyul na dosis sa tracker na ito ngayong linggo. Ipagpatuloy ang pagsunod sa reseta mo.',
+    medResetBtn:'I-reset Para sa Bagong Linggo', medResetConfirm:'Buburahin nito ang mga check-in ng gamot mo para makapagsimula kang muli. Mananatili ang mga gamot na sinusubaybayan mo at ang settings ng tracker. Hindi na ito maibabalik pa. Ituloy?',
+    thisWeek:'Ngayong Linggo', streakLabel:'Sunod-sunod na Araw', dosesUnit:'dosis', dayUnit:'araw', daysUnit:'araw',
+    timesPerDayLabel:'Ilang beses bawat araw (sarili mong routine)', doseAM:'Dosis 1', doseNoon:'Dosis 2', dosePM:'Dosis 3',
+    bpLogTitle:'Aking BP Log', bpLogSub:'Isulat dito ang iyong presyon ng dugo sa bahay para mapag-usapan ninyo ng iyong doktor. Sa device na ito lamang naka-save. Hindi diagnosis ang mga reading na ito.',
+    bpSysPlaceholder:'Systolic (hal. 130)', bpDiaPlaceholder:'Diastolic (hal. 85)', bpLogPrintBtn:'I-print ang Aking BP Log',
+    flagWarn:'Mataas', flagDanger:'Napakataas — Kumilos Agad', flagLowDanger:'Mababa — Kumilos Agad',
+    bpCrisisAdvice:'Hindi diagnosis ang flag na ito. Ang BP na lampas 180/120 ay napakataas. Magpatingin agad. Tumawag sa 137-175 kung malubha o biglaan ang mga sintomas, kabilang ang pananakit ng dibdib, hirap huminga, panghihina o pamamanhid, pagbabago ng paningin, pagkalito, o hirap magsalita.',
+    sugarLowAdvice:'Hindi diagnosis ang flag na ito. Ang mababang blood sugar reading ay babala na nangangailangan ng agarang payo medikal. Kumontak sa doktor o health worker.',
+    sugarLowEmergency:'Kung walang malay, nangingisay, sobrang nalilito, o hindi makalunok ang tao, tumawag sa 137-175 o humingi agad ng tulong pang-emergency.',
+    sugarLogTitle:'Aking Blood Sugar Log', sugarLogSub:'Isulat dito ang iyong blood sugar sa bahay para mapag-usapan ninyo ng iyong doktor. Sa device na ito lamang naka-save. Hindi diagnosis ang mga reading na ito.',
+    sugarValPlaceholder:'Reading (mg/dL)', sugarFasting:'Fasting', sugarPostMeal:'2 oras pagkatapos kumain', sugarRandom:'Random / kahit anong oras', sugarLogPrintBtn:'I-print ang Aking Sugar Log',
+    logAdd:'+ Idagdag', logNoEntries:'Wala pang entry.', logInvalid:'Maglagay ng wastong reading.',
+    weightLogTitle:'Aking Timbang Log', weightLogSub:'Isulat dito ang iyong timbang para maipakita at mapag-usapan ninyo ng iyong doktor o nutritionist. Sa browser ng device na ito lamang ito naka-save.',
+    weightValPlaceholder:'Timbang', weightLogPrintBtn:'I-print ang Aking Weight Log', weightChartEmpty:'Magdagdag ng hindi bababa sa 2 entry para makita ang graph ng iyong timbang.',
+    safeWeightNote:'Dapat naaayon sa iyong kalagayan ang target na timbang. Ipakonsulta sa doktor o nutritionist ang mabilis o hindi inaasahang pagbabago ng timbang.',
+  }
+};
+
+// ── Content Data ──────────────────────────────────────────────────────────────
+// NCD-relevant Red Flags only (Phase 1 scope): stroke, chest pain, hypertensive
+// emergency, diabetic emergency. Clinical content — edit directly in code and
+// have a licensed clinician review any change before deploying.
+const RF = [
+  {
+    en:{title:'Stroke Signs', signs:['Sudden drooping of one side of the face','Sudden weakness or numbness of one arm or leg (one side of body)','Sudden trouble speaking or understanding speech','Sudden vision trouble in one or both eyes','Sudden severe headache with no known cause','Sudden dizziness or loss of balance'],
+      action:'Call 137-175 or go to the nearest health center or hospital immediately. Do not wait. Do not give food or water.'},
+    fil:{title:'Senyales ng Stroke', signs:['Biglang pagtabingi ng isang bahagi ng mukha','Biglang panghihina o pamamanhid ng braso o binti sa isang side ng katawan','Biglang hirap magsalita o umintindi','Biglang paglabo ng paningin sa isa o parehong mata','Biglang matinding sakit ng ulo nang walang malinaw na dahilan','Biglang pagkahilo o pagkawala ng balanse'],
+      action:'Tumawag sa 137-175 o pumunta agad sa pinakamalapit na health center o ospital. Huwag maghintay. Huwag magpakain o magpainom.'},
+    emergency:true
+  },
+  {
+    en:{title:'Chest Pain / Possible Heart Attack', signs:['Chest pain, heaviness, pressure, or tightness','Pain spreading to arm, jaw, neck, back, or stomach','Shortness of breath','Cold sweat, nausea, or vomiting','Fainting or severe weakness'],
+      action:'Emergency care now. Call 137-175 or go to the nearest health center or hospital. Do not drive yourself.'},
+    fil:{title:'Pananakit ng Dibdib / Posibleng Heart Attack', signs:['Pananakit, bigat, presyon, o paninikip ng dibdib','Sakit na kumakalat sa braso, panga, leeg, likod, o itaas na bahagi ng tiyan','Hirap huminga','Malamig na pawis, pagduduwal, o pagsusuka','Himatay o matinding panghihina'],
+      action:'Emergency agad. Tumawag sa 137-175 o pumunta sa pinakamalapit na health center o ospital. Huwag magmaneho nang mag-isa.'},
+    emergency:true
+  },
+  {
+    en:{title:'Very High BP / Hypertensive Emergency', signs:['BP above 180/120','Severe headache','Chest pain','Difficulty breathing','Confusion or trouble speaking','Vision changes','Weakness or numbness on one side'],
+      action:'Seek urgent medical care. Call 137-175 for severe or sudden symptoms.'},
+    fil:{title:'Napakataas na BP / Hypertensive Emergency', signs:['BP na lampas 180/120','Matinding sakit ng ulo','Pananakit ng dibdib','Hirap huminga','Pagkalito o hirap magsalita','Pagbabago ng paningin','Panghihina o pamamanhid sa isang side'],
+      action:'Magpatingin agad. Tumawag sa 137-175 kung malubha o biglaan ang mga sintomas.'},
+    emergency:true
+  },
+  {
+    en:{title:'Diabetes Emergency', signs:['Always thirsty','Frequent urination','Blurred vision','Unexplained weight loss','Slow-healing wounds','Numbness or tingling in feet'],
+      danger:['Vomiting and unable to keep fluids down','Severe weakness or confusion','Drowsiness or altered consciousness','Sunken eyes or very dry mouth (dehydration)','Shaking, cold sweat, or sudden confusion (possible very low blood sugar)'],
+      action:'Consult health center or doctor. Go to the nearest health center or hospital immediately if danger signs appear.'},
+    fil:{title:'Emergency sa Diyabetis', signs:['Laging nauuhaw','Madalas umihi','Malabong paningin','Hindi maipaliwanag na pagbaba ng timbang','Sugat na matagal gumaling','Pamamanhid o tusok-tusok sa paa'],
+      danger:['Pagsusuka nang paulit-ulit at hindi kayang uminom ng tubig','Matinding panghihina o pagkalito','Antok o pagbabago ng kamalayan','Lubog ang mata o napakatuyong bibig (dehydration)','Panginginig, malamig na pawis, o biglang pagkalito (posibleng sobrang baba ng blood sugar)'],
+      action:'Magpatingin sa health center o doktor. Pumunta agad sa pinakamalapit na health center o ospital kung may delikadong senyales.'}
+  }
+];
+
+// Condition education content (Hypertension, Diabetes, Dyslipidemia) lives as
+// keyed strings in the T object below (e.g. T.en.htnWhatTitle / T.fil.htnWhatBody),
+// NOT in a separate data object, so all bilingual copy for a condition page
+// stays in one place. This is clinical content read directly by patients —
+// have a licensed clinician review any change to these keys before deploying.
+//
+// Below: just the structure (which sections exist, in what order, with which
+// icon) for each condition page. The actual title/body text is pulled from T.
+const HTN_SECTIONS = [
+  {key:'htnWhat', icon:'❓'}, {key:'htnWhy', icon:'⚠️'}, {key:'htnRisk', icon:'🎯'},
+  {key:'htnNumbers', icon:'📊'}, {key:'htnDiet', icon:'🥗'},
+  {key:'htnActivity', icon:'🚶'}, {key:'htnStress', icon:'🧘'}, {key:'htnUrgent', icon:'🚨'}
+];
+const DM_SECTIONS = [
+  {key:'dmWhat', icon:'❓'}, {key:'dmWhy', icon:'⚠️'}, {key:'dmRisk', icon:'🎯'},
+  {key:'dmNumbers', icon:'📊'}, {key:'dmFoot', icon:'🦶'},
+  {key:'dmDiet', icon:'🥗'}, {key:'dmActivity', icon:'🚶'}, {key:'dmUrgent', icon:'🚨'}
+];
+const DYS_SECTIONS = [
+  {key:'dysWhat', icon:'❓'}, {key:'dysWhy', icon:'❤️'}, {key:'dysRisk', icon:'🎯'},
+  {key:'dysNumbers', icon:'📊'}, {key:'dysDiet', icon:'🥗'},
+  {key:'dysActivity', icon:'🚶'}
+];
+
+// Pinggang Pinoy Go-Grow-Glow food guide. Content and portion amounts are
+// sourced directly from the official FNRI-DOST Pinggang Pinoy pamphlets for
+// Adults, Older Persons, and Pregnant & Lactating Women — see the "How to
+// Use This App" page for full citation. Only these 3 life-stage classes are
+// included (young child / school-age removed per project scope).
+const GGG = {
+  en:{
+    go:{title:'GO — Energy Giving', body:'Go for rice, root crops, pasta, bread, and other carbohydrate-rich foods, which give you energy for your body\'s functions and physical activity. Choose whole grains like brown rice, corn, whole wheat bread, and oatmeal when you can — they have more fiber and are linked to a lower risk of heart disease and diabetes.'},
+    grow:{title:'GROW — Body Building', body:'Eat fish, shellfish, lean meat, poultry, eggs, and dried beans and nuts — these are needed to grow, maintain, and repair your body\'s tissues. Include fatty fish like tuna, sardines, and mackerel 2–3 times a week for fatty acids that help protect your heart. Have milk, milk products, and other calcium-rich foods like dilis and small shrimp for strong bones and teeth.'},
+    glowVeg:{title:'GLOW — Vegetables', body:'Enjoy a wide variety of vegetables — they\'re packed with the vitamins, minerals, and fiber your body needs to regulate itself.'},
+    glowFruit:{title:'GLOW — Fruits', body:'Enjoy a wide variety of fruits too, for the same reason — vitamins, minerals, and fiber your body needs.'},
+    growExtraPreglact:'You need enough animal-based protein now — it gives you iron that\'s easier for your body to absorb. Fatty fish 2–3 times a week also supports your baby\'s brain development.',
+    glowExtraPreglact:'Make it a habit to include dark green leafy vegetables like malunggay and kangkong — they\'re high in iron and folate, which you need more of right now.'
+  },
+  fil:{
+    go:{title:'GO — Nagbibigay ng Enerhiya', body:'Kumain ng kanin, kamote, pasta, tinapay, at iba pang pagkaing mataas sa carbohydrates — dito ka kumukuha ng enerhiya para sa mga gawain ng katawan at pisikal na aktibidad. Kung maaari, piliin ang whole grains tulad ng brown rice, mais, whole wheat bread, at oatmeal — mas mataas ang fiber nito at may kaugnayan sa mas mababang panganib ng sakit sa puso at diabetes.'},
+    grow:{title:'GROW — Pagpapalusog ng Katawan', body:'Kumain ng isda, shellfish, lean na karne, manok, itlog, at dried beans o nuts — kailangan ito para lumaki, mapanatili, at ma-repair ang tisyu ng iyong katawan. Isama ang mataba/fatty fish tulad ng tuna, sardinas, at mackerel 2–3 beses sa isang linggo para sa fatty acids na tumutulong protektahan ang puso. Uminom ng gatas, kumain ng produktong gatas, at iba pang pagkaing mataas sa calcium tulad ng dilis at maliliit na hipon para sa malakas na buto at ngipin.'},
+    glowVeg:{title:'GLOW — Mga Gulay', body:'Kumain ng iba\'t ibang gulay — dito galing ang bitamina, minerals, at fiber na kailangan ng katawan para gumana nang maayos.'},
+    glowFruit:{title:'GLOW — Mga Prutas', body:'Kumain din ng iba\'t ibang prutas, sa parehong dahilan — bitamina, minerals, at fiber na kailangan ng katawan.'},
+    growExtraPreglact:'Kailangan mo ngayon ng sapat na animal-based protein — mas madali nitong maibigay ang iron na kaya ng katawan mong i-absorb. Ang fatty fish 2–3 beses sa isang linggo ay tumutulong din sa brain development ng sanggol mo.',
+    glowExtraPreglact:'Gawing ugali ang pagsama ng madahong gulay na berde tulad ng malunggay at kangkong — mataas ito sa iron at folate, na mas kailangan mo ngayon.'
+  }
+};
+const PLATE = {
+  adult:{
+    label_en:'Adults (19–59 y)', label_fil:'Mga Nasa Hustong Gulang (19–59 taon)',
+    variants:['male','female'], variantLabel_en:{male:'Male',female:'Female'}, variantLabel_fil:{male:'Lalaki',female:'Babae'},
+    male:{
+      go_en:'1½ cups cooked rice, or 6 pcs small pandesal, or 6 slices small bread, or 1½ cups cooked noodles (pansit), or 1½ medium pieces root crop (kamote)',
+      go_fil:'1½ tasang kanin, o 6 piraso maliit na pandesal, o 6 hiwa ng maliit na tinapay, o 1½ tasang lutong pansit, o 1½ katamtamang kamote',
+      grow_en:'2 pcs small galunggong, or 2 slices bangus, or 2 pcs small chicken leg, or 2 servings (30g each) lean meat, or 2 pcs tokwa (6×6×2cm), or 1 egg plus 1 piece of any of the above',
+      grow_fil:'2 piraso maliit na galunggong, o 2 hiwa ng bangus, o 2 piraso maliit na chicken leg, o 2 servings (30g bawat isa) ng lean na karne, o 2 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1 piraso pa mula sa nabanggit',
+      glowVeg_en:'1–1½ cups cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'1–1½ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, karot, sitaw)',
+      glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
+      water_en:'10 or more glasses of water a day', water_fil:'10 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'2450 kcal/day'
+    },
+    female:{
+      go_en:'1 cup cooked rice, or 4 pcs small pandesal, or 4 slices small bread, or 1 cup cooked noodles (pansit), or 1 medium piece root crop (kamote)',
+      go_fil:'1 tasang kanin, o 4 piraso maliit na pandesal, o 4 hiwa ng maliit na tinapay, o 1 tasang lutong pansit, o 1 katamtamang kamote',
+      grow_en:'2 pcs small galunggong, or 2 slices bangus, or 2 pcs small chicken leg, or 2 servings (30g each) lean meat, or 2 pcs tokwa (6×6×2cm), or 1 egg plus 1 piece of any of the above',
+      grow_fil:'2 piraso maliit na galunggong, o 2 hiwa ng bangus, o 2 piraso maliit na chicken leg, o 2 servings (30g bawat isa) ng lean na karne, o 2 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1 piraso pa mula sa nabanggit',
+      glowVeg_en:'¾–1 cup cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'¾–1 tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, karot, sitaw)',
+      glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
+      water_en:'8 or more glasses of water a day', water_fil:'8 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'1890 kcal/day'
+    }
+  },
+  older:{
+    label_en:'Older Persons (60 y and above)', label_fil:'Nakatatandang Edad (60 taon pataas)',
+    variants:['male','female'], variantLabel_en:{male:'Male',female:'Female'}, variantLabel_fil:{male:'Lalaki',female:'Babae'},
+    male:{
+      go_en:'1 cup cooked rice, or 4 pcs small pandesal, or 4 slices small bread, or 1 cup cooked noodles (pansit), or 1 medium piece root crop (kamote)',
+      go_fil:'1 tasang kanin, o 4 piraso maliit na pandesal, o 4 hiwa ng maliit na tinapay, o 1 tasang lutong pansit, o 1 katamtamang kamote',
+      grow_en:'2 pcs small galunggong, or 2 slices bangus, or 2 pcs small chicken leg, or 2 servings (30g each) lean meat, or 2 pcs tokwa (6×6×2cm), or 1 egg plus 1 piece of any of the above',
+      grow_fil:'2 piraso maliit na galunggong, o 2 hiwa ng bangus, o 2 piraso maliit na chicken leg, o 2 servings (30g bawat isa) ng lean na karne, o 2 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1 piraso pa mula sa nabanggit',
+      glowVeg_en:'¾–1 cup cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'¾–1 tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, karot, sitaw)',
+      glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
+      water_en:'8 or more glasses of water a day', water_fil:'8 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'2000 kcal/day'
+    },
+    female:{
+      go_en:'¾ cup cooked rice, or 3 pcs small pandesal, or 3 slices small bread, or ¾ cup cooked noodles (pansit), or ¾ medium piece root crop (kamote)',
+      go_fil:'¾ tasang kanin, o 3 piraso maliit na pandesal, o 3 hiwa ng maliit na tinapay, o ¾ tasang lutong pansit, o ¾ katamtamang kamote',
+      grow_en:'2 pcs small galunggong, or 2 slices bangus, or 2 pcs small chicken leg, or 2 servings (30g each) lean meat, or 2 pcs tokwa (6×6×2cm), or 1 egg plus 1 piece of any of the above',
+      grow_fil:'2 piraso maliit na galunggong, o 2 hiwa ng bangus, o 2 piraso maliit na chicken leg, o 2 servings (30g bawat isa) ng lean na karne, o 2 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1 piraso pa mula sa nabanggit',
+      glowVeg_en:'¾ cup cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'¾ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, karot, sitaw)',
+      glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
+      water_en:'7 or more glasses of water a day', water_fil:'7 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'1575 kcal/day'
+    }
+  },
+  preglact:{
+    label_en:'Pregnant & Lactating', label_fil:'Buntis at Nagpapasuso',
+    variants:['pregnant','lactating'], variantLabel_en:{pregnant:'Pregnant',lactating:'Lactating'}, variantLabel_fil:{pregnant:'Buntis',lactating:'Nagpapasuso'},
+    pregnant:{
+      go_en:'1½ cups cooked rice, or 6 pcs small pandesal, or 6 slices small bread, or 1½ cups cooked noodles (pansit), or 1½ medium pieces root crop (kamote)',
+      go_fil:'1½ tasang kanin, o 6 piraso maliit na pandesal, o 6 hiwa ng maliit na tinapay, o 1½ tasang lutong pansit, o 1½ katamtamang kamote',
+      grow_en:'2 pcs medium galunggong, or 3 slices bangus, or 2 pcs medium chicken leg, or 3 servings (30g each) lean meat, or 3 pcs tokwa (6×6×2cm), or 1 egg plus 1–2 pieces of any of the above',
+      grow_fil:'2 piraso katamtamang galunggong, o 3 hiwa ng bangus, o 2 piraso katamtamang chicken leg, o 3 servings (30g bawat isa) ng lean na karne, o 3 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1–2 piraso pa mula sa nabanggit',
+      glowVeg_en:'1–1½ cups cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'1–1½ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, karot, sitaw)',
+      glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
+      water_en:'9 or more glasses of water a day', water_fil:'9 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'2230 kcal/day'
+    },
+    lactating:{
+      go_en:'1½ cups cooked rice, or 6 pcs small pandesal, or 6 slices small bread, or 1½ cups cooked noodles (pansit), or 1½ medium pieces root crop (kamote)',
+      go_fil:'1½ tasang kanin, o 6 piraso maliit na pandesal, o 6 hiwa ng maliit na tinapay, o 1½ tasang lutong pansit, o 1½ katamtamang kamote',
+      grow_en:'2 pcs medium galunggong, or 3 slices bangus, or 2 pcs medium chicken leg, or 3 servings (30g each) lean meat, or 3 pcs tokwa (6×6×2cm), or 1 egg plus 1–2 pieces of any of the above',
+      grow_fil:'2 piraso katamtamang galunggong, o 3 hiwa ng bangus, o 2 piraso katamtamang chicken leg, o 3 servings (30g bawat isa) ng lean na karne, o 3 piraso tokwa (6×6×2cm), o 1 itlog kasama ang 1–2 piraso pa mula sa nabanggit',
+      glowVeg_en:'1–1½ cups cooked vegetables (malunggay, saluyot, gabi leaves, talinum, ampalaya, kalabasa, carrots, sitaw)', glowVeg_fil:'1–1½ tasang lutong gulay (malunggay, saluyot, dahon ng gabi, talinum, ampalaya, kalabasa, karot, sitaw)',
+      glowFruit_en:'1 medium fruit (saging, dalanghita, mangga) or 1 slice big fruit (papaya, pinya, pakwan)', glowFruit_fil:'1 katamtamang prutas (saging, dalanghita, mangga) o 1 hiwa ng malaking prutas (papaya, pinya, pakwan)',
+      water_en:'10 or more glasses of water a day', water_fil:'10 o higit pang basong tubig kada araw', milk_en:'1 glass of milk daily', milk_fil:'1 basong gatas araw-araw', kcal:'2430 kcal/day'
+    }
+  }
+};
+const PLATE_TIPS = {
+  common_en:['Eat less salty, fried, fatty, and sugar-rich food to help prevent chronic disease.','Check nutrition labels on packaged food to make smarter choices.'],
+  common_fil:['Bawasan ang maalat, pritong, mamantika, at matamis na pagkain para makatulong maiwasan ang chronic disease.','Tingnan ang nutrition label ng packaged na pagkain para makapili nang mas matalino.'],
+  adultOlder_en:['Stay physically active every day — even a daily walk helps.'], adultOlder_fil:['Manatiling aktibo araw-araw — nakakatulong na ang simpleng paglalakad.'],
+  preglact_en:['Take folic acid/iron supplements as advised by your health worker, to meet your daily needs.','Do not smoke or drink alcoholic beverages.','Go to your regular prenatal check-ups, and plan to deliver your baby at a health care facility.'],
+  preglact_fil:['Uminom ng folic acid/iron supplement ayon sa payo ng iyong health worker, para matugunan ang pangangailangan mo araw-araw.','Huwag manigarilyo o uminom ng alak.','Pumunta sa regular na prenatal check-up, at magplano na manganak sa isang health facility.']
+};
+const PLATE_MEAL = {
+  en:{note:'This is the same sample day used across all 3 official FNRI plate guides — only the portion sizes and calorie target above change by group.', breakfast:'Fried bangus, camote tops salad with tomatoes, rice, banana', lunch:'Chicken tinola with green papaya and malunggay, rice, mango', dinner:'Fried galunggong, pinakbet, rice, watermelon', amSnack:'Suman', pmSnack:'Boiled camote'},
+  fil:{note:'Ito ang parehong sample na araw na ginamit sa lahat ng 3 opisyal na Pinggang Pinoy guide — ang laki lang ng serving at kcal target sa itaas ang nagbabago depende sa grupo.', breakfast:'Piniritong bangus, ensaladang talbos ng kamote na may kamatis, kanin, saging', lunch:'Tinolang manok na may green papaya at malunggay, kanin, mangga', dinner:'Piniritong galunggong, pinakbet, kanin, pakwan', amSnack:'Suman', pmSnack:'Nilagang kamote'}
+};
+const MEALS = {
+  en:['Rice + monggo + malunggay (low salt)','Rice + boiled or grilled egg + sautéed vegetables (less oil)','Rice + grilled or steamed fish + vegetables','Rice + tofu or tokwa + vegetables','Banana, papaya, or seasonal fruit as snack instead of sweets'],
+  fil:['Kanin + monggo + malunggay (kaunting asin)','Kanin + nilagang o inihaw na itlog + ginisang gulay (kaunting mantika)','Kanin + inihaw o pinasingawang isda + gulay','Kanin + tofu o tokwa + gulay','Saging, papaya, o napapanahong prutas bilang meryenda sa halip na matamis']
+};
+const TIPS = {
+  en:['Use less salt, try calamansi, herbs, or vinegar for flavor instead','Drink water instead of soft drinks or sweetened juices','Limit fried and processed foods','Choose fresh fish or lean meat over processed meats (hotdog, longganisa, corned beef)','Eat a variety of vegetables and fruits when budget allows'],
+  fil:['Bawasan ang asin, subukan ang calamansi, herbs, o suka para sa lasa','Uminom ng tubig sa halip na softdrinks o matamis na juice','Bawasan ang pritong at processed na pagkain','Piliin ang sariwang isda o lean na karne kaysa sa processed na karne (hotdog, longganisa, corned beef)','Kumain ng iba\'t ibang gulay at prutas kung magagawa']
+};
+
+// Medicine names used as optional choices in the personal tracker. These names
+// are not accompanied by treatment, dose, or schedule information in the app.
+const MEDS = [
+  {group_en:'For High Blood Pressure and Heart Conditions', group_fil:'Para sa Altapresyon at Sakit sa Puso', items:[
+    {name:'Losartan', what_en:'Helps control high blood pressure', what_fil:'Tumutulong kontrolin ang altapresyon'},
+    {name:'Telmisartan', what_en:'Helps control high blood pressure', what_fil:'Tumutulong kontrolin ang altapresyon'},
+    {name:'Amlodipine', what_en:'Helps control high blood pressure', what_fil:'Tumutulong kontrolin ang altapresyon'},
+    {name:'Carvedilol', what_en:'Helps control high blood pressure and certain heart conditions', what_fil:'Tumutulong kontrolin ang altapresyon at ilang kondisyon ng puso'}
+  ]},
+  {group_en:'For Heart Care and Clot Prevention', group_fil:'Para sa Pangangalaga sa Puso at Pag-iwas sa Clot', items:[
+    {name:'Trimetazidine', what_en:'Helps with chest discomfort related to certain heart conditions; it does not treat sudden chest pain or a heart attack', what_fil:'Tumutulong sa paninikip o pananakit ng dibdib na may kaugnayan sa ilang sakit sa puso; hindi ito gamot para sa biglaang pananakit ng dibdib o heart attack'},
+    {name:'Clopidogrel', what_en:'A blood thinner that helps prevent blood clots', what_fil:'Pampanipis ng dugo na tumutulong maiwasan ang pamumuo ng dugo'}
+  ]},
+  {group_en:'For Cholesterol Management', group_fil:'Para sa Pamamahala ng Kolesterol', items:[
+    {name:'Atorvastatin', what_en:'Helps lower cholesterol', what_fil:'Tumutulong pababain ang kolesterol'}
+  ]},
+  {group_en:'For Diabetes', group_fil:'Para sa Diyabetis', items:[
+    {name:'Metformin', what_en:'Helps control blood sugar', what_fil:'Tumutulong kontrolin ang blood sugar'},
+    {name:'Gliclazide', what_en:'Helps control blood sugar', what_fil:'Tumutulong kontrolin ang blood sugar'}
+  ]},
+  {group_en:'Vitamin Supplement', group_fil:'Bitamina', items:[
+    {name:'Vitamin B Complex', what_en:'General nutritional support', what_fil:'Pangkalahatang suporta sa nutrisyon'}
+  ]}
+];
+
+// Nearby Care — Muntinlupa health centers, verified against official sources
+// (City Government of Muntinlupa website, checked at time of app development).
+const NEARBY = {
+  en:{
+    cats:[
+      {label:'Health Centers (Pilot Sites)',facilities:[
+        {name:'Bayanan Health Center (Main)',type:'Public Health Center',addr:'16 Ilaya, Alabang, Muntinlupa City, 1770',phones:[{num:'8622-0124',label:'8622-0124'}],verified:true},
+        {name:'Bayanan Annex Health Center',type:'Public Health Center',addr:'Bayanan, Muntinlupa City',phones:[{num:'8501-1719',label:'8501-1719'},{num:'8861-3365',label:'8861-3365'}],verified:true},
+        {name:'Alabang Health Center',type:'Public Health Center',addr:'Alabang, Muntinlupa City',phones:[{num:'8422-560',label:'8422-560'},{num:'8420-468',label:'8420-468'}],verified:true}
+      ]},
+      {label:'City Health Office',facilities:[
+        {name:'Muntinlupa City Health Office',type:'City Government',addr:'Centennial Avenue, Laguerta, Brgy. Tunasan, Muntinlupa City, 1773',phones:[],verified:true,note:'For general inquiries and coordination. See Emergency Numbers for urgent concerns.'}
+      ]},
+      {label:'Hospitals',facilities:[
+        {name:'Ospital ng Muntinlupa',type:'Government Hospital',addr:'Muntinlupa City',phones:[],verified:false,note:'Ask your health center for referral and current contact information.'}
+      ]}
+    ]
+  },
+  fil:{
+    cats:[
+      {label:'Mga Health Center (Pilot Sites)',facilities:[
+        {name:'Bayanan Health Center (Main)',type:'Pampublikong Health Center',addr:'16 Ilaya, Alabang, Muntinlupa City, 1770',phones:[{num:'8622-0124',label:'8622-0124'}],verified:true},
+        {name:'Bayanan Annex Health Center',type:'Pampublikong Health Center',addr:'Bayanan, Muntinlupa City',phones:[{num:'8501-1719',label:'8501-1719'},{num:'8861-3365',label:'8861-3365'}],verified:true},
+        {name:'Alabang Health Center',type:'Pampublikong Health Center',addr:'Alabang, Muntinlupa City',phones:[{num:'8422-560',label:'8422-560'},{num:'8420-468',label:'8420-468'}],verified:true}
+      ]},
+      {label:'City Health Office',facilities:[
+        {name:'Muntinlupa City Health Office',type:'Pamahalaan ng Lungsod',addr:'Centennial Avenue, Laguerta, Brgy. Tunasan, Muntinlupa City, 1773',phones:[],verified:true,note:'Para sa pangkalahatang katanungan at koordinasyon. Tingnan ang Emergency Numbers para sa agarang pangangailangan.'}
+      ]},
+      {label:'Mga Ospital',facilities:[
+        {name:'Ospital ng Muntinlupa',type:'Ospital ng Pamahalaan',addr:'Muntinlupa City',phones:[],verified:false,note:'Magtanong sa iyong health center para sa referral at kasalukuyang contact information.'}
+      ]}
+    ]
+  }
+};
+
+// Emergency Numbers — verified against official City Government of Muntinlupa
+// emergency hotlines page at time of app development.
+const EMERGENCY = {
+  en:[
+    {label:'Main Emergency Hotline', num:'137175', display:'137-175', big:true},
+    {label:'Landline', num:'8373-5165', display:'8373-5165'},
+    {label:'Emergency Hotline (Globe)', num:'09272579322', display:'0927-257-9322'},
+    {label:'Emergency Hotline (Smart)', num:'09215427123', display:'0921-542-7123'}
+  ],
+  fil:[
+    {label:'Pangunahing Emergency Hotline', num:'137175', display:'137-175', big:true},
+    {label:'Landline', num:'8373-5165', display:'8373-5165'},
+    {label:'Emergency Hotline (Globe)', num:'09272579322', display:'0927-257-9322'},
+    {label:'Emergency Hotline (Smart)', num:'09215427123', display:'0921-542-7123'}
+  ]
+};
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let lang = localStorage.getItem('bida-lang') || 'en';
+let textSize = localStorage.getItem('bida-textsize') || 'normal';   // 'normal' | 'large' | 'xlarge'
+let bmiHUnit = 'cm';   // 'cm' | 'in' | 'ft'
+let bmiWUnit = 'kg';   // 'kg' | 'lbs'
+let plateGroup = 'adult';   // 'adult' | 'older' | 'preglact'
+let plateVariant = 'male';  // sub-toggle within plateGroup — see PLATE[plateGroup].variants
+let bpShowAll = false;      // each log defaults to showing only the last 5 entries
+let sugarShowAll = false;
+let weightShowAll = false;
+const LOG_DISPLAY_COUNT = 5;
+const LOG_BACKUP_REMINDER_EVERY = 15;   // nudge to back up every N entries saved, per log
+
+// ── Personal Tracking (Medicine Tracker, BP Log, Sugar Log) ─────────────────
+// All data below lives ONLY in this device's browser storage (localStorage).
+// Nothing here is transmitted, synced, or visible to anyone but the person
+// using this phone — not the project team, not the health center. This is a
+// deliberate design choice: the app helps a patient keep their own record
+// without turning the app into a data-collection tool.
+const MED_TRACKER_KEY = 'bida-med-tracker-v1';
+const BP_LOG_KEY = 'bida-bp-log-v1';
+const SUGAR_LOG_KEY = 'bida-sugar-log-v1';
+const WEIGHT_LOG_KEY = 'bida-weight-log-v1';
+
+// Tracker schema v3: medicines are {name, timesPerDay, note}, and each log entry
+// is an array of booleans (one per dose slot) rather than a single boolean.
+// getTrackerData() migrates older data saved by earlier versions of the app.
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function jsString(value){
+  return escapeHtml(JSON.stringify(String(value)));
+}
+function getTrackerData(){
+  try{
+    const raw=localStorage.getItem(MED_TRACKER_KEY);
+    const data=raw?JSON.parse(raw):{medicines:[],log:{}};
+    data.medicines=(data.medicines||[]).map(m=>{
+      const item=typeof m==='string'?{name:m,timesPerDay:1}:m||{};
+      return {
+        name:String(item.name||'').trim(),
+        timesPerDay:[1,2,3].includes(Number(item.timesPerDay))?Number(item.timesPerDay):1,
+        note:typeof item.note==='string'?item.note.slice(0,120):''
+      };
+    }).filter(m=>m.name);
+    Object.keys(data.log||{}).forEach(name=>{
+      Object.keys(data.log[name]).forEach(dt=>{
+        const v=data.log[name][dt];
+        if(typeof v==='boolean') data.log[name][dt]=[v];
+      });
+    });
+    return data;
+  }catch(e){ return {medicines:[],log:{}}; }
+}
+function saveTrackerData(data){ try{ localStorage.setItem(MED_TRACKER_KEY, JSON.stringify(data)); }catch(e){} }
+function last7Dates(){
+  const arr=[];
+  for(let i=6;i>=0;i--){ const d=new Date(); d.setDate(d.getDate()-i); arr.push(d.toISOString().slice(0,10)); }
+  return arr;
+}
+function dayLabel(dateStr){
+  const d=new Date(dateStr+'T00:00:00');
+  const days={en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], fil:['Sun','Mon','Tue','Wed','Thu','Fri','Sat']};
+  return days[lang][d.getDay()];
+}
+// Use a neutral starting value. The user must set the tracker to match their
+// own prescription or familiar routine; this is not a medication instruction.
+function defaultTimesPerDay(name){
+  return 1;
+}
+function doseSlotLabel(t, n, i){
+  if(n===1) return t.doseAM;
+  if(n===2) return i===0?t.doseAM:t.doseNoon;
+  if(n===3) return i===0?t.doseAM:(i===1?t.doseNoon:t.dosePM);
+  return '';
+}
+function addTrackedMedicine(name){
+  if(!name) return;
+  const data=getTrackerData();
+  if(!data.medicines.some(m=>m.name===name)) data.medicines.push({name, timesPerDay:defaultTimesPerDay(name), note:''});
+  saveTrackerData(data);
+  renderMedications();
+}
+// For a medicine not in the health center's MEDS list — the name is
+// whatever the patient types, so it goes straight into the tracker the
+// same way a listed medicine would (same dose picker, same log, same
+// backup), just without a matching reference entry on the Medicines page.
+function addOtherMedicine(){
+  const input=document.getElementById('tracker-add-other-input');
+  const name=input.value.trim();
+  if(!name) return;
+  addTrackedMedicine(name);
+}
+function removeTrackedMedicine(name){
+  const data=getTrackerData();
+  data.medicines=data.medicines.filter(m=>m.name!==name);
+  saveTrackerData(data);
+  renderMedications();
+}
+function setTimesPerDay(name, n){
+  const data=getTrackerData();
+  const med=data.medicines.find(m=>m.name===name);
+  if(med) med.timesPerDay=n;
+  saveTrackerData(data);
+  renderMedications();
+}
+function saveMedicineNote(name, note){
+  const data=getTrackerData();
+  const med=data.medicines.find(m=>m.name===name);
+  if(med) med.note=String(note||'').trim().slice(0,120);
+  saveTrackerData(data);
+  renderMedications();
+}
+function renderMedicineNoteField(name, note, t){
+  return '<label class="tracker-note-label">'+t.medNoteLabel+'</label>'+
+    '<input class="tracker-note-input" type="text" value="'+escapeHtml(note)+'" placeholder="'+escapeHtml(t.medNotePlaceholder)+'" maxlength="120" onchange="saveMedicineNote('+jsString(name)+',this.value)">';
+}
+function toggleIntake(name, dateStr, slot){
+  const data=getTrackerData();
+  if(!data.log[name]) data.log[name]={};
+  if(!data.log[name][dateStr]) data.log[name][dateStr]=[];
+  data.log[name][dateStr][slot]=!data.log[name][dateStr][slot];
+  saveTrackerData(data);
+  renderMedications();
+}
+// Clears check-in history only — the tracked medicines and their dose
+// schedules stay put, so this is a "start a fresh week" action, not a
+// "remove everything" one.
+function resetMedTracker(){
+  if(!confirm(T[lang].medResetConfirm)) return;
+  const data=getTrackerData();
+  data.log={};
+  saveTrackerData(data);
+  renderMedications();
+}
+
+function getLog(key){ try{ const raw=localStorage.getItem(key); return raw?JSON.parse(raw):[]; }catch(e){ return []; } }
+function saveLog(key,arr){ try{ localStorage.setItem(key, JSON.stringify(arr)); }catch(e){} }
+
+function addBPEntry(){
+  const sysEl=document.getElementById('bp-sys-input'), diaEl=document.getElementById('bp-dia-input');
+  const sys=parseInt(sysEl.value), dia=parseInt(diaEl.value);
+  if(!sys||!dia||sys<50||sys>300||dia<30||dia>200){ alert(T[lang].logInvalid); return; }
+  const log=getLog(BP_LOG_KEY);
+  const now=new Date();
+  log.unshift({date:now.toISOString().slice(0,10), time:now.toLocaleTimeString(lang==='fil'?'fil-PH':'en-US',{hour:'numeric',minute:'2-digit'}), sys, dia});
+  saveLog(BP_LOG_KEY, log.slice(0,30));
+  renderLogs();
+}
+function deleteBPEntry(idx){
+  const log=getLog(BP_LOG_KEY);
+  log.splice(idx,1);
+  saveLog(BP_LOG_KEY, log);
+  renderLogs();
+}
+
+function addSugarEntry(){
+  const valEl=document.getElementById('sugar-val-input'), typeEl=document.getElementById('sugar-type-input');
+  const val=parseInt(valEl.value), type=typeEl.value;
+  if(!val||val<20||val>800){ alert(T[lang].logInvalid); return; }
+  const log=getLog(SUGAR_LOG_KEY);
+  const now=new Date();
+  log.unshift({date:now.toISOString().slice(0,10), time:now.toLocaleTimeString(lang==='fil'?'fil-PH':'en-US',{hour:'numeric',minute:'2-digit'}), val, type});
+  saveLog(SUGAR_LOG_KEY, log.slice(0,30));
+  renderLogs();
+}
+function deleteSugarEntry(idx){
+  const log=getLog(SUGAR_LOG_KEY);
+  log.splice(idx,1);
+  saveLog(SUGAR_LOG_KEY, log);
+  renderLogs();
+}
+
+// Weight is always stored internally in kg (converting from lbs at entry
+// time if needed) so the log and chart stay consistent even if the user
+// switches their preferred display unit later.
+function addWeightEntry(){
+  const valEl=document.getElementById('weight-val-input');
+  const raw=parseFloat(valEl.value);
+  if(!raw || raw<5 || raw>1500){ alert(T[lang].logInvalid); return; }
+  const kg = bmiWUnit==='kg' ? raw : raw*0.453592;
+  const log=getLog(WEIGHT_LOG_KEY);
+  const now=new Date();
+  log.unshift({date:now.toISOString().slice(0,10), time:now.toLocaleTimeString(lang==='fil'?'fil-PH':'en-US',{hour:'numeric',minute:'2-digit'}), kg});
+  saveLog(WEIGHT_LOG_KEY, log.slice(0,60));
+  refreshWeightWidget();
+}
+function deleteWeightEntry(idx){
+  const log=getLog(WEIGHT_LOG_KEY);
+  log.splice(idx,1);
+  saveLog(WEIGHT_LOG_KEY, log);
+  refreshWeightWidget();
+}
+// Scoped to #weight-tracker-section only — not a full renderBMI() re-render —
+// so adding a weight entry or switching kg/lbs doesn't wipe out anything the
+// user is mid-typing into the separate BMI calculator form above it.
+function refreshWeightWidget(){
+  const el=document.getElementById('weight-tracker-section');
+  if(el) el.outerHTML = renderWeightLogWidget();
+}
+
+// ── Backup & Restore ─────────────────────────────────────────────────────────
+// Bundles every localStorage-only data type (medicine tracker, BP/sugar/
+// weight logs) into one downloadable JSON file, and can restore from that
+// same file. This is the actual fix for "what if I lose my data" — the
+// Print buttons on each log help with a single doctor visit, but this is
+// the only way a patient can recover everything after clearing their
+// browser, switching phones, or reinstalling the app.
+function exportBackup(){
+  const backup={
+    app:'BIDA Health App', exportedAt:new Date().toISOString(), version:1,
+    medTracker:JSON.parse(localStorage.getItem(MED_TRACKER_KEY)||'null'),
+    bpLog:JSON.parse(localStorage.getItem(BP_LOG_KEY)||'null'),
+    sugarLog:JSON.parse(localStorage.getItem(SUGAR_LOG_KEY)||'null'),
+    weightLog:JSON.parse(localStorage.getItem(WEIGHT_LOG_KEY)||'null')
+  };
+  const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download=`bida-health-backup-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+function triggerRestore(){
+  document.getElementById('restore-file-input').click();
+}
+function importBackupFile(input){
+  const file=input.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    let data;
+    try{ data=JSON.parse(e.target.result); }
+    catch(err){ alert(T[lang].restoreError); input.value=''; return; }
+    if(!data || data.app!=='BIDA Health App'){ alert(T[lang].restoreError); input.value=''; return; }
+    if(!confirm(T[lang].restoreConfirm)){ input.value=''; return; }
+    if(data.medTracker) localStorage.setItem(MED_TRACKER_KEY, JSON.stringify(data.medTracker));
+    if(data.bpLog) localStorage.setItem(BP_LOG_KEY, JSON.stringify(data.bpLog));
+    if(data.sugarLog) localStorage.setItem(SUGAR_LOG_KEY, JSON.stringify(data.sugarLog));
+    if(data.weightLog) localStorage.setItem(WEIGHT_LOG_KEY, JSON.stringify(data.weightLog));
+    input.value='';
+    alert(T[lang].restoreSuccess);
+    renderAll();
+  };
+  reader.readAsText(file);
+}
+function renderBackupSection(){
+  const t=T[lang];
+  return `<div class="tracker-section no-print">
+    <div class="tracker-header"><div class="tracker-title">💾 ${t.backupTitle}</div><div class="tracker-sub">${t.backupSub}</div></div>
+    <button class="tracker-add-btn" style="width:100%;margin-bottom:8px" onclick="exportBackup()">${t.backupBtn}</button>
+    <button class="tracker-print-btn" style="margin-top:0" onclick="triggerRestore()">${t.restoreBtn}</button>
+    <input type="file" id="restore-file-input" accept="application/json,.json" style="display:none" onchange="importBackupFile(this)">
+  </div>`;
+}
+
+// ── Anonymous usage logging ──────────────────────────────────────────────────
+// No cookies, no login, no personal data, no persistent identifier.
+const ANALYTICS_URL = '';
+
+function logVisit(module){
+  if(!ANALYTICS_URL) return;
+  try{
+    fetch(ANALYTICS_URL, {
+      method: 'POST', mode: 'no-cors',
+      body: JSON.stringify({ module: module, lang: lang, ts: Date.now() })
+    }).catch(()=>{});
+  }catch(e){ /* blocked — ignore, no retry */ }
+}
+
+// ── Navigation ────────────────────────────────────────────────────────────────
+function navigate(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>{b.classList.remove('active');b.removeAttribute('aria-current');});
+  const sw = document.getElementById('search-wrap');
+  if(page==='home'){
+    document.getElementById('page-home').classList.add('active');
+    document.getElementById('nav-home').classList.add('active');
+    document.getElementById('nav-home').setAttribute('aria-current','page');
+    sw.style.display='';
+    clearSearch(false);
+  } else if(page==='search'){
+    document.getElementById('page-search').classList.add('active');
+    sw.style.display='';
+  } else {
+    const pe=document.getElementById('page-'+page);
+    if(pe) pe.classList.add('active');
+    const ne=document.getElementById('nav-'+page);
+    if(ne){ne.classList.add('active');ne.setAttribute('aria-current','page');}
+    sw.style.display='none';
+  }
+  logVisit(page);
+  window.scrollTo(0,0);
+}
+function goHome(){ navigate('home'); }
+
+// ── Language ──────────────────────────────────────────────────────────────────
+function setLang(l){
+  lang=l;
+  document.documentElement.lang=l==='fil'?'fil':'en';
+  localStorage.setItem('bida-lang',l);
+  document.getElementById('btn-en').classList.toggle('active',l==='en');
+  document.getElementById('btn-fil').classList.toggle('active',l==='fil');
+  document.getElementById('btn-en').setAttribute('aria-pressed',String(l==='en'));
+  document.getElementById('btn-fil').setAttribute('aria-pressed',String(l==='fil'));
+  applyStaticStrings();
+  renderAll();
+}
+
+// Scales the whole app by changing the root font-size only — every text
+// size in the CSS is set in rem, so this scales every page proportionally
+// without touching layout, padding, or spacing rules.
+function setTextSize(size){
+  textSize=size;
+  localStorage.setItem('bida-textsize',size);
+  if(size==='normal') document.documentElement.removeAttribute('data-textsize');
+  else document.documentElement.setAttribute('data-textsize',size);
+  ['normal','large','xlarge'].forEach(s=>{
+    const b=document.getElementById('textsize-btn-'+s);
+    b.classList.toggle('active',s===size);
+    b.setAttribute('aria-pressed',String(s===size));
+  });
+}
+
+function applyStaticStrings(){
+  const t=T[lang];
+  document.getElementById('hdr-subtitle').textContent=t.subtitle;
+  document.getElementById('textsize-label').textContent=t.textSizeLabel;
+  document.getElementById('emergency-banner').innerHTML=t.banner;
+  document.getElementById('search-input').placeholder=t.search;
+  document.getElementById('search-input').setAttribute('aria-label',t.search);
+  document.getElementById('home-disclaimer').textContent=t.disclaimer;
+  document.getElementById('lbl-rf').innerHTML=t.lblRF;
+  document.getElementById('lbl-htn').innerHTML=t.lblHTN;
+  document.getElementById('lbl-dm').innerHTML=t.lblDM;
+  document.getElementById('lbl-dys').innerHTML=t.lblDys;
+  document.getElementById('lbl-food').innerHTML=t.lblFood;
+  document.getElementById('lbl-nearby').innerHTML=t.lblNearby;
+  document.getElementById('title-rf').innerHTML=t.titleRF;
+  document.getElementById('title-htn').innerHTML=t.titleHTN;
+  document.getElementById('title-dm').innerHTML=t.titleDM;
+  document.getElementById('title-dys').innerHTML=t.titleDys;
+  document.getElementById('title-food').innerHTML=t.titleFood;
+  document.getElementById('title-bmi').innerHTML=t.titleBMI;
+  document.getElementById('title-meds').innerHTML=t.titleMeds;
+  document.getElementById('title-logs').innerHTML=t.titleLogs;
+  document.getElementById('title-nearby').innerHTML=t.titleNearby;
+  document.getElementById('nav-lbl-home').textContent=t.navHome;
+  document.getElementById('nav-lbl-logs').textContent=t.navLogs;
+  document.getElementById('nav-lbl-meds').textContent=t.lblMeds;
+  document.getElementById('nav-lbl-bmi').innerHTML=t.titleBMI;
+  document.getElementById('lbl-howto-link').textContent=t.howtoLinkLabel;
+  document.getElementById('title-howto').textContent=t.howtoLinkLabel;
+  document.getElementById('lbl-disclaimer-link').textContent=t.disclaimerLink;
+  document.getElementById('title-disclaimer').textContent=t.disclaimerTitle;
+  document.getElementById('howto-intro').textContent=t.howtoIntro;
+  for(let i=1;i<=8;i++){
+    document.getElementById('howto'+i+'-title').textContent=t['howto'+i+'Title'];
+    document.getElementById('howto'+i+'-body').textContent=t['howto'+i+'Body'];
+  }
+  document.getElementById('howtoRefs-title').textContent=t.howtoRefsTitle;
+  document.getElementById('howtoRefs-intro').textContent=t.howtoRefsIntro;
+  document.getElementById('howtoRefs-list').innerHTML=t.howtoRefsList.map(r=>`<li>${r}</li>`).join('');
+  document.getElementById('howtoRefs-note').textContent=t.howtoRefsNote;
+  document.getElementById('app-inquiries-line').textContent=t.inquiriesLabel;
+  document.querySelectorAll('.back-btn').forEach(b=>b.setAttribute('aria-label',lang==='fil'?'Bumalik sa Home':'Back to Home'));
+}
+
+// ── Search ────────────────────────────────────────────────────────────────────
+const SEARCH_IDX = [
+  {sec:'red-flags',kw:['stroke','face drooping','weakness','numbness','speech','headache','dizziness','tabingi','panghihina','pamamanhid','sakit ng ulo','pagkahilo']},
+  {sec:'red-flags',kw:['chest pain','heart attack','tightness','jaw','shortness of breath','sweating','sakit ng dibdib','paninikip','panga','hirap huminga','pawis']},
+  {sec:'red-flags',kw:['high blood','hypertensive emergency','mataas na BP']},
+  {sec:'red-flags',kw:['diabetes emergency','hypoglycemia','shaking','confusion','pagkalito','panginginig']},
+  {sec:'hypertension',kw:['hypertension','blood pressure','BP','altapresyon','presyon ng dugo']},
+  {sec:'diabetes',kw:['diabetes','sugar','insulin','diyabetis','asukal','blood sugar']},
+  {sec:'dyslipidemia',kw:['cholesterol','dyslipidemia','lipid','kolesterol','taba']},
+  {sec:'food',kw:['food','nutrition','pinggang pinoy','vegetable','rice','protein','pagkain','nutrisyon','gulay','kanin']},
+  {sec:'bmi',kw:['bmi','body mass','weight','timbang','katawan']},
+  {sec:'medications',kw:['medicine','medication','losartan','metformin','amlodipine','atorvastatin','gamot','dosis','dose']},
+  {sec:'nearby',kw:['health center','clinic','bayanan','alabang','ospital','klinika','emergency','137','hotline','ambulance','irespond','ambulansya']}
+];
+const SEC_NAMES = {
+  en:{'red-flags':'Red Flags',hypertension:'Hypertension',diabetes:'Diabetes',dyslipidemia:'Cholesterol',food:'Food',bmi:'BMI & Weight',medications:'Medicines',nearby:'Nearby Care & Emergency'},
+  fil:{'red-flags':'Mga Babala',hypertension:'Altapresyon',diabetes:'Diyabetis',dyslipidemia:'Kolesterol',food:'Pagkain',bmi:'BMI at Timbang',medications:'Mga Gamot',nearby:'Malapit na Tulong at Emergency'}
+};
+const SEC_DESC = {
+  en:{'red-flags':'Symptom red flags and when to seek care','hypertension':'Managing high blood pressure','diabetes':'Managing diabetes and foot care','dyslipidemia':'Managing cholesterol','food':'Pinggang Pinoy plate guide','bmi':'BMI calculator and weight tracker','medications':'Personal medicine tracker','nearby':'Muntinlupa health centers and emergency hotline numbers'},
+  fil:{'red-flags':'Mga babala ng sintomas at kung kailan magpatingin','hypertension':'Pamamahala ng altapresyon','diabetes':'Pamamahala ng diyabetis at pag-aalaga ng paa','dyslipidemia':'Pamamahala ng kolesterol','food':'Pinggang Pinoy','bmi':'BMI calculator at weight tracker','medications':'Pansariling medicine tracker','nearby':'Mga health center at mga numero sa emergency sa Muntinlupa'}
+};
+
+function handleSearch(val){
+  document.getElementById('search-clear').style.display=val.length?'block':'none';
+  if(!val.trim()){navigate('home');return;}
+  navigate('search');
+  const q=val.trim().toLowerCase();
+  const matched=new Set();
+  SEARCH_IDX.forEach(item=>{if(item.kw.some(k=>k.toLowerCase().includes(q)||q.includes(k.toLowerCase())))matched.add(item.sec);});
+  const list=document.getElementById('search-results-list');
+  if(!matched.size){list.innerHTML=`<div class="disclaimer">${T[lang].noResults}</div>`;return;}
+  list.innerHTML=[...matched].map(s=>`<button type="button" class="search-result-card" onclick="navigate('${s}')"><div class="result-section">${SEC_NAMES[lang][s]}</div><div class="result-title">${SEC_DESC[lang][s]}</div></button>`).join('');
+}
+function clearSearch(nav=true){
+  document.getElementById('search-input').value='';
+  document.getElementById('search-clear').style.display='none';
+  if(nav) navigate('home');
+}
+
+// ── Collapsibles ──────────────────────────────────────────────────────────────
+function toggleCard(id){const card=document.getElementById(id);const open=card.classList.toggle('open');const btn=card.querySelector('.symptom-card-header');if(btn)btn.setAttribute('aria-expanded',String(open));}
+
+// ── Renderers ─────────────────────────────────────────────────────────────────
+function renderAll(){
+  renderDisclaimer();
+  renderRedFlags();
+  renderHTN();
+  renderDM();
+  renderDys();
+  renderFood();
+  renderBMI();
+  renderBMICalc();
+  renderMedications();
+  renderLogs();
+  renderNearby();
+}
+
+function renderDisclaimer(){
+  const t=T[lang];
+  const sections=[
+    [t.disclaimerPurposeTitle,t.disclaimerPurposeBody],
+    [t.disclaimerNoDiagnosisTitle,t.disclaimerNoDiagnosisBody],
+    [t.disclaimerResultsTitle,t.disclaimerResultsBody],
+    [t.disclaimerEmergencyTitle,t.disclaimerEmergencyBody],
+    [t.disclaimerProfessionalTitle,t.disclaimerProfessionalBody],
+    [t.disclaimerPrivacyTitle,t.disclaimerPrivacyBody],
+    [t.disclaimerTermsTitle,t.disclaimerTermsBody],
+    [t.disclaimerOwnershipTitle,t.disclaimerOwnershipBody],
+    [t.disclaimerStatusTitle,t.disclaimerStatusBody],
+    [t.disclaimerMaintenanceTitle,t.disclaimerMaintenanceBody]
+  ];
+  document.getElementById('disclaimer-content').innerHTML=
+    `<div class="legal-lead">${t.disclaimerIntro}</div>`+
+    sections.map(([title,body])=>`<section class="legal-section"><h3>${title}</h3><p>${body}</p></section>`).join('')+
+    `<div class="legal-ack">${t.disclaimerAcknowledge}</div>`;
+}
+
+function renderRedFlags(){
+  const t=T[lang];
+  document.getElementById('red-flags-cards').innerHTML=RF.map((c,i)=>{
+    const d=c[lang];
+    const signsHtml=`<div class="card-section-label">${t.signsSym}</div><ul class="checklist">${d.signs.map(s=>`<li>${s}</li>`).join('')}</ul>`;
+    const dangerHtml=d.danger?`<div class="danger-strip"><div class="strip-label">${t.dangerSigns}</div><ul>${d.danger.map(s=>`<li>${s}</li>`).join('')}</ul></div>`:'';
+    const actionHtml=`<div class="action-strip"><div class="strip-label">✔ ${t.whatToDo}</div><p style="font-size:0.88rem;color:#1e3a8a;margin:0">${d.action}</p></div>`+
+      (c.emergency?`<a href="tel:137175" class="go-now-btn">${t.callNow}</a>`:'');
+    const border=c.emergency?'border-color:#fca5a5':'';
+    return `<div class="symptom-card" id="rf-${i}" style="${border}">
+      <button type="button" class="symptom-card-header" onclick="toggleCard('rf-${i}')" aria-expanded="false" aria-controls="rf-${i}-body">
+        <div class="symptom-card-title">🚨 ${d.title}</div>
+        <span class="chevron" aria-hidden="true">⌄</span>
+      </button>
+      <div class="symptom-card-body" id="rf-${i}-body">${signsHtml}${dangerHtml}${actionHtml}</div>
+    </div>`;
+  }).join('');
+}
+
+// Renders a condition page from keyed T strings (e.g. sectionKeys entry
+// {key:'htnWhat',icon:'❓'} pulls T[lang].htnWhatTitle / htnWhatBody). To edit
+// this content, find the matching key in the T.en / T.fil object above.
+function renderInfoSections(containerId, introKey, sectionKeys, prefixHtml){
+  const t=T[lang];
+  let html = prefixHtml || '';
+  const intro = t[introKey];
+  html += intro ? `<div class="disclaimer mb-14 no-print">${intro}</div>` : '';
+  html += sectionKeys.map((s,i)=>{
+    const id=containerId+'-'+i;
+    const title = t[s.key+'Title'];
+    const body = t[s.key+'Body'];
+    return `<div class="symptom-card no-print" id="${id}">
+      <button type="button" class="symptom-card-header" onclick="toggleCard('${id}')" aria-expanded="false" aria-controls="${id}-body">
+        <div class="symptom-card-title">${s.icon} ${title}</div>
+        <span class="chevron" aria-hidden="true">⌄</span>
+      </button>
+      <div class="symptom-card-body" id="${id}-body"><p style="font-size:0.87rem;color:#374151;line-height:1.55;padding-top:10px">${body}</p></div>
+    </div>`;
+  }).join('');
+  document.getElementById(containerId+'-content').innerHTML=html;
+}
+
+// Absolute danger/caution thresholds, not personal treatment targets (the
+// app already tells users their individual target may differ — see
+// htnNumbersBody/dmNumbersBody). These flag readings that are widely
+// recognized as concerning regardless of a person's own goal.
+// BP: 180/120 = hypertensive crisis (AHA/WHO/PSH); 140/90 = Stage 2 HTN.
+function bpFlag(sys, dia){
+  if(sys>=180 || dia>=120) return 'danger';
+  if(sys>=140 || dia>=90) return 'warn';
+  return null;
+}
+// Sugar: <70 = hypoglycemia (universal cutoff); >=250 = urgent-attention
+// ceiling for either test type; 126 (fasting) / 200 (random) = standard
+// ADA/WHO elevated thresholds.
+function sugarFlag(val, type){
+  if(val<70) return 'lowDanger';
+  if(val>=250) return 'danger';
+  if(type==='fasting' && val>=126) return 'warn';
+  if((type==='random' || type==='postmeal') && val>=200) return 'warn';
+  return null;
+}
+function flagTag(t, flag){
+  if(flag==='danger') return `<span class="log-flag log-danger">${t.flagDanger}</span>`;
+  if(flag==='lowDanger') return `<span class="log-flag log-danger">${t.flagLowDanger}</span>`;
+  if(flag==='warn') return `<span class="log-flag log-warn">${t.flagWarn}</span>`;
+  return '';
+}
+function flagClass(flag){
+  if(flag==='danger' || flag==='lowDanger') return 'log-danger';
+  if(flag==='warn') return 'log-warn';
+  return '';
+}
+
+function toggleBPShowAll(){
+  bpShowAll=!bpShowAll;
+  renderLogs();
+}
+function renderBPLogWidget(){
+  const t=T[lang];
+  const log=getLog(BP_LOG_KEY);
+  const visible=bpShowAll?log:log.slice(0,LOG_DISPLAY_COUNT);
+  const entries=visible.map((e,vi)=>{
+    const i=log.indexOf(e);
+    const flag=bpFlag(e.sys,e.dia);
+    const when=e.time?`${e.date} · ${e.time}`:e.date;
+    return `<div class="log-entry"><span class="log-date">${when}</span><span class="log-value ${flagClass(flag)}">${e.sys}/${e.dia}</span>${flagTag(t,flag)}<button class="log-delete no-print" onclick="deleteBPEntry(${i})">✕</button></div>`;
+  }).join('') || `<p class="tracker-empty-note">${t.logNoEntries}</p>`;
+  const viewAllBtn=log.length>LOG_DISPLAY_COUNT
+    ? `<button class="log-viewall-btn no-print" onclick="toggleBPShowAll()">${bpShowAll?t.bpShowLess:t.bpViewAll.replace('{count}',log.length)}</button>` : '';
+  const backupReminder=(log.length>0 && log.length%LOG_BACKUP_REMINDER_EVERY===0)
+    ? `<div class="tracker-reminder no-print">💾 ${t.bpBackupReminder.replace('{count}',log.length)} <button class="log-viewall-btn" style="margin-top:4px" onclick="exportBackup()">${t.backupNow}</button></div>` : '';
+  const crisisAdvice=(log[0] && bpFlag(log[0].sys,log[0].dia)==='danger')?`<div class="danger-strip no-print"><div class="strip-label">⚠ ${t.flagDanger}</div><p style="font-size:0.84rem;color:#7f1d1d">${t.bpCrisisAdvice}</p></div>`:'';
+  return `<div class="tracker-section">
+    <div class="tracker-header"><div class="tracker-title">📊 ${t.bpLogTitle}</div><div class="tracker-sub">${t.bpLogSub}</div></div>
+    <div class="log-input-row no-print">
+      <input type="number" id="bp-sys-input" placeholder="${t.bpSysPlaceholder}">
+      <span class="log-slash">/</span>
+      <input type="number" id="bp-dia-input" placeholder="${t.bpDiaPlaceholder}">
+      <button onclick="addBPEntry()">${t.logAdd}</button>
+    </div>
+    ${crisisAdvice}
+    ${backupReminder}
+    ${entries}
+    ${viewAllBtn}
+    ${log.length?`<button class="tracker-print-btn no-print" onclick="window.print()">🖨️ ${t.bpLogPrintBtn}</button>`:''}
+  </div>`;
+}
+
+function toggleSugarShowAll(){
+  sugarShowAll=!sugarShowAll;
+  renderLogs();
+}
+function renderSugarLogWidget(){
+  const t=T[lang];
+  const log=getLog(SUGAR_LOG_KEY);
+  const visible=sugarShowAll?log:log.slice(0,LOG_DISPLAY_COUNT);
+  const entries=visible.map(e=>{
+    const i=log.indexOf(e);
+    const flag=sugarFlag(e.val,e.type);
+    const when=e.time?`${e.date} · ${e.time}`:e.date;
+    const typeLabel=e.type==='fasting'?t.sugarFasting:(e.type==='postmeal'?t.sugarPostMeal:t.sugarRandom);
+    return `<div class="log-entry"><span class="log-date">${when}</span><span class="log-value ${flagClass(flag)}">${e.val} mg/dL</span><span class="log-type-tag">${typeLabel}</span>${flagTag(t,flag)}<button class="log-delete no-print" onclick="deleteSugarEntry(${i})">✕</button></div>`;
+  }).join('') || `<p class="tracker-empty-note">${t.logNoEntries}</p>`;
+  const viewAllBtn=log.length>LOG_DISPLAY_COUNT
+    ? `<button class="log-viewall-btn no-print" onclick="toggleSugarShowAll()">${sugarShowAll?t.sugarShowLess:t.sugarViewAll.replace('{count}',log.length)}</button>` : '';
+  const backupReminder=(log.length>0 && log.length%LOG_BACKUP_REMINDER_EVERY===0)
+    ? `<div class="tracker-reminder no-print">💾 ${t.sugarBackupReminder.replace('{count}',log.length)} <button class="log-viewall-btn" style="margin-top:4px" onclick="exportBackup()">${t.backupNow}</button></div>` : '';
+  const lowAdvice=(log[0] && log[0].val<70)?`<div class="danger-strip no-print"><div class="strip-label">⚠ ${t.flagLowDanger}</div><p style="font-size:0.84rem;color:#7f1d1d;margin-bottom:6px">${t.sugarLowAdvice}</p><p style="font-size:0.84rem;color:#7f1d1d">${t.sugarLowEmergency}</p></div>`:'';
+  return `<div class="tracker-section">
+    <div class="tracker-header"><div class="tracker-title">🩸 ${t.sugarLogTitle}</div><div class="tracker-sub">${t.sugarLogSub}</div></div>
+    <div class="log-input-row no-print">
+      <input type="number" id="sugar-val-input" placeholder="${t.sugarValPlaceholder}">
+      <select id="sugar-type-input" aria-label="${lang==='fil'?'Oras ng pagsukat':'Measurement timing'}"><option value="fasting">${t.sugarFasting}</option><option value="postmeal">${t.sugarPostMeal}</option><option value="random">${t.sugarRandom}</option></select>
+      <button onclick="addSugarEntry()">${t.logAdd}</button>
+    </div>
+    ${lowAdvice}
+    ${backupReminder}
+    ${entries}
+    ${viewAllBtn}
+    ${log.length?`<button class="tracker-print-btn no-print" onclick="window.print()">🖨️ ${t.sugarLogPrintBtn}</button>`:''}
+  </div>`;
+}
+
+// Simple dependency-free line chart (inline SVG) plotting up to the last 14
+// weight entries in chronological order. No charting library, to keep the
+// app a single self-contained file.
+function renderWeightChart(log){
+  const t=T[lang];
+  const chronological=log.slice().reverse();
+  const recent=chronological.slice(-14);
+  const vals=recent.map(e=>bmiWUnit==='kg'?e.kg:e.kg*2.20462);
+  const minV=Math.min(...vals), maxV=Math.max(...vals);
+  const range=Math.max(maxV-minV, 1);
+  const padTop=14, padBottom=14, padSide=10, w=300, h=110;
+  const plotH=h-padTop-padBottom;
+  const stepX=recent.length>1?(w-padSide*2)/(recent.length-1):0;
+  const points=vals.map((v,i)=>({
+    x: padSide+i*stepX,
+    y: padTop+plotH-((v-minV)/range)*plotH
+  }));
+  const polyPoints=points.map(p=>`${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+  const dots=points.map(p=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="#1d4ed8"/>`).join('');
+  const unitLabel=bmiWUnit==='kg'?t.bmiUnitKg:t.bmiUnitLbs;
+  return `<div style="margin-bottom:14px">
+    <svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block" role="img" aria-label="Weight trend chart">
+      <polyline points="${polyPoints}" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      ${dots}
+      <text x="${padSide}" y="10" font-size="9" fill="#6b7280">${maxV.toFixed(1)} ${unitLabel}</text>
+      <text x="${padSide}" y="${h-2}" font-size="9" fill="#6b7280">${minV.toFixed(1)} ${unitLabel}</text>
+    </svg>
+  </div>`;
+}
+
+function toggleWeightShowAll(){
+  weightShowAll=!weightShowAll;
+  refreshWeightWidget();
+}
+function renderWeightLogWidget(){
+  const t=T[lang];
+  const log=getLog(WEIGHT_LOG_KEY);
+  const unitLabel=bmiWUnit==='kg'?t.bmiUnitKg:t.bmiUnitLbs;
+  const visible=weightShowAll?log:log.slice(0,LOG_DISPLAY_COUNT);
+  const entries=visible.map(e=>{
+    const i=log.indexOf(e);
+    const disp=bmiWUnit==='kg'?e.kg:e.kg*2.20462;
+    const when=e.time?`${e.date} · ${e.time}`:e.date;
+    return `<div class="log-entry"><span class="log-date">${when}</span><span class="log-value">${disp.toFixed(1)} ${unitLabel}</span><button class="log-delete no-print" onclick="deleteWeightEntry(${i})">✕</button></div>`;
+  }).join('') || `<p class="tracker-empty-note">${t.logNoEntries}</p>`;
+  const viewAllBtn=log.length>LOG_DISPLAY_COUNT
+    ? `<button class="log-viewall-btn no-print" onclick="toggleWeightShowAll()">${weightShowAll?t.weightShowLess:t.weightViewAll.replace('{count}',log.length)}</button>` : '';
+  const backupReminder=(log.length>0 && log.length%LOG_BACKUP_REMINDER_EVERY===0)
+    ? `<div class="tracker-reminder no-print">💾 ${t.weightBackupReminder.replace('{count}',log.length)} <button class="log-viewall-btn" style="margin-top:4px" onclick="exportBackup()">${t.backupNow}</button></div>` : '';
+  const chart=log.length>=2 ? renderWeightChart(log) : `<p class="tracker-empty-note no-print">${t.weightChartEmpty}</p>`;
+  return `<div class="tracker-section" id="weight-tracker-section">
+    <div class="tracker-header"><div class="tracker-title">⚖️ ${t.weightLogTitle}</div><div class="tracker-sub">${t.weightLogSub}</div></div>
+    <div class="disclaimer mb-14" style="font-size:0.78rem">${t.safeWeightNote}</div>
+    ${chart}
+    <div class="log-input-row no-print">
+      <input type="number" id="weight-val-input" placeholder="${t.weightValPlaceholder} (${unitLabel})" step="0.1">
+      <button onclick="addWeightEntry()">${t.logAdd}</button>
+    </div>
+    ${backupReminder}
+    ${entries}
+    ${viewAllBtn}
+    ${log.length?`<button class="tracker-print-btn no-print" onclick="window.print()">🖨️ ${t.weightLogPrintBtn}</button>`:''}
+  </div>`;
+}
+
+function renderHTN(){ renderInfoSections('hypertension', 'htnIntro', HTN_SECTIONS); }
+function renderDM(){ renderInfoSections('diabetes', 'dmIntro', DM_SECTIONS); }
+function renderDys(){ renderInfoSections('dyslipidemia', 'dysIntro', DYS_SECTIONS); }
+
+// BP and blood sugar logs live on their own "My Logs" page (not embedded in
+// the Hypertension/Diabetes pages) so the input fields only exist once in
+// the DOM — the widgets use fixed element IDs (bp-sys-input, etc.), so
+// rendering them twice would create duplicate IDs and break input handling.
+function renderLogs(){
+  const t=T[lang];
+  let html = `<div class="disclaimer mb-14 no-print">${t.logsDataNote}</div><div class="disclaimer mb-14 no-print">${t.logsClinicalNote}</div>`;
+  html += renderBPLogWidget();
+  html += renderSugarLogWidget();
+  html += renderBackupSection();
+  document.getElementById('logs-content').innerHTML = html;
+}
+
+function renderFood(){
+  const t=T[lang];
+  const meals=MEALS[lang];
+  const tips=TIPS[lang];
+  const plateOptions=['adult','older','preglact'];
+  document.getElementById('food-content').innerHTML=
+    `<div class="info-card"><div class="info-card-title">🍽️ ${t.plateTitle}</div><p style="font-size:0.8rem;color:var(--muted);margin-bottom:10px">${t.plateNote}</p>`+
+    `<label style="display:block;font-size:0.8rem;font-weight:600;color:var(--text);margin-bottom:5px">${t.plateSelectLabel}</label>`+
+    `<select id="plate-group-select" onchange="setPlateGroup(this.value)" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:0.9rem;color:var(--text);background:#f9fafb;margin-bottom:14px">`+
+    plateOptions.map(g=>`<option value="${g}"${g===plateGroup?' selected':''}>${lang==='en'?PLATE[g].label_en:PLATE[g].label_fil}</option>`).join('')+
+    `</select>`+
+    `<div id="plate-group-body">${renderPlateGroup()}</div>`+
+    `</div><div class="info-card"><div class="info-card-title">🛒 ${t.mealsTitle}</div><ul class="checklist">${meals.map(m=>`<li>${m}</li>`).join('')}</ul></div>`+
+    `<div class="info-card"><div class="info-card-title">💡 ${t.tipsTitle}</div><ul class="checklist">${tips.map(tp=>`<li>${tp}</li>`).join('')}</ul></div>`;
+}
+
+// Renders the plate visual + Go/Grow/Glow cards + tips + sample meal for the
+// currently selected plateGroup/plateVariant. Scoped to #plate-group-body
+// (not a full renderFood() re-render) so switching the toggle doesn't wipe
+// out anything already typed elsewhere on the page.
+function renderPlateGroup(){
+  const t=T[lang];
+  const suf = lang==='en' ? '_en' : '_fil';
+  const g=PLATE[plateGroup];
+  if(!g.variants.includes(plateVariant)) plateVariant=g.variants[0];
+  const variantLabel = lang==='en' ? g.variantLabel_en : g.variantLabel_fil;
+  const v=g[plateVariant];
+  const ggg=GGG[lang];
+  const isPreglact = plateGroup==='preglact';
+
+  const variantToggle = `<div class="unit-seg" style="margin-bottom:14px">${g.variants.map(vr=>`<button onclick="setPlateVariant('${vr}')" class="${vr===plateVariant?'active':''}">${variantLabel[vr]}</button>`).join('')}</div>`;
+
+  const plateVisual = `<div class="ggg-plate-wrap"><div class="ggg-plate">`+
+    `<div class="ggg-quad ggg-grow">GROW</div><div class="ggg-quad ggg-glow-fruit">GLOW</div>`+
+    `<div class="ggg-quad ggg-go">GO</div><div class="ggg-quad ggg-glow-veg">GLOW</div>`+
+    `</div></div>`;
+
+  const metaRow = `<div class="ggg-meta-row">`+
+    `<div class="ggg-meta"><div class="ggg-meta-label">💧 ${t.plateWaterLabel}</div><div class="ggg-meta-value">${v['water'+suf]}</div></div>`+
+    `<div class="ggg-meta"><div class="ggg-meta-label">🥛 ${t.plateMilkLabel}</div><div class="ggg-meta-value">${v['milk'+suf]}</div></div>`+
+    `<div class="ggg-meta"><div class="ggg-meta-label">🔥 ${t.plateKcalLabel}</div><div class="ggg-meta-value">${v.kcal}</div></div>`+
+    `</div>`;
+
+  const growExtra = isPreglact ? `<p>${ggg.growExtraPreglact}</p>` : '';
+  const glowExtra = isPreglact ? `<p>${ggg.glowExtraPreglact}</p>` : '';
+
+  const cards =
+    `<div class="ggg-card ggg-go"><div class="ggg-card-title">${ggg.go.title}</div><p>${ggg.go.body}</p><div class="ggg-portion">${v['go'+suf]}</div></div>`+
+    `<div class="ggg-card ggg-grow"><div class="ggg-card-title">${ggg.grow.title}</div><p>${ggg.grow.body}</p>${growExtra}<div class="ggg-portion">${v['grow'+suf]}</div></div>`+
+    `<div class="ggg-card ggg-glow-veg"><div class="ggg-card-title">${ggg.glowVeg.title}</div><p>${ggg.glowVeg.body}</p>${glowExtra}<div class="ggg-portion">${v['glowVeg'+suf]}</div></div>`+
+    `<div class="ggg-card ggg-glow-fruit"><div class="ggg-card-title">${ggg.glowFruit.title}</div><p>${ggg.glowFruit.body}</p><div class="ggg-portion">${v['glowFruit'+suf]}</div></div>`;
+
+  const tipsArr = PLATE_TIPS['common'+suf].concat(isPreglact ? PLATE_TIPS['preglact'+suf] : PLATE_TIPS['adultOlder'+suf]);
+  const tipsHtml = `<div class="info-card" style="margin-top:10px"><div class="info-card-title">✅ ${t.plateTipsTitle}</div><ul class="checklist">${tipsArr.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+
+  const meal=PLATE_MEAL[lang];
+  const mealHtml = `<div class="info-card"><div class="info-card-title">🍛 ${t.plateMealTitle}</div>`+
+    `<p style="font-size:0.78rem;color:var(--muted);margin-bottom:8px">${meal.note}</p>`+
+    `<p><b>${t.plateMealBreakfast}:</b> ${meal.breakfast}</p>`+
+    `<p><b>${t.plateMealLunch}:</b> ${meal.lunch}</p>`+
+    `<p><b>${t.plateMealDinner}:</b> ${meal.dinner}</p>`+
+    `<p><b>${t.plateMealAM}:</b> ${meal.amSnack} &nbsp; <b>${t.plateMealPM}:</b> ${meal.pmSnack}</p>`+
+    `</div>`;
+
+  return variantToggle + plateVisual + metaRow + cards +
+    `<p style="font-size:0.72rem;color:var(--muted);margin:8px 0 0">${t.plateSourceNote}</p>` +
+    tipsHtml + mealHtml;
+}
+
+function setPlateGroup(g){
+  plateGroup=g;
+  plateVariant=PLATE[g].variants[0];
+  document.getElementById('plate-group-body').innerHTML = renderPlateGroup();
+}
+function setPlateVariant(v){
+  plateVariant=v;
+  document.getElementById('plate-group-body').innerHTML = renderPlateGroup();
+}
+
+// BMI Calculator — renders into #bmicalc-content, which sits above the
+// Weight tracker (#bmi-content, see renderBMI() below) on the same
+// bottom-nav "BMI & Weight" page.
+function renderBMICalc(){
+  const t=T[lang];
+  const hCm=bmiHUnit==='cm', hIn=bmiHUnit==='in', hFt=bmiHUnit==='ft';
+  const wKgA=bmiWUnit==='kg';
+  document.getElementById('bmicalc-content').innerHTML=
+    `<div class="bmi-form"><div style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:12px">⚖️ ${t.bmiTitle}</div>`+
+    `<div class="disclaimer" style="margin-bottom:14px;font-size:0.8rem">${t.bmiDisclaimer}</div>`+
+    `<label>${t.bmiAge}</label><input type="number" id="bmi-age" min="1" max="120" placeholder="e.g. 30">`+
+    `<label>${t.bmiH}</label>`+
+    `<div class="unit-seg"><button onclick="setBmiHUnit('cm')" id="hbtn-cm" class="${hCm?'active':''}">${t.bmiUnitCm}</button><button onclick="setBmiHUnit('in')" id="hbtn-in" class="${hIn?'active':''}">${t.bmiUnitIn}</button><button onclick="setBmiHUnit('ft')" id="hbtn-ft" class="${hFt?'active':''}">${t.bmiUnitFt}</button></div>`+
+    `<div id="bmi-h-cm"${hCm?'':' style="display:none"'}><input type="number" id="bmi-h-cm-val" min="50" max="250" placeholder="e.g. 160"></div>`+
+    `<div id="bmi-h-in"${hIn?'':' style="display:none"'}><input type="number" id="bmi-h-in-val" min="20" max="100" placeholder="e.g. 63"></div>`+
+    `<div id="bmi-h-ft"${hFt?'':' style="display:none"'}><div class="bmi-ft-row"><div style="flex:1"><input type="number" id="bmi-h-ft-ft" min="1" max="8" placeholder="e.g. 5"><span class="ft-sublabel">${t.bmiFtLabel}</span></div><div style="flex:1"><input type="number" id="bmi-h-ft-in" min="0" max="11" placeholder="0–11"><span class="ft-sublabel">${t.bmiInLabel}</span></div></div><div style="height:4px"></div></div>`+
+    `<label>${t.bmiW}</label>`+
+    `<div class="unit-seg"><button onclick="setBmiWUnit('kg')" id="wbtn-kg" class="${wKgA?'active':''}">${t.bmiUnitKg}</button><button onclick="setBmiWUnit('lbs')" id="wbtn-lbs" class="${wKgA?'':'active'}">${t.bmiUnitLbs}</button></div>`+
+    `<input type="number" id="bmi-w-val" min="5" max="1500" placeholder="e.g. 65">`+
+    `<button class="bmi-calc-btn" onclick="calcBMI()">${t.bmiBtn}</button><div class="bmi-result" id="bmi-result"></div></div>`;
+}
+
+// Weight tracker — renders into #bmi-content, below the BMI Calculator
+// (#bmicalc-content) on the same page. Shares the bmiWUnit state with the
+// calculator's kg/lbs toggle, via setBmiWUnit()/refreshWeightWidget().
+function renderBMI(){
+  document.getElementById('bmi-content').innerHTML =
+    renderWeightLogWidget();
+}
+
+function setBmiHUnit(u){
+  bmiHUnit=u;
+  ['cm','in','ft'].forEach(x=>{
+    document.getElementById('bmi-h-'+x).style.display=(x===u?'':'none');
+    const b=document.getElementById('hbtn-'+x);
+    if(b) b.classList.toggle('active',x===u);
+  });
+}
+
+function setBmiWUnit(u){
+  bmiWUnit=u;
+  ['kg','lbs'].forEach(x=>{
+    const b=document.getElementById('wbtn-'+x);
+    if(b) b.classList.toggle('active',x===u);
+  });
+  refreshWeightWidget();
+}
+
+function calcBMI(){
+  const t=T[lang];
+  const res=document.getElementById('bmi-result');
+  res.style.display='block';
+  res.style.background='';
+  res.style.borderColor='';
+  const age=parseFloat(document.getElementById('bmi-age').value);
+  let hCm=0;
+  if(bmiHUnit==='cm'){
+    hCm=parseFloat(document.getElementById('bmi-h-cm-val').value)||0;
+  } else if(bmiHUnit==='in'){
+    hCm=(parseFloat(document.getElementById('bmi-h-in-val').value)||0)*2.54;
+  } else {
+    const ft=parseFloat(document.getElementById('bmi-h-ft-ft').value)||0;
+    const ex=parseFloat(document.getElementById('bmi-h-ft-in').value)||0;
+    hCm=(ft*12+ex)*2.54;
+  }
+  const wRaw=parseFloat(document.getElementById('bmi-w-val').value)||0;
+  const wKg=bmiWUnit==='kg'?wRaw:wRaw*0.453592;
+  if(!age||hCm<50||wKg<5){res.innerHTML=`<p style="color:var(--danger);font-weight:600">${t.bmiInvalid}</p>`;return;}
+  if(age<18){res.style.background='#fffbeb';res.style.borderColor='#fde68a';res.innerHTML=`<div style="font-size:0.92rem;color:#92400e;font-weight:600">${t.bmiTeen}</div>`;return;}
+  const hM=hCm/100;
+  const bmi=wKg/(hM*hM);
+  // Asia-Pacific cutoffs (WHO WPRO 2000)
+  const CATS=[
+    {label:t.bmiUnder,  min:0,    max:18.5, col:'#2563eb', rec:t.bmiRecUnder},
+    {label:t.bmiNormal, min:18.5, max:23.0, col:'#0f766e', rec:t.bmiRecNormal},
+    {label:t.bmiOver,   min:23.0, max:25.0, col:'#d97706', rec:t.bmiRecOver},
+    {label:t.bmiObese1, min:25.0, max:30.0, col:'#ea580c', rec:t.bmiRecObese1},
+    {label:t.bmiObese2, min:30.0, max:999,  col:'#dc2626', rec:t.bmiRecObese2},
+  ];
+  const RANGES=['< 18.5','18.5 – 22.9','23.0 – 24.9','25.0 – 29.9','≥ 30.0'];
+  let ci=CATS.findIndex(c=>bmi>=c.min&&bmi<c.max);
+  if(ci<0)ci=4;
+  const cat=CATS[ci];
+  const rangeRows=CATS.map((c,i)=>
+    `<tr${i===ci?' class="bmi-hl"':''}><td>${c.label}</td><td>${RANGES[i]}</td></tr>`
+  ).join('');
+  const healthyLowerKg=18.5*hM*hM;
+  const healthyUpperKg=22.9*hM*hM;
+  let weightDifference='';
+  if(bmi>=23.0){
+    weightDifference=`<div class="bmi-weight-note">${t.bmiWeightOver.replace('{kg}',(wKg-healthyUpperKg).toFixed(1))}</div>`;
+  } else if(bmi<18.5){
+    weightDifference=`<div class="bmi-weight-note">${t.bmiWeightUnder.replace('{kg}',(healthyLowerKg-wKg).toFixed(1))}</div>`;
+  }
+  res.innerHTML=
+    `<div class="bmi-number" style="color:${cat.col}">${bmi.toFixed(1)}</div>`+
+    `<div class="bmi-category" style="color:${cat.col}">${cat.label}</div>`+
+    `<table class="bmi-range-table"><thead><tr><th>${t.bmiCatCol}</th><th>${t.bmiRangeCol}</th></tr></thead><tbody>${rangeRows}</tbody></table>`+
+    weightDifference+
+    `<div class="bmi-rec">&#128161; ${cat.rec}</div>`+
+    `<div class="bmi-note">${t.bmiResultNote}</div>`;
+}
+
+function renderMedTracker(){
+  const t=T[lang];
+  const data=getTrackerData();
+  const dates=last7Dates();
+  const today=dates[dates.length-1];
+  const allMedNames=[];
+  MEDS.forEach(g=>g.items.forEach(m=>allMedNames.push(m.name)));
+  const trackedNames=data.medicines.map(m=>m.name);
+  const availableToAdd=allMedNames.filter(n=>!trackedNames.includes(n));
+
+  const missedToday=data.medicines.filter(m=>{
+    const todayLog=(data.log[m.name] && data.log[m.name][today]) || [];
+    for(let i=0;i<m.timesPerDay;i++){ if(!todayLog[i]) return true; }
+    return false;
+  }).map(m=>m.name);
+  const reminderHtml=(data.medicines.length && missedToday.length)
+    ? `<div class="tracker-reminder">🔔 ${t.medReminderBanner.replace('{meds}', missedToday.join(', '))}</div>` : '';
+
+  // Weekly adherence + streak, tallied across every tracked medicine's
+  // scheduled dose slots (not just one checkbox per day).
+  let totalDoses=0, takenDoses=0;
+  const dayFullyTaken={};
+  dates.forEach(dt=>{
+    let dayScheduled=0, dayTaken=0;
+    data.medicines.forEach(m=>{
+      const dayLog=(data.log[m.name] && data.log[m.name][dt]) || [];
+      for(let i=0;i<m.timesPerDay;i++){
+        dayScheduled++; totalDoses++;
+        if(dayLog[i]){ dayTaken++; takenDoses++; }
+      }
+    });
+    dayFullyTaken[dt]=dayScheduled>0 && dayTaken===dayScheduled;
+  });
+  let streak=0;
+  for(let i=dates.length-1;i>=0;i--){ if(dayFullyTaken[dates[i]]) streak++; else break; }
+  const summaryHtml=data.medicines.length ? `<div class="tracker-summary no-print">
+    <div class="tracker-stat"><div class="tracker-stat-label">${t.thisWeek}</div><div class="tracker-stat-value">${takenDoses} / ${totalDoses} ${t.dosesUnit}</div></div>
+    <div class="tracker-stat"><div class="tracker-stat-label">${t.streakLabel}</div><div class="tracker-stat-value">${streak} ${streak===1?t.dayUnit:t.daysUnit}</div></div>
+  </div>` : '';
+
+  // Every scheduled dose for the visible 7-day window has been checked off —
+  // celebrate it, and offer a one-tap way to clear the check-ins (not the
+  // tracked medicine list itself) so the patient can start a fresh week.
+  const congratsHtml=(totalDoses>0 && takenDoses===totalDoses) ? `<div class="tracker-congrats no-print">
+    <div class="tracker-congrats-title">${t.medCongratsTitle}</div>
+    <div class="tracker-congrats-body">${t.medCongratsBody}</div>
+    <button class="tracker-reset-btn" onclick="resetMedTracker()">${t.medResetBtn}</button>
+  </div>` : '';
+
+  const rows=data.medicines.map(med=>{
+    const name=med.name, tpd=med.timesPerDay||1;
+    const safeName=name.replace(/'/g,"\\'");
+    const displayName=escapeHtml(name);
+    const note=typeof med.note==='string'?med.note:'';
+    const noteField=renderMedicineNoteField(name,note,t);
+    const freqPicker=`<div class="tracker-freq-picker no-print">
+      <span class="tracker-freq-label">${t.timesPerDayLabel}:</span>
+      ${[1,2,3].map(n=>`<button class="freq-btn${tpd===n?' active':''}" onclick="setTimesPerDay('${safeName}',${n})">${n}x</button>`).join('')}
+    </div>`;
+    const slotRows=[];
+    for(let slot=0; slot<tpd; slot++){
+      const label=doseSlotLabel(t, tpd, slot);
+      const cells=dates.map(dt=>{
+        const taken=(data.log[name] && data.log[name][dt] && data.log[name][dt][slot]) || false;
+        return `<button class="day-cell${taken?' taken':''}" onclick="toggleIntake('${safeName}','${dt}',${slot})" title="${dt}">${dayLabel(dt)}<span class="day-dot">${taken?'✓':'○'}</span></button>`;
+      }).join('');
+      slotRows.push(`<div class="dose-slot-row">${label?`<span class="dose-slot-label">${label}</span>`:''}<div class="tracker-days">${cells}</div></div>`);
+    }
+    return `<div class="tracker-row">
+      <div class="tracker-row-name">${displayName}<button class="tracker-remove" onclick="removeTrackedMedicine('${safeName}')" aria-label="remove">✕</button></div>
+      ${noteField}
+      ${freqPicker}
+      ${slotRows.join('')}
+    </div>`;
+  }).join('');
+
+  // The dropdown only offers medicines from the health center's own MEDS
+  // list. The "Other" text input beneath it always stays available (even
+  // after every listed medicine has been added) so a patient can track any
+  // medicine they take that isn't on that list — its name is whatever the
+  // user types, freely editable, not limited to a fixed set.
+  const dropdownControl=availableToAdd.length
+    ? `<div class="tracker-add-row"><select id="tracker-add-select">${availableToAdd.map(n=>`<option value="${n}">${n}</option>`).join('')}</select><button class="tracker-add-btn" onclick="addTrackedMedicine(document.getElementById('tracker-add-select').value)">${t.medAdd}</button></div>`
+    : `<p class="tracker-empty-note">${t.medAllAdded}</p>`;
+  const otherControl=`<div class="tracker-other-label">${t.medOtherLabel}</div>
+    <div class="tracker-add-row no-print">
+      <input type="text" id="tracker-add-other-input" placeholder="${t.medOtherPlaceholder}" maxlength="60" onkeydown="if(event.key==='Enter')addOtherMedicine()">
+      <button class="tracker-add-btn" onclick="addOtherMedicine()">${t.medAdd}</button>
+    </div>`;
+  const addControl=dropdownControl+otherControl;
+
+  return `<div class="tracker-section">
+    <div class="disclaimer mb-14">${t.medTrackerNotice}</div>
+    <div class="tracker-header"><div class="tracker-title">📋 ${t.medTrackerTitle}</div><div class="tracker-sub">${t.medTrackerSub}</div></div>
+    ${summaryHtml}
+    ${congratsHtml}
+    ${reminderHtml}
+    ${rows || `<p class="tracker-empty-note">${t.medTrackerEmpty}</p>`}
+    ${addControl}
+    ${data.medicines.length?`<button class="tracker-print-btn no-print" onclick="window.print()">🖨️ ${t.medPrintBtn}</button>`:''}
+  </div>`;
+}
+
+// Medicine tracker — renders into #medications-content.
+function renderMedications(){
+  document.getElementById('medications-content').innerHTML = renderMedTracker();
+}
+
+// Emergency Numbers and Nearby Care share one page (#page-nearby) so users
+// have a single destination for "who do I call / where do I go" instead of
+// two separate cards. Emergency numbers render first since they're the more
+// time-critical of the two.
+function renderNearby(){
+  const t=T[lang];
+  const list=EMERGENCY[lang];
+  const big=list.find(e=>e.big);
+  const rest=list.filter(e=>!e.big);
+  let html='';
+  if(big){
+    html+=`<a href="tel:${big.num}" class="emerg-big-btn">
+      <span style="font-size:2rem">☎️</span>
+      <div><div class="emerg-big-num">${big.display}</div><div class="emerg-big-label">${t.emergMainLabel}</div></div>
+    </a>`;
+  }
+  html+=`<div class="card-section-label">${t.emergOtherTitle}</div>`;
+  rest.forEach(e=>{
+    html+=`<div class="facility-card">
+      <div class="facility-name">${e.label}</div>
+      <a href="tel:${e.num}" class="facility-phone">📞 ${e.display}</a>
+    </div>`;
+  });
+  html+=`<div class="info-card mt-10"><div class="info-card-title">📱 iRESPOND Muntinlupa</div><p>${t.emergAppNote}</p></div>`;
+
+  const d=NEARBY[lang];
+  html+=`<div class="disclaimer mt-10 mb-14">⚠ ${t.nearbyVerify}</div>`;
+  d.cats.forEach(cat=>{
+    html+=`<div class="card-section-label">${cat.label}</div>`;
+    cat.facilities.forEach(f=>{
+      html+=`<div class="facility-card">
+        <div class="facility-name">${f.name}</div>
+        <div class="facility-type ${f.typeClass||''}">${f.type}</div>
+        <div class="facility-address">${f.addr}</div>
+        ${(f.phones||[]).map(p=>`<a href="tel:${p.num}" class="facility-phone">📞 ${p.label}</a>`).join('<br>')}
+        ${!f.verified?`<span class="verify-label">${t.verify}</span>`:''}
+        ${f.note?`<p style="font-size:0.78rem;color:var(--muted);margin-top:6px">${f.note}</p>`:''}
+      </div>`;
+    });
+  });
+  document.getElementById('nearby-content').innerHTML=html;
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+applyStaticStrings();
+renderAll();
+navigate('home');
+if(lang==='fil'){setLang('fil');}
+if(textSize!=='normal'){setTextSize(textSize);}
+</script>
+</body>
+</html>
